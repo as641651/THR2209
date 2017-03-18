@@ -1,0 +1,76 @@
+% Chapter 1
+
+\chapter{Introduction} % Main chapter title
+
+\label{Chapter1} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+
+%----------------------------------------------------------------------------------------
+
+% Define some commands to keep the formatting separated from the content 
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\tabhead}[1]{\textbf{#1}}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\file}[1]{\texttt{\bfseries#1}}
+\newcommand{\option}[1]{\texttt{\itshape#1}}
+
+%----------------------------------------------------------------------------------------
+
+%\section{Welcome and Thank You}
+Music has it’s own language and describing it can be quite tricky. Talking about music may simply require as much vocabulary as any technical subject, but a strict vocabulary signal mapping can steal the artistic freedom of expression. Musicians and composers usually discuss their work with jargons describing a particular note, chord, sound, or rhythm and how the pieces are put together as a whole. At the same time, with the amount to music recordings constantly growing, it would be time consuming for anyone to manually tag every one of them. Hence the ability to automatically summarize such tags according to personal or specific glossary is studied.  In section 1, the motivation for research is explained by describing some shortcomings of the current state of art.  
+
+
+
+%----------------------------------------------------------------------------------------
+
+\section{Motivation}
+Automatic music recommendation has become an active area of research in recent years because a lot of music is now sold and consumed digitally. These recommendation algorithms allows listeners to discover the songs that match their taste.  It also enables online music stores to filter their target audience. However, current state of art methods still suffer from the following problems mentioned below.
+
+
+\subsection{Cold start problem with collaborative filtering methods}
+In the area of music information retrieval, great technical progress have been made to enable efficient retrieval and organization of audio content. But the problem of music recommendation is  however complicated because of the sheer variety of genre,mood,acoustic scene, as well as social factors that affect listeners preference. When the usage data is available, one can use collaborative filtering to recommend the tracks on trending lists. In absence of such usage data, one resorts to content-based methods, where just the audio signal is used for generating recommendations.  Although collaborative filtering techniques have shown to outperform content-based recommendations \cite{DC1}, they suffer from cold start problem, making it less efficient for new and unpopular songs. 
+
+
+\subsection{Problems with content based methods}
+Content-based recommendation methods map audio signal to acoustic cues, which are then used for retrieval.
+
+\subsubsection{Psychoacoustic assumptions}
+The aspect of music that grabs attention is still an ongoing research in experimental psychology. Aesthetic judgments are strongly (although not exclusively) influenced by cultural variables, although there may be some universals that set constraints on what we initially find beautiful[no accounting for taste]. Hence, using currently available datasets\cite{MSD}\cite{MTT} for training can make recommendation systems suffer from generalization assumptions.  
+
+\subsubsection{Temporal summarization of audio content}
+The current state of art music tagging algorithms\cite{choi_crnn}\cite{MultiScale} are established by training on datasets that contain just short music excerpts. But choice of music is usually done based on the aspects of entire song. The ability to summarize the aesthetic judgement based on sequence of section-wise tags have not yet been studied. Furthermore, there aren’t much public datasets that summarize tags for entire song. 
+
+
+\subsection{Need for adaptive glossary}
+Current recommendation systems including the ones that use collaborative filtering, restrict the user with the choice of tags. Moreover, it is not guaranteed that all users will perceive all the tags in the same way. A recent study in idiographic music psychology have indicated that different people use different aesthetic criteria to make judgement about music\cite{NoAccountingForTaste}. Hence there is a need to study the performance of recommendation algorithms trained on personal repertoire..  
+
+
+
+%----------------------------------------------------------------------------------------
+
+\section{Structure of the Thesis}
+In the following work, only content-based methods are considered for multi-label classification. That is to say that only raw signal is used as input for classification. This requires feature extraction from input audio, temporal summarization of features followed by classification. 
+
+\subsection{Convolutional neural network for feature extraction}
+The input signal preprocessed to spectrogram is mapped to the feature space by convolving hierarchically with learnable filters. (see ch.2,1) Conceptual arguments have been made to demonstrate that deep processing models are powerful extensions of hand-crafted feature extraction methods\cite{Yann}. (see ch.3.1) It is also shown that deep layers learn to capture textures and patterns of continuous distribution on a spectrogram for music classification task. [explaining cNN for music class]. (see ch 3.2).  we discuss the ability of these CNN models to be fine tuned on a medium sized dataset (see ch ). Convolutions over log amplitude mel spectrogram and MFCC are studied (see ch)
+
+
+
+\subsection{ Recurrent neural network for temporal summarization of features}
+ The features extracted on every 29.1s time frame are then sent to sequence to one RNN. This leaves us with a feature of fixed dimension for audio of arbitrary length up to five minutes. (see ch ). Here we make an assumption that a listener can make an aesthetic judgement within 5 minutes. Conceptual comparisons of RNN with the state of art temporal feature pooling technique in [ ] have been discussed (see ) . Effectiveness of temporal summarization have been justified by comparing with the performance of section-wise merging of tags ( see )
+
+\subsection{ classification }
+The features are then mapped to the probability space of labels. Multilayer perceptron with binary cross entropy loss is used for training. End to end training is compared with two-stage method, separating  training of features and training of classifier ( see ch ). In the two-stage approach, MLP is compared with SVM classifier. ( see )
+
+\subsection{ supervised training on repository with aesthetic tags }
+A properly labelled training set is usually required to solve the task of automatic tagging. In this thesis, a repository labelled with aesthetic judgements of songs is used. An aesthetic judgement is a subjective evaluation of a piece of music as art based on an individual set of aesthetic properties. [from everyday .. ] An aesthetic judgement is assumed to rely more on ‘higher’ cognitive functions , domain relevant knowledge, and a fluid, individualized process that may change across time and context. We discuss how aesthetic judgements influence preference for a song. In a recent work in experimental music psychology, strong correlation have been found between the two. But it is also shown that such preferences also vary widely between cultural contexts. ( see ) This also justifies the need for adaptive glossaries in recommendation systems. 
+
+%----------------------------------------------------------------------------------------
+
+\section{Outline of the report}
+In chapter 2, the terminologies and mathematical formulations are elaborated. Advanced readers can skip this chapter. In chapter 3, a detailed overview of previous research, their shortcomings for the current problem along with justification for proposed models are discussed. In Chapter 4, details of the dataset, implementations and the experiment results of proposed models are discussed. In chapter 5, the results are analysed and the need for biologically motivated feature extraction techniques are discussed. 
+
+
+
+
+
+

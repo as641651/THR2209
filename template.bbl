@@ -1,0 +1,287 @@
+% $ biblatex auxiliary file $
+% $ biblatex version 2.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\entry{MTT}{article}{}
+  \name{author}{5}{}{%
+    {{}%
+     {Law}{L.}%
+     {Edith}{E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {West}{W.}%
+     {Kris}{K.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Mandel}{M.}%
+     {Michael}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Bay}{B.}%
+     {Mert}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {{Stephen Downie}}{S.}%
+     {J.}{J.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{article}
+  \strng{namehash}{LE+1}
+  \strng{fullhash}{LEWKMMBMSJ1}
+  \field{sortinit}{2}
+  \field{booktitle}{Proceedings of the 10th International Society for Music
+  Information Retrieval Conference, ISMIR 2009}
+  \field{isbn}{9780981353708}
+  \field{pages}{387\bibrangedash 392}
+  \field{title}{\href{https://experts.illinois.edu/en/publications/evaluation-of-algorithms-using-games-the-case-of-music-tagging}{Evaluation
+  of algorithms using games: The case of music tagging}}
+  \field{year}{2009}
+\endentry
+
+\entry{MSD}{inproceedings}{}
+  \name{author}{4}{}{%
+    {{}%
+     {Bertin-mahieux}{B.-m.}%
+     {Thierry}{T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Ellis}{E.}%
+     {Daniel P.~W.}{D.~P.~W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Whitman}{W.}%
+     {Brian}{B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lamere}{L.}%
+     {Paul}{P.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{proceedings}
+  \strng{namehash}{BmT+1}
+  \strng{fullhash}{BmTEDPWWBLP1}
+  \field{sortinit}{2}
+  \field{booktitle}{In Proceedings of the 12th International Conference on
+  Music Information Retrieval (ISMIR}
+  \field{title}{\href{http://ismir2011.ismir.net/papers/OS6-1.pdf}{The million
+  song dataset}}
+  \field{year}{2011}
+\endentry
+
+\entry{DC1}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Slaney}{S.}%
+     {M.}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{article}
+  \strng{namehash}{SM1}
+  \strng{fullhash}{SM1}
+  \field{sortinit}{2}
+  \verb{doi}
+  \verb 10.1109/MMUL.2011.34
+  \endverb
+  \field{issn}{1070-986X}
+  \field{number}{2}
+  \field{pages}{12\bibrangedash 15}
+  \field{title}{\href{http://ieeexplore.ieee.org/document/5754643/}{Web-Scale
+  Multimedia Analysis: Does Content Matter?}}
+  \field{volume}{18}
+  \field{journaltitle}{IEEE MultiMedia}
+  \field{year}{2011}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{MultiScale}{inproceedings}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Dieleman}{D.}%
+     {Sander}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Schrauwen}{S.}%
+     {Benjamin}{B.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{DSSB1}
+  \strng{fullhash}{DSSB1}
+  \field{sortinit}{2}
+  \field{booktitle}{ISMIR}
+  \field{title}{\href{https://www.semanticscholar.org/paper/Multiscale-Approaches-To-Music-Audio-Feature-Dieleman-Schrauwen/8c030a736512456e9fd8d53763cbfcac0c014ab3}{Multiscale
+  Approaches To Music Audio Feature Learning}}
+  \field{year}{2013}
+\endentry
+
+\entry{Yann}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {J.}{J.}%
+     {Humphrey~Eric}{H.~E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Bello}{B.}%
+     {Juan~P.}{J.~P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Yann}{Y.}%
+     {LeCun}{L.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{JHEBJPYL1}
+  \strng{fullhash}{JHEBJPYL1}
+  \field{sortinit}{2}
+  \verb{doi}
+  \verb 10.1007/s10844-013-0248-5
+  \endverb
+  \field{issn}{1573-7675}
+  \field{number}{3}
+  \field{pages}{461\bibrangedash 481}
+  \field{title}{\href{https://link.springer.com/article/10.1007/s10844-013-0248-5}{Feature
+  learning and deep architectures: new directions for music informatics}}
+  \field{volume}{41}
+  \field{journaltitle}{Journal of Intelligent Information Systems}
+  \field{year}{2013}
+\endentry
+
+\entry{choi_cnn}{inproceedings}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Choi}{C.}%
+     {Keunwoo}{K.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Fazekas}{F.}%
+     {George}{G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Sandler}{S.}%
+     {Mark}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{proceedings}
+  \strng{namehash}{CKFGSM1}
+  \strng{fullhash}{CKFGSM1}
+  \field{sortinit}{2}
+  \field{booktitle}{International Society of Music Information Retrieval
+  Conference. ISMIR}
+  \field{title}{\href{http://tex.stackexchange.com/questions/100782/add-a-hyperlink-in-bibtex}{Automatic
+  tagging using deep convolutional neural networks}}
+  \field{year}{2016}
+\endentry
+
+\entry{choi_crnn}{online}{}
+  \name{author}{4}{}{%
+    {{}%
+     {Choi}{C.}%
+     {Keunwoo}{K.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Fazekas}{F.}%
+     {Gyorgy}{G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Sandler}{S.}%
+     {Mark}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Cho}{C.}%
+     {Kyunghyun}{K.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{preprint}
+  \strng{namehash}{CK+1}
+  \strng{fullhash}{CKFGSMCK1}
+  \field{sortinit}{2}
+  \verb{eprint}
+  \verb 1609.04243
+  \endverb
+  \field{title}{\href{https://arxiv.org/pdf/1609.04243.pdf}{ Convolutional
+  Recurrent Neural Networks for Music Classification}}
+  \field{version}{3}
+  \field{eprinttype}{arxiv}
+  \field{day}{21}
+  \field{month}{12}
+  \field{year}{2016}
+  \warn{\item Can't use 'date' + 'year'}
+\endentry
+
+\entry{NoAccountingForTaste}{article}{}
+  \name{author}{4}{}{%
+    {{}%
+     {Juslin}{J.}%
+     {Patrik~N.}{P.~N.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Sakka}{S.}%
+     {Laura~S.}{L.~S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Barradas}{B.}%
+     {Gonçalo~T.}{G.~T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Liljeström}{L.}%
+     {Simon}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{article}
+  \strng{namehash}{JPN+1}
+  \strng{fullhash}{JPNSLSBGTLS1}
+  \field{sortinit}{2}
+  \verb{doi}
+  \verb 10.1037/aca0000034
+  \endverb
+  \field{number}{2}
+  \field{pages}{157\bibrangedash 170}
+  \field{title}{\href{https://www.researchgate.net/publication/294277163_No_Accounting_for_Taste_Idiographic_Models_of_Aesthetic_Judgment_in_Music}{No
+  Accounting for Taste? Idiographic Models of Aesthetic Judgmentin Music}}
+  \field{volume}{10}
+  \field{journaltitle}{Psychology of Aesthetics, Creativity, and the Arts}
+  \field{year}{2016}
+\endentry
+
+\lossort
+\endlossort
+
+\endinput

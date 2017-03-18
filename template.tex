@@ -1,0 +1,77 @@
+\documentclass{book}
+
+\addtolength{\textwidth}{3cm}  \addtolength{\oddsidemargin}{-1.5cm}  \addtolength{\evensidemargin}{-1.5cm}
+\addtolength{\textheight}{1cm} \addtolength{\topmargin}{-.3cm}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\usepackage{booktabs}
+\usepackage{aicescover}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=blue,  %choose some color if you want links to stand out
+}
+
+\usepackage[
+backend=bibtex8,
+sorting=ynt,
+maxbibnames=99
+]{biblatex}
+\addbibresource{bibliography.bib}
+
+\linespread{1.1}
+\pagestyle{plain}
+
+\begin{document}
+
+\aicescovertitle{Analyses of Convolutional Neural Networks for Automatic tagging of music tracks }
+\aicescoverauthor{{\bf Master Thesis}\\Aravind Sankaran}
+\aicescoversupervisor{Prof. Paolo Bientinesi \\ Prof. Marco Alunno}
+\aicescoverexaminer{Prof. Paolo Bientinesi \\ Prof. Bastian Leibe}
+\aicescoverpage
+
+
+\section*{Abstract}
+
+We address the automatic music tagging problem that can be solved by training with a personal repertoire. Trying to convey the meaning of music or its emotional content is not an easy task. This leaves a  semantic gap between music audio and listener's choice of words to describe the aspects of music. Furthermore, some emotional and structural components of music are realized only after listening to a greater length of the song. Hence we address the problem of multi-label classification on features that approximates the whole song. Since personal repertoires are usually small, we stick to find solutions on a medium sized dataset. We use convolutional neural networks (CNNs) for localized feature extraction. These features are extracted every 29s from log-amplitude Mel-spectrogram and fed into sequence-to-one recurrent neural network for temporal summarization of the song, which are then used for classification. We finetune over CNN architectures in \cite{choi_cnn} \cite{choi_crnn} and report the categorical AUC scores and Mean average precision. We also report the variations in performance with increasing number of training labels. [TODO : findings]
+\vspace{5cm}
+
+
+\newpage
+
+\section*{\bf Acknowledgments}
+
+\tableofcontents
+
+\include{Chapters/Chapter1}
+\include{Chapters/Chapter2}
+%\chapter{Introduction}
+%
+%\section{Related work}
+%
+%Use of references: \cite{BTO,Eigen3}
+%
+%\section{Outline of the thesis}
+%
+%\chapter{Chapter title}
+%
+%\chapter{Experimental results}
+%
+%\chapter{Conclusions and future work}
+
+
+%\printbibliography[
+%heading=bibintoc,
+%title={Bibliography}
+%]
+ 
+\chapter*{Bibliography}
+\addcontentsline{toc}{chapter}{Bibliography}
+\printbibliography[type={inproceedings},title={Proceedings},heading=subbibliography]
+\printbibliography[type={article},title={Articles},heading=subbibliography]
+\printbibliography[keyword={preprint},title={Pre-Prints},heading=subbibliography]
+
+\end{document}
