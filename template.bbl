@@ -16,6 +16,30 @@
   {}
 \endgroup
 
+\entry{allen}{book}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Allen}{A.}%
+     {R.L.}{R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Mills}{M.}%
+     {D.}{D.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Wiley}%
+  }
+  \strng{namehash}{ARMD1}
+  \strng{fullhash}{ARMD1}
+  \field{sortinit}{2}
+  \field{isbn}{9780471660361}
+  \field{title}{Signal Analysis: Time, Frequency, Scale, and Structure}
+  \field{year}{2004}
+\endentry
+
 \entry{MTT}{article}{}
   \name{author}{5}{}{%
     {{}%
@@ -279,6 +303,22 @@
   \field{volume}{10}
   \field{journaltitle}{Psychology of Aesthetics, Creativity, and the Arts}
   \field{year}{2016}
+\endentry
+
+\entry{specLeak}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {{Lecture Notes}}{L.}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{L1}
+  \strng{fullhash}{L1}
+  \field{sortinit}{9}
+  \field{howpublished}{\url{https://mil.ufl.edu/nechyba/www/__eel3135.s2003/lectures/lecture19/spectral_leakage.pdf}}
+  \field{note}{Online; accessed 20 March 2017}
+  \field{title}{Spectral Leakage and Windowing}
 \endentry
 
 \lossort

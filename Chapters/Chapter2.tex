@@ -60,8 +60,71 @@ thus fs = 1/T.
 The optimum sampling rate is given by Nyquist-Shannon sampling theorem which says, the sampling frequency (fs) should be at least twice the highest frequency contained in the signal [pp2] Given the human hearing range lies between 20Hz - 20KHz [pp3], most of the digital audio formats use a standard sampling frequency of 44.4Khz. The signal is further downsampled depending on the kind of feature information needed for classification. 
 
 
+\subsection{Time-Frequency transformations}
+The signal represented in the time domain is a set of ordered \textit{n}-tuples of real numbers \( (a_{1},a_{2}, ...,a_{N}) \in \mathbb{R}^N \) in the vector space \textit{V} , specifically \textit{Euclidean n-space}. That is to say, a discrete-time signal can be represented as a \textit{linear combination} of Cartesian basis vectors. 
+\begin{equation}
+\textbf{a}(t) = (a_{1},a_{2}, ...,a_{N}) = a_{1}\textbf{e}_{1} + a_{2}\textbf{e}_{2} + ... + a_{N}\textbf{e}_{N} = \displaystyle\sum_{i=1}^{N}a_{i}\textbf{e}_{i}
+\end{equation} 
+where:\\
+\indent \textbf{a} is a discrete-time signal\\
+\indent $\textbf{e}_{1} ... \textbf{e}_{N}$ are Cartesian basis vectors (Unit vectors).
+\bigskip
 
+\noindent Mapping from time-domain to frequency-domain is looked up on as change of basis. We need to find a set of basis vectors $\bm{\phi}_{ \omega }$, whose coefficients $c_{ \omega }$ then represents the components in frequency domain. 
+\begin{equation}
+\textbf{a}(t) = \displaystyle\sum_{ \omega =0}^{M-1}c_{ \omega }\bm{\phi}_{ \omega }(t) 
+\end{equation}
+for some integer $0 < M < \infty$. Then $\textbf{c}(\phi) = (c_{0},c_{1}, ...,c_{M-1}) \in \mathbb{C}^M $ represents the components in frequency domain. Thus our aim is to compute $\textbf{c}(\phi)$. Computing the Fourier coefficients for periodic and aperiodic signals are discussed below.
 
+\subsubsection{Periodic Signals}
+If $\textbf{a}(t)$ is periodic in \textbf{T}, then we can apply the definition of \textbf{Exponential Fourier Series} expansion and define $\bm{\phi}$ in equation (2.2) as (See Appendix ??),
+\begin{equation}
+\bm{\phi}_{k}(t) = \frac{1}{\sqrt{T}}e^{ik \omega t}
+\end{equation}    
+Whose basis functions $\bm{\phi}$ now form \textit{complete orthonormal} set \cite{allen}. That is, 
+\begin{equation}
+ < \bm{\phi}_{i}, \bm{\phi}_{j} > =
+	\begin{cases}
+	  0 & i \neq j \\
+	  1 &  i = j \\ 
+	\end{cases}
+\end{equation}
+The fourier series finds a set of discrete coefficients of \textbf{harmonically related frequencies} $(k \omega )$ . To retrieve $c_{k}$, multiply $\bm{\phi}_{k}$ on both sides of equation (2.2) and apply the conditions of orthonormality in equation (2.4). Thus
+\begin{equation}
+c_{k} = <\textbf{a}(t), \bm{\phi}_{k}(t)>
+\end{equation}
+
+Although periodicity assumptions are not made for general music signals, it becomes relevant to deduce rhythmic patterns. 
+
+\subsubsection{Aperiodic Signals}
+It is difficult to assume periodicity for a generalized signal. We need to estimate the coefficients $\textbf{c}$ for continuous frequency variable $\bm{\omega}$ instead of discrete harmonics $\textbf{k}\bm{\omega}$. With the arguments in appendix (??), it can be shown that
+\begin{equation}
+sin(\omega t + \Phi) \propto e^{i \omega t}
+\end{equation} 
+Where $\Phi$ is the phase difference. Hence to know how much of a particular frequency exists in signal $\textbf{a}(t)$, we just divide by $e^{i \omega t}$ over the time domain. Thus,
+\begin{equation}
+c_{\omega} =  \displaystyle\sum_{t=0}^{N-1}a(t)e^{-i \omega t}
+\end{equation}  
+This is the N-point \textbf{Discrete Fourier Transform}. The Inverse Fourier transform is defined by setting $\bm{\phi}_{ \omega }(t)$ in equation (2.2) as
+\begin{equation}
+\bm{\phi}_{ \omega }(t) = e^{i \omega t}
+\end{equation}
+Hence, with Fourier Transform, we can go back and forth between time and frequency domain. It is important to note that these basis vectors need \textbf{not} be \textit{orthogonal}.
+\bigskip
+
+\textbf{Fast Fourier Transform}(FFT) is an efficient implementation of Discrete Fourier Transform(DFT) which exploits the symmetry of $sines$ and $cosines$. While DFT requires $O(N^2)$ operations, FFT requires only $O(NlogN)$ \cite{allen}.  
+
+\subsection{STFT, Mel-Spectrogram, Chromogram}
+
+It is useful to perform FFT locally over short segments. This is simply because FFT becomes very expensive for larger $N$. 
+\[
+KNlog(N) < (KN)log(KN)
+\]
+The full length signal is divided into short segments, and FFT is computed separately for each segment. This is known as \textbf{Short Time Fourier Transform (STFT)}. Usually the dimension of the frequency components are reduced by using bins. Every frequency component is assigned to it's nearest bin. This however causes \textbf{spectral leakage} when we divide the signal into rectangular windows. That is, components at the end of the segment can leak to the adjacent segment. This is avoided by modifying the original signal by applying some window function. The most common window function is the \textbf{Hamming Window} defined as,
+\begin{equation}
+h[n] = 0.54 - 0.46cos(\frac{2 \pi n}{N-1})
+\end{equation}
+Where $n \in {0,1,...,N-1}$. The signal approaches zero near $n=0$ and $n=N-1$, but reaches peak near $n=N/2$ \cite{specLeak}. To overcome the information loss at the ends of the window, signal is divided into segments that are partly \textit{overlapping} with eachother.
 
 
 
