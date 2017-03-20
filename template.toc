@@ -42,4 +42,6 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.1.4}STFT, Mel-Spectrogram, Chromogram}{12}{subsection.2.1.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{13}{chapter*.8}
+\contentsline {subsubsection}{Mel Spectrogram}{12}{section*.9}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Bibliography}{15}{chapter*.10}

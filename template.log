@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.3.6)  20 MAR 2017 18:20
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.3.6)  20 MAR 2017 19:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -736,46 +736,68 @@ Package biblatex Info: ... file 'biblatex.cfg' found.
 (/opt/texlive/texmf-dist/tex/latex/biblatex/biblatex.cfg
 File: biblatex.cfg 
 )))
+(/opt/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
+
+(/opt/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
+\captionmargin=\dimen177
+\captionmargin@=\dimen178
+\captionwidth=\dimen179
+\caption@tempdima=\dimen180
+\caption@indent=\dimen181
+\caption@parindent=\dimen182
+\caption@hangindent=\dimen183
+)
+\c@ContinuedFloat=\count293
+Package caption Info: hyperref package is loaded.
+)
+(/opt/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
+\c@subfigure=\count294
+\c@subtable=\count295
+)
 Package biblatex Info: Trying to load language 'english'...
 Package biblatex Info: ... file 'english.lbx' found.
 
 (/opt/texlive/texmf-dist/tex/latex/biblatex/lbx/english.lbx
 File: english.lbx 2013/11/25 v2.8a biblatex localization (PK/JW/AB)
 )
-\@quotelevel=\count293
-\@quotereset=\count294
+\@quotelevel=\count296
+\@quotereset=\count297
  (./template.aux
 (./Chapters/Chapter1.aux) (./Chapters/Chapter2.aux))
 \openout1 = `template.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
 
 ABD: EveryShipout initializing macros
 (/opt/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count295
-\scratchdimen=\dimen177
+\scratchcounter=\count298
+\scratchdimen=\dimen184
 \scratchbox=\box39
-\nofMPsegments=\count296
-\nofMParguments=\count297
+\nofMPsegments=\count299
+\nofMParguments=\count300
 \everyMPshowfont=\toks33
-\MPscratchCnt=\count298
-\MPscratchDim=\dimen178
-\MPnumerator=\count299
-\makeMPintoPDFobject=\count300
+\MPscratchCnt=\count301
+\MPscratchDim=\dimen185
+\MPnumerator=\count302
+\makeMPintoPDFobject=\count303
 \everyMPtoPDFconversion=\toks34
 ) (/opt/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -793,7 +815,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box40
-Package hyperref Info: Link coloring ON on input line 28.
+Package hyperref Info: Link coloring ON on input line 32.
 
 (/opt/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -801,11 +823,11 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/opt/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count301
+\c@section@level=\count304
 )
-LaTeX Info: Redefining \ref on input line 28.
-LaTeX Info: Redefining \pageref on input line 28.
-LaTeX Info: Redefining \nameref on input line 28.
+LaTeX Info: Redefining \ref on input line 32.
+LaTeX Info: Redefining \pageref on input line 32.
+LaTeX Info: Redefining \nameref on input line 32.
 
 (./template.out) (./template.out)
 \@outlinefile=\write5
@@ -831,102 +853,104 @@ Package biblatex Warning: BibTeX reported the following issues
 (biblatex)                - Can't use 'date' + 'year'.
 
 )
-Package biblatex Info: Reference section=0 on input line 28.
-Package biblatex Info: Reference segment=0 on input line 28.
+Package biblatex Info: Reference section=0 on input line 32.
+Package biblatex Info: Reference segment=0 on input line 32.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
 \titlewidth=\skip58
-LaTeX Font Info:    Try loading font information for U+msa on input line 34.
+LaTeX Font Info:    Try loading font information for U+msa on input line 38.
  (/opt/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 34.
+LaTeX Font Info:    Try loading font information for U+msb on input line 38.
 
 (/opt/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <24> not available
-(Font)              size <24.88> substituted on input line 34.
+(Font)              size <24.88> substituted on input line 38.
 
 
 LaTeX Font Warning: Font shape `OT1/cmss/bx/n' in size <24> not available
-(Font)              size <24.88> substituted on input line 34.
+(Font)              size <24.88> substituted on input line 38.
 
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <15> not available
-(Font)              size <14.4> substituted on input line 34.
+(Font)              size <14.4> substituted on input line 38.
 
-LaTeX Font Info:    Calculating math sizes for size <15> on input line 34.
+LaTeX Font Info:    Calculating math sizes for size <15> on input line 38.
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <15> not available
-(Font)              size <14.4> substituted on input line 34.
+(Font)              size <14.4> substituted on input line 38.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <10.49995> not available
-(Font)              size <10.95> substituted on input line 34.
+(Font)              size <10.95> substituted on input line 38.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <7.5> not available
-(Font)              size <7> substituted on input line 34.
+(Font)              size <7> substituted on input line 38.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <15> not available
-(Font)              size <14.4> substituted on input line 34.
+(Font)              size <14.4> substituted on input line 38.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <10.49995> not available
-(Font)              size <10.95> substituted on input line 34.
+(Font)              size <10.95> substituted on input line 38.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <7.5> not available
-(Font)              size <7> substituted on input line 34.
+(Font)              size <7> substituted on input line 38.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <15> not available
-(Font)              size <14.4> substituted on input line 34.
+(Font)              size <14.4> substituted on input line 38.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <10.49995> not available
-(Font)              size <10.95> substituted on input line 34.
+(Font)              size <10.95> substituted on input line 38.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <7.5> not available
-(Font)              size <7> substituted on input line 34.
+(Font)              size <7> substituted on input line 38.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <15> not available
-(Font)              size <14.4> substituted on input line 34.
+(Font)              size <14.4> substituted on input line 38.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <10.49995> not available
-(Font)              size <10.95> substituted on input line 34.
+(Font)              size <10.95> substituted on input line 38.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <7.5> not available
-(Font)              size <7> substituted on input line 34.
+(Font)              size <7> substituted on input line 38.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <15> not available
-(Font)              size <14.4> substituted on input line 34.
+(Font)              size <14.4> substituted on input line 38.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <10.49995> not available
-(Font)              size <10.95> substituted on input line 34.
+(Font)              size <10.95> substituted on input line 38.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <7.5> not available
-(Font)              size <7> substituted on input line 34.
+(Font)              size <7> substituted on input line 38.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <15> not available
-(Font)              size <14.4> substituted on input line 34.
+(Font)              size <14.4> substituted on input line 38.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <10.49995> not available
-(Font)              size <10.95> substituted on input line 34.
+(Font)              size <10.95> substituted on input line 38.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <7.5> not available
-(Font)              size <7> substituted on input line 34.
+(Font)              size <7> substituted on input line 38.
 
 [1{/opt/texlive/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
@@ -934,7 +958,7 @@ LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <7.5> not available
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.43 \newpage
+l.47 \newpage
               [1
 
 
@@ -1001,7 +1025,30 @@ Overfull \hbox (12.77528pt too wide) in paragraph at lines 115--116
 nt im-ple-men-ta-tion of Dis-crete Fourier Trans-form(DFT)
  []
 
-) [12]
+<Figures/stft_pipe.png, id=211, 461.725pt x 338.26375pt>
+File: Figures/stft_pipe.png Graphic file (type png)
+
+<use Figures/stft_pipe.png>
+Package pdftex.def Info: Figures/stft_pipe.png used on input line 130.
+(pdftex.def)             Requested size: 258.21758pt x 189.17348pt.
+
+<Figures/stft.png, id=212, 539.01375pt x 598.235pt>
+File: Figures/stft.png Graphic file (type png)
+ <use Figures/stft.png>
+Package pdftex.def Info: Figures/stft.png used on input line 135.
+(pdftex.def)             Requested size: 172.14067pt x 191.05571pt.
+
+Overfull \hbox (2.2222pt too wide) in paragraph at lines 129--141
+[][] [] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) [12] [13 <./Figures/stft_pipe.png> <./Figures/stft.png>] [14
+
+
+]
 
 Package biblatex Warning: Setting 'defernumbers=true' recommended.
 
@@ -1018,37 +1065,37 @@ Package biblatex Warning: Setting 'defernumbers=true' recommended.
 
 Package biblatex Warning: Setting 'defernumbers=true' recommended.
 
-[13
-
-
-]
+[15]
 
 Package biblatex Warning: Setting 'defernumbers=true' recommended.
 
-[14]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 79.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 79.
+[16]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 83.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 83.
  (./template.aux (./Chapters/Chapter1.aux) (./Chapters/Chapter2.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 79.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 79.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 83.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 83.
 Package rerunfilecheck Info: File `template.out' has not changed.
-(rerunfilecheck)             Checksum: B0825F5B0437CB824AE53034A60C477D;1458.
+(rerunfilecheck)             Checksum: 8A4010A75DD7000489B0199555F562E6;1459.
 
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.88pt have occurred.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package logreq Info: Writing requests to 'template.run.xml'.
 \openout1 = `template.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 79.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 83.
  ) 
 Here is how much of TeX's memory you used:
- 21195 strings out of 493308
- 385214 string characters out of 6137823
- 549267 words of memory out of 5000000
- 24227 multiletter control sequences out of 15000+600000
- 18117 words of font info for 67 fonts, out of 8000000 for 9000
+ 22276 strings out of 493308
+ 404832 string characters out of 6137823
+ 569512 words of memory out of 5000000
+ 25291 multiletter control sequences out of 15000+600000
+ 18416 words of font info for 68 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  62i,18n,60p,1216b,1028s stack positions out of 5000i,500n,10000p,200000b,80000s
 </opt/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></opt/texl
@@ -1059,16 +1106,17 @@ msfonts/cm/cmmi10.pfb></opt/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mmi7.pfb></opt/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></
 opt/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></opt/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></opt/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmss12.pfb></opt/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmssbx10.pfb></opt/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmsy10.pfb></opt/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.p
-fb></opt/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></opt/tex
-live/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></opt/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on template.pdf (15 pages, 212927 bytes).
+s/type1/public/amsfonts/cm/cmr9.pfb></opt/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmss12.pfb></opt/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmssbx10.pfb></opt/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
+b></opt/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></opt/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></opt/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmtt10.pfb></opt/texlive/texmf-dist/fonts/type
+1/public/amsfonts/symbols/msbm10.pfb>
+Output written on template.pdf (17 pages, 289559 bytes).
 PDF statistics:
- 326 PDF objects out of 1000 (max. 8388607)
- 290 compressed objects within 3 object streams
- 64 named destinations out of 1000 (max. 500000)
- 157 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 344 PDF objects out of 1000 (max. 8388607)
+ 302 compressed objects within 4 object streams
+ 68 named destinations out of 1000 (max. 500000)
+ 167 words of extra memory for PDF output out of 10000 (max. 10000000)
 

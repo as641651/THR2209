@@ -124,7 +124,25 @@ The full length signal is divided into short segments, and FFT is computed separ
 \begin{equation}
 h[n] = 0.54 - 0.46cos(\frac{2 \pi n}{N-1})
 \end{equation}
-Where $n \in {0,1,...,N-1}$. The signal approaches zero near $n=0$ and $n=N-1$, but reaches peak near $n=N/2$ \cite{specLeak}. To overcome the information loss at the ends of the window, signal is divided into segments that are partly \textit{overlapping} with eachother.
+Where $n \in {0,1,...,N-1}$. The signal approaches zero near $n=0$ and $n=N-1$, but reaches peak near $n=N/2$ \cite{specLeak}. To overcome the information loss at the ends of the window, signal is divided into segments that are partly \textit{overlapping} with eachother. Figure (2.1 (a)) shows the extraction of spectral frames of a spectrogram.  
+\begin{figure}[h]
+       \begin{subfigure}[b]{0.6\textwidth}
+        \includegraphics[width=\textwidth]{stft_pipe}
+        \caption{Windowing is applied on overlapping segments\\ followed by FFT }
+        \label{fig:STFT Pipe}
+       \end{subfigure}
+	    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{stft}
+        \caption{
+        Application of Hamming Window on \\a segment of input signal
+        }
+        \label{fig:Hamming Window}
+       \end{subfigure}
+       \caption{(a) Shows STFT Pipeline. (b) Shows the application of \\Window function}\label{fig:STFT}
+\end{figure}
+\bigskip
+
+\subsubsection{Mel Spectrogram}
 
 
 
