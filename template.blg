@@ -1,4 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2013)
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: template.aux
 The style file: biblatex.bst
@@ -20,44 +20,44 @@ Database file #2: bibliography.bib
 Biblatex version: 2.8
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
-You've used 11 entries,
+You've used 12 entries,
             6047 wiz_defined-function locations,
-            1201 strings with 10692 characters,
-and the built_in function-call counts, 35721 in all, are:
-= -- 1088
-> -- 1715
-< -- 366
-+ -- 833
-- -- 932
-* -- 2755
-:= -- 2714
+            1209 strings with 10886 characters,
+and the built_in function-call counts, 39130 in all, are:
+= -- 1257
+> -- 1819
+< -- 417
++ -- 869
+- -- 959
+* -- 2938
+:= -- 2885
 add.period$ -- 0
-call.type$ -- 11
-change.case$ -- 10
-chr.to.int$ -- 121
-cite$ -- 20
-duplicate$ -- 3813
-empty$ -- 3545
-format.name$ -- 763
-if$ -- 7511
+call.type$ -- 12
+change.case$ -- 11
+chr.to.int$ -- 125
+cite$ -- 22
+duplicate$ -- 4199
+empty$ -- 3902
+format.name$ -- 812
+if$ -- 8312
 int.to.chr$ -- 0
-int.to.str$ -- 21
+int.to.str$ -- 24
 missing$ -- 0
-newline$ -- 316
-num.names$ -- 418
-pop$ -- 3320
+newline$ -- 339
+num.names$ -- 483
+pop$ -- 3635
 preamble$ -- 1
-purify$ -- 142
+purify$ -- 175
 quote$ -- 0
-skip$ -- 1980
+skip$ -- 2236
 stack$ -- 0
-substring$ -- 689
-swap$ -- 1318
-text.length$ -- 328
-text.prefix$ -- 10
+substring$ -- 826
+swap$ -- 1449
+text.length$ -- 352
+text.prefix$ -- 11
 top$ -- 1
-type$ -- 406
+type$ -- 444
 warning$ -- 0
-while$ -- 270
+while$ -- 289
 width$ -- 0
-write$ -- 304
+write$ -- 326

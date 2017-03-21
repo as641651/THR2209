@@ -16,6 +16,29 @@
   {}
 \endgroup
 
+\entry{speech}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {O'Shaughnessy}{O.}%
+     {D.}{D.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Addison-Wesley Pub. Co.}%
+  }
+  \strng{namehash}{OD1}
+  \strng{fullhash}{OD1}
+  \field{sortinit}{1}
+  \field{isbn}{9780201165203}
+  \field{series}{Addison-Wesley series in electrical engineering}
+  \field{title}{Speech communication: human and machine}
+  \verb{url}
+  \verb https://books.google.de/books?id=mHFQAAAAMAAJ
+  \endverb
+  \field{year}{1987}
+\endentry
+
 \entry{allen}{book}{}
   \name{author}{2}{}{%
     {{}%

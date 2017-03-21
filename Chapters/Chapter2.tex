@@ -57,7 +57,7 @@ The digital formats contain the discrete version of the signal obtained by sampl
 
 thus fs = 1/T.
 
-The optimum sampling rate is given by Nyquist-Shannon sampling theorem which says, the sampling frequency (fs) should be at least twice the highest frequency contained in the signal [pp2] Given the human hearing range lies between 20Hz - 20KHz [pp3], most of the digital audio formats use a standard sampling frequency of 44.4Khz. The signal is further downsampled depending on the kind of feature information needed for classification. 
+The optimum sampling rate is given by Nyquist-Shannon sampling theorem which says, the sampling frequency (fs) should be at least twice the highest frequency contained in the signal [pp2] Given the human hearing range lies between 20Hz - 20KHz [pp3], most of the digital audio formats use a standard sampling frequency of 44.4Khz. The signal is further down sampled depending on the kind of feature information needed for classification. 
 
 
 \subsection{Time-Frequency transformations}
@@ -97,17 +97,21 @@ c_{k} = <\textbf{a}(t), \bm{\phi}_{k}(t)>
 Although periodicity assumptions are not made for general music signals, it becomes relevant to deduce rhythmic patterns. 
 
 \subsubsection{Aperiodic Signals}
-It is difficult to assume periodicity for a generalized signal. We need to estimate the coefficients $\textbf{c}$ for continuous frequency variable $\bm{\omega}$ instead of discrete harmonics $\textbf{k}\bm{\omega}$. With the arguments in appendix (??), it can be shown that
+It is difficult to assume periodicity for a generalized signal. We need to estimate the coefficients $\textbf{c}$ for continuous frequency variable $\bm{\omega}$ instead of discrete harmonics $\textbf{k}\bm{\omega}$. The Fourier series can not be applied directly and hence Fourier Transform was developed. Here we aim to find out quantity of each sinusoids is the signal $\textbf{a}(t)$. This can be done by dividing  $\textbf{a}(t)$ by $e^{i \omega t}$ over the time domain. We use the complex exponential in place of sinusoids because we know (see Appendix ??)
 \begin{equation}
 sin(\omega t + \Phi) \propto e^{i \omega t}
 \end{equation} 
-Where $\Phi$ is the phase difference. Hence to know how much of a particular frequency exists in signal $\textbf{a}(t)$, we just divide by $e^{i \omega t}$ over the time domain. Thus,
+Where $\Phi$ is the phase difference. Thus, the coefficients in the frequency domain are 
 \begin{equation}
 c_{\omega} =  \displaystyle\sum_{t=0}^{N-1}a(t)e^{-i \omega t}
 \end{equation}  
-This is the N-point \textbf{Discrete Fourier Transform}. The Inverse Fourier transform is defined by setting $\bm{\phi}_{ \omega }(t)$ in equation (2.2) as
+This is the N-point \textbf{Discrete Fourier Transform}. For the proof of existence of such coefficients, please refer to chapter ?? in \cite{allen}. From here, $\bm{\phi}_{ \omega }(t)$ in equation (2.2) can be defined as
 \begin{equation}
 \bm{\phi}_{ \omega }(t) = e^{i \omega t}
+\end{equation}
+Thus, we can compute $\textbf{a}(t)$ as a linear combination of complex exponentials. This is also known as \textbf{Inverse Fourier Transform}.
+\begin{equation}
+\textbf{a}(t) = \displaystyle\sum_{ \omega =0}^{M-1}c_{ \omega }e^{i \omega t} 
 \end{equation}
 Hence, with Fourier Transform, we can go back and forth between time and frequency domain. It is important to note that these basis vectors need \textbf{not} be \textit{orthogonal}.
 \bigskip
@@ -142,7 +146,36 @@ Where $n \in {0,1,...,N-1}$. The signal approaches zero near $n=0$ and $n=N-1$, 
 \end{figure}
 \bigskip
 
+It is important to note that the coefficients $c_{\omega}$ may be complex valued. They are functions of the amplitude of corresponding sinusoidal component (see Appendix ??). But, to obtain useful metrics, we need to extract some physical quantity from the coefficients. This is where \textbf{Parseval's theorem} is used, which relates and time and frequency domain components in DFT as follows \cite{allen} :
+\begin{equation}
+{\|\textbf{c}\|}^2 \propto {\|\textbf{a}\|}^2
+\end{equation}
+If \textbf{a} represents amplitude in the time-domain, then as a consequence of Hook's law  on energy equation (see Appendix ??), we know that
+\begin{equation}
+Energy \propto amplitude^2
+\end{equation}
+Relating equation 2.11 and 2.12, it can be inferred that \textbf{square} of the Fourier coefficients is proportional to the energy distributed in the corresponding frequencies. This is called the \textbf{Power Spectrum}. 
+\bigskip
+
+\noindent As mentioned earlier, the frequencies in the considered range are  grouped into bins. It is useful to do so, not only to reduce dimension but also due to the aliasing effect of human auditory system. Depending on how frequencies are grouped, two different class of spectrograms are discussed.
+  
 \subsubsection{Mel Spectrogram}
 
+The \textit{mel-scale} was developed to establish to express measured frequency in terms of psychological metrics (i.e perceived pitch). The mel-scale was developed
+by experimenting with the human ears interpretation of a pitch. The experiment showed that the pitch is linearly perceived in the frequency range 0-1000 Hz. Above
+1000 Hz, the scale becomes logarithmic. There are several formulae to convert Hertz to mel. A popularly used formula is noted in \cite{speech}
+\begin{equation}
+m = 2595log_{10}\bigg(1+\frac{ \omega }{700}\bigg)
+\end{equation}
+Where $\omega$ is the frequency in Hertz. In a mel spectrogram, the frequencies and converted to mels and then divided into bins. Hence the difference from the normal spectrogram is just the assignment of frequencies to the bins.
 
+\subsubsection{Chromagram}
 
+This representation takes advantage of the periodic perception of pitch. Two pitches are perceived similar in "color" if they differ by one or several octaves apart. Chromagram groups such periodic perceptions into same coefficient (chroma). All pitches that belong to the same chroma are said to be from same pitch class. [TODO: How is this computed?]
+\begin{figure}[h] 
+\centering
+\includegraphics[width=0.5\textwidth]{chroma}
+\caption{Chromagram of Western Pitch Scale}
+ \label{fig:Chromagram}
+ \end{figure}
+\bigskip
