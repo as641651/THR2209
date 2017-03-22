@@ -74,7 +74,7 @@ where:\\
 \begin{equation}
 \textbf{a}(t) = \displaystyle\sum_{ \omega =0}^{M-1}c_{ \omega }\bm{\phi}_{ \omega }(t) 
 \end{equation}
-for some integer $0 < M < \infty$. Then $\textbf{c}(\phi) = (c_{0},c_{1}, ...,c_{M-1}) \in \mathbb{C}^M $ represents the components in frequency domain. Thus our aim is to compute $\textbf{c}(\phi)$. Computing the Fourier coefficients for periodic and aperiodic signals are discussed below.
+for some integer $0 < M < \infty$. Then $\textbf{c}(\phi) = (c_{0},c_{1}, ...,c_{M-1}) \in \mathbb{C}^M $ represents the components in frequency domain. Thus our aim is to compute $\textbf{c}(\phi)$ by defining basis vectors $\bm{\phi}_{\omega}$ which are functions of frequency. Computing the Fourier coefficients for periodic and aperiodic signals are discussed below.
 
 \subsubsection{Periodic Signals}
 If $\textbf{a}(t)$ is periodic in \textbf{T}, then we can apply the definition of \textbf{Exponential Fourier Series} expansion and define $\bm{\phi}$ in equation (2.2) as (See Appendix ??),
@@ -157,9 +157,10 @@ Where:
     \item $M$: is the dimension of discrete frequency space ; $\omega \in \mathbb{R}^{M}$
     \item $F$: is the frame length 
     \item $s$: is stride (or) hop-length for the next segment
-    \item $\textbf{C}$: is Fourier Coefficient Matrix ; $\textbf{C} \in \mathbb{C}^{M \times P}$
     \item $\textbf{a} \in  \mathbb{R}^{N}$ ; $n \in [0,1...N-1]$
     \item $\textbf{h} \in  \mathbb{R}^{F}$
+    \item $\omega \in  \mathbb{R}^{M}$
+    \item $\textbf{C}$: is Fourier Coefficient Matrix ; $\textbf{C} : \mathbb{R}^{F.P} \rightarrow \mathbb{C}^{M \times P}$
 \end{itemize}
 
 \noindent Equation (2.11) can be seen as a \textbf{convolution} over the signal \textbf{a} with \textbf{W} which has finite support over the set $\left\{0,1..,F \right\}$ (more details in section ??)
@@ -198,9 +199,9 @@ by experimenting with the human ears interpretation of a pitch. The experiment s
 \begin{equation}
 \omega_{m} = 2595log_{10}\bigg(1+\frac{ \omega }{700}\bigg)
 \end{equation}
-Where $\omega$ is the frequency in Hertz. In a mel spectrogram, the frequencies and converted to mels and then grouped into mel-spaced bins. This is done by multiplying the spectrum with some \textbf{filter bank (Mf)}. For details about computation of mel-filter banks, refer \textbf{??}. Each filter bank is centered at a specific frequency. Hence, to compute R mel bins, we need R mel-filter banks. 
+Where $\omega$ is the frequency in Hertz. In a mel spectrogram, the frequencies and converted to mels and then grouped into mel-spaced bins. This is done by multiplying the spectrum with some \textbf{filter bank ($\textbf{M}_{\omega_{m}}$)}. For details about computation of mel-filter banks, refer \cite{mel}. Each filter bank is centered at a specific frequency. Hence, to compute R mel bins, we need R mel-filter banks. 
 \begin{equation}
-\textbf{Mel}(p,\omega_{m}) = \displaystyle\sum_{ \omega = 0}^{M}\textbf{Y}(p, \omega)\textbf{Mf}(\omega_{m}, \omega)
+\textbf{Mel}(p,\omega_{m}) = \displaystyle\sum_{ \omega = 0}^{M}\textbf{Y}(p, \omega)\textbf{M}_{\omega_{m}}(\omega)
 \end{equation}
 Where:
 \begin{itemize}[label=]
@@ -218,12 +219,17 @@ When the function $f$ is an defined by equation (2.15), we get \textbf{mel power
 Where:
 \begin{itemize}[label=]
     \setlength\itemsep{0em}
+    \item $P$: is the number of spectral frames; $p \in [0,1..P-1]$ 
+    \item $M$: is the dimension of discrete frequency space ; $\omega = k-p.M \in \mathbb{R}^{M}$
     \item $K$ = $M.P$ and $k \in [0,1...K]$
     \item $\textbf{U}(k)$ = $\textbf{Y}(i,j)$ ; $i = floor(\frac{k}{M})$ ; $j = k-floor(\frac{Mk}{M-1})$
-    \item $\omega$ = $k-p.M$
+    \item $\textbf{Y} \in \mathbb{R}^{M \times P}$
+    \item $\textbf{U} \in \mathbb{R}^{M.P}$
+    \item $\omega_{m} \in  \mathbb{R}^{R}$
+    \item $\textbf{Mel}$: is Mel Spectrum Matrix ; $\textbf{Mel} : \mathbb{R}^{M.P} \rightarrow \mathbb{R}^{R \times P}$
 \end{itemize}
 
-\noindent Hence, we can represent mel-spectrogram as \textbf{M-strided convolution} over \textit{flattened} $\textbf{Y}$ with mel filters $\textbf{M}_{\omega_{m}}$, 
+\noindent Hence, we can represent mel-spectrogram as \textbf{M-strided convolution} over \textit{flattened} $\textbf{Y}$ with mel filters $\textbf{M}_{\omega_{m}}$ (i.e, the frequency axis of $\textbf{C}$ is contracted with each mel-filte)r, 
 \begin{equation}
 \boxed
 {
@@ -240,4 +246,57 @@ This representation takes advantage of the periodic perception of pitch. Two pit
 \caption{Chromagram of Western Pitch Scale}
  \label{fig:Chromagram}
  \end{figure}
+\FloatBarrier
 \bigskip
+
+\section{Dimensionality Reduction}
+The objective of dimensionality reduction is to retain only the desirable characteristics of the representations presented in section 2.1, which can be large for longer audio tracks (because number of frames $P$ depends on length of the audio). Usually, to handle audio frames of  length, dimensionality reduction is done hierarchically, sometimes by stacking combination of these techniques. We generalize the operations on signal $\textbf{a}$ as follows,
+\[
+   \textbf{R} = Rep(\textbf{a}) \qquad Rep : \mathbb{R}^{N} \rightarrow \mathbb{R}^{R \times P}
+\]
+\[
+   \textbf{X} = f(\textbf{R}) \qquad f : \mathbb{R}^{R \times P} \rightarrow \mathbb{R}^{S \times Q} 
+\]
+\[
+   \textbf{Y} = D(\textbf{X}) \qquad D : \mathbb{R}^{S \times Q} \rightarrow \mathbb{R}^{T \times W} 
+\] 
+
+\noindent The representation operations defined in the previous section can be a part of the function $Rep$. Since dimension reductions can be stacked, $f$ represents the previous reductions applied. $Q$ and $W$ are number of frames as a result of hierarchical windowing operation shown in fig (??). Usually, $S < R$ or $Q < P$. $\textbf{Y} \in \mathbb{R}^{T \times W}$ will then be the reduced representation ($T < S$ or $W < Q$). Depending on how the function $D$ is defined, we will classify the techniques into broad categories. 
+
+\subsection{Basis Transformations - PCA, MFCC}
+In general terms, this is done by \textit{changing to a reduced basis}. Recalling the change of basis done to represent a signal \textbf{a}(t) in \textit{time} domain in terms of components \textbf{c}($\omega$) (or $c_{ \omega }$)  in \textit{frequency} domain with basis vectors $\bm{\phi}_{ \omega }$ in equation (2.2),
+  
+\[
+\textbf{a}(t) = \displaystyle\sum_{ \omega =0}^{M-1}\textbf{c}( \omega )\bm{\phi}_{ \omega }(t)
+\]
+where we did not aim to reduce the size of the mapped dimension (M). Now we will generalize the basis transformation for dimensionality reduction. That is, we want to approximate a vector $\textbf{x} \in \mathbb{R}^{S}$ as a \textit{linear combination} of $T$ basis vectors $\textbf{q}_{j}$ such that $T < S$ and $j \in [0,1,..T-1]$.     
+\begin{equation}
+\textbf{x}(i) = \displaystyle\sum_{j =0}^{T-1}\textbf{y}(j)\textbf{q}_{j}(i)
+\end{equation}
+
+Re writing in matrix notation,
+\begin{equation}
+\textbf{x} = \textbf{Q}\textbf{y} 
+\end{equation}
+\[
+\textbf{Q} = 
+\begin{bmatrix}
+    \textbf{q}_{1} & \textbf{q}_{2} & \dots  & \textbf{q}_{S} \\
+    \vline & \vline & \dots & \vline \\
+\end{bmatrix}
+\]
+Similarly, $\textbf{x}$ and $\textbf{y}$ are a single column of the matrix $\textbf{X}$ and $\textbf{Y}$ respectively. If \textbf{Q} is defined, then \textbf{y} can be computed by solving equation (2.21). 
+
+\subsubsection{Principal Component Analysis (PCA)}
+PCA uses bases that account for maximum variations in a group of inputs. Here we break the function $D$ into two,
+\[
+  \textbf{Cov} = D1(\textbf{X}) \qquad D1 : \mathbb{R}^{S \times Q} \rightarrow \mathbb{R}^{W \times Q1 \times Q2}
+\]
+\[
+  \textbf{Y} = D2(\textbf{Cov}) \qquad D2 : \mathbb{R}^{W \times Q1 \times Q2} \rightarrow \mathbb{R}^{T \times W}
+\]
+\[
+D(\textbf{X}) = D2(D1(\textbf{X}))
+\]
+
+The input is grouped in sets of $Q1$ vectors and the covariance is computed. Then 
