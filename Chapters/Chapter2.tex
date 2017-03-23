@@ -262,6 +262,14 @@ The objective of dimensionality reduction is to retain only the desirable charac
 \] 
 
 \noindent The representation operations defined in the previous section can be a part of the function $Rep$. Since dimension reductions can be stacked, $f$ represents the previous reductions applied. $Q$ and $W$ are number of frames as a result of hierarchical windowing operation shown in fig (??). Usually, $S < R$ or $Q < P$. $\textbf{Y} \in \mathbb{R}^{T \times W}$ will then be the reduced representation ($T < S$ or $W < Q$). Depending on how the function $D$ is defined, we will classify the techniques into broad categories. 
+\begin{figure}[h] 
+\centering
+\includegraphics[width=0.5\textwidth]{dim_red}
+\caption{Dimensionality Reduction Pipeline}
+ \label{fig:Dimensionality Reduction}
+ \end{figure}
+\FloatBarrier
+\bigskip
 
 \subsection{Basis Transformations - PCA, MFCC}
 In general terms, this is done by \textit{changing to a reduced basis}. Recalling the change of basis done to represent a signal \textbf{a}(t) in \textit{time} domain in terms of components \textbf{c}($\omega$) (or $c_{ \omega }$)  in \textit{frequency} domain with basis vectors $\bm{\phi}_{ \omega }$ in equation (2.2),
@@ -281,19 +289,19 @@ Re writing in matrix notation,
 \[
 \textbf{Q} = 
 \begin{bmatrix}
-    \textbf{q}_{1} & \textbf{q}_{2} & \dots  & \textbf{q}_{S} \\
+    \textbf{q}_{1} & \textbf{q}_{2} & \dots  & \textbf{q}_{T} \\
     \vline & \vline & \dots & \vline \\
 \end{bmatrix}
 \]
 Similarly, $\textbf{x}$ and $\textbf{y}$ are a single column of the matrix $\textbf{X}$ and $\textbf{Y}$ respectively. If \textbf{Q} is defined, then \textbf{y} can be computed by solving equation (2.21). 
 
 \subsubsection{Principal Component Analysis (PCA)}
-PCA uses bases that account for maximum variations in a group of inputs. Here we break the function $D$ into two,
+PCA uses bases that account for maximum variations in a group of inputs. Considering the dimension $Q$ to be the number of samples, the covariance of every sample with every other sample is computed. If $Q$ is large, there can be loss of temporal information. So we segment the inputs into groups of $Q1$.  Here we break the function $D$ into two,
 \[
-  \textbf{Cov} = D1(\textbf{X}) \qquad D1 : \mathbb{R}^{S \times Q} \rightarrow \mathbb{R}^{W \times Q1 \times Q2}
+  \textbf{Cov} = D1(\textbf{X}) \qquad D1 : \mathbb{R}^{S \times Q} \rightarrow \mathbb{R}^{W \times Q1 \times Q1}
 \]
 \[
-  \textbf{Y} = D2(\textbf{Cov}) \qquad D2 : \mathbb{R}^{W \times Q1 \times Q2} \rightarrow \mathbb{R}^{T \times W}
+  \textbf{Y} = D2(\textbf{Cov}) \qquad D2 : \mathbb{R}^{W \times Q1 \times Q1} \rightarrow \mathbb{R}^{T \times W}
 \]
 \[
 D(\textbf{X}) = D2(D1(\textbf{X}))
