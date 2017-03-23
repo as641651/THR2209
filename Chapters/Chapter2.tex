@@ -264,7 +264,7 @@ The objective of dimensionality reduction is to retain only the desirable charac
 \noindent The representation operations defined in the previous section can be a part of the function $Rep$. Since dimension reductions can be stacked, $f$ represents the previous reductions applied. $Q$ and $W$ are number of frames as a result of hierarchical windowing operation shown in fig (??). Usually, $S < R$ or $Q < P$. $\textbf{Y} \in \mathbb{R}^{T \times W}$ will then be the reduced representation ($T < S$ or $W < Q$). Depending on how the function $D$ is defined, we will classify the techniques into broad categories. 
 \begin{figure}[h] 
 \centering
-\includegraphics[width=0.5\textwidth]{dim_red}
+\includegraphics[width=0.5\textwidth]{chroma}
 \caption{Dimensionality Reduction Pipeline}
  \label{fig:Dimensionality Reduction}
  \end{figure}
@@ -308,3 +308,50 @@ D(\textbf{X}) = D2(D1(\textbf{X}))
 \]
 
 The input is grouped in sets of $Q1$ vectors and the covariance is computed. Then 
+
+
+
+\begin{algorithm}
+  \caption{$\textbf{Y}$ = PCA($\textbf{X}$)}\label{PCA}
+  \begin{algorithmic}[1]
+    \Statex \textbf{Input :} $\textbf{X} \in \mathbb{R}^{S \times Q}$
+    \Statex \textbf{Output :} $\textbf{Y} \in \mathbb{R}^{T \times W}$
+    \State  $W = \frac{Q}{Q_{s}}$
+    \For{$i \in \{0,1,..,W\}$}
+    \State $\textbf{X}_{s} = \textbf{X}[i.Q_{s}:(i+1).Q_{s}]$ \Comment{$\textbf{X}_{s} \in \mathbb{R}^{S \times Q_{s}}$}
+      \State $\bm{\Sigma} = \frac{1}{Q_{s}}\textbf{X}_{s}\textbf{X}_{s}^{T}$ \Comment{$\bm{\Sigma} \in \mathbb{S}^{S \times S}$}
+      \State $\textbf{V}, \bm{\lambda} = EIG(\bm{\Sigma}, T)$ \Comment{$\bm{\lambda} \in \mathbb{R}^{T}$ , $\textbf{V} \in \mathbb{O}^{S \times T}$}
+      \State $\textbf{Y}^{T}[i] \leftarrow \bm{\lambda}$
+    \EndFor
+  \end{algorithmic}
+\end{algorithm}
+\bigskip
+
+
+\begin{algorithm}
+  \caption{$\textbf{Y}$ = PCA WHITENING($\textbf{X}$) }\label{PCA_W}
+  \begin{algorithmic}[1]
+    \Statex \textbf{Input :} $\textbf{X} \in \mathbb{R}^{S \times Q}$
+    \Statex \textbf{Output :} $\textbf{Y} \in \mathbb{R}^{T \times Q}$ \Comment{$W=Q$}
+      \State $\bm{\Sigma} = \frac{1}{Q}\textbf{X}\textbf{X}^{T}$ \Comment{$\bm{\Sigma} \in \mathbb{S}^{S \times S}$}
+      \State $\textbf{V}, \bm{\Lambda} = EIG(\bm{\Sigma}, T)$ \Comment{$\bm{\Lambda} \in \mathbb{D}^{T \times T}$ , $\textbf{V} \in \mathbb{O}^{S \times T}$}
+      \State $\textbf{\^{X}} = ZERO\_MEAN(\textbf{X})$
+      \State $\textbf{Y} \leftarrow \bm{\Lambda}^{-1}\textbf{V}^{T}\textbf{\^{X}}$
+  \end{algorithmic}
+\end{algorithm}
+\bigskip
+
+
+\begin{algorithm}
+  \caption{$\textbf{Y}$ = MFCC($\textbf{a}$) }\label{MFCC}
+  \begin{algorithmic}[1]
+    \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{N}$
+    \Statex \textbf{Output :} $\textbf{Y} \in \mathbb{R}^{S \times P}$ \Comment{$T=S$, $W=Q=T$}
+    \State $\textbf{C} = STFT(\textbf{a})$ \Comment{$\textbf{C} \in \mathbb{C}^{M \times P}$}
+    \State $\textbf{Y}_{r} = MODULUS(\textbf{C})$ \Comment{$\textbf{Y}_{r} \in \mathbb{R}^{M \times P}$}
+    \State $\textbf{R} = MEL(\textbf{Y}_{r})$ \Comment{$\textbf{R} \in \mathbb{R}^{R \times P}$, $\textbf{X}=\textbf{R}$}
+    \State $\textbf{R} \leftarrow ln(\textbf{R})$
+    \State $\textbf{V} \leftarrow COSINE\_BASIS(R,S)$  \Comment{$\textbf{V} \in \mathbb{R}^{R \times S}$}
+    \State $\textbf{Y} \leftarrow \textbf{V}^{T}\textbf{R}$
+  \end{algorithmic}
+\end{algorithm}
