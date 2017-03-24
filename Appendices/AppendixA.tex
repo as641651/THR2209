@@ -1,25 +1,30 @@
 % Appendix A
 
-\chapter{Frequently Asked Questions} % Main appendix title
+%\chapter*{Frequently Asked Questions} % Main appendix title
 
-\label{AppendixA} % For referencing this appendix elsewhere, use \ref{AppendixA}
+%\label{AppendixA} % For referencing this appendix elsewhere, use \ref{AppendixA}
+\begin{appendices}
 
-\section{How do I change the colors of links?}
+\chapter{}
+\section{Basis Transformation}
+Any vector $\textbf{y} = [y_{1}, y_{2},...,y_{n}] \in V$ can be represented as a \gls{linear combination} of it's \gls{basis} $\textbf{V} = [\textbf{v}_{1}, \textbf{v}_{2},...,\textbf{v}_{n}] \in \mathbb{C}^{N \times N}$
+  
+\[
+\textbf{y} = \displaystyle\sum_{i=1}^{N}\alpha_{i}\textbf{v}_{i} = \textbf{V}^{T}\bm{\alpha}
+\]
+Where $\alpha_{i}$ are the coefficients or coordinates with respect to $\textbf{v}_{i}$. If there exists another set of \gls{basis} vectors $\textbf{U} = [\textbf{u}_{1}, \textbf{u}_{2},...,\textbf{u}_{m}] \in \mathbb{C}^{M \times M}$, then we can represent $\textbf{y}$ as a \gls{linear combination} of $M$ \gls{basis}.
+\[
+\textbf{y} = \displaystyle\sum_{i=1}^{M}\beta_{i}\textbf{u}_{i} = \textbf{U}^{T}\bm{\beta}
+\]
+Where $\beta_{i}$ are the coefficients or coordinates with respect to $\textbf{u}_{i}$.
+\bigskip
 
-The color of links can be changed to your liking using:
+\noindent For a vector in basis $\textbf{V}$ with co-ordinates $\bm{\alpha}$, \textbf{basis transformation} is defined as representing the same vector with the new co-ordinates $\bm{\beta}$ in basis $\textbf{U}$.
+\bigskip
 
-{\small\verb!\hypersetup{urlcolor=red}!}, or
+\noindent Cartesian basis ($\textbf{e}_{i}$) are standard basis vectors with $\bm{\alpha} = \textbf{y}$
+\[
+\textbf{y} = \displaystyle\sum_{i=1}^{N}y_{i}\textbf{e}_{i} = \displaystyle\sum_{i=1}^{M}\beta_{i}\textbf{u}_{i}
+\]
 
-{\small\verb!\hypersetup{citecolor=green}!}, or
-
-{\small\verb!\hypersetup{allcolor=blue}!}.
-
-\noindent If you want to completely hide the links, you can use:
-
-{\small\verb!\hypersetup{allcolors=.}!}, or even better: 
-
-{\small\verb!\hypersetup{hidelinks}!}.
-
-\noindent If you want to have obvious links in the PDF but not the printed text, use:
-
-{\small\verb!\hypersetup{colorlinks=false}!}.
+\end{appendices}

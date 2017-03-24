@@ -32,6 +32,12 @@ maxbibnames=99
 %\usepackage{algorithm}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+\usepackage{glossaries}
+\usepackage{appendix}
+
+\makeglossaries
+\loadglsentries{glossary.tex}
+
 \graphicspath{ {Figures/} }
 
 \begin{document}
@@ -57,6 +63,7 @@ We address the automatic music tagging problem that can be solved by training wi
 
 \include{Chapters/Chapter1}
 \include{Chapters/Chapter2}
+\include{Appendices/AppendixA}
 %\chapter{Introduction}
 %
 %\section{Related work}
@@ -77,6 +84,7 @@ We address the automatic music tagging problem that can be solved by training wi
 %title={Bibliography}
 %]
  
+\printglossaries
 \chapter*{Bibliography}
 \addcontentsline{toc}{chapter}{Bibliography}
 \printbibliography[type={inproceedings},title={Proceedings},heading=subbibliography]

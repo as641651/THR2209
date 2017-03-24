@@ -61,7 +61,7 @@ The optimum sampling rate is given by Nyquist-Shannon sampling theorem which say
 
 
 \subsection{Time-Frequency transformations}
-The signal represented in the time domain is a set of ordered \textit{n}-tuples of real numbers \( (a_{1},a_{2}, ...,a_{N}) \in \mathbb{R}^N \) in the vector space \textit{V} , specifically \textit{Euclidean n-space}. That is to say, a discrete-time signal can be represented as a \textit{linear combination} of Cartesian basis vectors. 
+The signal represented in the time domain is a set of ordered \textit{n}-tuples of real numbers \( (a_{1},a_{2}, ...,a_{N}) \in \mathbb{R}^N \) in the vector space \textit{V} , specifically \textit{Euclidean n-space}. That is to say, a discrete-time signal can be represented as a \gls{linear combination} of Cartesian \gls{basis} vectors. 
 \begin{equation}
 \textbf{a}(t) = (a_{1},a_{2}, ...,a_{N}) = a_{1}\textbf{e}_{1} + a_{2}\textbf{e}_{2} + ... + a_{N}\textbf{e}_{N} = \displaystyle\sum_{i=1}^{N}a_{i}\textbf{e}_{i}
 \end{equation} 
@@ -250,7 +250,7 @@ This representation takes advantage of the periodic perception of pitch. Two pit
 \bigskip
 
 \section{Dimensionality Reduction}
-The objective of dimensionality reduction is to retain only the desirable characteristics of the representations presented in section 2.1, which can be large for longer audio tracks (because number of frames $P$ depends on length of the audio). Usually, to handle audio frames of  length, dimensionality reduction is done hierarchically, sometimes by stacking combination of these techniques. We generalize the operations on signal $\textbf{a}$ as follows,
+The objective of dimensionality reduction is to retain only the desirable characteristics of the representations presented in section 2.1. This is done because the representation ($\textbf{R}$) can be large for longer audio tracks (because number of frames $P$ depends on length of the audio). Reduction over a large frame at once can lead to loss of temporal information (i.e, change of variables across frames). Hence, dimensionality reduction is done hierarchically, sometimes by stacking combination of these techniques. We generalize the operations on input signal $\textbf{a}$ as follows,
 \[
    \textbf{R} = Rep(\textbf{a}) \qquad Rep : \mathbb{R}^{N} \rightarrow \mathbb{R}^{R \times P}
 \]
@@ -261,10 +261,15 @@ The objective of dimensionality reduction is to retain only the desirable charac
    \textbf{Y} = D(\textbf{X}) \qquad D : \mathbb{R}^{S \times Q} \rightarrow \mathbb{R}^{T \times W} 
 \] 
 
-\noindent The representation operations defined in the previous section can be a part of the function $Rep$. Since dimension reductions can be stacked, $f$ represents the previous reductions applied. $Q$ and $W$ are number of frames as a result of hierarchical windowing operation shown in fig (??). Usually, $S < R$ or $Q < P$. $\textbf{Y} \in \mathbb{R}^{T \times W}$ will then be the reduced representation ($T < S$ or $W < Q$). Depending on how the function $D$ is defined, we will classify the techniques into broad categories. 
+\noindent The representation operations defined in the previous section can be a part of the function $Rep$. Since dimension reductions can be stacked, $f$ represents the previous reductions applied. $Q$ and $W$ are number of frames as a result of hierarchical windowing operation shown in fig (2.3). For the first reduction however, $f$ does not exist and hence represented by conditional arrow (dotted). The output of reduction $\textbf{Y} \in \mathbb{R}^{T \times W}$ will then be the reduced representation ($T < S$ or $W < Q$). Depending on how the function $D$ is defined, we will classify the techniques into broad categories.
+\begin{itemize}
+  \item Reduction by \gls{basis} transformation
+  \item Reduction by neural networks
+  \item Reduction by clustering 
+\end{itemize} 
 \begin{figure}[h] 
 \centering
-\includegraphics[width=0.5\textwidth]{chroma}
+\includegraphics[width=0.5\textwidth]{dim_red}
 \caption{Dimensionality Reduction Pipeline}
  \label{fig:Dimensionality Reduction}
  \end{figure}
@@ -272,7 +277,32 @@ The objective of dimensionality reduction is to retain only the desirable charac
 \bigskip
 
 \subsection{Basis Transformations - PCA, MFCC}
-In general terms, this is done by \textit{changing to a reduced basis}. Recalling the change of basis done to represent a signal \textbf{a}(t) in \textit{time} domain in terms of components \textbf{c}($\omega$) (or $c_{ \omega }$)  in \textit{frequency} domain with basis vectors $\bm{\phi}_{ \omega }$ in equation (2.2),
+
+The \gls{basis} vectors are functions of the properties we want to encode. In equation (2.2), we used \gls{basis transformation} to represent the signal in frequency domain. Now we want to use the same concept, but for dimensionality reduction. In general terms, this is done by \textit{changing to a reduced basis}. 
+\bigskip
+
+\noindent To reduce the dimension from $S$ to $T$, the input frame $\textbf{X}_{p}$ is operated with some window function $\textbf{w}$,
+\[
+  \textbf{z}_{p} = \textbf{X}_{p}\textbf{w}
+\] 
+Where:
+\begin{itemize}[label=]
+    \setlength\itemsep{0em}
+    \item $\textbf{X}_{p} \in \mathbb{R}^{S \times Q1}$ 
+    \item $\textbf{w} \in \mathbb{R}^{Q1}$
+    \item $\textbf{z}_{p} \in \mathbb{R}^{S}$
+\end{itemize}    
+Now we have to compute $\textbf{y}_{p} \in \mathbb{R}^{T}$ which extracts maximum information from $\textbf{z}_{p} \in \mathbb{R}^{S}$ such that $T < S$. Let us say, $\textbf{z}_{p}$ are the coordinates in some \gls{basis} $\textbf{V} \in \mathbb{R}^{S \times S}$. Then,
+\begin{equation}
+\textbf{y}_{p} = \textbf{V}^{T}\textbf{z}_{p}
+\end{equation}
+The information in $\textbf{y}_{p}$ is of same dimension as $\textbf{z}_{p}$ ($S = T$). To represent $\textbf{y}_{p}$ in reduced dimension without losing much information, we need to find new basis $\textbf{U} \in \mathbb{R}^{T \times T}$ such that,
+\begin{equation}
+\textbf{y}_{p} = \textbf{U}^{T}\bm{\beta}_{p} =  \textbf{V}^{T}\textbf{z}_{p}
+\end{equation}
+Where $\bm{\beta}_{p}$ are co-ordinates in basis $\textbf{U}$.
+
+. Recalling the change of basis done to represent a signal \textbf{a}(t) in \textit{time} domain in terms of components \textbf{c}($\omega$) (or $c_{ \omega }$)  in \textit{frequency} domain with basis vectors $\bm{\phi}_{ \omega }$ in equation (2.2),
   
 \[
 \textbf{a}(t) = \displaystyle\sum_{ \omega =0}^{M-1}\textbf{c}( \omega )\bm{\phi}_{ \omega }(t)
@@ -355,3 +385,4 @@ The input is grouped in sets of $Q1$ vectors and the covariance is computed. The
     \State $\textbf{Y} \leftarrow \textbf{V}^{T}\textbf{R}$
   \end{algorithmic}
 \end{algorithm}
+ 
