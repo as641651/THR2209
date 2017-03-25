@@ -70,7 +70,7 @@ where:\\
 \indent $\textbf{e}_{1} ... \textbf{e}_{N}$ are Cartesian basis vectors (Unit vectors).
 \bigskip
 
-\noindent Mapping from time-domain to frequency-domain is looked up on as change of basis. We need to find a set of basis vectors $\bm{\phi}_{ \omega }$, whose coefficients $c_{ \omega }$ then represents the components in frequency domain. 
+\noindent Mapping from time-domain to frequency-domain is looked up on as \gls{basis transformation}. We need to find a set of basis vectors $\bm{\phi}_{ \omega }$, whose coefficients $c_{ \omega }$ then represents the components in frequency domain. 
 \begin{equation}
 \textbf{a}(t) = \displaystyle\sum_{ \omega =0}^{M-1}c_{ \omega }\bm{\phi}_{ \omega }(t) 
 \end{equation}
@@ -278,66 +278,45 @@ The objective of dimensionality reduction is to retain only the desirable charac
 
 \subsection{Basis Transformations - PCA, MFCC}
 
-The \gls{basis} vectors are functions of the properties we want to encode. In equation (2.2), we used \gls{basis transformation} to represent the signal in frequency domain. Now we want to use the same concept, but for dimensionality reduction. In general terms, this is done by \textit{changing to a reduced basis}. 
+The \gls{basis} vectors are functions of the properties we want to encode. In equation (2.2), we used \gls{basis transformation} to represent the signal in frequency domain. Now we want to use the same concept, but for dimensionality reduction. In general terms, this is done by \textit{changing to a reduced basis}. That is, we need to find a   \gls{change of coordinates matrix} that will map the input to a basis system with lesser coordinates. 
 \bigskip
 
-\noindent To reduce the dimension from $S$ to $T$, the input frame $\textbf{X}_{p}$ is operated with some window function $\textbf{w}$,
+\noindent The input frame $\textbf{X}_{w}$ is first operated with some window function $\textbf{w}$,
 \[
-  \textbf{z}_{p} = \textbf{X}_{p}\textbf{w}
-\] 
-Where:
-\begin{itemize}[label=]
-    \setlength\itemsep{0em}
-    \item $\textbf{X}_{p} \in \mathbb{R}^{S \times Q1}$ 
-    \item $\textbf{w} \in \mathbb{R}^{Q1}$
-    \item $\textbf{z}_{p} \in \mathbb{R}^{S}$
-\end{itemize}    
-Now we have to compute $\textbf{y}_{p} \in \mathbb{R}^{T}$ which extracts maximum information from $\textbf{z}_{p} \in \mathbb{R}^{S}$ such that $T < S$. Let us say, $\textbf{z}_{p}$ are the coordinates in some \gls{basis} $\textbf{V} \in \mathbb{R}^{S \times S}$. Then,
+  \textbf{z}_{w} = \{\textbf{X}_{w}\textbf{w} \quad | \quad \textbf{X}_{w} \in \mathbb{R}^{S \times J}, \textbf{w} \in \mathbb{R}^{J}, \textbf{z}_{w} \in \mathbb{R}^{S}\}
+\]    
+Now we have to compute $\textbf{y}_{w} \in \mathbb{R}^{T}$ which has least representation error with $\textbf{z}_{w} \in \mathbb{R}^{S}$ such that $T < S$. Let us say, $\textbf{z}_{w}$ can be written as a \gls{linear combination} of some \gls{basis} $\textbf{V} \in \mathbb{R}^{S \times T}$. Then $\textbf{y}_{w}$ can be calculated by solving,
 \begin{equation}
-\textbf{y}_{p} = \textbf{V}^{T}\textbf{z}_{p}
+\textbf{z}_{w} = \textbf{V}\textbf{y}_{w}
 \end{equation}
-The information in $\textbf{y}_{p}$ is of same dimension as $\textbf{z}_{p}$ ($S = T$). To represent $\textbf{y}_{p}$ in reduced dimension without losing much information, we need to find new basis $\textbf{U} \in \mathbb{R}^{T \times T}$ such that,
-\begin{equation}
-\textbf{y}_{p} = \textbf{U}^{T}\bm{\beta}_{p} =  \textbf{V}^{T}\textbf{z}_{p}
-\end{equation}
-Where $\bm{\beta}_{p}$ are co-ordinates in basis $\textbf{U}$.
-
-. Recalling the change of basis done to represent a signal \textbf{a}(t) in \textit{time} domain in terms of components \textbf{c}($\omega$) (or $c_{ \omega }$)  in \textit{frequency} domain with basis vectors $\bm{\phi}_{ \omega }$ in equation (2.2),
-  
+Thus, the operator $D$ in equation (??) is,
 \[
-\textbf{a}(t) = \displaystyle\sum_{ \omega =0}^{M-1}\textbf{c}( \omega )\bm{\phi}_{ \omega }(t)
+\textbf{Y} = D(\textbf{X}, \textbf{V})
 \]
-where we did not aim to reduce the size of the mapped dimension (M). Now we will generalize the basis transformation for dimensionality reduction. That is, we want to approximate a vector $\textbf{x} \in \mathbb{R}^{S}$ as a \textit{linear combination} of $T$ basis vectors $\textbf{q}_{j}$ such that $T < S$ and $j \in [0,1,..T-1]$.     
-\begin{equation}
-\textbf{x}(i) = \displaystyle\sum_{j =0}^{T-1}\textbf{y}(j)\textbf{q}_{j}(i)
-\end{equation}
-
-Re writing in matrix notation,
-\begin{equation}
-\textbf{x} = \textbf{Q}\textbf{y} 
-\end{equation}
-\[
-\textbf{Q} = 
-\begin{bmatrix}
-    \textbf{q}_{1} & \textbf{q}_{2} & \dots  & \textbf{q}_{T} \\
-    \vline & \vline & \dots & \vline \\
-\end{bmatrix}
-\]
-Similarly, $\textbf{x}$ and $\textbf{y}$ are a single column of the matrix $\textbf{X}$ and $\textbf{Y}$ respectively. If \textbf{Q} is defined, then \textbf{y} can be computed by solving equation (2.21). 
+Therefore, dimension reduction through \gls{basis transformation} are those class of techniques where $D$ is a function of some \gls{change of coordinates matrix} $\textbf{V}$. Now, depending on how $\textbf{V}$ is defined, some methods are discussed.
 
 \subsubsection{Principal Component Analysis (PCA)}
-PCA uses bases that account for maximum variations in a group of inputs. Considering the dimension $Q$ to be the number of samples, the covariance of every sample with every other sample is computed. If $Q$ is large, there can be loss of temporal information. So we segment the inputs into groups of $Q1$.  Here we break the function $D$ into two,
+The frequencies in the adjacent bins can be highly correlated and therefore contain redundant information. Principal component Analysis is a procedure to transform large number of correlated variables into smaller number of uncorrelated variables. This means, $\textbf{y}_{w}$ should be approximated only with basis vectors that account for large variance. Hence, in PCA based techniques, dimension reduction is done through \gls{basis} vectors of covariance matrix ($\bm{\Sigma}$). The steps of this abstraction are enumerated,
+\begin{enumerate}[label=(\alph*)]
+\item The rows of $\textbf{X}_{w}$ are centred by their mean and covariance is computed as,
 \[
-  \textbf{Cov} = D1(\textbf{X}) \qquad D1 : \mathbb{R}^{S \times Q} \rightarrow \mathbb{R}^{W \times Q1 \times Q1}
+   \bm{\Sigma} = \textbf{E}[(\textbf{X}_{w} - \textbf{E}[\textbf{X}_{w}])(\textbf{X}_{w} - \textbf{E}[\textbf{X}_{w}])^{T}] = \frac{1}{J}\textbf{\^X}_{w}\textbf{\^X}_{w}^{T} \quad \in \mathbb{S}^{S \times S}
+\]
+\item The eigen values and eigen vectors of $\bm{\Sigma}$ are computed. At this point, we use the \gls{Orthogonal Eigenvector Decomposition Theorem} and infer that eigen vectors of symmetric matrix ($\bm{\Sigma}$) form an orthogonal basis in $\mathbb{R}^{S}$. 
+\[
+\bm{\Sigma} = \textbf{V}\bm{\Lambda}\textbf{V}^{T} \qquad \textbf{V} \in \mathbb{O}^{S \times S}, \quad \bm{\Lambda} \in \mathbb{D}^{S \times S}
+\]
+To understand how the basis of $\textbf{X}_{w}$ are related to that of $\bm{\Sigma}$, we use \gls{singular value decomposition theorem} which can be used to decompose an arbitrary matrix into basis vectors ($\textbf{U}$ and $\textbf{V}$) in $\mathbb{R}^{J}$ and $\mathbb{R}^{S}$ respectively. Thus,
+\[
+\textbf{X}_{w} = \textbf{V}\bm{\Xi}\textbf{U}^{T} \qquad \textbf{V} \in \mathbb{O}^{S \times S}, \bm{\Xi} \in \mathbb{R}^{S \times J},\textbf{U} \in \mathbb{O}^{J \times J}
 \]
 \[
-  \textbf{Y} = D2(\textbf{Cov}) \qquad D2 : \mathbb{R}^{W \times Q1 \times Q1} \rightarrow \mathbb{R}^{T \times W}
+J\bm{\Sigma} = \textbf{X}_{w}\textbf{X}_{w}^{T} = \textbf{V}\bm{\Xi}\textbf{U}^{T}(\textbf{V}\bm{\Xi}\textbf{U}^{T})^T = \textbf{V}\bm{\Xi}\textbf{U}^{T}\textbf{U}\bm{\Xi}^{T}\textbf{V}^{T} = \textbf{V}\bm{\Lambda}^{2}\textbf{V}^{T}
 \]
-\[
-D(\textbf{X}) = D2(D1(\textbf{X}))
-\]
+Where $\textbf{U}^{T}\textbf{U} = I$, as $\textbf{U}$ is orthogonal. Hence, it can be seen that the basis in $\mathbb{R}^{S}$ for $\textbf{X}_{w}$ and $\bm{\Sigma}$ are same. 
+\item Now the eigenvectors corresponding to top $T$ eigen values are retained and operated on $\textbf{z}_{w}$. The windowing function (equation ??), if applied on $\textbf{X}_{w}$, should not change the basis. To compute $\textbf{y}_{w}$, lets assume there is an operator $\textbf{P} : \mathbb{R}^{S} \rightarrow \mathbb{R}^{T}$
 
-The input is grouped in sets of $Q1$ vectors and the covariance is computed. Then 
+\end{enumerate}   
 
 
 

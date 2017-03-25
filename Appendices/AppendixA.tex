@@ -7,24 +7,20 @@
 
 \chapter{}
 \section{Basis Transformation}
-Any vector $\textbf{y} = [y_{1}, y_{2},...,y_{n}] \in V$ can be represented as a \gls{linear combination} of it's \gls{basis} $\textbf{V} = [\textbf{v}_{1}, \textbf{v}_{2},...,\textbf{v}_{n}] \in \mathbb{C}^{N \times N}$
-  
-\[
-\textbf{y} = \displaystyle\sum_{i=1}^{N}\alpha_{i}\textbf{v}_{i} = \textbf{V}^{T}\bm{\alpha}
-\]
-Where $\alpha_{i}$ are the coefficients or coordinates with respect to $\textbf{v}_{i}$. If there exists another set of \gls{basis} vectors $\textbf{U} = [\textbf{u}_{1}, \textbf{u}_{2},...,\textbf{u}_{m}] \in \mathbb{C}^{M \times M}$, then we can represent $\textbf{y}$ as a \gls{linear combination} of $M$ \gls{basis}.
-\[
-\textbf{y} = \displaystyle\sum_{i=1}^{M}\beta_{i}\textbf{u}_{i} = \textbf{U}^{T}\bm{\beta}
-\]
-Where $\beta_{i}$ are the coefficients or coordinates with respect to $\textbf{u}_{i}$.
+
+Here we discuss only transformation from standard \gls{basis} or Cartesian \gls{basis}.
 \bigskip
 
-\noindent For a vector in basis $\textbf{V}$ with co-ordinates $\bm{\alpha}$, \textbf{basis transformation} is defined as representing the same vector with the new co-ordinates $\bm{\beta}$ in basis $\textbf{U}$.
-\bigskip
-
-\noindent Cartesian basis ($\textbf{e}_{i}$) are standard basis vectors with $\bm{\alpha} = \textbf{y}$
+\noindent The standard \gls{basis} for $\mathbb{R}^{N}$ is the ordered sequence $\textbf{E}_{n} = [\textbf{e}_{1}, \textbf{e}_{2}, ..,\textbf{e}_{n}]$, where $\textbf{e}_{i}$ is a vector with 1 in $\textit{i}^{th}$ place and 0 elsewhere. Any vector $\textbf{x} = [x_{1}, x_{2},...,x_{n}] \in \mathbb{R}^{N}$ can be represented as a \gls{linear combination} of $\textbf{E}_{n}$ as,
 \[
-\textbf{y} = \displaystyle\sum_{i=1}^{N}y_{i}\textbf{e}_{i} = \displaystyle\sum_{i=1}^{M}\beta_{i}\textbf{u}_{i}
+\textbf{x} = \displaystyle\sum_{i=1}^{N}x_{i}\textbf{e}_{i} = \textbf{E}_{n}\textbf{x}
 \]
 
+\noindent \textbf{Basis transformation} from standard \gls{basis} is defined as representing the same vector $\textbf{x}$ with the new co-ordinates $[y_{1}, y_{2},...,y_{m}]$ in \gls{basis} $\textbf{V} = [\textbf{v}_{1}, \textbf{v}_{2}, ..,\textbf{v}_{m}] \in \textbf{R}^{N \times M} $.
+\bigskip
+
+\[
+\textbf{x} = \displaystyle\sum_{i=1}^{M}y_{i}\textbf{v}_{i} = \textbf{V}\textbf{y} \qquad \textbf{y} \in \mathbb{R}^{M}
+\]
+$\textbf{V}$ is also known as \textbf{change of coordinates matrix} (also stated as any matrix whose columns form a \gls{basis}). If $\textbf{V}$ is orthogonal, then $\textbf{V}^{-1} = \textbf{V}^{T}$ and hence $\textbf{y} = \textbf{V}^{T}\textbf{x}$
 \end{appendices}
