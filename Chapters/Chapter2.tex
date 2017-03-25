@@ -285,36 +285,34 @@ The \gls{basis} vectors are functions of the properties we want to encode. In eq
 \[
   \textbf{z}_{w} = \{\textbf{X}_{w}\textbf{w} \quad | \quad \textbf{X}_{w} \in \mathbb{R}^{S \times J}, \textbf{w} \in \mathbb{R}^{J}, \textbf{z}_{w} \in \mathbb{R}^{S}\}
 \]    
-Now we have to compute $\textbf{y}_{w} \in \mathbb{R}^{T}$ which has least representation error with $\textbf{z}_{w} \in \mathbb{R}^{S}$ such that $T < S$. Let us say, $\textbf{z}_{w}$ can be written as a \gls{linear combination} of some \gls{basis} $\textbf{V} \in \mathbb{R}^{S \times T}$. Then $\textbf{y}_{w}$ can be calculated by solving,
-\begin{equation}
-\textbf{z}_{w} = \textbf{V}\textbf{y}_{w}
-\end{equation}
+Now we have to compute $\textbf{y}_{w} \in \mathbb{R}^{T}$ which has least representation error with $\textbf{z}_{w} \in \mathbb{R}^{S}$ such that $T < S$. Let us say, $\textbf{z}_{w}$ can be written as a \gls{linear combination} of some \gls{basis} $\textbf{V} = [\textbf{v}_{1}, \textbf{v}_{2}, ..,\textbf{v}_{T}] \in \mathbb{R}^{S \times T}$ with coordinates $\textbf{y}_{w} = [y_{1}, y_{2},...,y_{T}]$. Then $\textbf{y}_{w}$ can be calculated by solving,
+\[
+\textbf{z}_{w} = \displaystyle\sum_{i=1}^{T}y_{i}\textbf{v}_{i} = \textbf{V}\textbf{y}_{w}
+\]
+\[
+\textbf{y}_{w} = \textbf{V}^{-1}\textbf{z}_{w}
+\]
 Thus, the operator $D$ in equation (??) is,
 \[
 \textbf{Y} = D(\textbf{X}, \textbf{V})
 \]
-Therefore, dimension reduction through \gls{basis transformation} are those class of techniques where $D$ is a function of some \gls{change of coordinates matrix} $\textbf{V}$. Now, depending on how $\textbf{V}$ is defined, some methods are discussed.
+Therefore, dimension reduction through \gls{basis transformation} are those class of techniques where $D$ is a function of some invertible \gls{change of coordinates matrix} $\textbf{V}$. Now, depending on how $\textbf{V}$ is defined, some methods are discussed.
 
 \subsubsection{Principal Component Analysis (PCA)}
-The frequencies in the adjacent bins can be highly correlated and therefore contain redundant information. Principal component Analysis is a procedure to transform large number of correlated variables into smaller number of uncorrelated variables. This means, $\textbf{y}_{w}$ should be approximated only with basis vectors that account for large variance. Hence, in PCA based techniques, dimension reduction is done through \gls{basis} vectors of covariance matrix ($\bm{\Sigma}$). The steps of this abstraction are enumerated,
+The frequencies in the adjacent bins can be highly correlated and therefore contain redundant information. Principal component Analysis is a procedure to transform large number of correlated variables into smaller number of uncorrelated variables. This means, $\textbf{y}_{w}$ should be approximated only with basis vectors that account for large variance. Hence, in PCA based techniques, dimension reduction is done through \gls{basis} vectors of covariance matrix ($\bm{\Sigma}$). The coordinates of the resulting basis system are known as \textit{principal components}. The steps of this abstraction are enumerated,
 \begin{enumerate}[label=(\alph*)]
-\item The rows of $\textbf{X}_{w}$ are centred by their mean and covariance is computed as,
+\item The rows of $\textbf{X}$ are centred by their mean and covariance is computed as,
 \[
-   \bm{\Sigma} = \textbf{E}[(\textbf{X}_{w} - \textbf{E}[\textbf{X}_{w}])(\textbf{X}_{w} - \textbf{E}[\textbf{X}_{w}])^{T}] = \frac{1}{J}\textbf{\^X}_{w}\textbf{\^X}_{w}^{T} \quad \in \mathbb{S}^{S \times S}
+   \bm{\Sigma} = \textbf{E}[(\textbf{X} - \textbf{E}[\textbf{X}])(\textbf{X} - \textbf{E}[\textbf{X}])^{T}] = \frac{1}{Q}\textbf{\^X}\textbf{\^X}^{T} \quad \in \mathbb{S}^{S \times S}
 \]
 \item The eigen values and eigen vectors of $\bm{\Sigma}$ are computed. At this point, we use the \gls{Orthogonal Eigenvector Decomposition Theorem} and infer that eigen vectors of symmetric matrix ($\bm{\Sigma}$) form an orthogonal basis in $\mathbb{R}^{S}$. 
 \[
 \bm{\Sigma} = \textbf{V}\bm{\Lambda}\textbf{V}^{T} \qquad \textbf{V} \in \mathbb{O}^{S \times S}, \quad \bm{\Lambda} \in \mathbb{D}^{S \times S}
 \]
-To understand how the basis of $\textbf{X}_{w}$ are related to that of $\bm{\Sigma}$, we use \gls{singular value decomposition theorem} which can be used to decompose an arbitrary matrix into basis vectors ($\textbf{U}$ and $\textbf{V}$) in $\mathbb{R}^{J}$ and $\mathbb{R}^{S}$ respectively. Thus,
-\[
-\textbf{X}_{w} = \textbf{V}\bm{\Xi}\textbf{U}^{T} \qquad \textbf{V} \in \mathbb{O}^{S \times S}, \bm{\Xi} \in \mathbb{R}^{S \times J},\textbf{U} \in \mathbb{O}^{J \times J}
-\]
-\[
-J\bm{\Sigma} = \textbf{X}_{w}\textbf{X}_{w}^{T} = \textbf{V}\bm{\Xi}\textbf{U}^{T}(\textbf{V}\bm{\Xi}\textbf{U}^{T})^T = \textbf{V}\bm{\Xi}\textbf{U}^{T}\textbf{U}\bm{\Xi}^{T}\textbf{V}^{T} = \textbf{V}\bm{\Lambda}^{2}\textbf{V}^{T}
-\]
-Where $\textbf{U}^{T}\textbf{U} = I$, as $\textbf{U}$ is orthogonal. Hence, it can be seen that the basis in $\mathbb{R}^{S}$ for $\textbf{X}_{w}$ and $\bm{\Sigma}$ are same. 
-\item Now the eigenvectors corresponding to top $T$ eigen values are retained and operated on $\textbf{z}_{w}$. The windowing function (equation ??), if applied on $\textbf{X}_{w}$, should not change the basis. To compute $\textbf{y}_{w}$, lets assume there is an operator $\textbf{P} : \mathbb{R}^{S} \rightarrow \mathbb{R}^{T}$
+
+\item The eigen values represent the magnitude of variance for each frequency.  Hence, eigenvectors corresponding to large eigen values gives the coordinates corresponding to greater variance. So eigen vectors corresponding to top $T$ eigen values are retained, while ignoring coordinates of lower variance. The resulting \gls{change of coordinates matrix} is then $\textbf{\^V} \in \mathbb{O}^{S \times T}$
+   
+\item Since $\textbf{\^V}$ is orthogonal, $\textbf{\^{V}}^{-1} = \textbf{\^{V}}^{T}$, and we can compute $\textbf{y}_{w} = \textbf{\^{V}}^{T}\textbf{z}_{w}$
 
 \end{enumerate}   
 

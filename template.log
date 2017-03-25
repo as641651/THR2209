@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2017.3.23)  25 MAR 2017 23:18
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2017.3.23)  26 MAR 2017 00:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1287,7 +1287,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 [16 <./Figures/chroma.png>] [17 <./Figures/dim_red.png>]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 324.
+put line 322.
 ) [18] [19]
 \openout2 = `Appendices/AppendixA.aux'.
 
@@ -1340,27 +1340,21 @@ Package rerunfilecheck Info: File `template.out' has not changed.
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.88pt have occurred.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package logreq Info: Writing requests to 'template.run.xml'.
 \openout1 = `template.run.xml'.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 96.
  ) 
 Here is how much of TeX's memory you used:
- 25298 strings out of 493304
- 435944 string characters out of 6139871
- 807401 words of memory out of 5000000
+ 25297 strings out of 493304
+ 435884 string characters out of 6139871
+ 806399 words of memory out of 5000000
  28137 multiletter control sequences out of 15000+600000
  19413 words of font info for 71 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  63i,18n,77p,1714b,1106s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{glo:singular\040value\040decomposition\040theorem
-} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{glo:Orthogonal\040Eigenvector\040Decomposition\040T
-heorem} has been referenced but does not exist, replaced by a fixed one
+pdfTeX warning (dest): name{glo:Orthogonal\040Eigenvector\040Decomposition\04
+0Theorem} has been referenced but does not exist, replaced by a fixed one
 
 pdfTeX warning (dest): name{glo:change\040of\040coordinates\040matrix} has been
  referenced but does not exist, replaced by a fixed one
@@ -1383,10 +1377,10 @@ ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/font
 s/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on template.pdf (27 pages, 521651 bytes).
+Output written on template.pdf (27 pages, 521190 bytes).
 PDF statistics:
- 497 PDF objects out of 1000 (max. 8388607)
- 440 compressed objects within 5 object streams
- 113 named destinations out of 1000 (max. 500000)
+ 495 PDF objects out of 1000 (max. 8388607)
+ 438 compressed objects within 5 object streams
+ 112 named destinations out of 1000 (max. 500000)
  209 words of extra memory for PDF output out of 10000 (max. 10000000)
 
