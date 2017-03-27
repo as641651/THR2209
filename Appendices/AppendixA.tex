@@ -23,4 +23,44 @@ Here we discuss only transformation from standard \gls{basis} or Cartesian \gls{
 \textbf{x} = \displaystyle\sum_{i=1}^{M}y_{i}\textbf{v}_{i} = \textbf{V}\textbf{y} \qquad \textbf{y} \in \mathbb{R}^{M}
 \]
 $\textbf{V}$ is also known as \textbf{change of coordinates matrix} (also stated as any matrix whose columns form a \gls{basis}). If $\textbf{V}$ is orthogonal, then $\textbf{V}^{-1} = \textbf{V}^{T}$ and hence $\textbf{y} = \textbf{V}^{T}\textbf{x}$
+
+\section{Convolution}
+Only discrete convolutions with finite support are discussed below,
+
+\subsection{1D Convolution}
+Convolution of a vector $\textbf{f}$ with filter $\textbf{w}_{k}$ of stride $s$ is defined as, 
+\begin{equation}
+\textbf{C}(k, i) = \displaystyle\sum_{n=i.s}^{i.s + F}\textbf{f}(n)\textbf{w}_{k}(n-i.s) \qquad \textbf{f} \in \mathbb{R}^{N}, \textbf{w}_{k} \in \mathbb{R}^{F}, \textbf{C} \in \mathbb{R}^{K \times I}
+\end{equation}
+\[
+\textbf{C}(k,i) = \textbf{f}(n)\star\textbf{w}_{k}(n-i.s)
+\]
+Where:
+\begin{itemize}[label=]
+    \setlength\itemsep{0em}
+    \item $K$ is the number of filters. $k \in {0,1...K-1}$ 
+    \item $I$ is the number of contractions. $i \in {0,1...I-1}$
+\end{itemize}
+\textbf{Short Hand Notation :} 1D Convolution of $\textbf{f}$ with filter $\textbf{w}_{k}$ with stride $s$
+\[
+\boxed{
+\textbf{C}(k,:) = \textbf{f}\star\textbf{w}^{(s)}_{k}
+}  
+\]
+
+\subsection{2D Convolution}
+Convolution of a matrix $\textbf{F}$ with filter $\textbf{W}_{k}$ of row-stride $s$ and column-stride $t$ is defined as, 
+\begin{equation}
+\textbf{C}(k, j, i) = \displaystyle\sum_{n=i.s}^{i.s + F}\displaystyle\sum_{m=j.t}^{j.t + G}\textbf{F}(m,n):\textbf{W}_{k}(m-j.t, n-i.s) \qquad \textbf{F} \in \mathbb{R}^{M \times N}, \textbf{W}_{k} \in \mathbb{R}^{G \times F}, \textbf{C} \in \mathbb{R}^{K \times J \times I}
+\end{equation}
+\[
+\textbf{C}(k,j,i) = \textbf{F}(m,n)\star\textbf{W}_{k}(m-j.t, n-i.s)
+\]
+\textbf{Short Hand Notation :} 2D Convolution of $\textbf{F}$ with filter $\textbf{W}_{k}$ with row-stride $s$ and column-stride $t$
+\[
+\boxed{
+\textbf{C}(k,:,;) = \textbf{F}\star\textbf{W}^{(s,t)}_{k}
+}  
+\]
+
 \end{appendices}
