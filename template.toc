@@ -58,30 +58,36 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.1.1}From classifier to feature emphasis}{22}{subsection.3.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Audio music genre classification using different classifiers and feature selection methods. Proceedings of the International Conference on Pattern Recognition, Hong-Kong, China,2006}{22}{section*.14}
+\contentsline {subsubsection}{Audio music genre classification using different classifiers and feature selection methods. Proceedings of the International Conference on Pattern Recognition, Hong-Kong, China,2006}{22}{section*.15}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Exploring common variations in state of the art chord recognition systems. In Proc. SMC, 2010.}{22}{section*.15}
+\contentsline {subsubsection}{Exploring common variations in state of the art chord recognition systems. In Proc. SMC, 2010.}{22}{section*.16}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.1.2}From hand-crafting to feature learning}{22}{subsection.3.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{[2011] Multi label class : temporal pooling auc 86 [ mfcc ]}{23}{section*.16}
+\contentsline {subsubsection}{[2011] Multi label class : temporal pooling auc 86 [ mfcc ]}{23}{section*.17}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{[2012] Multi scale : spec : auc 89.8 (still not deep learning, feature learning is not task specific)}{23}{section*.17}
+\contentsline {subsubsection}{[2012] Multi scale : spec : auc 89.8 (still not deep learning, feature learning is not task specific)}{23}{section*.18}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.1.3}Transfer Learning by supervised pre-training}{24}{subsection.3.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{[2014] Transfer learning : auc 88.0}{24}{section*.18}
+\contentsline {subsubsection}{[2014] Transfer learning : auc 88.0}{24}{section*.19}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.4}Towards deep learning}{25}{subsection.3.1.4}
+\contentsline {subsection}{\numberline {3.1.4}Convolutional Neural Networks}{25}{subsection.3.1.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}}{27}{Appendix.1.A}
+\contentsline {subsubsection}{End to end learning of music audio}{25}{section*.21}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.1}Basis Transformation}{27}{section.1.A.1}
+\contentsline {subsubsection}{Experimenting musically motivated CNNs}{26}{section*.22}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.2}Convolution}{27}{section.1.A.2}
+\contentsline {subsection}{\numberline {3.1.5}Automatic tagging using deep convolutional neural network}{27}{subsection.3.1.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.2.1}1D Convolution}{27}{subsection.1.A.2.1}
+\contentsline {chapter}{\numberline {A}}{29}{Appendix.1.A}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.2.2}2D Convolution}{28}{subsection.1.A.2.2}
+\contentsline {section}{\numberline {A.1}Basis Transformation}{29}{section.1.A.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{31}{chapter*.22}
+\contentsline {section}{\numberline {A.2}Convolution}{29}{section.1.A.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {A.2.1}1D Convolution}{29}{subsection.1.A.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {A.2.2}2D Convolution}{30}{subsection.1.A.2.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Bibliography}{33}{chapter*.26}

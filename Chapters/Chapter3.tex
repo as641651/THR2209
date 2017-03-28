@@ -102,5 +102,111 @@ Next,  the trained models are used to extract higher-level features from other d
 
 \noindent It has been shown that features learned in this fashion work well for auxiliary audio classification tasks on different datasets, consistently outperforming a purely unsupervised feature learning approach.
 
-\subsection{Towards deep learning}
-As alternative to the above systems, Deep Neural Networks(DNN) have recently become widely used in audio analysis, following their success in computer vision, speech recognition [19]. From an engineering perspective, DNNs sidestep the problem of creating or finding audio features relevant to a task. Their general structure includes multiple hidden layers with hidden units trained to represent some underlying structure in data.
+\subsection{Convolutional Neural Networks}
+It can be seen that deep signal processing structures can be realized by stacking multiple shallow architectures. As feature learning was proving to be more efficient than hand crafted features, stacking learnable layers over one another became a hot area of research. Following the success of convolutional neural networks in computer vision [ ] and speech recognition [], experiments were also done for music auto-tagging [] [] []. The idea was to replace the application specific dimension reductions with hierarchy of learnable convolution filters (see \ref{deep learning}) 
+
+\subsubsection{End to end learning of music audio}
+As shown in chapter 2, all operations including FFT can be defined in terms of convolutions. In this research they investigate whether it is possible to apply feature learning directly to raw audio signal. The signal was convolved with 3 layers of 1D convolutions followed by two fully connected layers for predicting the tag. Thus, the feature and the classifier was trained in a single pipeline and this was called end to end learning. They compared the end to end learning approach with convolutions from mel-spectrogram on MTT dataset. It was found that, discarding STFT hurt the performance. CNN from mel-spectrogram achieved 0.8815 AUC, but on including convolutions on audio signal AUC dropped to 0.8487.     
+ 
+\begin{minipage}[t]{7.5cm}
+  \vspace{0pt}  
+  \begin{algorithm}[H]
+    \caption{CNN(raw audio) [\textbf{0.84}]}
+    \begin{algorithmic}[1]
+      \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{N}$
+      \Statex \textbf{Output :} $Pred \in \mathbb{R}^{L}$ 
+      \State $\textbf{C}_{1}  = Log(\textbf{a}\star\textbf{w}_{(256)}^{(256)})$
+      \State $\textbf{C}_{2} =  MaxPool(ReLU(\textbf{C}_{1}\star\textbf{w}_{(32)}^{(1)}))$
+       \State $\textbf{C}_{3} = MaxPool(ReLU(\textbf{C}_{2}\star\textbf{w}_{(32)}^{(1)}))$
+       \State $\textbf{y} = FLATTEN(\textbf{C}_{3})$
+       \State $Pred = \sigma(L(\textbf{W}_{2})ReLU(L(\textbf{W}_{1})\textbf{y}))$
+   \end{algorithmic}
+  \end{algorithm}
+\end{minipage}%
+\begin{minipage}[t]{7.5cm}
+  \vspace{0pt}
+  \begin{algorithm}[H]
+    \caption{CNN(Mel-Spectrogram) [\textbf{0.88}]}
+     \begin{algorithmic}[1]
+      \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{N}$
+      \Statex \textbf{Output :} $Pred \in \mathbb{R}^{L}$ 
+      \State $\textbf{R}  = MEL(||STFT(\textbf{a})||^{2})$
+      \State $\textbf{C}_{1} =  MaxPool(ReLU(\textbf{R}\star\textbf{w}_{(32)}^{(1)}))$
+       \State $\textbf{C}_{2} = MaxPool(ReLU(\textbf{C}_{1}\star\textbf{w}_{(32)}^{(1)}))$
+       \State $\textbf{y} = FLATTEN(\textbf{C}_{2})$
+       \State $Pred = \sigma(L(\textbf{W}_{2})ReLU(L(\textbf{W}_{1})\textbf{y}))$
+   \end{algorithmic}
+  \end{algorithm}
+\end{minipage}
+
+\subsubsection{Experimenting musically motivated CNNs}
+In the previous section, only 1D convolution with filter sizes directly motivated by hand-crafted methods were tested for comparison. But usually, the convolution operation allows flexibility in choosing the filter sizes. In this research, the authors discuss how convolution filters with different shapes can fit specific musical concepts. 
+\begin{figure}[h]
+       \begin{subfigure}[b]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{square}
+        \caption{Rectangular filter }
+        \label{fig:square}
+       \end{subfigure}
+	    \begin{subfigure}[b]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{time}
+        \caption{
+        Time filter
+        }
+        \label{fig:time}
+       \end{subfigure}
+       	    \begin{subfigure}[b]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{freq}
+        \caption{
+        Frequency filter
+        }
+        \label{fig:freq}
+       \end{subfigure}
+       \caption{Different Filter sizes}\label{fig:STFT}
+\end{figure}
+\FloatBarrier
+\bigskip 
+\noindent \textit{Time filters} can learn temporal cues (Onset, BPM and other rhythmic patterns), while \textit{frequency filters} can differentiate timbre and note. \textit{Rectangular filters} can learn short time sub-bands (Bass, kick, drums) [ ]. However, because of hierarchical nature of deep networks, any filter should be theoretically capable of picking up the relevant cues. It was shown in their experiments that \textit{rectangular filters} or combination of time and frequency filters performed better than using just time / frequency filter. These experiments were however done for a genre classification task.  
+
+\subsection{Automatic tagging using deep convolutional neural network}
+Different CNN architectures are tested on MTT and MSD datasets and the proposed model achieves close to state of art performance on MTT dataset (0.894 AUC). The audio samples were down-sampled to 12 KHz and convolutions were started from mel spectrogram (96 bins). They also compared convolutions over STFT and convolutions over Mel-spectrogram and report that the latter performs significantly better. Also, to exploit the advantage of PCA Whitening proven in [] [], Batch Normalization[] of frequency components is done. That is, data is centred to the batch mean and divided by batch variance. In Batch normalization however, the basis is not switched but the data is \textit{learned} to be scaled and shifted.
+\begin{algorithm}
+  \caption{$\textbf{\^{X}}$ = BATCHNORM($\textbf{X}$) }\label{Batch norm}
+  \begin{algorithmic}[1]
+    \Statex \textbf{Input :} $\textbf{X} \in \mathbb{R}^{B \times S \times Q}$, \Comment{$B$ is batch size}
+    \Statex \textbf{Output :} $\textbf{\^X} \in \mathbb{R}^{B \times S \times Q}$ 
+    \Statex \textbf{Parameters to learn :} $\gamma$ (Scale), $\beta$ (Shift) 
+    \State $\bm{\mu}, \bm{\sigma}^{2} = FREQUENCY\_MEAN\_VARIANCE(\textbf{X})$ \Comment{$\bm{\mu},\bm{\sigma}^{2} \in \mathbb{R}^{S}$}
+    \For{$i \in \{1,..,B\}$}
+     \For{$j \in \{1,..,Q\}$}
+       \State $\textbf{X}[i,:,j] \leftarrow \frac{\textbf{X}[i,:,j] - \bm{\mu}}{\sqrt{\bm{\sigma}}^{2} - \epsilon}$
+      \EndFor
+     \EndFor
+     \State $\textbf{\^X} = \gamma\textbf{X} + \beta$
+  \end{algorithmic}
+\end{algorithm}
+\FloatBarrier
+
+\noindent The five layer proposed CNN architecture is shown below. The filters $\textbf{W}$ in each layer are the weights that will be learned. $Spatial\_Bn$ is similar to the normalization algorthim mentioned above, except that the normalization is done along the 1st axis of tensors $\textbf{C}$. $MaxPool_{i,j}$ is a dimensionality reduction done by pooling $(i,j)$ elements along $S$ and $Q$ directions respectively. $Elu$ is an element-wise non-linearity operation described in section (??) 
+
+\begin{algorithm}
+  \caption{$\textbf{y}$ = $CHOI\_CNN(\textbf{R})$ }      
+  \begin{algorithmic}[1]
+   \Statex \textbf{Input :} $\textbf{R} \in \mathbb{R}^{1 \times 96 \times 1366}$
+   \Statex \textbf{Output :} $\textbf{y} \in \mathbb{R}^{1024}$ 
+   \State $\textbf{R}_{n} = BatchNorm(\textbf{R})$
+   \State $\textbf{C}_{1} = \textbf{R}_{n}\star\textbf{W1}_{(32)}^{(1,1)}$ \Comment{$\textbf{W1} \in \mathbb{R}^{32 \times 3 \times 3}, \textbf{C}_{1} \in \mathbb{R}^{32 \times S1 \times Q1}$}
+   \State $\textbf{C}_{1} \leftarrow MaxPool_{(2,4)}(Elu(Spatial\_Bn(\textbf{C}_{1})))$ \Comment{$\textbf{C}_{1} \in \mathbb{R}^{32 \times T1 \times W1}$}
+      \State $\textbf{C}_{2} = \textbf{C}_{1}\star\textbf{W2}_{(128)}^{(1,1)}$ \Comment{$\textbf{W2} \in \mathbb{R}^{128 \times 3 \times 3}, \textbf{C}_{2} \in \mathbb{R}^{128 \times S2 \times Q2}$}
+   \State $\textbf{C}_{2} \leftarrow MaxPool_{(2,4)}(Elu(Spatial\_Bn(\textbf{C}_{2})))$ \Comment{$\textbf{C}_{2} \in \mathbb{R}^{128 \times T2 \times W2}$}
+         \State $\textbf{C}_{3} = \textbf{C}_{2}\star\textbf{W3}_{(128)}^{(1,1)}$ \Comment{$\textbf{W3} \in \mathbb{R}^{128 \times 3 \times 3}, \textbf{C}_{3} \in \mathbb{R}^{128 \times S3 \times Q3}$}
+   \State $\textbf{C}_{3} \leftarrow MaxPool_{(2,4)}(Elu(Spatial\_Bn(\textbf{C}_{3})))$ \Comment{$\textbf{C}_{3} \in \mathbb{R}^{128 \times T3 \times W3}$}
+         \State $\textbf{C}_{4} = \textbf{C}_{3}\star\textbf{W4}_{(192)}^{(1,1)}$ \Comment{$\textbf{W4} \in \mathbb{R}^{192 \times 3 \times 3}, \textbf{C}_{4} \in \mathbb{R}^{192 \times S4 \times Q4}$}
+   \State $\textbf{C}_{4} \leftarrow MaxPool_{(2,4)}(Elu(Spatial\_Bn(\textbf{C}_{4})))$ \Comment{$\textbf{C}_{4} \in \mathbb{R}^{192 \times T4 \times W4}$}
+         \State $\textbf{C}_{5} = \textbf{C}_{4}\star\textbf{W5}_{(256)}^{(1,1)}$ \Comment{$\textbf{W5} \in \mathbb{R}^{256 \times 3 \times 3}, \textbf{C}_{5} \in \mathbb{R}^{256 \times S5 \times Q5}$}
+   \State $\textbf{C}_{5} \leftarrow Elu(Spatial\_Bn(\textbf{C}_{5}))$ 
+   \State $\textbf{y} = Flatten(\textbf{C}_{5})$ \Comment{$\textbf{y} \in \mathbb{R}^{1024}$}
+  \end{algorithmic}
+\end{algorithm}
+\FloatBarrier
+
+\noindent The features from convolutions then pass through a fully connected layer of size equalling  number of tags. The authors have trained this model on MSD dataset and made the weights publicly available.
