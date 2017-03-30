@@ -10,7 +10,7 @@
 \BOOKMARK [2][-]{subsection.1.2.4}{ supervised training on repository with aesthetic tags }{section.1.2}% 10
 \BOOKMARK [1][-]{section.1.3}{Outline of the report}{chapter.1}% 11
 \BOOKMARK [0][-]{chapter.2}{Formalisms}{}% 12
-\BOOKMARK [1][-]{section.2.1}{Representation of audio signal}{chapter.2}% 13
+\BOOKMARK [1][-]{section.2.1}{Representation of music signal}{chapter.2}% 13
 \BOOKMARK [2][-]{subsection.2.1.1}{ Discriminants of music signal - Harmonics and overtones }{section.2.1}% 14
 \BOOKMARK [2][-]{subsection.2.1.2}{Sampling of continuous-time signal}{section.2.1}% 15
 \BOOKMARK [2][-]{subsection.2.1.3}{Time-Frequency transformations}{section.2.1}% 16
