@@ -17,15 +17,17 @@
 %----------------------------------------------------------------------------------------
 
 %\section{Welcome and Thank You}
-Music has it’s own language and describing it can be quite tricky. Talking about music may simply require as much vocabulary as any technical subject, but a strict vocabulary signal mapping can steal the artistic freedom of expression. Musicians and composers usually discuss their work with jargons describing a particular note, chord, sound, or rhythm and how the pieces are put together as a whole. At the same time, with the amount to music recordings constantly growing, it would be time consuming for anyone to manually tag every one of them. Hence the ability to automatically summarize such tags according to personal or specific glossary is studied.  In section 1, the motivation for research is explained by describing some shortcomings of the current state of art.  
 
-
+Computers have been used to automate discovery and management of music in so many different ways. Automating the task of attaching a semantic meaning to a song is popularly known as \textit{music auto-tagging}. Automatic tagging algorithms have been used to build recommendation systems that allow listeners to discover songs that match their taste. It also enables online music stores to filter their target audience. But semantic description of a song is not straightforward and there is a linguistic gap between music audio and listener's choice of words to describe it. In this thesis, we try to develop an algorithm that is least affected by linguistic noise. In section \ref{motivation}, the need for this dedicated research is explained by describing some shortcomings of the currently available solution approaches. In section \ref{structure}, a top to bottom overview of the contents of this research is presented.   
 
 %----------------------------------------------------------------------------------------
 
 \section{Motivation}
-Automatic music recommendation has become an active area of research in recent years because a lot of music is now sold and consumed digitally. These recommendation algorithms allows listeners to discover the songs that match their taste.  It also enables online music stores to filter their target audience. However, current state of art methods still suffer from the following problems mentioned below.
-
+\label{motivation}
+A properly labelled training data is required to solve the task of automatic-tagging. 
+Understanding music is a very general statement
+But when an organization has specific terminologies for aesthetic aspects of a music piece, then bridging this linguistic gap would just be a matter of translation.   
+However, current state of art methods still suffer from the following problems mentioned below.
 
 \subsection{Cold start problem with collaborative filtering methods}
 In the area of music information retrieval, great technical progress have been made to enable efficient retrieval and organization of audio content. But the problem of music recommendation is  however complicated because of the sheer variety of genre,mood,acoustic scene, as well as social factors that affect listeners preference. When the usage data is available, one can use collaborative filtering to recommend the tracks on trending lists. In absence of such usage data, one resorts to content-based methods, where just the audio signal is used for generating recommendations.  Although collaborative filtering techniques have shown to outperform content-based recommendations \cite{DC1}, they suffer from cold start problem, making it less efficient for new and unpopular songs. 
@@ -50,6 +52,7 @@ Current recommendation systems including the ones that use collaborative filteri
 %----------------------------------------------------------------------------------------
 
 \section{Structure of the Thesis}
+\label{structure}
 In the following work, only content-based methods are considered for multi-label classification. That is to say that only raw signal is used as input for classification. This requires feature extraction from input audio, temporal summarization of features followed by classification. 
 
 \subsection{Convolutional neural network for feature extraction}
