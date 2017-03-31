@@ -1,5 +1,7 @@
 % Chapter 2
 
+\externaldocument{chapter3}
+\externaldocument{chapter4}
 \chapter{Formalisms} % Main chapter title
 
 \label{Chapter2} % For referencing the chapter elsewhere, use \ref{Chapter2} 
@@ -197,6 +199,7 @@ Relating equation 2.11 and 2.12, it can be inferred that \textbf{square} of the 
 \noindent As mentioned earlier, the frequencies in the considered range are  grouped into bins. It is useful to do so, not only to reduce dimension but also due to the aliasing effect of human auditory system. This is motivated by the human cochlea (an organ in the ear) which vibrates at different spots depending on the frequency of the incoming sounds. Depending on how frequencies are grouped, two different class of spectrograms are discussed.
   
 \subsubsection{Mel Spectrogram}
+\label{mel}
 
 The \textit{mel-scale} was developed to express measured frequency in terms of psychological metrics (i.e perceived pitch). The mel-scale was developed
 by experimenting with the human ears interpretation of a pitch. The experiment showed that the pitch is linearly perceived in the frequency range 0-1000 Hz. Above
@@ -282,6 +285,7 @@ The objective of dimensionality reduction is to retain only the desirable charac
 \bigskip
 
 \subsection{Basis Transformations - PCA, MFCC}
+\label{basis}
 
 The \gls{basis} vectors are functions of the properties we want to encode. In equation (2.2), we used \gls{basis transformation} to represent the signal in frequency domain. Now we want to use the same concept, but for dimensionality reduction. In general terms, this is done by \textit{changing to a reduced basis}. That is, we need to find a   \gls{change of coordinates matrix} that will map the input to a basis system with lesser coordinates. 
 \bigskip
@@ -368,6 +372,12 @@ The frequencies in the adjacent bins can be highly correlated and therefore cont
   \end{algorithmic}
 \end{algorithm}
  
+\subsection{Feature learning with stacked convolutions}
+\label{stacked}
+
+\subsubsection{Feature engineering Vs Feature Learning}
+\label{feature}
+
 \begin{figure}[h] 
 \centering
 \includegraphics[width=0.95\textwidth]{dnn_motivation}
@@ -376,3 +386,14 @@ The frequencies in the adjacent bins can be highly correlated and therefore cont
  \end{figure}
 \FloatBarrier
 \bigskip
+
+\section{Temporal pooling}
+\label{temporal}
+\subsection{Clustering}
+\label{clustering}
+\subsection{Recurrent Neural Networks}
+\label{rnn}
+
+\section{Classifier Training}
+\label{classifier}
+
