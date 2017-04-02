@@ -258,6 +258,7 @@ This representation takes advantage of the periodic perception of pitch. Two pit
 \bigskip
 
 \section{Dimensionality Reduction}
+\label{dimension}
 The objective of dimensionality reduction is to retain only the desirable characteristics of the representations presented in section 2.1. This is done because the representation ($\textbf{R}$) can be large for longer audio tracks (because number of frames $P$ depends on length of the audio). Reduction over a large frame at once can lead to loss of temporal information (i.e, change of variables across frames). Hence, dimensionality reduction is done hierarchically, sometimes by stacking combination of these techniques. We generalize the operations on input signal $\textbf{a}$ as follows,
 \[
    \textbf{R} = Rep(\textbf{a}) \qquad Rep : \mathbb{R}^{N} \rightarrow \mathbb{R}^{R \times P}
@@ -394,6 +395,6 @@ The frequencies in the adjacent bins can be highly correlated and therefore cont
 \subsection{Recurrent Neural Networks}
 \label{rnn}
 
-\section{Classifier Training}
-\label{classifier}
+\section{Training}
+\label{training}
 

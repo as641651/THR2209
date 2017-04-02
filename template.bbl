@@ -60,6 +60,28 @@
   \field{year}{2004}
 \endentry
 
+\entry{MusicTherapy}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Tsiris}{T.}%
+     {Giorgos}{G.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{TG1}
+  \strng{fullhash}{TG1}
+  \field{sortinit}{2}
+  \field{number}{3}
+  \field{title}{Aesthetic Experience and Transformation in Music Therapy: A
+  Critical Essay}
+  \verb{url}
+  \verb https://voices.no/index.php/voices/article/view/416
+  \endverb
+  \field{volume}{8}
+  \field{journaltitle}{Voices: A World Forum for Music Therapy}
+  \field{year}{2008}
+\endentry
+
 \entry{MTT}{article}{}
   \name{author}{5}{}{%
     {{}%

@@ -18,42 +18,41 @@
 
 %\section{Welcome and Thank You}
 
-Computers have been used to automate discovery and management of music in so many different ways. Automating the task of attaching a semantic meaning to a song is popularly known as \textit{music auto-tagging}. Automatic tagging algorithms have been used to build recommendation systems that allow listeners to discover songs that match their taste. It also enables online music stores to filter their target audience. But semantic description of a song is not straightforward and there is a linguistic gap between music audio and listener's choice of words to describe it. In this thesis, we try to develop an algorithm that is least affected by linguistic noise. In section \ref{motivation}, the need for this dedicated research is explained by describing some shortcomings of the currently available solution approaches. In section \ref{structure}, a top to bottom overview of the contents of this research is presented.   
+Computers have been used to automate discovery and management of music in so many different ways. Automating the task of attaching a semantic meaning to a song is popularly known as \textit{music auto-tagging}. Automatic tagging algorithms have been used to build recommendation systems that allow listeners to discover songs that match their taste. It also enables online music stores to filter their target audience. But semantic description of a song is not straightforward and there is this gap between music audio and listener's description, both linguistically and emotionally, which we term as \textit{audio-semantic gap}. In this thesis, we try to develop an algorithm that is least affected by \textit{audio-semantic} noise. In section \ref{motivation}, the need for this dedicated research is explained by describing some shortcomings of the currently available solution approaches. In section \ref{structure}, a top to bottom overview of the contents of this research is presented.   
 
 %----------------------------------------------------------------------------------------
 
 \section{Motivation}
 \label{motivation}
-A properly labelled training data is required to solve the task of automatic-tagging. 
-Understanding music is a very general statement
-But when an organization has specific terminologies for aesthetic aspects of a music piece, then bridging this linguistic gap would just be a matter of translation.   
-However, current state of art methods still suffer from the following problems mentioned below.
+Describing music is a very general statement and it is difficult to assign an absolute value to it. This also makes analysing music and communicating it's artistic properties more challenging. Although great technical progress have been made to enable efficient retrieval and organization of audio content, the problem of music recommendation is complicated because of the sheer variety of genre,mood,acoustic scene, as well as social factors that affect listeners preference. The problems faced by current music recommendation systems are mentioned below,  
 
 \subsection{Cold start problem with collaborative filtering methods}
-In the area of music information retrieval, great technical progress have been made to enable efficient retrieval and organization of audio content. But the problem of music recommendation is  however complicated because of the sheer variety of genre,mood,acoustic scene, as well as social factors that affect listeners preference. When the usage data is available, one can use collaborative filtering to recommend the tracks on trending lists. In absence of such usage data, one resorts to content-based methods, where just the audio signal is used for generating recommendations.  Although collaborative filtering techniques have shown to outperform content-based recommendations \cite{DC1}, they suffer from cold start problem, making it less efficient for new and unpopular songs. 
+When the usage data is available, one can use collaborative filtering to recommend the tracks on trending lists. That is, if a listener liked songs A and B and you liked A, you might also like B. Such algorithms have proven to be extremely efficient in finding similar songs and out-perform those algorithms that works by extracting acoustic cues from audio signal \cite{DC1}. However, in absence of such usage data, one resorts to content-based methods, where just the audio signal is used for generating recommendations. Thus collaborative filtering methods suffer from what is called a \textit{cold start problem}, making it less efficient for new and unpopular songs. 
 
 
 \subsection{Problems with content based methods}
 \label{problems}
-Content-based recommendation methods map audio signal to acoustic cues, which are then used for retrieval.
+Using information from audio content to overcome the cold-start problem resulted in \textit{content-based} recommendation methods. In such algorithms, a classifier is trained on some training data to learn acoustic cues. But a recommendation system can also be built without requiring  such acoustic labels by combining \textit{content based} and \textit{collaborative} techniques[combining content], where training is done from collaborative view point. However, this is not sufficient if a recommendation system has to designed for artists and composers who search for songs based on some properties of music itself. In such cases, the current \textit{content-based} methods fall short because of following training assumption,   
 
 \subsubsection{Psychoacoustic assumptions}
-The aspect of music that grabs attention is still an ongoing research in experimental psychology. Aesthetic judgments are strongly (although not exclusively) influenced by cultural variables, although there may be some universals that set constraints on what we initially find beautiful[no accounting for taste]. Hence, using currently available datasets\cite{MSD}\cite{MTT} for training can make recommendation systems suffer from generalization assumptions.  
+Music descriptions are often affected by social factors. However, it is possible to measure what percentage of subjects classify a music to certain mood (say, happy, dull etc.) and present the popular description. The currently available large datasets are built on this assumption \cite{MSD}\cite{MTT}.  Training on such datasets may not help in developing algorithms that can actually extract the musical properties (also termed as \textit{aesthetics} in popular journals of music psychology [no account for taste..]). This psychoacoustic assumption stands as a barrier to discover songs based on aesthetics (which has applications in music therapy \cite{MusicTherapy}).
 
 \subsubsection{Temporal summarization of audio content}
-The current state of art music tagging algorithms\cite{choi_crnn}\cite{MultiScale} are established by training on datasets that contain just short music excerpts. But choice of music is usually done based on the aspects of entire song. The ability to summarize the aesthetic judgement based on sequence of section-wise tags have not yet been studied. Furthermore, there aren’t much public datasets that summarize tags for entire song. 
-
+The current state of art music tagging algorithms\cite{choi_crnn}\cite{MultiScale} are established by training on datasets that contain just short music excerpts. While recommending, these algorithms classify each short section separately and merge tags across different sections. It is not clear if such section-wise mearging can approximate actual properties of the whole song. Hence there is a need to test algorithms that extract features approximating greater length of the song. 
 
 \subsection{Need for adaptive glossary}
-Current recommendation systems including the ones that use collaborative filtering, restrict the user with the choice of tags. Moreover, it is not guaranteed that all users will perceive all the tags in the same way. A recent study in idiographic music psychology have indicated that different people use different aesthetic criteria to make judgement about music\cite{NoAccountingForTaste}. Hence there is a need to study the performance of recommendation algorithms trained on personal repertoire..  
-
-
+Current recommendation systems including the ones that use collaborative filtering, restrict the user with the choice of tags. Moreover, it is not guaranteed that all users will perceive all the tags in the same way. A recent study in idiographic music psychology have indicated that different people use different aesthetic criteria to make judgement about music\cite{NoAccountingForTaste}. Hence it would be interesting to study if these models \cite{choi_cnn}\cite{choi_crnn} trained on large datasets can be exploited for training on personal repertoire, which are usually small.  
 
 %----------------------------------------------------------------------------------------
 
-\section{Structure of the Thesis}
-\label{structure}
+\section{Overview}
+\label{overview}
 In the following work, only content-based methods are considered for multi-label classification. That is to say that only raw signal is used as input for classification. This requires feature extraction from input audio, temporal summarization of features followed by classification. 
+
+\subsection{Supervised training on repository with aesthetic tags }
+The machine learning assumption is that if we show an algorithm enough examples, the correlation between human tags and predicted tags will become clear. Thus, a properly labelled training set is usually required to solve the task of automatic tagging. 
+
+In this thesis, a repository labelled with aesthetic judgements of songs is used. An aesthetic judgement is a subjective evaluation of a piece of music as art based on an individual set of aesthetic properties. [from everyday .. ] An aesthetic judgement is assumed to rely more on ‘higher’ cognitive functions , domain relevant knowledge, and a fluid, individualized process that may change across time and context. We discuss how aesthetic judgements influence preference for a song. In a recent work in experimental music psychology, strong correlation have been found between the two. But it is also shown that such preferences also vary widely between cultural contexts. ( see ) This also justifies the need for adaptive glossaries in recommendation systems. 
 
 \subsection{Convolutional neural network for feature extraction}
 The input signal preprocessed to spectrogram is mapped to the feature space by convolving hierarchically with learnable filters. (see ch.2,1) Conceptual arguments have been made to demonstrate that deep processing models are powerful extensions of hand-crafted feature extraction methods\cite{Yann}. (see ch.3.1) It is also shown that deep layers learn to capture textures and patterns of continuous distribution on a spectrogram for music classification task. [explaining cNN for music class]. (see ch 3.2).  we discuss the ability of these CNN models to be fine tuned on a medium sized dataset (see ch ). Convolutions over log amplitude mel spectrogram and MFCC are studied (see ch)
@@ -66,8 +65,7 @@ The input signal preprocessed to spectrogram is mapped to the feature space by c
 \subsection{ classification }
 The features are then mapped to the probability space of labels. Multilayer perceptron with binary cross entropy loss is used for training. End to end training is compared with two-stage method, separating  training of features and training of classifier ( see ch ). In the two-stage approach, MLP is compared with SVM classifier. ( see )
 
-\subsection{ supervised training on repository with aesthetic tags }
-A properly labelled training set is usually required to solve the task of automatic tagging. In this thesis, a repository labelled with aesthetic judgements of songs is used. An aesthetic judgement is a subjective evaluation of a piece of music as art based on an individual set of aesthetic properties. [from everyday .. ] An aesthetic judgement is assumed to rely more on ‘higher’ cognitive functions , domain relevant knowledge, and a fluid, individualized process that may change across time and context. We discuss how aesthetic judgements influence preference for a song. In a recent work in experimental music psychology, strong correlation have been found between the two. But it is also shown that such preferences also vary widely between cultural contexts. ( see ) This also justifies the need for adaptive glossaries in recommendation systems. 
+
 
 %----------------------------------------------------------------------------------------
 

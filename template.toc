@@ -14,15 +14,15 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.1.3}Need for adaptive glossary}{6}{subsection.1.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.2}Structure of the Thesis}{6}{section.1.2}
+\contentsline {section}{\numberline {1.2}Overview}{6}{section.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.1}Convolutional neural network for feature extraction}{6}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.1}Supervised training on repository with aesthetic tags }{7}{subsection.1.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.2} Recurrent neural network for temporal summarization of features}{7}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {1.2.2}Convolutional neural network for feature extraction}{7}{subsection.1.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.3} classification }{7}{subsection.1.2.3}
+\contentsline {subsection}{\numberline {1.2.3} Recurrent neural network for temporal summarization of features}{7}{subsection.1.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.4} supervised training on repository with aesthetic tags }{7}{subsection.1.2.4}
+\contentsline {subsection}{\numberline {1.2.4} classification }{7}{subsection.1.2.4}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.3}Outline of the report}{7}{section.1.3}
 \defcounter {refsection}{0}\relax 
@@ -62,7 +62,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.3.2}Recurrent Neural Networks}{20}{subsection.2.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.4}Classifier Training}{20}{section.2.4}
+\contentsline {section}{\numberline {2.4}Training}{20}{section.2.4}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {3}Literature Dynamics and Model Selection }{21}{chapter.3}
 \defcounter {refsection}{0}\relax 
@@ -102,18 +102,28 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {4.1}Dataset and Evaluation}{31}{section.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Experiments}{31}{section.4.2}
+\contentsline {subsection}{\numberline {4.1.1}Dataset for source task}{31}{subsection.4.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}Summary of Results}{31}{section.4.3}
+\contentsline {subsection}{\numberline {4.1.2}Dataset for target task}{32}{subsection.4.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}}{33}{Appendix.1.A}
+\contentsline {subsection}{\numberline {4.1.3}Evaluation metrics}{32}{subsection.4.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.1}Basis Transformation}{33}{section.1.A.1}
+\contentsline {section}{\numberline {4.2}Experiments}{32}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.2}Convolution}{33}{section.1.A.2}
+\contentsline {subsection}{\numberline {4.2.1}Experiments with pre-trained CNNs as feature extractor}{33}{subsection.4.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.2.1}1D Convolution}{33}{subsection.1.A.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Experiments with MFCCs as feature extractor}{35}{subsection.4.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.2.2}2D Convolution}{34}{subsection.1.A.2.2}
+\contentsline {section}{\numberline {4.3}Summary of Results}{35}{section.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{37}{chapter*.26}
+\contentsline {chapter}{\numberline {A}}{37}{Appendix.1.A}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.1}Basis Transformation}{37}{section.1.A.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.2}Convolution}{37}{section.1.A.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {A.2.1}1D Convolution}{37}{subsection.1.A.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {A.2.2}2D Convolution}{38}{subsection.1.A.2.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Bibliography}{41}{chapter*.26}
