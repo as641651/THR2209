@@ -22,9 +22,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.2.3} Recurrent neural network for temporal summarization of features}{7}{subsection.1.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.4} classification }{7}{subsection.1.2.4}
+\contentsline {subsection}{\numberline {1.2.4} classification }{8}{subsection.1.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.3}Outline of the report}{7}{section.1.3}
+\contentsline {section}{\numberline {1.3}Outline of the report}{8}{section.1.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {2}Formalisms}{9}{chapter.2}
 \defcounter {refsection}{0}\relax 
@@ -126,4 +126,4 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {A.2.2}2D Convolution}{38}{subsection.1.A.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{41}{chapter*.26}
+\contentsline {chapter}{Bibliography}{41}{chapter*.28}
