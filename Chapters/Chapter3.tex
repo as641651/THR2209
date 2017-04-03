@@ -4,48 +4,40 @@
 
 \label{Chapter3} % For referencing the chapter elsewhere, use \ref{Chapter2} 
 
-Using content-based music information for solving several music information retrieval tasks is not new, but a decade long research efforts have been put. Hunting for the right model for our task and to justify it to be superior to the rest requires thorough understanding of evolution of such techniques. In section 3.1, the dynamics of the literature that has lead to the use of deep learning techniques for MIR tasks have been discussed. In section 3.2, the inferences from state of art techniques have been used to short list models for the experiments.       
+Using content-based music information for solving several music information retrieval tasks is not new, but a decade long research efforts have been put. Hunting for the right model for our task and to justify it to be superior to the rest requires thorough understanding of evolution of such techniques. In section \ref{literature}, the dynamics of the literature that has lead to the use of deep learning techniques for MIR tasks have been discussed. In section \ref{model}, the inferences from state of art techniques have been used to short list models for the experiments.       
 
 
 \section{Literature Review}
 \label{literature}
-A number of surveys (e.g. [8, 22, 29]) amply document what is a decades-long research effort at the intersection of music, machine learning and signal processing. In a broader sense, all techniques have a two-stage architecture: first, features are extracted from music audio signals to transform them into a more meaningful representation. These features are then used as input to a classifier, which is trained to perform the task at hand. This dedicated analysis for music features emerged due to the fact that music signals possess specific acoustic and structural characteristics that distinguish them from spoken language or other non musical signals.
+A number of surveys\cite{survey1}\cite{survey2} amply document what is a decades-long research effort at the intersection of music, machine learning and signal processing. In a broader sense, all techniques have a two-stage architecture: first, features are extracted from music audio signals to transform them into a more meaningful representation. These features are then used as input to a classifier, which is trained to perform the task at hand. This dedicated analysis for music features emerged due to the fact that music signals possess specific acoustic and structural characteristics that distinguish them from spoken language or other non musical signals.
 \bigskip
 
 \noindent In a general sense, the goal of classification tasks in music informatics is to attach a semantic meaning to the content. The underlying issue is ultimately one of \textit{organization} and \textit{variance} of the features. 
 \bigskip
 
-\noindent \textit{\textbf{•Feature organization :}} The better organized a feature is to answer some question, the simpler it is to assign or infer semantic meaning. Thus a feature representation should explicitly reflect a desired semantic organization. That is, the information about the discriminants (refered in \ref{discriminants} ) is not lost.
+\noindent \textit{\textbf{Feature organization :}} The better organized a feature is to answer some question, the simpler it is to assign or infer semantic meaning. Thus a feature representation should explicitly reflect a desired semantic organization. That is, the information about the discriminants (refered in \ref{discriminants} ) is not lost.
 
-\noindent \textit{\textbf{•Feature variance :}} A feature representation is said to be \textit{noisy} when variance in the data is misleading or uninformative, and \textit{robust} when it predictably encodes these invariant attributes. Complicated classifying methods are necessary only to compensate for any noise and hence a \textit{robust} feature representation is important.
+\noindent \textit{\textbf{Feature variance :}} A feature representation is said to be \textit{noisy} when variance in the data is misleading or uninformative, and \textit{robust} when it predictably encodes these invariant attributes. Complicated classifying methods are necessary only to compensate for any noise and hence a \textit{robust} feature representation is important.
 \bigskip
 
-\noindent In subsection 3.1.1, some of the early works indicating the need for better feature organization are discussed. In the remaining subsections, adoption of feature learning techniques for multi-label classification task are elaborated. The general motivation of all the works from section 3.1.2 - 3.1.4, was to use feature learning to obtain \textit{robust} and \textit{organized} features. (In section \ref{stacked}, how feature learning can increase \textit{robustness} was explained) All the models (except [],[],[]) were experimented on Magna Tag a Tune dataset [] (MTT) with about 29K clips which are 29.1s long.
+\noindent In subsection \ref{feature}, some of the early works indicating the need for better \textit{feature organization} are discussed. In the remaining subsections, adoption of feature learning techniques for multi-label classification task are elaborated. The general motivation of all the works from section \ref{featurelearning} - \ref{convolution}, was to use feature learning to obtain \textit{robust} and \textit{organized} features. (In section \ref{stacked}, how feature learning can increase \textit{robustness} was explained) All the models (except \cite{MusicMotive}) were experimented on Magna Tag a Tune dataset(MTT)\cite{MTT} with about 29K clips which are 29.1s long.
 
 
 \subsection{From classifier to feature emphasis}
-Looking back to our history before 2010, there is a clear trend in MIR of applying increasingly more powerful machine learning algorithms to the same feature representations to solve a given task. There are also ample surveys with evidence suggesting that appropriate feature representations significantly reduce the need for complex semantic interpretation methods [2]. Evidence from genre classification and chord recognition task have been discussed below. 
-
-\subsubsection{Audio music genre classification using different classifiers and feature selection methods. Proceedings of the International Conference on Pattern Recognition, Hong-Kong, China,2006}
-Fixing the features, ten different classifiers were compared, namely: Fisher (Fisher classifier), LDC (Linear classifier assuming normal densities with equal covariance matrices), QDC (Quadratic classifier assuming normal densities), UDC (Quadratic classifier assuming normal uncorrelated densities), NBC (Naïve Bayes Classifier), PDC (Parzen Density Based Classifier), KNN (Knearest neighbor with optimal k computed using leave one out cross validation), KNN1 (1 nearest neighbor), KNN3 (3 nearest neighbor), KNN5.  It is seen that a ceiling performance of 80\% accuracy on GTZAN dataset was obtained by using combination of classifiers and squeezing every last percentage from the same features. This suggested the need for robust feature representation for further improvements.
-
-\subsubsection{Exploring common variations in state of the art chord recognition systems. In Proc. SMC, 2010.}
-The significance of robust feature representations was demonstrated by using appropriate filtering of chroma features to increase system performance even for the simplest classifier. An overall reduction of performance variation across all classifiers was also shown[9].
+\label{feature}
+Looking back to our history before 2010, there is a clear trend in MIR of applying increasingly more powerful machine learning algorithms to the same feature representations to solve a given task. There are also ample surveys with evidence suggesting that appropriate feature representations significantly reduce the need for complex semantic interpretation methods\cite{survey3}. Particularly in \cite{feature1}, ten different classifiers were compared on same set of features for genre classification task. It was seen that ceiling performance of 80\% was achieved on GTZAN dataset, thereby suggesting the need for robust feature representation for further improvements. In \cite{feature2}, significant improvements were reported even for simplest classifiers by using appropriate filtering of features for chord recognition task. 
 
 \subsection{From hand-crafting to feature learning}
- 
-Feature learning consists of exploiting the structure of the \textit{data distribution} to construct a new representation of the input.Although MFCC are hand-crafted, they pose a tough competition, which makes researchers not to ignore them completely. Recalling that feature extractors can be used in hierarchy (see section ??), there is a chance that MFCCs can outperform for some combination of feature learning at higher levels. It is also worthy to consider MFCCs because of computational efficiency. Aggregating hand-crafted features for music tagging was introduced in [25]. Several subsequent works rely on a Bag of frames approach - where a collection of features are computed for each frame and then statistically aggregated. Typical features are designed to represent physical or perceived aspects of sound and include MFCCs, MFCC derivatives and spectral centroids.
+\label{featurelearning}
+Great amount of technical research have been done to develop robust features. A number of features relevant for different MIR tasks were formulated (hand-crafted) and tested. MFCC features (ref. \ref{basis}), originally developed for speech recognition task often proved efficient for genre classification and tagging. At the same time, some machine learning algorithms were also used to adopt feature learning on spectrogram frames. Several subsequent works rely on a Bag of Frames approach - where a collection of features are computed for each frame and then statistically aggregated (ref. \ref{clustering}). Some early feature learning approaches that proved more efficient than MFCCs are discussed in this section.
 \bigskip
 
-\noindent Although MFCC related features work great for speech recognition tasks, it falls short in performance for MIR tasks[ ]. This is especially because long range temporal structure is crucial in music (MFCC derivatives only encode short term temporal information). In [ ], better performance was achieved by using different scales of PCA whitened frames, and achieves state of art result for multi label classification on MTT dataset till date.
-
-
-\subsubsection{[2011] Multi label class : temporal pooling auc 86  [ mfcc ]}
-
-The pipe line of their algorithm is shown below . The formalism of the notations used are consistent with explanations in chapter 2. The PCA whitened mel-power spectrogram is compared with MFCC features on Magna tag a tune dataset. It was shown that the former achieve a performance of AUC 0.87 out performing MFCCs which was 0.77.  
+\noindent \textbf{Temporal pooling and multiscale learning for automatic annotation and ranking of music audio. 2011 \cite{featurelearn1}:}\\
+\\
+\noindent The pipe line of their algorithm is shown below. The formalism of the notations used are consistent with explanations in chapter 2. The PCA whitened mel-power spectrogram (ref. \ref{basis}) is compared with MFCC features on Magna tag a tune dataset. It was shown that the former achieve a performance of \textbf{AUC 0.87} out performing MFCCs which was 0.77.  
 \bigskip
 
-\noindent Signal ($\textbf{a}$) is sampled at 22.1 KHz. Then STFT with window length 1024 and stride 512 is computed with FFT algorithm. This is followed by conversion to mel power-spectrogram with 128 bins, followed by PCA Whitening which selects the top 120 variant frequencies. Another transformation is done by stacking a single layer perceptron ($L(\textbf{W})$ means the weight matrix $\textbf{W}$ is learned by training a neural network (see section ??)). The temporal pooling is done by summarizing every 2.3s frame with suitable functions (see [ ] for details). The matrix $\textbf{W}_{1}$ learns the optimal features for pooling. The resulting feature is then classified by two layer perceptron with 1000 hidden units with sigmoid ($\sigma$) activations.
+\noindent Signal ($\textbf{a}$) is sampled at 22.1 KHz. Then STFT with window length 1024 and stride 512 is computed with FFT algorithm (ref. \ref{stft}). This is followed by conversion to mel power-spectrogram with 128 bins, followed by PCA Whitening which selects the top 120 variant frequencies. Another transformation is done by stacking a single layer perceptron ($L(\textbf{W})$ means the weight matrix $\textbf{W}$ is learned by training a neural network). The temporal pooling is done by summarizing every 2.3s frame with suitable functions (see \cite{featurelearn1} for details). The matrix $\textbf{W}_{1}$ learns the optimal features for pooling. The resulting feature is then classified by two layer perceptron with 1000 hidden units with sigmoid ($\sigma$) activations.
 
 \begin{algorithm}
   \caption{$Pred$ = MODEL($\textbf{a}$) }\label{Temporal Pooling}
@@ -61,14 +53,15 @@ The pipe line of their algorithm is shown below . The formalism of the notations
     \State $Pred = \sigma(L(\textbf{W}_{3})\sigma(L(\textbf{W}_{2})\textbf{y}))$ \Comment{$\textbf{W}_{2} \in \mathbb{R}^{1000 \times S.W}, \textbf{W}_{3} \in \mathbb{R}^{L \times 1000}$}
   \end{algorithmic}
 \end{algorithm}
+\FloatBarrier
 \noindent It is important to note that this algorithm is does not work on audio of arbitrary length because of their design of temporal pooling (because fixed sized features are needed for classification).
+\bigskip
 
-\subsubsection{[2012] Multi scale : spec : auc 89.8 (still not deep learning, feature learning is not task specific)}
-The result reported by this model is the current state-of-art on MTT dataset (AUC 0.898). Here, reducing the mel spectrogram to different sizes is done in parallel by \gls{gaussian pyramids}. The resulting features are then concatenated. This was mainly done to see the relevance of rhythmic structure from longer time-scales. PCA whitened frames in the mel-spectrogram are subjected to unsupervised learning with K-Means to get the bag of words features (see \ref{clustering}). It has been shown that learning features at larger timescales in addition to short time scales improves performance. This also suggests the existence of periodicity at longer timescales emerging from rhythmic structure, repeated motifs and musical form.  
-
-
+\noindent \textbf{Multiscale Approaches To Music Audio Feature Learning. 2012\cite{MultiScale}:}\\
+\\
+\noindent The result reported by this model is the current state-of-art on MTT dataset (\textbf{AUC 0.898}). Here, features are extracted from mel-power spectrogram by convolving with window functions (\textit{gaussian pyramids}). This is done for $\textit{W}$ window functions of different sizes (time length). The resulting features are then concatenated. PCA whitened frames in the mel-spectrogram are subjected to unsupervised learning with K-Means to get the Bag of Frames features (see \ref{clustering}). The efficient performance attributed to use of window functions of different time length suggests the existence of overlapping rhythms. (Recall the discussion about rhythmic traces in \ref{discriminants}) 
 \begin{algorithm}
-  \caption{$Pred$ = MODEL($\textbf{a}$) }\label{Temporal Pooling}
+  \caption{$Pred$ = MODEL($\textbf{a}$) }\label{multiscale}
   \begin{algorithmic}[1]
     \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{N}$
     \Statex \textbf{Output :} $Pred \in \mathbb{R}^{L}$ 
@@ -78,25 +71,28 @@ The result reported by this model is the current state-of-art on MTT dataset (AU
     \For{$i \in \{1,..,W\}$}
      \State $\textbf{X}_{1} \leftarrow GAUSSIAN\_PYRAMID(\textbf{R},i)$ \Comment{$\textbf{X}_{1} \in \mathbb{R}^{R \times Q1_{i}}$}
     \State $\textbf{X}_{2} \leftarrow PCA\_WHITEN(\textbf{X}_{1})$ \Comment{$\textbf{X}_{2} \in \mathbb{R}^{S1 \times Q1_{i}}$}
-     \State $\textbf{X}_{3} \leftarrow BAG\_OF\_WORDS(\textbf{X}_{2},S2)$ \Comment{$\textbf{X}_{3} \in \mathbb{R}^{S2 \times Q2_{i}}$}
+     \State $\textbf{X}_{3} \leftarrow BAG\_OF\_FRAMES(\textbf{X}_{2},S2)$ \Comment{$\textbf{X}_{3} \in \mathbb{R}^{S2 \times Q2_{i}}$}
     \State $\textbf{Y}[i] \leftarrow MAX\_POOL(\textbf{X}_{3})$ \Comment{$\textbf{Y}[i] \in \mathbb{R}^{S2}, \textbf{Y} \in \mathbb{R}^{S2 \times W}$}
     \EndFor
     \State $\textbf{y} = FLATTEN(\textbf{Y})$ \Comment{$\textbf{y} \in \mathbb{R}^{S2.W}$}
     \State $Pred = \sigma(L(\textbf{W}_{3})ReLU(L(\textbf{W}_{2})\textbf{y}))$ \Comment{$\textbf{W}_{2} \in \mathbb{R}^{1000 \times S2.W}, \textbf{W}_{3} \in \mathbb{R}^{L \times 1000}$}
   \end{algorithmic}
 \end{algorithm}
+\FloatBarrier
 \noindent The take-away is that modelling relation between features at rhythmic intervals does help.
 
 \subsection{Transfer Learning by supervised pre-training}
 \label{transfer}
-Stacked feature learning techniques  typically require large amounts of training data to work well. The following publication propose to exploit models trained on larger datasets like Million Song Dataset and use those weights as initialization for classification on smaller datasets. This is called supervised pre-training and it is essential to have a source task that requires a very rich feature representation, so as to ensure that the information content of this representation is likely to be useful for other tasks
+Stacked feature learning techniques  typically require large amounts of training data to work well. But sometimes, features learned on large datasets can be used for other datasets, either as a \textit{black-box} extractor (feature extractor is not further trained on target dataset) or as a \textit{fine-tuned} feature extractor (feature extractor is further trained after initializing weights). To do this, it is essential to have a source task that requires a very rich feature representation, so as to ensure that the information content of this representation is likely to be useful for other tasks
+\bigskip
 
-\subsubsection{[2014] Transfer learning : auc 88.0}
-This model achieves AUC 0.88 on MTT dataset. The training on MTT dataset (~29k clips) was done by initializing weights of a model trained on MSD dataset (~1000K clips). The workflow for source and target are shown below,
+\noindent \textbf{Transfer learning by supervised pre-training for audio-based music classification. 2014\cite{TransferLearning}:}\\
+\\
+In this research, features trained on MSD dataset (~1000K clips) are used as \textit{black-box} feature extractor while training on MTT dataset and the resulting classification performance still achieved \textbf{AUC 0.88} outperforming baseline MFCC. The workflow for source and target are shown below,
 \begin{figure}[h] 
 \centering
 \includegraphics[width=0.95\textwidth]{specLeak1}
-\caption{Schematic overview of the workflow of transfer learning}
+\caption{Schematic overview of the workflow of transfer learning\cite{TransferLearning}}
  \label{fig:transfer learning}
  \end{figure}
 \FloatBarrier
@@ -107,17 +103,18 @@ The low-level features from audio spectrograms are learned through unsupervised 
 \bigskip
 
 \noindent \textbf{Target task}
-Next,  the trained models are used to extract features from other datasets, which are then passed to train shallow classifiers for different but related target tasks. This workflow is visualized in fig[ ] Dashed arrows indicate transfer of the learned feature extractors from the source task to the target task.
+Next,  the trained models are used to extract features from other datasets, which are then passed to train shallow classifiers for different but related target tasks. This workflow is visualized in figure \ref{fig:transfer learning}. Dashed arrows indicate transfer of the learned feature extractors from the source task to the target task.
 \bigskip
 
-\noindent It has been shown that features learned in this fashion work well for auxiliary audio classification tasks on different datasets, consistently outperforming a purely unsupervised feature learning approach.
 
 \subsection{Convolutional Neural Networks}
 \label{convolution}
-It can be seen that deep signal processing structures can be realized by stacking multiple shallow architectures. As feature learning was proving to be more efficient than hand crafted features, stacking learnable layers over one another became a hot area of research. Following the success of convolutional neural networks in computer vision [ ] and speech recognition [], experiments were also done for music auto-tagging [] [] []. The idea was to replace the application specific dimension reductions with hierarchy of learnable convolution filters (see \ref{deep learning}) 
+It can be seen that deep signal processing structures can be realized by stacking multiple shallow architectures (ref. \ref{stacked}). As feature learning was proving to be more efficient than hand crafted features, stacking learnable layers over one another became a hot area of research.  The idea was to replace the application specific dimension reductions with hierarchy of learnable convolution filters. 
+\bigskip
 
-\subsubsection{End to end learning of music audio}
-As shown in chapter 2, all operations including FFT can be defined in terms of convolutions. In this research they investigate whether it is possible to apply feature learning directly to raw audio signal. The signal was convolved with 3 layers of 1D convolutions followed by two fully connected layers for predicting the tag. Thus, the feature and the classifier was trained in a single pipeline and this was called end to end learning. They compared the end to end learning approach with convolutions from mel-spectrogram on MTT dataset (i.e, retaining STFT). Their algorithm is described below. Function $f$ is an element-wise logarithmic compression. It was found that, discarding STFT hurt the performance. CNN from mel-spectrogram achieved 0.8815 AUC, but on including convolutions on audio signal AUC dropped to 0.8487.     
+\noindent \textbf{End-to-end learning for music audio. 2014\cite{EndToEnd}:}\\
+\\
+\noindent As shown in chapter 2, all operations including FFT can be defined in terms of convolutions. In this research they investigate whether it is possible to apply feature learning directly to raw audio signal. The signal was convolved with 3 layers of 1D convolutions followed by two fully connected layers. Thus, the feature and the classifier was trained in a single pipeline and this is called\textit{ end to end learning}. They compared the \textit{end to end learning} approach with convolutions from mel-spectrogram on MTT dataset (i.e, retaining STFT). Their algorithm is described below. Function $f$ is an element-wise logarithmic compression. It was found that, discarding STFT hurt the performance. CNN from mel-spectrogram achieved \textbf{AUC 0.8815}, but on including convolutions on audio signal AUC dropped to 0.8487.     
  
 \begin{minipage}[t]{7.5cm}
   \vspace{0pt}  
@@ -149,9 +146,12 @@ As shown in chapter 2, all operations including FFT can be defined in terms of c
    \end{algorithmic}
   \end{algorithm}
 \end{minipage}
+\FloatBarrier
+\bigskip
 
-\subsubsection{Experimenting musically motivated CNNs}
-In the previous section, only 1D convolution with filter sizes directly motivated by hand-crafted methods were tested for comparison. But usually, the convolution operation allows flexibility in choosing the filter sizes. In this research, the authors discuss how convolution filters with different shapes can fit specific musical concepts. 
+\noindent \textbf{Experimenting with musically motivated convolutional neural networks. 2016\cite{MusicMotive}:}\\
+\\
+\noindent In the previous section, only 1D convolution with filter sizes directly motivated by hand-crafted methods were tested for comparison. But usually, the convolution operation allows flexibility in choosing the filter sizes. In this research, the authors discuss how convolution filters with different shapes can fit specific musical concepts. 
 \begin{figure}[h]
        \begin{subfigure}[b]{0.3\textwidth}
         \includegraphics[width=\textwidth]{square}
@@ -176,10 +176,12 @@ In the previous section, only 1D convolution with filter sizes directly motivate
 \end{figure}
 \FloatBarrier
 \bigskip 
-\noindent \textit{Time filters} can learn temporal cues (Onset, BPM and other rhythmic patterns), while \textit{frequency filters} can differentiate timbre and note. \textit{Rectangular filters} can learn short time sub-bands (Bass, kick, drums) [ ]. However, because of hierarchical nature of deep networks, any filter should be theoretically capable of picking up the relevant cues. It was shown in their experiments that \textit{rectangular filters} or combination of time and frequency filters performed better than using just time / frequency filter. These experiments were however done for a genre classification task.  
-
-\subsubsection{Automatic tagging using deep convolutional neural network}
-Different CNN architectures were tested and the proposed model achieves close to state of art performance on MTT dataset (0.894 AUC). The audio samples were down-sampled to 12 KHz and convolutions were started from mel spectrogram (96 bins). They also compared MFCCs, convolutions over STFT and convolutions over Mel-log power spectrogram and report that the latter performs significantly better. 
+\noindent \textit{Time filters} can learn temporal cues (Onset, BPM and other rhythmic patterns), while \textit{frequency filters} can differentiate timbre and note. \textit{Rectangular filters} can learn short time sub-bands (Bass, kick, drums)\cite{MusicMotive}. However, because of hierarchical nature of deep networks, any filter should be theoretically capable of picking up the relevant cues. It was shown in their experiments that \textit{rectangular filters} or combination of time and frequency filters performed better than using just time / frequency filter. These experiments were however done for a genre classification task. 
+\bigskip
+ 
+\noindent \textbf{Automatic tagging using deep convolutional neural networks. 2016\cite{choi_cnn}:}\\
+\\
+\noindent Different CNN architectures were tested and the proposed model achieves close to state of art performance on MTT dataset (\textbf{0.894 AUC}). The audio samples were down-sampled to 12 KHz and convolutions were started from mel spectrogram (96 bins). They also compared MFCCs, convolutions over STFT and convolutions over Mel-log power spectrogram and report that the latter performs significantly better. 
 
     \begin{tabular}{ | p{5cm} | l |}
     \hline
@@ -190,7 +192,7 @@ Different CNN architectures were tested and the proposed model achieves close to
     \hline
     \end{tabular}
     
-Also, to exploit the advantage of PCA Whitening proven in [] [], Batch Normalization[] of frequency components is done. That is, data is centred to the batch mean and divided by batch variance. In Batch normalization however, the basis is not switched but the data is \textit{learned} to be scaled and shifted.
+\noindent Also, to exploit the advantage of PCA Whitening proven in \cite{MultiScale}\cite{featurelearn1}, Batch Normalization of frequency components is done. That is, data is centred to the batch mean and divided by batch variance. In Batch normalization however, the basis is not switched but the data is \textit{learned} to be scaled and shifted.
 \begin{algorithm}
   \caption{$\textbf{\^{X}}$ = BATCHNORM($\textbf{X}$) }\label{Batch norm}
   \begin{algorithmic}[1]
@@ -208,7 +210,7 @@ Also, to exploit the advantage of PCA Whitening proven in [] [], Batch Normaliza
 \end{algorithm}
 \FloatBarrier
 
-\noindent The five layer proposed CNN architecture is shown below. The filters $\textbf{W}$ in each layer are the weights that will be learned. $Spatial\_Bn$ is similar to the normalization algorithm mentioned above, except that the normalization is done along the 1st axis of tensors $\textbf{C}$. $MaxPool_{i,j}$ is a dimensionality reduction done by pooling $(i,j)$ elements along $S$ and $Q$ directions respectively. $Elu$ is an element-wise non-linearity operation described in section (??) 
+\noindent The five layer proposed CNN architecture is shown below. The filters $\textbf{W}$ in each layer are the weights that will be learned. $Spatial\_Bn$ is similar to the normalization algorithm mentioned above, except that the normalization is done along the 1st axis of tensors $\textbf{C}$. $MaxPool_{i,j}$ is a dimensionality reduction done by pooling $(i,j)$ elements along $S$ and $Q$ directions respectively. $Elu$ is an element-wise non-linearity operation described in section \ref{training} 
 
 \begin{algorithm}
   \caption{$\textbf{y}$ = $CHOI\_CNN(\textbf{R})$ }

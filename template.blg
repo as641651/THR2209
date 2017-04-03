@@ -20,47 +20,58 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: template-blx.bib
 Database file #2: bibliography.bib
+Warning--I'm ignoring combining's extra "keywords" field
+--line 37 of file bibliography.bib
+Warning--I'm ignoring combining's extra "keywords" field
+--line 38 of file bibliography.bib
+Warning--I'm ignoring combining's extra "keywords" field
+--line 39 of file bibliography.bib
+Warning--I'm ignoring combining's extra "keywords" field
+--line 40 of file bibliography.bib
+Warning--I'm ignoring combining's extra "keywords" field
+--line 42 of file bibliography.bib
 Biblatex version: 2.8
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
-You've used 14 entries,
+You've used 23 entries,
             6047 wiz_defined-function locations,
-            1227 strings with 11685 characters,
-and the built_in function-call counts, 44860 in all, are:
-= -- 1436
-> -- 2017
-< -- 482
-+ -- 913
-- -- 1030
-* -- 3368
-:= -- 3213
+            1291 strings with 14178 characters,
+and the built_in function-call counts, 75029 in all, are:
+= -- 2373
+> -- 3150
+< -- 801
++ -- 1245
+- -- 1493
+* -- 6077
+:= -- 5054
 add.period$ -- 0
-call.type$ -- 14
-change.case$ -- 13
-chr.to.int$ -- 134
-cite$ -- 26
-duplicate$ -- 4860
-empty$ -- 4542
-format.name$ -- 929
-if$ -- 9617
+call.type$ -- 23
+change.case$ -- 22
+chr.to.int$ -- 173
+cite$ -- 44
+duplicate$ -- 8309
+empty$ -- 7672
+format.name$ -- 1707
+if$ -- 16321
 int.to.chr$ -- 0
-int.to.str$ -- 28
+int.to.str$ -- 50
 missing$ -- 0
-newline$ -- 384
-num.names$ -- 565
-pop$ -- 4272
+newline$ -- 677
+num.names$ -- 955
+pop$ -- 7242
 preamble$ -- 1
-purify$ -- 200
+purify$ -- 342
 quote$ -- 0
-skip$ -- 2596
+skip$ -- 4365
 stack$ -- 0
-substring$ -- 906
-swap$ -- 1679
-text.length$ -- 405
-text.prefix$ -- 13
+substring$ -- 1323
+swap$ -- 2890
+text.length$ -- 680
+text.prefix$ -- 22
 top$ -- 1
-type$ -- 520
+type$ -- 862
 warning$ -- 0
-while$ -- 327
+while$ -- 502
 width$ -- 0
-write$ -- 369
+write$ -- 653
+(There were 5 warnings)
