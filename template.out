@@ -4,45 +4,44 @@
 \BOOKMARK [2][-]{subsection.1.1.2}{Problems with content based methods}{section.1.1}% 4
 \BOOKMARK [2][-]{subsection.1.1.3}{Need for adaptive glossary}{section.1.1}% 5
 \BOOKMARK [1][-]{section.1.2}{Overview}{chapter.1}% 6
-\BOOKMARK [2][-]{subsection.1.2.1}{Supervised training on repository with aesthetic tags }{section.1.2}% 7
-\BOOKMARK [2][-]{subsection.1.2.2}{Convolutional neural network for feature extraction}{section.1.2}% 8
-\BOOKMARK [2][-]{subsection.1.2.3}{ Recurrent neural network for temporal summarization of features}{section.1.2}% 9
-\BOOKMARK [2][-]{subsection.1.2.4}{ classification }{section.1.2}% 10
-\BOOKMARK [1][-]{section.1.3}{Outline of the report}{chapter.1}% 11
-\BOOKMARK [0][-]{chapter.2}{Formalisms}{}% 12
-\BOOKMARK [1][-]{section.2.1}{Representation of music signal}{chapter.2}% 13
-\BOOKMARK [2][-]{subsection.2.1.1}{ Discriminants of music signal - Harmonics and overtones }{section.2.1}% 14
-\BOOKMARK [2][-]{subsection.2.1.2}{Sampling of continuous-time signal}{section.2.1}% 15
-\BOOKMARK [2][-]{subsection.2.1.3}{Time-Frequency transformations}{section.2.1}% 16
-\BOOKMARK [2][-]{subsection.2.1.4}{STFT, Mel-Spectrogram, Chromogram}{section.2.1}% 17
-\BOOKMARK [1][-]{section.2.2}{Dimensionality Reduction}{chapter.2}% 18
-\BOOKMARK [2][-]{subsection.2.2.1}{Basis Transformations - PCA, MFCC}{section.2.2}% 19
-\BOOKMARK [2][-]{subsection.2.2.2}{Feature learning with stacked convolutions}{section.2.2}% 20
-\BOOKMARK [1][-]{section.2.3}{Temporal pooling}{chapter.2}% 21
-\BOOKMARK [2][-]{subsection.2.3.1}{Clustering}{section.2.3}% 22
-\BOOKMARK [2][-]{subsection.2.3.2}{Recurrent Neural Networks}{section.2.3}% 23
-\BOOKMARK [1][-]{section.2.4}{Training}{chapter.2}% 24
-\BOOKMARK [0][-]{chapter.3}{Literature Dynamics and Model Selection }{}% 25
-\BOOKMARK [1][-]{section.3.1}{Literature Review}{chapter.3}% 26
-\BOOKMARK [2][-]{subsection.3.1.1}{From classifier to feature emphasis}{section.3.1}% 27
-\BOOKMARK [2][-]{subsection.3.1.2}{From hand-crafting to feature learning}{section.3.1}% 28
-\BOOKMARK [2][-]{subsection.3.1.3}{Transfer Learning by supervised pre-training}{section.3.1}% 29
-\BOOKMARK [2][-]{subsection.3.1.4}{Convolutional Neural Networks}{section.3.1}% 30
-\BOOKMARK [1][-]{section.3.2}{Model Selection}{chapter.3}% 31
-\BOOKMARK [2][-]{subsection.3.2.1}{Transfer learning Vs MFCC}{section.3.2}% 32
-\BOOKMARK [2][-]{subsection.3.2.2}{K-Means vs RNN}{section.3.2}% 33
-\BOOKMARK [0][-]{chapter.4}{Experiments and Results}{}% 34
-\BOOKMARK [1][-]{section.4.1}{Dataset and Evaluation}{chapter.4}% 35
-\BOOKMARK [2][-]{subsection.4.1.1}{Dataset for source task}{section.4.1}% 36
-\BOOKMARK [2][-]{subsection.4.1.2}{Dataset for target task}{section.4.1}% 37
-\BOOKMARK [2][-]{subsection.4.1.3}{Evaluation metrics}{section.4.1}% 38
-\BOOKMARK [1][-]{section.4.2}{Experiments}{chapter.4}% 39
-\BOOKMARK [2][-]{subsection.4.2.1}{Experiments with pre-trained CNNs as feature extractor}{section.4.2}% 40
-\BOOKMARK [2][-]{subsection.4.2.2}{Experiments with MFCCs as feature extractor}{section.4.2}% 41
-\BOOKMARK [1][-]{section.4.3}{Summary of Results}{chapter.4}% 42
-\BOOKMARK [0][-]{Appendix.1.A}{}{}% 43
-\BOOKMARK [1][-]{section.1.A.1}{Basis Transformation}{Appendix.1.A}% 44
-\BOOKMARK [1][-]{section.1.A.2}{Convolution}{Appendix.1.A}% 45
-\BOOKMARK [2][-]{subsection.1.A.2.1}{1D Convolution}{section.1.A.2}% 46
-\BOOKMARK [2][-]{subsection.1.A.2.2}{2D Convolution}{section.1.A.2}% 47
-\BOOKMARK [0][-]{chapter*.28}{Bibliography}{}% 48
+\BOOKMARK [2][-]{subsection.1.2.1}{Signal Representation}{section.1.2}% 7
+\BOOKMARK [2][-]{subsection.1.2.2}{Dimensionality reduction}{section.1.2}% 8
+\BOOKMARK [2][-]{subsection.1.2.3}{Temporal approximation}{section.1.2}% 9
+\BOOKMARK [1][-]{section.1.3}{Outline of the report}{chapter.1}% 10
+\BOOKMARK [0][-]{chapter.2}{Formalisms}{}% 11
+\BOOKMARK [1][-]{section.2.1}{Representation of music signal}{chapter.2}% 12
+\BOOKMARK [2][-]{subsection.2.1.1}{ Discriminants of music signal - Harmonics and overtones }{section.2.1}% 13
+\BOOKMARK [2][-]{subsection.2.1.2}{Sampling of continuous-time signal}{section.2.1}% 14
+\BOOKMARK [2][-]{subsection.2.1.3}{Time-Frequency transformations}{section.2.1}% 15
+\BOOKMARK [2][-]{subsection.2.1.4}{STFT, Mel-Spectrogram, Chromogram}{section.2.1}% 16
+\BOOKMARK [1][-]{section.2.2}{Dimensionality Reduction}{chapter.2}% 17
+\BOOKMARK [2][-]{subsection.2.2.1}{Basis Transformations - PCA, MFCC}{section.2.2}% 18
+\BOOKMARK [2][-]{subsection.2.2.2}{Feature learning with stacked convolutions}{section.2.2}% 19
+\BOOKMARK [1][-]{section.2.3}{Temporal pooling}{chapter.2}% 20
+\BOOKMARK [2][-]{subsection.2.3.1}{Clustering}{section.2.3}% 21
+\BOOKMARK [2][-]{subsection.2.3.2}{Recurrent Neural Networks}{section.2.3}% 22
+\BOOKMARK [1][-]{section.2.4}{Training}{chapter.2}% 23
+\BOOKMARK [0][-]{chapter.3}{Literature Dynamics and Model Selection }{}% 24
+\BOOKMARK [1][-]{section.3.1}{Literature Review}{chapter.3}% 25
+\BOOKMARK [2][-]{subsection.3.1.1}{From classifier to feature emphasis}{section.3.1}% 26
+\BOOKMARK [2][-]{subsection.3.1.2}{From hand-crafting to feature learning}{section.3.1}% 27
+\BOOKMARK [2][-]{subsection.3.1.3}{Transfer Learning by supervised pre-training}{section.3.1}% 28
+\BOOKMARK [2][-]{subsection.3.1.4}{Convolutional Neural Networks}{section.3.1}% 29
+\BOOKMARK [1][-]{section.3.2}{Model Selection}{chapter.3}% 30
+\BOOKMARK [2][-]{subsection.3.2.1}{Transfer learning Vs MFCC}{section.3.2}% 31
+\BOOKMARK [2][-]{subsection.3.2.2}{K-Means vs RNN}{section.3.2}% 32
+\BOOKMARK [0][-]{chapter.4}{Experiments and Results}{}% 33
+\BOOKMARK [1][-]{section.4.1}{Dataset and Evaluation}{chapter.4}% 34
+\BOOKMARK [2][-]{subsection.4.1.1}{Dataset for source task}{section.4.1}% 35
+\BOOKMARK [2][-]{subsection.4.1.2}{Dataset for target task}{section.4.1}% 36
+\BOOKMARK [2][-]{subsection.4.1.3}{Evaluation metrics}{section.4.1}% 37
+\BOOKMARK [1][-]{section.4.2}{Experiments}{chapter.4}% 38
+\BOOKMARK [2][-]{subsection.4.2.1}{Experiments with pre-trained CNNs as feature extractor}{section.4.2}% 39
+\BOOKMARK [2][-]{subsection.4.2.2}{Experiments with MFCCs as feature extractor}{section.4.2}% 40
+\BOOKMARK [1][-]{section.4.3}{Summary of Results}{chapter.4}% 41
+\BOOKMARK [0][-]{Appendix.1.A}{}{}% 42
+\BOOKMARK [1][-]{section.1.A.1}{Basis Transformation}{Appendix.1.A}% 43
+\BOOKMARK [1][-]{section.1.A.2}{Convolution}{Appendix.1.A}% 44
+\BOOKMARK [2][-]{subsection.1.A.2.1}{1D Convolution}{section.1.A.2}% 45
+\BOOKMARK [2][-]{subsection.1.A.2.2}{2D Convolution}{section.1.A.2}% 46
+\BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 47

@@ -1,3 +1,4 @@
+\externaldocument{chapter1}
 \chapter{Experiments and Results} % Main chapter title
 
 \label{Chapter4} % For referencing the chapter elsewhere, use\ref{Chapter2} 
@@ -31,7 +32,7 @@ As with any MIR task, the raw audio signal containing amplitude values in time d
 \bigskip 
 
 \noindent \textbf{Mel-Spectrogram Parameters :}
-The signal in the time domain is converted to frequency domain by Short-Time-Fourier-Transform ($STFT$) using Fast-Fourier-Transform(FFT) algorithm. The arguments for doing this were presented in Chapter 2 (ref. \ref{stft}). The parameters for FFT are the size (often referred as FFT Size) and stride (often referred as hop-length) of the window function. FFT size was fixed to 512 and hop-length was fixed to 256. Motivated by the human auditory system, the frequency axis is binned to mel-scale and log of squared STFT coefficients (proportional to loudness) are calculated. In \cite{choi_cnn}, it was stated that 96 mel-bins were optimum.   
+The signal in the time domain is converted to frequency domain by Short-Time-Fourier-Transform ($STFT$) using Fast-Fourier-Transform(FFT) algorithm. The arguments for doing this were presented in Chapter 2 (ref. \ref{stft}). The parameters for FFT are the size (often referred as FFT Size) and stride (often referred as hop-length) of the window function. FFT size was fixed to 512 (42 ms) and hop-length was fixed to 256. Motivated by the human auditory system, the frequency axis is binned to mel-scale and log of squared STFT coefficients (proportional to loudness) are calculated. In \cite{choi_cnn}, it was stated that 96 mel-bins were optimum.   
 \bigskip
 
 \noindent Feature learning over mel-spectrogram still requires large dataset, but our target dataset is small. Hence by questing the effectiveness of feature learning over spectrogram with MFCCs, we decided  to compare both.
@@ -106,14 +107,18 @@ MFCCs are still de-facto standard for classifications on small datasets. If CNNs
 \bigskip
 
 \noindent \textbf{MFCC + RNN :}\\
-Now, MFCCs from every STFT window is passed to the two layer LSTM which was used previously. The RNN was first trained with MTT dataset before our target dataset. The parameter setting are same as those used while training \textbf{CNN+RNN}. The resulting WAUC was \textbf{0.74}   
+Now, MFCCs from every STFT window is passed in a \textit{30s  Batched sequence} to a Sequence to one LSTM, which results in a projection for every 30s window. These sequence of 30s frames are then passed to another Sequence to One LSTM to get a final projection. This is done because a MFCCs from STFT frame will result in a long sequence and RNNs tend to forget the information in the earlier sequence samples. This network was first trained with MTT dataset before our target dataset. The parameter setting are same as those used while training \textbf{CNN+RNN}. The resulting WAUC was \textbf{0.74}   
 \begin{algorithm}
   \caption{$Pred$ = MODEL($\textbf{a}$) }\label{alg:mfccrnn}
   \begin{algorithmic}[1]
     \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{N}$
     \Statex \textbf{Output :} $Pred \in \mathbb{R}^{65}$ 
     \State $\textbf{R} = MFCC(\textbf{a})$ \Comment{$\textbf{R} \in \mathbb{R}^{90 \times P}$}
-    \State $\textbf{Y} = Drop_{(0.3)}(Seq2Seq\_LSTM(\textbf{R}))$ \Comment{$\textbf{Y} \in \mathbb{R}^{1024 \times P}$}
+        \State $W = floor(\frac{P}{1366})$
+    \For{$i \in \{0,..,W\}$}
+      \State $\textbf{X} \leftarrow \textbf{R}[:][i:(i+1).1366]$ \Comment{$\textbf{X} \in \mathbb{R}^{90 \times 1366}$}
+    \State $\textbf{Y}[i] \leftarrow Drop_{(0.3)}(Seq2One\_LSTM(\textbf{X}))$ \Comment{$\textbf{Y} \in \mathbb{R}^{1024 \times W}$}
+    \EndFor
     \State $\textbf{y} = Drop_{(0.3)}(Seq2One\_LSTM(\textbf{Y}))$ \Comment{$\textbf{y} \in \mathbb{R}^{1024}$}
     \State $Pred = \sigma(L(\textbf{W})\textbf{y}))$ \Comment{$\textbf{W} \in \mathbb{R}^{65 \times 1024}$}
   \end{algorithmic}
