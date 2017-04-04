@@ -601,8 +601,8 @@
      {}{}}%
   }
   \keyw{preprint}
-  \strng{namehash}{CK+1}
-  \strng{fullhash}{CKFGSMCK1}
+  \strng{namehash}{CK+2}
+  \strng{fullhash}{CKFGSMCK2}
   \field{sortinit}{2}
   \verb{eprint}
   \verb 1609.04243
@@ -687,6 +687,47 @@
   networks}
   \field{year}{2016}
   \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{choi_transfer}{online}{}
+  \name{author}{4}{}{%
+    {{}%
+     {{Choi}}{C.}%
+     {K.}{K.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {{Fazekas}}{F.}%
+     {G.}{G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {{Sandler}}{S.}%
+     {M.}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {{Cho}}{C.}%
+     {K.}{K.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{Computer Science - Computer Vision and Pattern Recognition, Computer
+  Science - Artificial Intelligence, Computer Science - Multimedia, Computer
+  Science - Sound}
+  \strng{namehash}{CK+1}
+  \strng{fullhash}{CKFGSMCK1}
+  \field{sortinit}{2}
+  \verb{eprint}
+  \verb 1703.09179
+  \endverb
+  \field{title}{{Transfer learning for music classification and regression
+  tasks}}
+  \field{journaltitle}{ArXiv e-prints}
+  \field{eprinttype}{arXiv}
+  \field{eprintclass}{cs.CV}
+  \field{month}{03}
+  \field{year}{2017}
 \endentry
 
 \entry{specLeak}{misc}{}

@@ -54,7 +54,7 @@ maxbibnames=99
 
 \section*{Abstract}
 
-Describing music can be quite tricky and talking about music may simply require as much vocabulary as any technical subject. Musicians and composers usually discuss their work with jargon describing certain aesthetics of the song. As the amount of music recordings are constantly growing, finding a song that matches these aesthetic description is challenging. This work is an attempt to take a step towards developing algorithms that could tag music like an artist. The currently available state-of-art algorithms are trained and tested on datasets with tags that are socially biased. In this thesis, a classifier is trained on a repertoire of 900 songs with carefully labelled data. The Mel-Frequency-Cepstral-Coefficients (MFCC) features are compared with features extracted by pre-trained Convolution Neural Networks (CNN) over mel-log power spectrogram. These features are extracted every 29.1s and approximated over time to a fixed size representation. The temporal approximation by sequence to one Long Term Short Memory (LSTM) Recurrent Neural Network is compared with approximation by Bag of Frames (BoF) approach and the weighted area under receiver operating characteristic curve (AUC) is reported. The experiments show that MFCC features summarized by LSTM outperforms pre-trained convolutions counterpart. It is also seen that LSTM perform better than Bag of Frames features for temporal approximation.     
+Describing music can be quite tricky and talking about music may simply require as much vocabulary as any technical subject. Musicians and composers usually discuss their work with jargon describing certain aesthetics of the song. As the amount of music recordings are constantly growing, finding a song that matches these aesthetic description is challenging. This work is an attempt to take a step towards developing algorithms that could tag music like an artist. The currently available state-of-art algorithms are trained and tested on datasets with tags that are socially biased. Moreover these datasets contain just short clips of songs, but an artist describes a song as a whole. Therefore, in this thesis, a repertoire of 900 songs with carefully labelled data describing the whole track is used and the aim is to find the model settings that would best approximate the audio features for such a dataset. The Mel-Frequency-Cepstral-Coefficients (MFCC) features are compared with features extracted by pre-trained Convolution Neural Networks (CNN) over mel-log power spectrogram. These features are extracted every 29.1s and approximated over time to a fixed size representation. The temporal approximation by sequence to one Long Term Short Memory (LSTM) Recurrent Neural Network is compared with approximation by Bag of Frames (BoF) approach and the weighted area under receiver operating characteristic curve (AUC) is reported. The experiments show that MFCC features summarized by LSTM outperforms pre-trained convolutions counterpart. It is also seen that LSTM perform better than Bag of Frames features for temporal approximation.     
 
 \vspace{5cm}
 
@@ -62,13 +62,14 @@ Describing music can be quite tricky and talking about music may simply require 
 \newpage
 
 \section*{\bf Acknowledgments}
-[TODO]
+I would like to thank \textit{Prof. Paolo Bientinesi} (High performance and automatic comupting group, AICES, RWTH Aachen) for doing one of the most expensive work - \textit{Listen to almost thousand songs and tag them}. I also thank  \textit{Prof. Marco Alunno} (Professor of Composition and Theory at University EAFIT, Columbia) for his valuable association and advices.  
 \tableofcontents
 
 \include{Chapters/Chapter1}
 \include{Chapters/Chapter2}
 \include{Chapters/Chapter3}
 \include{Chapters/Chapter4}
+\include{Chapters/Chapter5}
 \include{Appendices/AppendixA}
 %\chapter{Introduction}
 %

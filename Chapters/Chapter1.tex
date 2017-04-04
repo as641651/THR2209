@@ -18,7 +18,7 @@
 
 %\section{Welcome and Thank You}
 
-Computers have been used to automate discovery and management of music in so many different ways. Automating the task of attaching a semantic meaning to a song is popularly known as \textit{music auto-tagging}. Automatic tagging algorithms have been used to build recommendation systems that allow listeners to discover songs that match their taste. It also enables online music stores to filter their target audience. But semantic description of a song is not straightforward and there is this gap between music audio and listener's description, both linguistically and emotionally, which we term as \textit{audio-semantic gap}. In this thesis, we test the state-of-art approaches of music auto-tagging on a dataset that is least affected by \textit{audio-semantic} noise. In section \ref{motivation}, the need for this dedicated research is explained by describing some shortcomings of the currently available solution approaches. In section \ref{overview}, a top to bottom overview of the contents of this research is presented.   
+Computers have been used to automate discovery and management of music in so many different ways. Automating the task of attaching a semantic meaning to a song is popularly known as \textit{music auto-tagging}. Automatic tagging algorithms have been used to build recommendation systems that allow listeners to discover songs that match their taste. It also enables online music stores to filter their target audience. But semantic description of a song is not straightforward and there is this gap between music audio and listener's description, both linguistically and emotionally, which we term as \textit{audio-semantic gap}. In this thesis, we test the state-of-art approaches of music auto-tagging on a dataset that is least affected by \textit{audio-semantic} noise and find out the efficient model settings. In section \ref{motivation}, the need for this dedicated research is explained by describing some shortcomings of the currently available solution approaches. In section \ref{overview}, a top to bottom overview of the contents of this research is presented.   
 
 %----------------------------------------------------------------------------------------
 
@@ -47,7 +47,7 @@ Current recommendation systems including the ones that use collaborative filteri
 
 \section{Overview}
 \label{overview}
-Convolution neural networks (CNN) have recently gained popularity for content-based multi-label classification task achieving state-of-art performance on established datasets\cite{choi_cnn}\cite{choi_crnn}. But these models were trained on large amount of training data containing short excerpts of music and it is not clear if section-wise merging of descriptions can approximate actual description of the whole song. To train these models to tag like an artist, a dataset tagged by an expert is needed and gathering such data is expensive. So the aim of this thesis is to find out
+In an attempt to get rid of the \textit{audio-semantic} noise, we use a dataset tagged by an expert and assumptions about song length are not made (Let us call them \textit{aesthetic tags}). But such datasets are usually small because gathering them is expensive. Convolution neural networks (CNN) have recently gained popularity for content-based multi-label classification task achieving state-of-art performance\cite{choi_cnn}\cite{choi_crnn} on established datasets\cite{MSD}\cite{MTT}. But these models were trained on large amount of training data containing short excerpts of music and it is not clear if section-wise merging of descriptions can approximate actual description of the whole song. So the aim of this thesis is to find out
 \begin{itemize}
 \setlength\itemsep{0em}
 \item If the celebrated CNN models trained on large data can be exploited to show similar performance gains when \textit{fine-tuned} on a small dataset (Generally termed as \textit{transfer learning}).
@@ -76,7 +76,7 @@ We are looking for an algorithm that will approximate features for songs of arbi
 %----------------------------------------------------------------------------------------
 
 \section{Outline of the report}
-In chapter 2, the fundamentals required for understanding remaining contents are explained  and formalism of notations are introduced. In chapter 3, a detailed overview of previous research, their shortcomings for the current problem along with justification for proposed models are discussed. In Chapter 4, details of the dataset and the experiment results of proposed models are discussed. In chapter 5, the inference from these experiments in understanding the development of algorithms for tagging music with aesthetic tags is explained and future directions are discussed. 
+In chapter 2, the fundamentals required for understanding remaining contents are explained  and formalism of notations are introduced. In chapter 3, a detailed overview of previous research, their shortcomings for the current problem along with justification for proposed models are discussed. In chapter 4, details of the dataset and the experiment results of proposed models are discussed. In chapter 5, the inference from these experiments in understanding the development of algorithms for tagging music with aesthetic tags is explained and future directions are discussed. 
 
 
 

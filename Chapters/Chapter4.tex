@@ -1,4 +1,5 @@
 \externaldocument{chapter1}
+\externaldocument{chapter5}
 \chapter{Experiments and Results} % Main chapter title
 
 \label{Chapter4} % For referencing the chapter elsewhere, use\ref{Chapter2} 
@@ -19,7 +20,42 @@ To gather annotations with clean mapping to aesthetic properties, we adopt the m
 
 \subsection{Evaluation metrics}
 \label{evaluation}
-[TODO]
+For multi-label classification with L labels, the performance of L binary classifiers is computed and averaged. Each label can belong to one of the class - \textit{positive} (1) or \textit{negative} (0). To discuss about a fair performance measure, lets first recall some important terminologies,\\
+\\
+\textbf{True Positives (TP) :} If the classifier admits a label as positive when the ground truth is also positive.\\
+\textbf{True Negative (TN) :} If the classifier admits a label as negative when the ground truth is also negative.\\
+\textbf{False Positives (FP) :} If the classifier admits a label as positive when the ground truth is negative.\\
+\textbf{False Negative (FN) :} If the classifier admits a label as negative when the ground truth is positive.\\
+\\
+For a general tagging problem, most of the tags are \textit{negative} for most of the clips (That is, out of 900 songs, if 20 songs have the tag '\textit{electro}', then for this tag there are 20 \textit{ground truth positives} and 880 \textit{ground truth negatives}.\\
+\\
+\textbf{Accuracy :} To see why \textit{accuracy} will be an unfair measure, lets look at the definition of \textit{accuracy} for the label 'electro',
+\[
+  Accuracy = \frac{\sum TP + \sum TN}{900} = \frac{0+880}{900}
+\]
+Even if the classifier did not classify one 'electro' as positive, accuracy will be 0.98 with the contribution from 880 true negative samples.\\
+\\
+\textbf{Precision :} This is also not a comprehensive measure to indicate the strength of the classifier because it does not tell anything about the percentage of negatively classified samples (false negatives). That is, even if the classifier \textit{correctly} admits one 'electro' as positive and 899 as negative, \textit{precision} would be 1.0   
+\[
+  Precission = \frac{\sum TP}{\sum TP + \sum FP} = \frac{1}{1+0}
+\]
+\\
+\textbf{Recall :} This is also not comprehensive because it does not tell anything about false positives or in other words, it does not say if your classifier is a \textit{liar}. That is, even if the classifier admits 900 samples as positive (20 true positives and 880 false positives), \textit{recall} will be 1.0
+\[
+  Recall = \frac{\sum TP}{\sum TP + \sum FN} = \frac{20}{20+0} 
+\]
+\\
+To strike a balance between \textit{recall} and \textit{precision}, the harmonic mean of both is often used, which is called \textit{F1} score. But to calculate all the metrics mentioned so far, some classifier threshold is required (That is, a binary classifier spits a number between 0 and 1 and if the number is above the threshold, the sample is classified as positive, otherwise negative). If someone changes the threshold then the performance can change. To find a comprehensive measure for classifier performance, the metric should consider all threshold values.\\
+\\ 
+\textbf{Area under precision-recall curve :} When the\textit{ precision} and \textit{recall} are plotted for various threshold and the area under the precision-recall curve is found, the metric is termed as \textit{average precision}. Averaging the \textit{average precision} of L labels gives \textit{Mean average precision}, which is a useful metric and can be found in some research works.\\
+\\
+\textbf{Area under receiver operating characteristic curve (AUC) :} The \textit{fall-out} and \textit{recall} are plotted for various threshold and the area under the this curve is found. \textit{Fall-out} is defined as
+\[
+   Fall\_out = \frac{\sum FP}{\sum FP + \sum TN} 
+\]
+\textit{Recall} answers the question, 'when the ground truth is positive, how often does the classifier admit it as a positive'. \textit{Fall-out} answers the question, 'when the ground truth is negative, how often does the classifier admit it as positive'. A random classifier would have an AUC of 0.5, meaning, for a binary random classification of an unknown sample there is 50\% chance for it to be true. Therefore, AUC can be thought of as a probability that a classifier would rank a randomly chosen positive ground truth higher than a randomly chosen negative observation. AUC measures how well the positive and negative classes are separated. AUC is computed for L labels and averaged. Since the publications reviewed in previous chapter report this metric, we will also use the same. But in addition, we use \textit{weighted average} because our validation set is small and number of occurrences of each label is not balanced.\\
+\\
+Therefore, in all our experiments, \textit{Weighted averaged AUC} (WAUC) will be reported.
 
 \section{Experiments}
 \label{experiments}
