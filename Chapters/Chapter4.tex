@@ -15,10 +15,11 @@ The MagnaTagATune dataset consists of 25,856 clips of 29.1-s, 16 kHz-sampled mp3
 
 \subsection{Dataset for target task}
 \label{target}
-To gather annotations with clean mapping to aesthetic properties, we adopt the most straightforward and costly method - ask someone to listen to songs and tag them. Around 900 songs approximately 5 - 8 min long, were tagged by my supervisor Prof. Paolo Bientinesi in association with Prof. Marco Aluno (Professor of Composition and Theory at University EAFIT, Columbia). Out of 900 songs, 112 are used for validation.  
+To gather annotations with clean mapping to aesthetic properties, we adopt the most straightforward and costly method - ask someone to listen to songs and tag them. Around 900 songs approximately 5 - 8 min long, were tagged by my supervisor Prof. Paolo Bientinesi in association with Prof. Marco Aluno (Professor of Composition and Theory at University EAFIT, Columbia). Out of 900 songs, 100 are used for validation.  
 
 \subsection{Evaluation metrics}
 \label{evaluation}
+[TODO]
 
 \section{Experiments}
 \label{experiments}
@@ -28,7 +29,7 @@ As with any MIR task, the raw audio signal containing amplitude values in time d
 \noindent \textbf{Sampling Parameters : } Although most of the available audio in digital format are sampled at 44KHz (ref. \ref{sampling}), it is important to note that most of the information lie in the lower range of the spectrum. In \cite{choi_cnn}, a pilot experiment was conducted to demonstrate similar performance with 12KHz and 16KHz for top 50 tags (Recall that MTT clips are already downsampled to 16KHz). Hence we sample all our tracks to 12KHz. 
 \bigskip
 
-\noindent Next step is to extract relevant features. General pipeline is \textit{sampling} (ref. \ref{sampling}), \textit{representation} (ref. \ref{stft}), stacks of \textit{dimensionality reduction} (ref. \ref{dimension}) followed by \textit{temporal summarization} (ref. \ref{temporal}). Feature learning can be introduced at different stages. Introducing in earlier stages would require training with huge amount of data. Feature learning on raw sampled signal proved sub-optimal in [end to end]. Same was the case when convolved over STFT frame \cite{choi_cnn}. Convolutions over mel-spectrogram performed better than MFCC in many previous work \cite{choi_cnn}[end to end]. Hence we stick to engineered features until the extraction of mel-spectrogram.  
+\noindent Next step is to extract relevant features. General pipeline is \textit{sampling} (ref. \ref{sampling}), \textit{representation} (ref. \ref{stft}), stacks of \textit{dimensionality reduction} (ref. \ref{dimension}) followed by \textit{temporal summarization} (ref. \ref{temporal}). Feature learning can be introduced at different stages. Introducing in earlier stages would require training with huge amount of data. Feature learning on raw sampled signal proved sub-optimal in \cite{EndToEnd}. Same was the case when convolved over STFT frame \cite{choi_cnn}. Convolutions over mel-spectrogram performed better than MFCC in many previous work \cite{choi_cnn}\cite{EndToEnd}. Hence we stick to engineered features until the extraction of mel-spectrogram.  
 \bigskip 
 
 \noindent \textbf{Mel-Spectrogram Parameters :}
@@ -65,6 +66,7 @@ In Chapter 2 (ref. \ref{stacked}), it was shown how Convolution Neural Networks 
     \State $Pred = \sigma(L(\textbf{W})\textbf{y}_{2}))$ \Comment{$\textbf{W} \in \mathbb{R}^{L \times 1024}$}
   \end{algorithmic}
 \end{algorithm}
+\FloatBarrier
 
 \noindent This CNN model can either be used as a \textit{black-box} feature extractor (That is, weights of the model are not modified while training the \textit{target-task}) or certain layers can be \textit{fine-tuned} (That is, we continue the training on \textit{target-task}). Both the cases are looked separately,
 \bigskip
@@ -77,10 +79,10 @@ The weights of CNN trained on the source task are not modified (no fine-tuning).
 With the same parameter settings, the last layer of CNN was finetuned after 5K iterations. Training was then continued until 25K iterations and WAUC went up to \textbf{0.69}. When last two CNN layers were finetuned WAUC further improved to \textbf{0.71}. Fine-tuning earlier layers proved sub-optimal. 
 \bigskip
 
-\noindent This tells us that in the final layers CNN tend to find features specific to task. (Recalling that labels for source and target tasks are different). However, we still do not know if convolutions over mel-spectrogram will be better than MFCCs which is proven to model audio discriminants. Before going there, the effectiveness of RNN should also be questioned. It was hypothesised in Chapter 3 (\ref{model}) that Bog-of-Words (\ref{clustering}) features using K-Means (which was actually used in [multi-scale] to attain state of art performance) may not be suitable for summarizing features for longer audio. So we test this by replacing RNN with Bag Of Words (BoW) features.
+\noindent This tells us that in the final layers CNN tend to find features specific to task. (Recalling that labels for source and target tasks are different). However, we still do not know if convolutions over mel-spectrogram will be better than MFCCs which is proven to model audio discriminants. Before going there, the effectiveness of RNN should also be questioned. It was hypothesised in Chapter 3 (\ref{model}) that Bag-of-Frames (\ref{clustering}) features using K-Means (which was actually used in \cite{MultiScale} to attain state of art performance) may not be suitable for summarizing features for longer audio. So we test this by replacing RNN with Bag Of Frames (BoF) features.
 \bigskip
 
-\noindent \textbf{CNN + BoW :}
+\noindent \textbf{CNN + BoF :}
 The CNN is first finetuned for 10K iterations with algorithm \ref{alg:cnnrnn}. Then 1024 centroids of CNN features are found by unsupervised training on both MTT and our target dataset. This is followed by multi layer perceptron with a hidden layer of 512 units and ReLU activation. Having hidden size of 1024 did not improve the result. WAUC was \textbf{0.67}. The algorithm is described below,
 
 \begin{algorithm}
@@ -96,10 +98,11 @@ The CNN is first finetuned for 10K iterations with algorithm \ref{alg:cnnrnn}. T
       \State $\textbf{X} \leftarrow \textbf{R}[:][i:(i+1).1366]$ \Comment{$\textbf{X} \in \mathbb{R}^{96 \times 1366}$}
       \State $\textbf{Y}[i] \leftarrow CHOI\_CNN(\textbf{X})$ \Comment{$\textbf{Y} \in \mathbb{R}^{1024 \times W}$} 
     \EndFor
-    \State $\textbf{y}_{1} = BagOfWords(\textbf{Y},1024)$ \Comment{$\textbf{y}_{1} \in \mathbb{R}^{1024}$}
+    \State $\textbf{y}_{1} = BagOfFrames(\textbf{Y},1024)$ \Comment{$\textbf{y}_{1} \in \mathbb{R}^{1024}$}
      \State $Pred = \sigma(L(\textbf{W}_{2})ReLU(L(\textbf{W}_{1})\textbf{y}_{1}))$ \Comment{$\textbf{W}_{2} \in \mathbb{R}^{65 \times 512}, \textbf{W}_{1} \in \mathbb{R}^{512 \times 1024}$}
   \end{algorithmic}
 \end{algorithm}
+\FloatBarrier
     
 \subsection{Experiments with MFCCs as feature extractor}    
 \label{mfcc}  
@@ -123,20 +126,21 @@ Now, MFCCs from every STFT window is passed in a \textit{30s  Batched sequence} 
     \State $Pred = \sigma(L(\textbf{W})\textbf{y}))$ \Comment{$\textbf{W} \in \mathbb{R}^{65 \times 1024}$}
   \end{algorithmic}
 \end{algorithm}
+\FloatBarrier
 
-\noindent \textbf{MFCC + BoW :}\\
-RNN is repalaced with Bag of Words features. Now WAUC drops to \textbf{0.62}
+\noindent \textbf{MFCC + BoF :}\\
+RNN is repalaced with Bag of Frames features. Now WAUC drops to \textbf{0.62}
 \begin{algorithm}
   \caption{$Pred$ = MODEL($\textbf{a}$) }\label{alg:mfccbow}
   \begin{algorithmic}[1]
     \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{N}$
     \Statex \textbf{Output :} $Pred \in \mathbb{R}^{65}$ 
     \State $\textbf{R} = MFCC(\textbf{a})$ \Comment{$\textbf{R} \in \mathbb{R}^{90 \times P}$}
-   \State $\textbf{y} = BagOfWords(\textbf{R},1024)$ \Comment{$\textbf{y} \in \mathbb{R}^{1024}$}
+   \State $\textbf{y} = BagOfFrames(\textbf{R},1024)$ \Comment{$\textbf{y} \in \mathbb{R}^{1024}$}
      \State $Pred = \sigma(L(\textbf{W}_{2})ReLU(L(\textbf{W}_{1})\textbf{y}))$ \Comment{$\textbf{W}_{2} \in \mathbb{R}^{65 \times 512}, \textbf{W}_{1} \in \mathbb{R}^{512 \times 1024}$}
   \end{algorithmic}
 \end{algorithm}
-    
+\FloatBarrier    
 
 \section{Summary of Results}
 \label{results}
@@ -146,9 +150,9 @@ Summary of results is shown in the table below. It is seen that \textit{transfer
     \hline
     \textbf{Model} & \textbf{AUC} \\ \hline
     Finetune CNN + RNN &  0.71\\ \hline
-    CNN + BoW  &  0.67\\ \hline
+    CNN + BoF  &  0.67\\ \hline
     MFCC + RNN &  \textbf{0.74} \\ \hline
-    MFCC + BoW &  0.62 \\ \hline
+    MFCC + BoF &  0.62 \\ \hline
     \hline
     \end{tabular}
 

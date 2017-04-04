@@ -35,6 +35,7 @@ maxbibnames=99
 \usepackage{glossaries}
 \usepackage{appendix}
 \usepackage{xr}
+\usepackage{color}
 
 
 \makeglossaries
@@ -53,7 +54,7 @@ maxbibnames=99
 
 \section*{Abstract}
 
-Describing music can be quite tricky and talking about music may simply require as much vocabulary as any technical subject. Musicians and composers usually discuss their work with jargon describing certain aesthetics of the song. As the amount of music recordings are constantly growing, finding a song that matches these aesthetic description is challenging. Hence there is a need for algorithms that could tag music like an artist. The currently available state-of-art algorithms are trained and tested on datasets with tags that are socially biased. In this thesis, the classifier is trained on a repertoire with carefully labelled data. The digital signal is transformed to time-frequency representation with frequency in mel-scale and coefficients that are proportional to loudness, resulting in mel-log power spectrogram. The MFCC features are compared with features extracted by fine-tuned Convolution Neural Networks (CNN) on mel-log power spectrogram. These features are extracted every 29.1s and approximated to a fixed size representation. This temporal approximation by sequence to one Long Term Short Memory (LSTM) Recurrent Neural Network is compared with approximation by Bag of Words (BoW) approach and the weighted area under receiver operating characteristic curve (AUC) is reported. The experiments show that MFCC features summarized by LSTM outperforms fine-tuned convolutions counterpart. It is also seen that LSTM perform better than Bag of Words features for temporal approximation.     
+Describing music can be quite tricky and talking about music may simply require as much vocabulary as any technical subject. Musicians and composers usually discuss their work with jargon describing certain aesthetics of the song. As the amount of music recordings are constantly growing, finding a song that matches these aesthetic description is challenging. This work is an attempt to take a step towards developing algorithms that could tag music like an artist. The currently available state-of-art algorithms are trained and tested on datasets with tags that are socially biased. In this thesis, a classifier is trained on a repertoire of 900 songs with carefully labelled data. The Mel-Frequency-Cepstral-Coefficients (MFCC) features are compared with features extracted by pre-trained Convolution Neural Networks (CNN) over mel-log power spectrogram. These features are extracted every 29.1s and approximated over time to a fixed size representation. The temporal approximation by sequence to one Long Term Short Memory (LSTM) Recurrent Neural Network is compared with approximation by Bag of Frames (BoF) approach and the weighted area under receiver operating characteristic curve (AUC) is reported. The experiments show that MFCC features summarized by LSTM outperforms pre-trained convolutions counterpart. It is also seen that LSTM perform better than Bag of Frames features for temporal approximation.     
 
 \vspace{5cm}
 
@@ -61,7 +62,7 @@ Describing music can be quite tricky and talking about music may simply require 
 \newpage
 
 \section*{\bf Acknowledgments}
-
+[TODO]
 \tableofcontents
 
 \include{Chapters/Chapter1}

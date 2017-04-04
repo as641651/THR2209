@@ -11,7 +11,7 @@
 %----------------------------------------------------------------------------------------
 
 %\section{Welcome and Thank You}
-In this chapter, acoustical characteristics of music signal that enables general MIR tasks will be introduced.We will examine the Fourier Series representations of sound waves and see how they relate to harmonics and tonal color of instruments  
+%In this chapter, acoustical characteristics of music signal that enables general MIR tasks will be introduced.We will examine the Fourier Series representations of sound waves and see how they relate to harmonics and tonal color of instruments  
 
 
 
@@ -36,7 +36,9 @@ Where $c_{i}$ are the coefficients in \gls{linear combination} and $k_{i}$ are t
 
 \noindent For now, let us assume that signal is stationary. This can be imagined as a stroke of a musical note. When a note is played on an instrument, listeners hear the played tone as the fundamental, as well as a combination of its harmonics sounding at the same time (Hammond, 2011).  Harmonics are tones that have frequencies that are integer multiples of the fundamental frequency. The fundamental and its harmonics naturally sound good together. So a \textit{stationary} signal is harmonic if $k_{i} \in \mathbb{Z}$, where $\mathbb{Z}$ is a set of \textit{integers}. The fundamental usually dominates the harmonics (i.e strength of higher harmonics are usually less). These additional frequencies with multiples $k_{i}$ determines the \textit{timber}. It is this \textit{timber} that differentiates the same note played by different instruments. 
 
-(graph example of harmonics of two instruments)
+{\color{gray}
+
+TODO:
 
 The presence of multiple, simultaneous notes in polyphonic music renders accurate pitch tracking very difficult. However, there are many other applications, including chord recognition and music matching, that do not require explicit detection of pitches, and for these tasks several representations of the pitch and harmonic information commonly appear. Usually, there are more instruments being played simultaneously and sometimes accompanied by voices. In such cases, we hear the fundamental and overtones (chord). The overtones are any frequency above the fundamental frequency.  The overtones may or may not be harmonics. So overtones are those frequencies which are not just restricted to integer multiples of fundamental. The fundamental and overtones together are called partials
 
@@ -53,17 +55,16 @@ Thus the recorded signal has components of all these frequencies\\
   
 Most certainly, the signal evolves over time and hence the components of frequencies and its amplitudes will vary for each time t. The heat map representation of amplitudes, with frequency along y, time along   x is called spectrogram. 
 
-Thus to discriminate a signal, we not only need the evolution of frequencies, but also information about harmonics. For instance, to discriminate the instruments from the recorded signal m(t), the classifier should infer the frequencies in the each harmonics m1(t) and m2(t). To discriminate the temporal pattern (Rhythm), we need the evolution of m1 and m2. To identify other aesthetics (warm, city) , the interaction between m1(t) and m2(t) should be inferred. To discriminate voices and other non-harmonic aspects (tempo, beat), the envelop curve of the spectrum will also be needed.    
-
-(diagram)
+Thus to discriminate a signal, we not only need the evolution of frequencies, but also information about harmonics. For instance, to discriminate the instruments from the recorded signal m(t), the classifier should infer the frequencies in the each harmonics m1(t) and m2(t). To discriminate the temporal pattern (Rhythm), we need the evolution of m1 and m2. To identify other aesthetics (warm, city) , the interaction between m1(t) and m2(t) should be inferred. To discriminate voices and other non-harmonic aspects (tempo, beat), the envelop curve of the spectrum will also be needed. 
+}
 
 
 \subsection{Sampling of continuous-time signal}
 \label{sampling}
-The digital formats contain the discrete version of the signal obtained by sampling continuous-time signal. For functions that vary with time, let s(t) be a continuous function (or "signal") to be sampled, and let sampling be performed by measuring the value of the continuous function every T seconds, which is called the sampling interval or the sampling period.[1][pp2]. The sampling frequency or sampling rate, fs, is the average number of samples obtained in one second (samples per second),  
-
-thus fs = 1/T.
-
+The digital formats contain the discrete version of the signal obtained by sampling continuous-time signal. For functions that vary with time, let s(t) be a continuous function (or "signal") to be sampled, and let sampling be performed by measuring the value of the continuous function every T seconds, which is called the sampling interval or the sampling period.[1][pp2]. The sampling frequency or sampling rate, $fs$, is the average number of samples obtained in one second (samples per second),  
+\[
+ fs = \frac{1}{T}.
+\]
 The optimum sampling rate is given by Nyquist-Shannon sampling theorem which says, the sampling frequency (fs) should be at least twice the highest frequency contained in the signal [pp2] Given the human hearing range lies between 20Hz - 20KHz [pp3], most of the digital audio formats use a standard sampling frequency of 44.4Khz. The signal is further down sampled depending on the kind of feature information needed for classification. 
 
 
@@ -339,7 +340,7 @@ The frequencies in the adjacent bins can be highly correlated and therefore cont
     \State $\textbf{X}_{s} = \textbf{X}[i.Q_{s}:(i+1).Q_{s}]$ \Comment{$\textbf{X}_{s} \in \mathbb{R}^{S \times Q_{s}}$}
       \State $\bm{\Sigma} = \frac{1}{Q_{s}}\textbf{X}_{s}\textbf{X}_{s}^{T}$ \Comment{$\bm{\Sigma} \in \mathbb{S}^{S \times S}$}
       \State $\textbf{V}, \bm{\lambda} = EIG(\bm{\Sigma}, T)$ \Comment{$\bm{\lambda} \in \mathbb{R}^{T}$ , $\textbf{V} \in \mathbb{O}^{S \times T}$}
-      \State $\textbf{Y}^{T}[i] \leftarrow \bm{\lambda}$
+      \State $\textbf{Y}[i] \leftarrow \textbf{V}^{T}\textbf{X}_{s}$
     \EndFor
   \end{algorithmic}
 \end{algorithm}
@@ -374,6 +375,7 @@ The frequencies in the adjacent bins can be highly correlated and therefore cont
   \end{algorithmic}
 \end{algorithm}
  
+{\color{gray}
 \subsection{Feature learning with stacked convolutions}
 \label{stacked}
 
@@ -398,4 +400,4 @@ The frequencies in the adjacent bins can be highly correlated and therefore cont
 
 \section{Training}
 \label{training}
-
+}
