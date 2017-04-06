@@ -16,7 +16,23 @@
 %----------------------------------------------------------------------------------------
 
 \documentclass{beamer}
-
+\usepackage{amssymb}
+\usepackage{amsmath,bm}
+\graphicspath{ {pics/} }
+\usepackage{tikz}
+\tikzset{
+  every overlay node/.style={
+    draw=black,fill=white,rounded corners,anchor=north west,
+  },
+}
+% Usage:
+% \tikzoverlay at (-1cm,-5cm) {content};
+% or
+% \tikzoverlay[text width=5cm] at (-1cm,-5cm) {content};
+\def\tikzoverlay{%
+   \tikz[baseline,overlay]\node[every overlay node]
+}%
+\usepackage[absolute,overlay]{textpos}
 \mode<presentation> {
 
 % The Beamer class comes with a number of default slide themes
@@ -69,7 +85,7 @@
 %\usecolortheme{seahorse}
 \usecolortheme{whale}
 %\usecolortheme{wolverine}
-
+\setbeamertemplate{itemize items}[ball]
 %\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
 \setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
 
@@ -102,7 +118,126 @@ RWTH Aachen \\ % Your institution for the title page
 
 \begin{frame}
 \frametitle{Acknowledgement}
+\begin{itemize}
+\item Prof. Paolo Bientinesi
+\item Prof. Marco Alunno
+\end{itemize}
 
+\end{frame}
+\begin{frame}
+\frametitle{AIM}
+\begin{picture}(50,50)
+\put(20,-100){\hbox{\includegraphics[scale=0.4]{aim}}} 
+\end{picture} 
+\end{frame}
+
+\begin{frame}
+\frametitle{AIM}
+\begin{picture}(50,50)
+\put(20,-100){\hbox{\includegraphics[scale=0.35]{aim_2}}} 
+\end{picture} 
+\end{frame}
+
+\begin{frame}
+\frametitle{APPLICATION}
+\begin{block}{\textbf{User specific recommendation system?}}
+$\mathbf{\rightarrow}$ \textbf{Do you have to create a dataset with ground-truth?}\\
+\pause
+\qquad $\mathbf{\rightarrow}$ \textit{Lets look at some solutions where you \textbf{don't} have to..}
+
+\end{block}
+\bigskip
+
+\textbf{Collaborative filtering :}
+\begin{itemize}
+\item {\color<2>[RGB]{0,100,0}Exploits social trends}
+\item {\color<2>[RGB]{0,100,0}No information from audio content is used}
+\item {\color{red} Cold-Start Problem}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{APPLICATION}
+\begin{block}{\textbf{User specific recommendation system?}}
+$\mathbf{\rightarrow}$ \textbf{Do you have to create a dataset with ground-truth?}\\
+\qquad $\mathbf{\rightarrow}$ \textit{Lets look at some solutions where you \textbf{don't} have to..}
+\end{block}
+\bigskip
+
+\textbf{Collaborative + Content-based :}
+\begin{itemize}
+\item {\color<1>[RGB]{0,100,0}Gather training data by crowd sourcing}
+\item {\color<1>[RGB]{0,100,0}User specific recommendations by filtering popular tags}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{APPLICATION}
+\begin{block}{\textbf{User specific recommendation system?}}
+$\mathbf{\rightarrow}$ \textbf{{\color{red} When} do you have to create a dataset with ground-truth?}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{APPLICATION}
+\begin{block}{\textbf{Recommendation system for {\color{green} experts}?}}
+$\mathbf{\rightarrow}$ \textbf{{\color{red} When} do you have to create a dataset with ground-truth?}\\
+\qquad $\mathbf{\rightarrow}$ \textit{Lets look from an artist's point of view ..}
+
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{PIPELINE}
+\begin{picture}(50,50)
+\put(90,-100){\hbox{\includegraphics[scale=0.4]{gpipe}}} 
+\end{picture} 
+\end{frame}
+
+\begin{frame}
+\frametitle{PIPELINE}
+\begin{columns}[c]
+\column{.45\textwidth}
+\begin{picture}(50,50)
+\put(0,-100){\hbox{\includegraphics[scale=0.4]{gpipe_1}}} 
+\end{picture} 
+%\hspace{.45\textwidth}
+%\vrule{}
+\column{.5\textwidth}
+\begin{block}{\textbf{Inputs :}}
+\begin{itemize}
+\item {\color<1>[RGB]{0,100,0}Digital Signal (.mp3, .wav)}
+\item Sheets of musical notes
+\end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{PIPELINE}
+\begin{columns}[c]
+\column{.45\textwidth}
+\begin{picture}(50,50)
+\put(0,-100){\hbox{\includegraphics[scale=0.4]{gpipe_3}}} 
+\end{picture} 
+%\hspace{.45\textwidth}
+%\vrule{}
+\column{.5\textwidth}
+\begin{block}{\textbf{Feature Extraction :}}
+\begin{itemize}
+\item $\mathbb{R}^{N} \rightarrow \mathbb{R}^{T} \quad T < N$
+\item \textbf{Organized :}\\ Encode information about discriminants
+\item \textbf{Robust :}\\ Transformation should be well posed
+\end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{PIPELINE}
+\begin{picture}(50,50)
+\put(40,-100){\hbox{\includegraphics[scale=0.4]{gpipe_4}}} 
+\end{picture} 
 \end{frame}
 
 \begin{frame}
