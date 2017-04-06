@@ -241,6 +241,401 @@ $\mathbf{\rightarrow}$ \textbf{{\color{red} When} do you have to create a datase
 \end{frame}
 
 \begin{frame}
+\frametitle{REPRESENTATION}
+\begin{columns}[c]
+\column{.45\textwidth}
+\begin{figure}
+\includegraphics[width=\textwidth]{rep}
+\end{figure}
+\column{.5\textwidth}
+\[
+\textbf{a} = (a_{1}, a_{2}, .. a_{N}) = a_{1}\textbf{e}_{1} + ... a_{N}\textbf{e}_{N}
+\]
+\pause
+\begin{block}{\textbf{Basis}}
+A group of vectors forms a basis of a vector space $\mathbb{V}$ if every vector in $\mathbb{V}$ can be represented as a linear combination of the basis vectors
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{REPRESENTATION}
+\begin{columns}[c]
+\column{.45\textwidth}
+\begin{figure}
+\includegraphics[width=\textwidth]{rep}
+\end{figure}
+\column{.5\textwidth}
+\[
+\textbf{a} = a_{1}\textbf{e}_{1} + ... a_{N}\textbf{e}_{N} = \mathbb{I}_{N}\textbf{a}
+\]
+\[
+\textbf{a} = c_{1}\textbf{q}_{1} + ... c_{M}\textbf{q}_{M} = \textbf{Q}\textbf{c}
+\]
+\pause
+\[
+\textbf{Q}^{-1}\textbf{a} = \textbf{c} \qquad \textbf{Q}^{-1} \in \mathbb{R}^{M \times N}
+\]
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{REPRESENTATION}
+\begin{columns}[c]
+\column{.45\textwidth}
+\begin{figure}
+\includegraphics[width=\textwidth]{rep}
+\end{figure}
+\column{.5\textwidth}
+\[
+\textbf{Q}^{-1}\textbf{a} = \textbf{c} \qquad \textbf{Q}^{-1} \in \mathbb{R}^{M \times N}
+\]
+\begin{block}{\textbf{Exponential Fourier Theorem}}
+Complex exponentials which are functions of frequencies form basis for \textit{periodic} function
+\end{block}
+\pause
+\begin{block}{\textbf{Fourier Transform}}
+Application of \textit{Fourier Theorem} for general signals.
+\[
+\textbf{Q}^{-1}[i] = \textbf{e}^{-j \omega t} \qquad i \in \{0,1..,M\}
+\]
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{REPRESENTATION}
+\begin{columns}[c]
+\column{.45\textwidth}
+\begin{figure}
+\includegraphics[width=\textwidth]{rep_1}
+\end{figure}
+\column{.5\textwidth}
+\[
+\textbf{Q}^{-1}\textbf{a} = \textbf{c} \qquad \textbf{Q}^{-1} \in \mathbb{R}^{M \times N}
+\]
+\begin{block}{\textbf{Fourier Transform}}
+Application of \textit{Fourier Theorem} for general signals.
+\[
+\textbf{Q}^{-1}[i] = \textbf{e}^{-j \omega t} \qquad i \in \{0,1..,M\}
+\]
+\end{block}
+\pause
+\begin{block}{\textbf{Short-time Fourier Transform}}
+\[
+\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}
+\]
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{REPRESENTATION}
+\begin{columns}[c]
+\column{.45\textwidth}
+\begin{figure}
+\includegraphics[width=\textwidth]{rep_1}
+\end{figure}
+\column{.5\textwidth}
+\begin{block}{\textbf{Short-time Fourier Transform}}
+\[
+\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}
+\]
+\end{block}
+\begin{block}{\textbf{Fast Fourier Transform}}
+Faster version of STFT that exploits the symmetry of sinusoids.\\
+\textbf{STFT :} $O(N^{2})$\\
+\textbf{FFT :} $O(NlogN)$
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{REPRESENTATION}
+\begin{columns}[c]
+\column{.45\textwidth}
+\begin{figure}
+\includegraphics[width=\textwidth]{rep_2}
+\end{figure}
+\column{.5\textwidth}
+\[
+\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}
+\]
+\begin{block}{\textbf{Spectrogram representations}}
+\begin{itemize}
+\item \textbf{Mel Spec :}  \\ $\textbf{R} = \textbf{M}. \textbf{C} \quad \vee \textbf{M} \in \mathbb{R}^{R \times M}$
+\item \textbf{Chromagram :}\\$\textbf{R} = \textbf{C}.\textbf{M}_{C}$
+\item \textbf{Tempogram :}\\$\textbf{R} = \textbf{C} \star \textbf{M}_{T}$  
+\end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{DIMENSIONALITY REDUCTION}
+\begin{columns}[c]
+\column{.45\textwidth}
+\begin{figure}
+\includegraphics[width=\textwidth]{rep_3}
+\end{figure}
+\column{.5\textwidth}
+\[
+\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}
+\]
+\[
+\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{R \times P}
+\]
+\begin{block}{\textbf{Principal Component Analysis}}
+Represent $\textbf{R}$ in a basis that is a function of variance in the information.
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{DIMENSIONALITY REDUCTION}
+\begin{columns}[c]
+\column{.45\textwidth}
+\begin{figure}
+\includegraphics[width=\textwidth]{dim_1}
+\end{figure}
+\column{.5\textwidth}
+\[
+\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}
+\]
+\[
+\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{R \times P}
+\]
+\begin{block}{\textbf{Principal Component Analysis}}
+Represent $\textbf{R}$ in a basis that is a function of variance in the information.\\
+$\textbf{\^R} = Center(\textbf{R})$\\
+$\bm{\Sigma} = \frac{1}{P}\textbf{\^R} \textbf{\^R}^{T}$\\
+$\textbf{V}\bm{\Lambda}\textbf{V}^{T} = \bm{\Sigma}$\\
+$\textbf{X} = Truncate(\textbf{V}^{T})\textbf{\^R}$
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{DIMENSIONALITY REDUCTION}
+\begin{columns}[c]
+\column{.45\textwidth}
+\begin{figure}
+\includegraphics[width=\textwidth]{dim_1}
+\end{figure}
+\column{.5\textwidth}
+\[
+\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}
+\]
+\[
+\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{R \times P}
+\]
+\begin{block}{\textbf{Mel-Frequency Cepstral Coefficients}}
+Basis functions of \textit{principal components} of log spectra are very similiar to \textit{cosine transform}\\
+$\textbf{V}^{T}[i] = cos( \omega t) \quad i \in \{0,1..,T\}$
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{DIMENSIONALITY REDUCTION}
+\begin{columns}[c]
+\column{.45\textwidth}
+\begin{figure}
+\includegraphics[width=\textwidth]{dim_1}
+\end{figure}
+\column{.5\textwidth}
+\[
+\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}
+\]
+\[
+\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{R \times P}
+\]
+\begin{block}{\textbf{Mel-Frequency Cepstral Coefficients}}
+Basis functions of \textit{principal components} of log spectra are very similiar to \textit{cosine transform}\\
+$\textbf{V}^{T}[i] = cos( \omega t) \quad i \in \{0,1..,T\}$
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{DIMENSIONALITY REDUCTION}
+\begin{columns}[c]
+\column{.45\textwidth}
+\begin{figure}
+\includegraphics[width=\textwidth]{dim_2}
+\end{figure}
+\column{.5\textwidth}
+$\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}$\\
+$\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{R \times P}$
+$\textbf{X} = \textbf{R} \bm{\star} \textbf{V}^{T} \qquad \textbf{X} \in \mathbb{R}^{T \times P}$\\
+\begin{block}{\textbf{Mel-Frequency Cepstral Coefficients}}
+Basis functions of \textit{principal components} of log spectra are very similiar to \textit{cosine transform}\\
+$\textbf{V}^{T}[i] = cos( \omega t) \quad i \in \{0,1..,T\}$
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{TEMPORAL APPROXIMATION}
+\begin{columns}[c]
+\column{.45\textwidth}
+\begin{figure}
+\includegraphics[width=\textwidth]{tmp_1}
+\end{figure}
+\column{.5\textwidth}
+$\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}$\\
+$\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{R \times P}$
+$\textbf{X} = \textbf{R} \bm{\star} \textbf{V}^{T} \qquad \textbf{X} \in \mathbb{R}^{T \times P}$\\
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{TEMPORAL APPROXIMATION}
+\begin{columns}[c]
+\column{.45\textwidth}
+\begin{figure}
+\includegraphics[width=\textwidth]{tmp_2}
+\end{figure}
+\column{.5\textwidth}
+$\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}$\\
+$\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{R \times P}$
+$\textbf{X} = \textbf{R} \bm{\star} \textbf{V}^{T} \qquad \textbf{X} \in \mathbb{R}^{T \times P}$\\
+\begin{block}{\textbf{Bag Of Frames}}
+\begin{itemize}
+\item Assign each column of $\textbf{X}$ to the nearest of $K$ clusters.
+\item Count the number of assignments to each of the $K$ clusters.
+\item The resulting feature is of dimension $K$
+\end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{TEMPORAL APPROXIMATION}
+\textbf{K - Means}[1] :
+\begin{figure}
+\includegraphics[width=0.8\textwidth]{kmeans}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{CLASSIFICATION}
+\textbf{Feature Extraction :} $\mathbb{R}^{N_{f}} \rightarrow \mathbb{R}^{K}$
+\bigskip
+
+$\quad \textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}$\\
+$\quad \textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{R \times P}$\\
+$\quad \textbf{X} = \textbf{R} \bm{\star} \textbf{V}^{T} \qquad \textbf{X} \in \mathbb{R}^{T \times P}$\\
+$\quad \textbf{f} = Temporal\_Approx(\textbf{X}) \qquad \textbf{f} \in \mathbb{R}^{K}$\\
+\bigskip
+
+\textbf{Classification :} $\mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$
+\bigskip
+
+$\quad \textbf{y} = \bm{\Phi}(\textbf{f}) \qquad \textbf{y} \in \mathbb{R}^{L}$
+\end{frame}
+
+\begin{frame}
+\frametitle{CLASSIFICATION}
+\begin{columns}[c]
+\column{.45\textwidth}
+\textbf{Single-layer perceptron :}
+\bigskip
+
+$\quad \textbf{y} = \textbf{W}\textbf{f} \qquad \textbf{W} \in \mathbb{R}^{L \times K}$
+
+\column{.5\textwidth}
+\begin{block}{\textbf{FE :} $\mathbb{R}^{N_{f}} \rightarrow \mathbb{R}^{K}$}
+
+$\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}$\\
+$\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{R \times P}$\\
+$\textbf{X} = \textbf{R} \bm{\star} \textbf{V}^{T} \qquad \textbf{X} \in \mathbb{R}^{T \times P}$\\
+$\textbf{f} = T(\textbf{X}) \qquad \textbf{f} \in \mathbb{R}^{K}$\\
+\end{block}
+\begin{block}{\textbf{Classification :} $\mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$}
+$\quad \textbf{y} = \bm{\Phi}(\textbf{f}) \qquad \textbf{y} \in \mathbb{R}^{L}$
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{CLASSIFICATION}
+\begin{columns}[c]
+\column{.45\textwidth}
+\textbf{Single-layer perceptron :}
+\bigskip
+
+$\quad \textbf{y} = \textbf{{\color{red}W}}\textbf{f} \qquad \textbf{W} \in \mathbb{R}^{L \times K}$\\
+\bigskip
+
+Solve for \textbf{{\color{red}W}} with the training data
+
+\column{.5\textwidth}
+\begin{block}{\textbf{FE :} $\mathbb{R}^{N_{f}} \rightarrow \mathbb{R}^{K}$}
+
+$\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}$\\
+$\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{R \times P}$\\
+$\textbf{X} = \textbf{R} \bm{\star} \textbf{V}^{T} \qquad \textbf{X} \in \mathbb{R}^{T \times P}$\\
+$\textbf{f} = T(\textbf{X}) \qquad \textbf{f} \in \mathbb{R}^{K}$\\
+\end{block}
+\begin{block}{\textbf{Classification :} $\mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$}
+$\quad \textbf{y} = \bm{\Phi}(\textbf{f}) \qquad \textbf{y} \in \mathbb{R}^{L}$
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{CLASSIFICATION}
+\begin{columns}[c]
+\column{.45\textwidth}
+\textbf{Two-layer perceptron :}
+\bigskip
+
+$\quad \textbf{y} = \sigma(\textbf{W}_{2}ReLU({\color{red}\textbf{W}_{1}\textbf{f}}))$
+\bigskip
+
+$\quad \textbf{W}_{2} \in \mathbb{R}^{L \times H} \quad \textbf{W}_{1} \in \mathbb{R}^{H \times K}$
+
+\column{.5\textwidth}
+\begin{block}{\textbf{FE :} $\mathbb{R}^{N_{f}} \rightarrow \mathbb{R}^{K}$}
+
+$\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}$\\
+$\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{R \times P}$\\
+$\textbf{X} = \textbf{R} \bm{\star} \textbf{V}^{T} \qquad \textbf{X} \in \mathbb{R}^{T \times P}$\\
+$\textbf{f} = T(\textbf{X}) \qquad \textbf{f} \in \mathbb{R}^{K}$\\
+\end{block}
+\begin{block}{\textbf{Classification :} $\mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$}
+$\quad \textbf{y} = \bm{\Phi}(\textbf{f}) \qquad \textbf{y} \in \mathbb{R}^{L}$
+\end{block}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{CLASSIFICATION}
+\begin{columns}[c]
+\column{.45\textwidth}
+$\quad \textbf{y} = \sigma({\color{red}\textbf{W}_{2}}ReLU({\color{red}\textbf{W}_{1}}\textbf{f}))$
+\bigskip
+
+\noindent \textbf{Training :}
+
+\column{.5\textwidth}
+\begin{block}{\textbf{FE :} $\mathbb{R}^{N_{f}} \rightarrow \mathbb{R}^{K}$}
+
+$\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}$\\
+$\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{R \times P}$\\
+$\textbf{X} = \textbf{R} \bm{\star} \textbf{V}^{T} \qquad \textbf{X} \in \mathbb{R}^{T \times P}$\\
+$\textbf{f} = T(\textbf{X}) \qquad \textbf{f} \in \mathbb{R}^{K}$\\
+\end{block}
+\begin{block}{\textbf{Classification :} $\mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$}
+$\textbf{y} = \sigma(\textbf{W}_{2}ReLU(\textbf{W}_{1}\textbf{f})) \quad \textbf{y} \in \mathbb{R}^{L}$
+\end{block}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}
 \frametitle{Overview} % Table of contents slide, comment this block out to remove it
 \tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
 \end{frame}
