@@ -619,6 +619,9 @@ $\quad \textbf{y} = \sigma({\color{red}\textbf{W}_{2}}ReLU({\color{red}\textbf{W
 \bigskip
 
 \noindent \textbf{Training :}
+\begin{itemize}
+\item $E = loss(\textbf{y}, \textbf{t})$
+\end{itemize}
 
 \column{.5\textwidth}
 \begin{block}{\textbf{FE :} $\mathbb{R}^{N_{f}} \rightarrow \mathbb{R}^{K}$}
@@ -634,6 +637,190 @@ $\textbf{y} = \sigma(\textbf{W}_{2}ReLU(\textbf{W}_{1}\textbf{f})) \quad \textbf
 \end{columns}
 \end{frame}
 
+\begin{frame}
+\frametitle{CLASSIFICATION}
+\begin{columns}[c]
+\column{.45\textwidth}
+$\quad \textbf{y} = \sigma({\color{red}\textbf{W}_{2}}ReLU({\color{red}\textbf{W}_{1}}\textbf{f}))$
+\bigskip
+
+\noindent \textbf{Training :}
+\begin{itemize}
+\item $E = loss(\textbf{y}, \textbf{t})$
+\item $\frac{\partial E}{\partial \textbf{W}_{2}} = \frac{\partial E}{\partial \textbf{y}}\frac{\partial \textbf{y}}{\partial \sigma}\frac{\partial \sigma}{\partial \textbf{W}_{2}}$
+\item $\frac{\partial E}{\partial \textbf{W}_{1}} = \frac{\partial E}{\partial \textbf{y}}\frac{\partial \textbf{y}}{\partial \sigma}\frac{\partial \sigma}{\partial ReLU}\frac{\partial ReLU}{\partial \textbf{W}_{1}}$
+\end{itemize}
+
+\column{.5\textwidth}
+\begin{block}{\textbf{FE :} $\mathbb{R}^{N_{f}} \rightarrow \mathbb{R}^{K}$}
+
+$\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}$\\
+$\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{R \times P}$\\
+$\textbf{X} = \textbf{R} \bm{\star} \textbf{V}^{T} \qquad \textbf{X} \in \mathbb{R}^{T \times P}$\\
+$\textbf{f} = T(\textbf{X}) \qquad \textbf{f} \in \mathbb{R}^{K}$\\
+\end{block}
+\begin{block}{\textbf{Classification :} $\mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$}
+$\textbf{y} = \sigma(\textbf{W}_{2}ReLU(\textbf{W}_{1}\textbf{f})) \quad \textbf{y} \in \mathbb{R}^{L}$
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{CLASSIFICATION}
+\begin{columns}[c]
+\column{.45\textwidth}
+$\quad \textbf{y} = \sigma({\color{red}\textbf{W}_{2}}ReLU({\color{red}\textbf{W}_{1}}\textbf{f}))$
+\bigskip
+
+\noindent \textbf{Training :}
+\begin{itemize}
+\item $E = loss(\textbf{y}, \textbf{t})$
+\item $\frac{\partial E}{\partial \textbf{W}_{2}} = \frac{\partial E}{\partial \textbf{y}}\frac{\partial \textbf{y}}{\partial \sigma}\frac{\partial \sigma}{\partial \textbf{W}_{2}}$
+\item $\frac{\partial E}{\partial \textbf{W}_{1}} = \frac{\partial E}{\partial \textbf{y}}\frac{\partial \textbf{y}}{\partial \sigma}\frac{\partial \sigma}{\partial ReLU}\frac{\partial ReLU}{\partial \textbf{W}_{1}}$
+\item $\textbf{W}_{1} \leftarrow update(\textbf{W}_{1}, \frac{\partial E}{\partial \textbf{W}_{1}})$
+\item $\textbf{W}_{2} \leftarrow update(\textbf{W}_{2}, \frac{\partial E}{\partial \textbf{W}_{2}})$
+\end{itemize}
+
+\column{.5\textwidth}
+\begin{block}{\textbf{FE :} $\mathbb{R}^{N_{f}} \rightarrow \mathbb{R}^{K}$}
+
+$\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}$\\
+$\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{R \times P}$\\
+$\textbf{X} = \textbf{R} \bm{\star} \textbf{V}^{T} \qquad \textbf{X} \in \mathbb{R}^{T \times P}$\\
+$\textbf{f} = T(\textbf{X}) \qquad \textbf{f} \in \mathbb{R}^{K}$\\
+\end{block}
+\begin{block}{\textbf{Classification :} $\mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$}
+$\textbf{y} = \sigma(\textbf{W}_{2}ReLU(\textbf{W}_{1}\textbf{f})) \quad \textbf{y} \in \mathbb{R}^{L}$
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{OVERVIEW}
+\begin{block}{\textbf{FE :} $\mathbb{R}^{N_{f}} \rightarrow \mathbb{R}^{K}$}
+
+$\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}$\\
+$\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{R \times P}$\\
+$\textbf{X} = \textbf{R} \bm{\star} \textbf{V}^{T} \qquad \textbf{X} \in \mathbb{R}^{T \times P}$\\
+$\textbf{f} = T(\textbf{X}) \qquad \textbf{f} \in \mathbb{R}^{K}$\\
+\end{block}
+
+\begin{block}{\textbf{Classification :} $\mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$}
+${\color{red}\textbf{y}} = \sigma({\color{red}\textbf{W}_{2}}ReLU({\color{red}\textbf{W}_{1}}\textbf{f})) \quad \textbf{y} \in \mathbb{R}^{L}$
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{SUPERVISING FEATURES}
+\begin{columns}[c]
+\column{.45\textwidth}
+\textbf{Recurrent Neural Network:}
+\bigskip
+
+\column{.5\textwidth}
+\begin{block}{\textbf{FE :} $\mathbb{R}^{N_{f}} \rightarrow \mathbb{R}^{K}$}
+
+$\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}$\\
+$\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{R \times P}$\\
+$\textbf{X} = \textbf{R} \bm{\star} \textbf{V}^{T} \qquad \textbf{X} \in \mathbb{R}^{T \times P}$\\
+${\color{violet}\textbf{f} = T(\textbf{X})} \qquad \textbf{f} \in \mathbb{R}^{K}$\\
+\end{block}
+\begin{block}{\textbf{Classification :} $\mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$}
+${\color{red}\textbf{y}} = \sigma({\color{red}\textbf{W}_{2}}ReLU({\color{red}\textbf{W}_{1}}\textbf{f})) \quad \textbf{y} \in \mathbb{R}^{L}$
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{SUPERVISING FEATURES}
+\begin{columns}[c]
+\column{.45\textwidth}
+\textbf{Recurrent Neural Network:}\\
+(Sequence to One)
+\begin{figure}
+\includegraphics[width=\textwidth]{rnn_1}
+\end{figure}
+\column{.5\textwidth}
+\begin{block}{\textbf{FE :} $\mathbb{R}^{N_{f}} \rightarrow \mathbb{R}^{K}$}
+
+$\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}$\\
+$\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{R \times P}$\\
+$\textbf{X} = \textbf{R} \bm{\star} \textbf{V}^{T} \qquad \textbf{X} \in \mathbb{R}^{T \times P}$\\
+${\color{violet}\textbf{f} = T(\textbf{X})} \qquad \textbf{f} \in \mathbb{R}^{K}$\\
+\end{block}
+\begin{block}{\textbf{Classification :} $\mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$}
+${\color{red}\textbf{y}} = \sigma({\color{red}\textbf{W}_{2}}ReLU({\color{red}\textbf{W}_{1}}\textbf{f})) \quad \textbf{y} \in \mathbb{R}^{L}$
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{SUPERVISING FEATURES}
+\begin{columns}[c]
+\column{.45\textwidth}
+\textbf{Recurrent Neural Network:}\\
+(Sequence to One)
+\begin{figure}
+\includegraphics[width=\textwidth]{rnn_1}
+\end{figure}
+\column{.5\textwidth}
+\begin{block}{\textbf{RNN}}
+$\textbf{f} = \textbf{W}_{3}\textbf{h}_{P}$
+$\qquad \textbf{h}_{P} = \bm{\Phi}(\textbf{X}[P], \textbf{X}[P-1], ..\textbf{X}[0])$
+\end{block}
+
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{SUPERVISING FEATURES}
+\textbf{Recurrent Neural Network:}\\
+(Sequence to One)
+
+\begin{block}{\textbf{RNN}}
+$\textbf{f} = \textbf{W}_{3}\textbf{h}_{P}$
+$\qquad \textbf{h}_{P} = \bm{\Phi}(\textbf{X}[P], \textbf{X}[P-1], ..\textbf{X}[0])$
+\end{block}
+\begin{block}{\textbf{Long Short Term Memory}}
+$\textbf{f} = {\color{red}\textbf{W}_{3}}\textbf{h}_{P}$\\
+$\textbf{h}_{p} = \textbf{o}_{p} \odot \sigma_{h} (\textbf{c}_{p})$\\
+$\textbf{c}_{p} = \textbf{g}_{p} \odot \textbf{c}_{p-1} + \textbf{i}_{p}  \odot \sigma_{c} ({\color{red}\textbf{W}_{c}}\textbf{x}_{p} + {\color{red}\textbf{U}_{c}}\textbf{h}_{p-1})$\\
+$\textbf{o}_{p} = \sigma ({\color{red}\textbf{W}_{o}}\textbf{x}_{p} + {\color{red}\textbf{U}_{o}}\textbf{h}_{p-1})$ \\
+$\textbf{i}_{p} = \sigma ({\color{red}\textbf{W}_{i}}\textbf{x}_{p} + {\color{red}\textbf{U}_{i}}\textbf{h}_{p-1})$\\
+$\textbf{g}_{p} = \sigma ({\color{red}\textbf{W}_{g}}\textbf{x}_{p} + {\color{red}{\textbf{U}_{g}}}\textbf{h}_{p-1})$\\  
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{SUPERVISING FEATURE}
+\begin{block}{\textbf{FE :} $\mathbb{R}^{N_{f}} \rightarrow \mathbb{R}^{K}$}
+
+$\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}$\\
+$\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{R \times P}$\\
+$\textbf{X} = \textbf{R} \bm{\star} \textbf{V}^{T} \qquad \textbf{X} \in \mathbb{R}^{T \times P}$\\
+${\color{red}\textbf{f}} = {\color{red}LSTM}(\textbf{X}) \qquad \textbf{f} \in \mathbb{R}^{K}$\\
+\end{block}
+
+\begin{block}{\textbf{Classification :} $\mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$}
+${\color{red}\textbf{y}} = \sigma({\color{red}\textbf{W}_{2}}ReLU({\color{red}\textbf{W}_{1}}{\color{red}\textbf{f}})) \quad \textbf{y} \in \mathbb{R}^{L}$
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{SUPERVISING FEATURE - Deep learning}
+\textbf{Convolution Neural Network :}
+\begin{block}{\textbf{FE :} $\mathbb{R}^{N_{f}} \rightarrow \mathbb{R}^{K}$}
+
+$\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}$\\
+$\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{R \times P}$\\
+${\color{red}\textbf{X}} = \textbf{R} \bm{\star} {\color{red}\textbf{W}_{4}} \qquad \textbf{X} \in \mathbb{R}^{T \times P}$\\
+${\color{red}\textbf{f}} = {\color{red}LSTM}({\color{red}\textbf{X}}) \qquad \textbf{f} \in \mathbb{R}^{K}$\\
+\end{block}
+
+\begin{block}{\textbf{Classification :} $\mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$}
+${\color{red}\textbf{y}} = \sigma({\color{red}\textbf{W}_{2}}ReLU({\color{red}\textbf{W}_{1}}{\color{red}\textbf{f}})) \quad \textbf{y} \in \mathbb{R}^{L}$
+\end{block}
+\end{frame}
 
 \begin{frame}
 \frametitle{Overview} % Table of contents slide, comment this block out to remove it
