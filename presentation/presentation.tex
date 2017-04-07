@@ -94,6 +94,7 @@
 
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{dsfont}
 
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
@@ -127,11 +128,11 @@ RWTH Aachen \\ % Your institution for the title page
 \begin{frame}
 \frametitle{AIM}
 \begin{picture}(50,50)
-\put(20,-100){\hbox{\includegraphics[scale=0.4]{aim}}} 
+\put(20,-100){\hbox{\includegraphics[scale=0.4]{aim.png}}} 
 \end{picture} 
 \end{frame}
 
-\begin{frame}
+\begin{frame}[noframenumbering]
 \frametitle{AIM}
 \begin{picture}(50,50)
 \put(20,-100){\hbox{\includegraphics[scale=0.35]{aim_2}}} 
@@ -178,7 +179,7 @@ $\mathbf{\rightarrow}$ \textbf{{\color{red} When} do you have to create a datase
 \end{block}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[noframenumbering]
 \frametitle{APPLICATION}
 \begin{block}{\textbf{Recommendation system for {\color{green} experts}?}}
 $\mathbf{\rightarrow}$ \textbf{{\color{red} When} do you have to create a dataset with ground-truth?}\\
@@ -240,7 +241,7 @@ $\mathbf{\rightarrow}$ \textbf{{\color{red} When} do you have to create a datase
 \end{picture} 
 \end{frame}
 
-\begin{frame}
+\begin{frame}[noframenumbering]
 \frametitle{REPRESENTATION}
 \begin{columns}[c]
 \column{.45\textwidth}
@@ -258,7 +259,7 @@ A group of vectors forms a basis of a vector space $\mathbb{V}$ if every vector 
 \end{columns}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[noframenumbering]
 \frametitle{REPRESENTATION}
 \begin{columns}[c]
 \column{.45\textwidth}
@@ -267,7 +268,7 @@ A group of vectors forms a basis of a vector space $\mathbb{V}$ if every vector 
 \end{figure}
 \column{.5\textwidth}
 \[
-\textbf{a} = a_{1}\textbf{e}_{1} + ... a_{N}\textbf{e}_{N} = \mathbb{I}_{N}\textbf{a}
+\textbf{a} = a_{1}\textbf{e}_{1} + ... a_{N}\textbf{e}_{N} = \mathds{1} \textbf{a}
 \]
 \[
 \textbf{a} = c_{1}\textbf{q}_{1} + ... c_{M}\textbf{q}_{M} = \textbf{Q}\textbf{c}
@@ -364,7 +365,7 @@ Faster version of STFT that exploits the symmetry of sinusoids.\\
 \begin{block}{\textbf{Spectrogram representations}}
 \begin{itemize}
 \item \textbf{Mel Spec :}  \\ $\textbf{R} = \textbf{M}. \textbf{C} \quad \vee \textbf{M} \in \mathbb{R}^{R \times M}$
-\item \textbf{Chromagram :}\\$\textbf{R} = \textbf{C}.\textbf{M}_{C}$
+\item \textbf{Chromagram :}\\$\textbf{R} = \textbf{M}_{C}. \textbf{C}$
 \item \textbf{Tempogram :}\\$\textbf{R} = \textbf{C} \star \textbf{M}_{T}$  
 \end{itemize}
 \end{block}
@@ -823,158 +824,251 @@ ${\color{red}\textbf{y}} = \sigma({\color{red}\textbf{W}_{2}}ReLU({\color{red}\t
 \end{frame}
 
 \begin{frame}
-\frametitle{Overview} % Table of contents slide, comment this block out to remove it
-\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+\frametitle{SUPERVISING FEATURE - Deep learning}
+\textbf{Convolution Neural Network :}
+\begin{block}{\textbf{FE :} $\mathbb{R}^{N_{f}} \rightarrow \mathbb{R}^{K}$}
+
+$\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}$\\
+$\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{R \times P}$\\
+${\color{red}\textbf{X}_{1}} = \Phi (\textbf{R} \bm{\star} {\color{red}\textbf{W}_{6}})$\\
+${\color{red}\textbf{X}_{2}} = \Phi ({\color{red}\textbf{X}_{1}} \bm{\star} {\color{red}\textbf{W}_{5}})$\\
+${\color{red}\textbf{X}} = \Phi ({\color{red}\textbf{X}_{2}} \bm{\star} {\color{red}\textbf{W}_{4}}) \qquad \textbf{X} \in \mathbb{R}^{T \times P}$\\
+${\color{red}\textbf{f}} = {\color{red}LSTM}({\color{red}\textbf{X}}) \qquad \textbf{f} \in \mathbb{R}^{K}$\\
+\end{block}
+
+\begin{block}{\textbf{Classification :} $\mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$}
+${\color{red}\textbf{y}} = \sigma({\color{red}\textbf{W}_{2}}ReLU({\color{red}\textbf{W}_{1}}{\color{red}\textbf{f}})) \quad \textbf{y} \in \mathbb{R}^{L}$
+\end{block}
 \end{frame}
 
-%----------------------------------------------------------------------------------------
-%	PRESENTATION SLIDES
-%----------------------------------------------------------------------------------------
-
-%------------------------------------------------
-\section{First Section} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
-%------------------------------------------------
-
-\subsection{Subsection Example} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
-
 \begin{frame}
-\frametitle{Paragraphs of Text}
-Sed iaculis dapibus gravida. Morbi sed tortor erat, nec interdum arcu. Sed id lorem lectus. Quisque viverra augue id sem ornare non aliquam nibh tristique. Aenean in ligula nisl. Nulla sed tellus ipsum. Donec vestibulum ligula non lorem vulputate fermentum accumsan neque mollis.\\~\\
-
-Sed diam enim, sagittis nec condimentum sit amet, ullamcorper sit amet libero. Aliquam vel dui orci, a porta odio. Nullam id suscipit ipsum. Aenean lobortis commodo sem, ut commodo leo gravida vitae. Pellentesque vehicula ante iaculis arcu pretium rutrum eget sit amet purus. Integer ornare nulla quis neque ultrices lobortis. Vestibulum ultrices tincidunt libero, quis commodo erat ullamcorper id.
-\end{frame}
-
-%------------------------------------------------
-
-\begin{frame}
-\frametitle{Bullet Points}
+\frametitle{SUPERVISING FEATURE - Deep learning}
+\begin{columns}[c]
+\column{.45\textwidth}
+\textbf{Deep Learning issues :}
 \begin{itemize}
-\item Lorem ipsum dolor sit amet, consectetur adipiscing elit
-\item Aliquam blandit faucibus nisi, sit amet dapibus enim tempus eu
-\item Nulla commodo, erat quis gravida posuere, elit lacus lobortis est, quis porttitor odio mauris at libero
-\item Nam cursus est eget velit posuere pellentesque
-\item Vestibulum faucibus velit a augue condimentum quis convallis nulla gravida
+\item Vanishing gradients
+\item Need large amount of training data
 \end{itemize}
-\end{frame}
+\textbf{Solutions :}
+\begin{itemize}
+\item $\Phi$  : Non-linearities, Drop out, Batch Normalization
+\item Transfer learning (Black-box / Fine tune)
+\end{itemize}
+\column{.5\textwidth}
+\begin{block}{\textbf{FE :} $\mathbb{R}^{N_{f}} \rightarrow \mathbb{R}^{K}$}
 
-%------------------------------------------------
-
-\begin{frame}
-\frametitle{Blocks of Highlighted Text}
-\begin{block}{Block 1}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus nisl, ultricies in feugiat rutrum, porttitor sit amet augue. Aliquam ut tortor mauris. Sed volutpat ante purus, quis accumsan dolor.
+$\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}$\\
+$\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{R \times P}$\\
+${\color{red}\textbf{X}_{1}} = \Phi (\textbf{R} \bm{\star} {\color{red}\textbf{W}_{6}})$\\
+${\color{red}\textbf{X}_{2}} = \Phi ({\color{red}\textbf{X}_{1}} \bm{\star} {\color{red}\textbf{W}_{5}})$\\
+${\color{red}\textbf{X}} = \Phi ({\color{red}\textbf{X}_{2}} \bm{\star} {\color{red}\textbf{W}_{4}}) \qquad \textbf{X} \in \mathbb{R}^{T \times P}$\\
+${\color{red}\textbf{f}} = {\color{red}LSTM}({\color{red}\textbf{X}}) \qquad \textbf{f} \in \mathbb{R}^{K}$\\
 \end{block}
 
-\begin{block}{Block 2}
-Pellentesque sed tellus purus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum quis magna at risus dictum tempor eu vitae velit.
+\begin{block}{\textbf{Classification :} $\mathbb{R}^{K} \rightarrow \mathbb{R}^{L}$}
+${\color{red}\textbf{y}} = \sigma({\color{red}\textbf{W}_{2}}ReLU({\color{red}\textbf{W}_{1}}{\color{red}\textbf{f}})) \quad \textbf{y} \in \mathbb{R}^{L}$
 \end{block}
-
-\begin{block}{Block 3}
-Suspendisse tincidunt sagittis gravida. Curabitur condimentum, enim sed venenatis rutrum, ipsum neque consectetur orci, sed blandit justo nisi ac lacus.
-\end{block}
-\end{frame}
-
-%------------------------------------------------
-
-\begin{frame}
-\frametitle{Multiple Columns}
-\begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
-
-\column{.45\textwidth} % Left column and width
-\textbf{Heading}
-\begin{enumerate}
-\item Statement
-\item Explanation
-\item Example
-\end{enumerate}
-
-\column{.5\textwidth} % Right column and width
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus nisl, ultricies in feugiat rutrum, porttitor sit amet augue. Aliquam ut tortor mauris. Sed volutpat ante purus, quis accumsan dolor.
-
 \end{columns}
 \end{frame}
 
-%------------------------------------------------
-\section{Second Section}
-%------------------------------------------------
-
 \begin{frame}
-\frametitle{Table}
-\begin{table}
-\begin{tabular}{l l l}
-\toprule
-\textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2}\\
-\midrule
-Treatment 1 & 0.0003262 & 0.562 \\
-Treatment 2 & 0.0015681 & 0.910 \\
-Treatment 3 & 0.0009271 & 0.296 \\
-\bottomrule
-\end{tabular}
-\caption{Table caption}
-\end{table}
+\frametitle{Experiments}
+\begin{columns}[c]
+\column{.45\textwidth}
+\begin{block}{\textbf{Choi's CNN[2] + BoF :}\\ AUC 0.67 }
+
+$\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}$\\
+$\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{96 \times P}$\\
+$\textbf{X} =Cnn5(\textbf{R}) \quad \textbf{X} \in \mathbb{R}^{1366 \times W}$\\
+$\textbf{f} = BoF(\textbf{X}) \qquad \textbf{f} \in \mathbb{R}^{1024}$\\
+\end{block}
+\begin{block}{\textbf{MFCC + BoF :}\\ AUC 0.62 }
+
+$\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}$\\
+$\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{96 \times P}$\\
+$\textbf{X} = \textbf{R} \bm{\star} \textbf{V}^{T} \quad \textbf{X} \in \mathbb{R}^{90 \times P}$\\
+$\textbf{f} = BoF(\textbf{X}) \qquad \textbf{f} \in \mathbb{R}^{1024}$\\
+\end{block}
+
+\column{.5\textwidth}
+\begin{block}{\textbf{Choi's CNN[2] + LSTM :}\\ AUC 0.71 }
+
+$\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}$\\
+$\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{96 \times P}$\\
+$\textbf{X} = Cnn5(\textbf{R}) \qquad \textbf{X} \in \mathbb{R}^{1366 \times W}$\\
+$\textbf{f} = LSTM\_2(\textbf{X}) \qquad \textbf{f} \in \mathbb{R}^{1024}$\\
+\end{block}
+\begin{block}{\textbf{MFCC + LSTM :}\\ AUC \textbf{0.74} }
+
+$\textbf{C} = \textbf{a} \bm{\star} \textbf{Q}^{-1} \qquad \textbf{C} \in \mathbb{C}^{M \times P}$\\
+$\textbf{R} = \textbf{C} \bm{\star} \textbf{M} \qquad \textbf{R} \in \mathbb{R}^{96 \times P}$\\
+$\textbf{X} = \textbf{R} \bm{\star} \textbf{V}^{T} \quad \textbf{X} \in \mathbb{R}^{90 \times P}$\\
+$\textbf{f} = LSTM\_2(\textbf{X}) \qquad \textbf{f} \in \mathbb{R}^{1024}$\\
+\end{block}
+
+\end{columns}
 \end{frame}
-
-%------------------------------------------------
-
 \begin{frame}
-\frametitle{Theorem}
-\begin{theorem}[Mass--energy equivalence]
-$E = mc^2$
-\end{theorem}
+\frametitle{Conclusion}
+\textbf{First teach the algorithm to decompose the rhythmic traces?}
+\begin{figure}
+\includegraphics[width=0.8\textwidth]{conclusion}
+\end{figure}
 \end{frame}
-
-%------------------------------------------------
-
-\begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
-\frametitle{Verbatim}
-\begin{example}[Theorem Slide Code]
-\begin{verbatim}
-\begin{frame}
-\frametitle{Theorem}
-\begin{theorem}[Mass--energy equivalence]
-$E = mc^2$
-\end{theorem}
-\end{frame}\end{verbatim}
-\end{example}
-\end{frame}
-
-%------------------------------------------------
-
-\begin{frame}
-\frametitle{Figure}
-Uncomment the code on this slide to include your own image from the same directory as the template .TeX file.
-%\begin{figure}
-%\includegraphics[width=0.8\linewidth]{test}
-%\end{figure}
-\end{frame}
-
-%------------------------------------------------
-
-\begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
-\frametitle{Citation}
-An example of the \verb|\cite| command to cite within the presentation:\\~
-
-This statement requires citation \cite{p1}.
-\end{frame}
-
-%------------------------------------------------
-
-\begin{frame}
-\frametitle{References}
-\footnotesize{
-\begin{thebibliography}{99} % Beamer does not support BibTeX so references must be inserted manually as below
-\bibitem[Smith, 2012]{p1} John Smith (2012)
-\newblock Title of the publication
-\newblock \emph{Journal Name} 12(3), 45 -- 678.
-\end{thebibliography}
-}
-\end{frame}
-
-%------------------------------------------------
-
-\begin{frame}
-\Huge{\centerline{The End}}
-\end{frame}
+%\begin{frame}
+%\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+%\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+%\end{frame}
+%
+%%----------------------------------------------------------------------------------------
+%%	PRESENTATION SLIDES
+%%----------------------------------------------------------------------------------------
+%
+%%------------------------------------------------
+%\section{First Section} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
+%%------------------------------------------------
+%
+%\subsection{Subsection Example} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
+%
+%\begin{frame}
+%\frametitle{Paragraphs of Text}
+%Sed iaculis dapibus gravida. Morbi sed tortor erat, nec interdum arcu. Sed id lorem lectus. Quisque viverra augue id sem ornare non aliquam nibh tristique. Aenean in ligula nisl. Nulla sed tellus ipsum. Donec vestibulum ligula non lorem vulputate fermentum accumsan neque mollis.\\~\\
+%
+%Sed diam enim, sagittis nec condimentum sit amet, ullamcorper sit amet libero. Aliquam vel dui orci, a porta odio. Nullam id suscipit ipsum. Aenean lobortis commodo sem, ut commodo leo gravida vitae. Pellentesque vehicula ante iaculis arcu pretium rutrum eget sit amet purus. Integer ornare nulla quis neque ultrices lobortis. Vestibulum ultrices tincidunt libero, quis commodo erat ullamcorper id.
+%\end{frame}
+%
+%%------------------------------------------------
+%
+%\begin{frame}
+%\frametitle{Bullet Points}
+%\begin{itemize}
+%\item Lorem ipsum dolor sit amet, consectetur adipiscing elit
+%\item Aliquam blandit faucibus nisi, sit amet dapibus enim tempus eu
+%\item Nulla commodo, erat quis gravida posuere, elit lacus lobortis est, quis porttitor odio mauris at libero
+%\item Nam cursus est eget velit posuere pellentesque
+%\item Vestibulum faucibus velit a augue condimentum quis convallis nulla gravida
+%\end{itemize}
+%\end{frame}
+%
+%%------------------------------------------------
+%
+%\begin{frame}
+%\frametitle{Blocks of Highlighted Text}
+%\begin{block}{Block 1}
+%Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus nisl, ultricies in feugiat rutrum, porttitor sit amet augue. Aliquam ut tortor mauris. Sed volutpat ante purus, quis accumsan dolor.
+%\end{block}
+%
+%\begin{block}{Block 2}
+%Pellentesque sed tellus purus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum quis magna at risus dictum tempor eu vitae velit.
+%\end{block}
+%
+%\begin{block}{Block 3}
+%Suspendisse tincidunt sagittis gravida. Curabitur condimentum, enim sed venenatis rutrum, ipsum neque consectetur orci, sed blandit justo nisi ac lacus.
+%\end{block}
+%\end{frame}
+%
+%%------------------------------------------------
+%
+%\begin{frame}
+%\frametitle{Multiple Columns}
+%\begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
+%
+%\column{.45\textwidth} % Left column and width
+%\textbf{Heading}
+%\begin{enumerate}
+%\item Statement
+%\item Explanation
+%\item Example
+%\end{enumerate}
+%
+%\column{.5\textwidth} % Right column and width
+%Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus nisl, ultricies in feugiat rutrum, porttitor sit amet augue. Aliquam ut tortor mauris. Sed volutpat ante purus, quis accumsan dolor.
+%
+%\end{columns}
+%\end{frame}
+%
+%%------------------------------------------------
+%\section{Second Section}
+%%------------------------------------------------
+%
+%\begin{frame}
+%\frametitle{Table}
+%\begin{table}
+%\begin{tabular}{l l l}
+%\toprule
+%\textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2}\\
+%\midrule
+%Treatment 1 & 0.0003262 & 0.562 \\
+%Treatment 2 & 0.0015681 & 0.910 \\
+%Treatment 3 & 0.0009271 & 0.296 \\
+%\bottomrule
+%\end{tabular}
+%\caption{Table caption}
+%\end{table}
+%\end{frame}
+%
+%%------------------------------------------------
+%
+%\begin{frame}
+%\frametitle{Theorem}
+%\begin{theorem}[Mass--energy equivalence]
+%$E = mc^2$
+%\end{theorem}
+%\end{frame}
+%
+%%------------------------------------------------
+%
+%\begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
+%\frametitle{Verbatim}
+%\begin{example}[Theorem Slide Code]
+%\begin{verbatim}
+%\begin{frame}
+%\frametitle{Theorem}
+%\begin{theorem}[Mass--energy equivalence]
+%$E = mc^2$
+%\end{theorem}
+%\end{frame}\end{verbatim}
+%\end{example}
+%\end{frame}
+%
+%%------------------------------------------------
+%
+%\begin{frame}
+%\frametitle{Figure}
+%Uncomment the code on this slide to include your own image from the same directory as the template .TeX file.
+%%\begin{figure}
+%%\includegraphics[width=0.8\linewidth]{test}
+%%\end{figure}
+%\end{frame}
+%
+%%------------------------------------------------
+%
+%\begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
+%\frametitle{Citation}
+%An example of the \verb|\cite| command to cite within the presentation:\\~
+%
+%This statement requires citation \cite{p1}.
+%\end{frame}
+%
+%%------------------------------------------------
+%
+%\begin{frame}
+%\frametitle{References}
+%\footnotesize{
+%\begin{thebibliography}{99} % Beamer does not support BibTeX so references must be inserted manually as below
+%\bibitem[Smith, 2012]{p1} John Smith (2012)
+%\newblock Title of the publication
+%\newblock \emph{Journal Name} 12(3), 45 -- 678.
+%\end{thebibliography}
+%}
+%\end{frame}
+%
+%%------------------------------------------------
+%
+%\begin{frame}
+%\Huge{\centerline{The End}}
+%\end{frame}
 
 %----------------------------------------------------------------------------------------
 
