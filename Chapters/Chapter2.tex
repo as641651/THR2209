@@ -121,6 +121,7 @@ Where:
 
 \noindent Equation \ref{stfteq} can be seen as a \textbf{convolution} over the signal \textbf{a} with \textbf{W} which has finite support over the set $\left\{0,1..,F \right\}$
 \begin{equation}
+\label{eq:stft}
 \boxed
 {
   \textbf{C}(p, \omega ) = \textbf{a}(n) \star \textbf{W}_{\omega}(n- \tau)
@@ -191,6 +192,7 @@ Where:
 
 \noindent Hence, we can represent mel-spectrogram as \textbf{M-strided convolution} over \textit{flattened} $\textbf{Y}$ with mel filters $\textbf{M}_{\omega_{m}}$ (i.e, the frequency axis of $\textbf{C}$ is contracted with each mel-filter, 
 \begin{equation}
+\label{eq:mel}
 \boxed
 {
   \textbf{Mel}(p, \omega_{m} ) = \textbf{U}(k) \star \textbf{M}_{\omega_{m}}(k - p.M)
@@ -232,7 +234,7 @@ The objective of dimensionality reduction is to retain only the information that
 \subsection{Basis Transformations - PCA, MFCC}
 \label{basis}
 
-The basis vectors are functions of the properties we want to encode. In equation \ref{exp_fourier}, we used basis transformation to represent the signal in frequency domain. Now we want to use the same concept, but for dimensionality reduction. In general terms, this is done by changing to a reduced basis. That is, we need to find a change of coordinates matrix that will map the input to a basis system with lesser coordinates. 
+In equation \ref{exp_fourier}, we used basis transformation to represent the signal in frequency domain. Now we want to use the same concept, but for dimensionality reduction. In general terms, this is done by changing to a reduced basis. That is, we need to find a change of coordinates matrix that will map the input to a basis system with lesser coordinates. 
 \bigskip
 
 \noindent The input frame $\textbf{X}_{w}$ is first operated with some window function $\textbf{w}$ involving statistical operation,
@@ -292,7 +294,7 @@ The frequencies in the adjacent bins can be highly correlated and therefore cont
 \bigskip
 
 \subsubsection{Mel-frequency cepstrum coefficients (MFCC)}
-It has been studied that the spectral basis functions of cosine transform in mel-log power spectrogram are similar to the corresponding principal component basis[]. MFCC coefficients are obtained by taking discrete cosine transform of the mel log power spectrogram. Since these basis functions are similar to that of co-variance matrix, using the coefficients corresponding to high frequency cosine functions encodes the information corresponding to large variance. 
+It has been studied that the spectral basis functions of cosine transform in mel-log power spectrogram are similar to the corresponding principal component basis[]. MFCC coefficients are obtained by taking discrete cosine transform of the mel log power spectrogram. Since these basis functions are similar to that of co-variance matrix, using the coefficients corresponding to low frequency cosine functions encodes the information corresponding to large variance. 
 \begin{algorithm}
   \caption{$\textbf{Y}$ = MFCC($\textbf{a}$) }\label{MFCC}
   \begin{algorithmic}[1]
@@ -310,22 +312,82 @@ It has been studied that the spectral basis functions of cosine transform in mel
 \end{algorithm}
  
 
-\subsection{Stacked Convolutions}
+\subsection{Convolution neural network}
 \label{stacked}
+Transformation of input $\textbf{a}$ by shifted contractions of an operator $\textbf{w}$ is termed as \textit{discrete convolution} and can be mathematically represented as one dimensional convolution operation, 
+\[
+	\textbf{y} = \textbf{a} \star \textbf{w}^{(s)}
+\]   
+The operator $\textbf{w}$ is known as a \textit{filter function} and the length of shift $s$ is known as \textit{stride}. Usually $\textbf{a}$ is convolved with multiple filter functions. For $K$ \textit{filters},
+\[
+	\textbf{Y}[k] = \textbf{a} \star {\textbf{w}_{k}}^{(s)} = \textbf{a} \star \textbf{W}^{(s)} \qquad k \in {0,1..K-1}
+\] 
+The index based notations for this operation are shown in appendix ??. If the filters $\textbf{w}_{k}$ are \textit{defined}, then computation of $\textbf{Y}$ is straight forward. All the operations explained in the previous section are forward convolutions with defined filters,
+\begin{itemize}
+\setlength\itemsep{0em}
 
-{\color{gray}
+\item \textbf{STFT} in equation \ref{eq:stft}, where the filter functions are complex negative exponentials.
+\item Transformation to \textbf{Mel} frequency scale in equation \ref{eq:mel}, where a set of mel-frequency centred filters are used.
+\item \textbf{Principal components} and \textbf{MFCC} can be realized as a convolution of the input with transformation matrix $\textbf{V}^{T}$ defined in section \ref{basis} (Recall that matrix multiplication can be represented as a convolution of stride equal to column length. An illustration was shown in section \ref{mel})  
+
+\end{itemize}
+However, it is not clear if such defined filters really encodes the information in $\textbf{Y}$ relevant for certain classification task at hand. But, when a set of task-specific observations are available, it is possible to solve for the filters $\textbf{w}_{k}$, so that the resulting transformation $\textbf{Y}$ is optimal for the considered task. This is done using iterative optimization techniques, starting by random initializing of $\textbf{w}_{k}$ and updating it's values after every iteration. Computational models that solves by \textbf{first-order gradient descent} methods (a class of optimization techniques) are represented as first order \textbf{artificial neural networks}. The filters $\textbf{w}_{k}$ which we are attempting to solve are also termed as \textit{parameters} or \textit{weights} of the network. The iterative steps involving finding these \textit{weights} is termed as \textit{training} the neural network (Details of training neural network are explained in section \ref{training}). Since the transformation operation by the \textit{filters} are represented as convolution over the input, the neural network is termed as \textbf{convolution neural network}.   
+
 \subsubsection{Feature engineering Vs Feature Learning}
 \label{feature}
+The features obtained as a result of defined \textit{filter functions} are known as \textit{engineered} features. On the other hand, the features obtained as a result of training a neural network are known as \textit{learned} features. Transition from feature engineering to feature learning is realized by replacing the defined filters with learnable filters $\textbf{w}_{k}$. An illustration of realizing MFCCs with an architecture of Convolution Neural Network (CNN) have been described.
+\bigskip
+
+\noindent To compute MFCC features, the input signal $\textbf{a}$ is convolved with complex negative exponentials ($\textbf{W}_{STFT}$). After element-wise squaring operation, the resulting transformation is convolved with mel-filters ($\textbf{W}_{MEL}$). Logarithm of the resulting transformation is then convolved with cosine filters ($\textbf{W}_{MFCC}$). The motivation and description of these so called \textit{engineered} filters were described in section \ref{time} and \ref{dimension}. 
+
+\begin{algorithm}
+  \caption{$\textbf{Y}$ = MFCC($\textbf{a}$) }\label{MFCC_engineer}
+  \begin{algorithmic}[1]
+    \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{N}$
+    \Statex \textbf{Output :} $\textbf{Y} \in \mathbb{R}^{T \times Q}$ 
+    \State $\textbf{C} = \textbf{a} \star {\textbf{W}_{STFT}}^{(s)}$ \Comment{$ \textbf{W}_{STFT} \in \mathbb{R}^{M \times F}, \textbf{C} \in \mathbb{C}^{M \times Q}$}
+    \State $\textbf{C} \leftarrow \textbf{C} \odot \textbf{C}$ 
+    \State $\textbf{R} = \textbf{C} \star {\textbf{W}_{MEL}}^{(M)}$ \Comment{$ \textbf{W}_{MEL} \in \mathbb{R}^{R \times M}, \textbf{R} \in \mathbb{R}^{R \times Q}$}
+    \State $\textbf{R} \leftarrow ln(\textbf{R})$
+    \State $\textbf{Y} = \textbf{R} \star {\textbf{W}_{MFCC}}^{(R)}$ \Comment{$\textbf{W}_{MFCC} \in \mathbb{R}^{T \times R}$}
+  \end{algorithmic}
+\end{algorithm}
+\FloatBarrier
+Defining an architecture for CNN requires setting the \textit{hyper-parameters} : number of filters, filter dimensions, stride of the filter. An equivalent of MFCC computation can be realized with three layers of convolution by replacing the engineered filters by learnable filters and setting the following hyper parameters :
+\begin{itemize}
+\setlength\itemsep{0em}
+\item $\textbf{W}_{L1}$ : $M$ filters (representing discrete frequencies) of size $F$ (STFT window size) and stride $s$ (STFT hop length)
+\item $\textbf{W}_{L2}$ : $R$ filters (for mel-frequencies) of size $M$ and stride $M$.
+\item $\textbf{W}_{L3}$ : $T$ filters (for mel coefficients) of size $R$ and stride $R$.   
+\end{itemize}
+The non-linearity in between each layer is needed. Otherwise, the filters accross layers can be combined into a representation for single layer. Setting $\bm{\Phi}_{1}$ as element-wise squaring operation and $\bm{\Phi}_{2}$ as logarithm should result in a CNN architecture that \textit{may} realize MFCCs. That is, the solution will converge to the defined filters ($\textbf{W}_{STFT}, \textbf{W}_{MEL}, \textbf{W}_{MFCC}$) if they are optimal for the task considered. Otherwise, one could expect either richer representation or sub-optimal representation because of local convergence.  
+\begin{algorithm}
+  \caption{$\textbf{Y}$ = CNN($\textbf{a}$) }\label{MFCC_learn}
+  \begin{algorithmic}[1]
+    \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{N}$
+    \Statex \textbf{Output :} $\textbf{Y} \in \mathbb{R}^{T \times Q}$ 
+    \State $\textbf{C} = \bm{\Phi}_{1} (\textbf{a} \star {\textbf{W}_{L1}}^{(s)})$ \Comment{$ \textbf{W}_{L1} \in \mathbb{R}^{M \times F}, \textbf{C} \in \mathbb{C}^{M \times Q}$}
+    \State $\textbf{R} = \bm{\Phi}_{2} (\textbf{C} \star {\textbf{W}_{L2}}^{(M)})$ \Comment{$ \textbf{W}_{L2} \in \mathbb{R}^{R \times M}, \textbf{R} \in \mathbb{R}^{R \times Q}$}
+    \State $\textbf{Y} = \bm{\Phi}_{3} (\textbf{R} \star {\textbf{W}_{L3}}^{(R)})$ \Comment{$\textbf{W}_{L3} \in \mathbb{R}^{T \times R}$}
+  \end{algorithmic}
+\end{algorithm}
+\FloatBarrier
+\noindent It is possible to with-hold the engineered filters at earlier levels and just introduce learning at later stages. For instance, it is sometimes optimal to compute the STFT and mel-filters and just perform convolutions over the mel-spectrogram\cite{EndToEnd}\cite{choi_cnn} (see Chapter 3, Sec. ??). Sometimes it is also useful to generalize the convolution as a 2 dimensional operation\cite{MusicMotive}.(see Chapter 3, Sec. ??). 2D convolution operation is shown in appendix ??. 
+
+\subsubsection{CNN as a general purpose feature extractor}  
+\label{general}
+In music information retrieval, several task-specific features have been engineered. The MFCC features along with it's derivatives (the derivative is useful to encode the temporal evolution) are often used for genre and mood recognition tasks. Instead of convolving with mel-filters on STFT representation, one might opt for filters that would result in chroma-gram (combines frequencies by exploiting the periodicity of pitches) or tempo-gram (encodes change of frequencies over time). Features derived from chroma-gram find application for automatic mixing, chord recognition tasks. Features derived from tempo-gram find applications for tasks like on-set detection, tempo-estimation etc.. But more often, combination of features are used to boost classifier performance. For all the features that can be realized in terms of hierarchy of convolution operations, it is possible to find mathematical equivalence in convolution neural network.     
 
 \begin{figure}[h] 
 \centering
 \includegraphics[width=0.95\textwidth]{dnn_motivation}
-\caption{Motivation for deep architectures}
+\caption{General purpose feature extractor}
  \label{fig:deep learning}
  \end{figure}
 \FloatBarrier
 \bigskip
 
+{\color{gray}
 \section{Temporal pooling}
 \label{temporal}
 \subsection{Clustering}

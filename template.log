@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.3.6)  10 APR 2017 16:20
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.3.6)  13 APR 2017 19:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1319,7 +1319,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: Figures/dim_red.png Graphic file (type png)
 
 <use Figures/dim_red.png>
-Package pdftex.def Info: Figures/dim_red.png used on input line 225.
+Package pdftex.def Info: Figures/dim_red.png used on input line 227.
 (pdftex.def)             Requested size: 215.17912pt x 256.99698pt.
 
 
@@ -1327,19 +1327,19 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 [14] [15 <./Figures/dim_red.png>]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 274.
- [16]
-<Figures/dnn_motivation.png, id=468, 773.89125pt x 469.00218pt>
+put line 276.
+ [16] [17] [18]
+<Figures/dnn_motivation.png, id=491, 773.89125pt x 469.00218pt>
 File: Figures/dnn_motivation.png Graphic file (type png)
 
 <use Figures/dnn_motivation.png>
-Package pdftex.def Info: Figures/dnn_motivation.png used on input line 321.
+Package pdftex.def Info: Figures/dnn_motivation.png used on input line 383.
 (pdftex.def)             Requested size: 408.83902pt x 247.76845pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[17]) [18 <./Figures/dnn_motivation.png>]
+[19]) [20 <./Figures/dnn_motivation.png>]
 \openout2 = `Chapters/Chapter3.aux'.
 
  (./Chapters/Chapter3.tex
@@ -1363,10 +1363,10 @@ LABELS NOT IMPORTED.
 
 Chapter 3.
 
-LaTeX Warning: Reference `discriminants' on page 19 undefined on input line 19.
+LaTeX Warning: Reference `discriminants' on page 21 undefined on input line 19.
 
 
-[19
+[21
 
 
 
@@ -1375,9 +1375,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 36--40
 
  []
 
-[20]
+[22]
 
-LaTeX Warning: Reference `discriminants' on page 21 undefined on input line 63.
+LaTeX Warning: Reference `discriminants' on page 23 undefined on input line 63.
 
 
 
@@ -1385,7 +1385,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 61--82
 
  []
 
-[21] <Figures/specLeak1.png, id=526, 621.82312pt x 270.25969pt>
+[23] <Figures/specLeak1.png, id=549, 621.82312pt x 270.25969pt>
 File: Figures/specLeak1.png Graphic file (type png)
 
 <use Figures/specLeak1.png>
@@ -1402,7 +1402,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 90--99
 
  []
 
-[22 <./Figures/specLeak1.png>]
+[24 <./Figures/specLeak1.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 116--119
 
  []
@@ -1412,19 +1412,19 @@ Overfull \hbox (11.43306pt too wide) in paragraph at lines 120--150
 [][][] 
  []
 
-<Figures/square.png, id=539, 144.54pt x 125.71968pt>
+<Figures/square.png, id=563, 144.54pt x 125.71968pt>
 File: Figures/square.png Graphic file (type png)
  <use Figures/square.png>
 Package pdftex.def Info: Figures/square.png used on input line 158.
 (pdftex.def)             Requested size: 129.10878pt x 112.30258pt.
 
-<Figures/time.png, id=540, 167.87718pt x 121.20282pt>
+<Figures/time.png, id=564, 167.87718pt x 121.20282pt>
 File: Figures/time.png Graphic file (type png)
  <use Figures/time.png>
 Package pdftex.def Info: Figures/time.png used on input line 163.
 (pdftex.def)             Requested size: 129.10878pt x 93.21364pt.
 
-<Figures/freq.png, id=541, 155.83218pt x 123.46124pt>
+<Figures/freq.png, id=565, 155.83218pt x 123.46124pt>
 File: Figures/freq.png Graphic file (type png)
  <use Figures/freq.png>
 Package pdftex.def Info: Figures/freq.png used on input line 170.
@@ -1437,21 +1437,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 153--178
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[23]
+[25]
 Underfull \hbox (badness 10000) in paragraph at lines 183--186
 
  []
 
-[24 <./Figures/square.png> <./Figures/time.png> <./Figures/freq.png>]
+[26 <./Figures/square.png> <./Figures/time.png> <./Figures/freq.png>]
 
-LaTeX Warning: Reference `discriminants' on page 25 undefined on input line 242
+LaTeX Warning: Reference `discriminants' on page 27 undefined on input line 242
 .
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [25]
-[26]) [27]
+ [27]
+[28]) [29]
 \openout2 = `Chapters/Chapter4.aux'.
 
  (./Chapters/Chapter4.tex
@@ -1467,13 +1467,13 @@ No file chapter5.aux
 LABELS NOT IMPORTED.
  on input line 2.
 
-[28
+[30
 
 
 
 ]
 Chapter 4.
-[29]
+[31]
 Underfull \hbox (badness 10000) in paragraph at lines 23--33
 
  []
@@ -1493,7 +1493,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 35--39
 
  []
 
-[30]
+[32]
 Underfull \hbox (badness 10000) in paragraph at lines 46--53
 
  []
@@ -1508,14 +1508,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 55--59
 
  []
 
-[31] [32] [33] [34]) [35]
+[33] [34] [35] [36]) [37]
 \openout2 = `Chapters/Chapter5.aux'.
 
 
 No file Chapters/Chapter5.tex.
 \openout2 = `Appendices/AppendixA.aux'.
 
-(./Appendices/AppendixA.tex [36
+(./Appendices/AppendixA.tex [38
 
 
 
@@ -1523,11 +1523,11 @@ No file Chapters/Chapter5.tex.
 
 ]
 Appendix A.
-[37]) [38] (./template.gls) [39
+[39]) [40] (./template.gls) [41
 
 
 
-] [40
+] [42
 
 ]
 
@@ -1540,7 +1540,7 @@ Missing character: There is no © in font cmr10!
 
 Package biblatex Warning: Setting 'defernumbers=true' recommended.
 
-[41]
+[43]
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ¡ in font cmr10!
 Missing character: There is no Ã in font cmr10!
@@ -1557,7 +1557,7 @@ Package biblatex Warning: Setting 'defernumbers=true' recommended.
 
 Package biblatex Warning: Setting 'defernumbers=true' recommended.
 
-[42] [43]
+[44] [45]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 103.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 103.
  (./template.aux (./Chapters/Chapter1.aux) (./Chapters/Chapter2.aux)
@@ -1565,15 +1565,9 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 103.
 (./Appendices/AppendixA.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 103.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 103.
+Package rerunfilecheck Info: File `template.out' has not changed.
+(rerunfilecheck)             Checksum: 6BF951E5AD29D043D1B4A949950D89B1;3368.
 
-
-Package rerunfilecheck Warning: File `template.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `template.out':
-(rerunfilecheck)             Before: 7D9489CAD530EF172ADCB98CF4A8B3DD;3384
-(rerunfilecheck)             After:  6B6577EA41FCB1A71152BDC03DF31CAE;3362.
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.88pt have occurred.
@@ -1590,10 +1584,10 @@ Package logreq Info: Writing requests to 'template.run.xml'.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 103.
  ) 
 Here is how much of TeX's memory you used:
- 27070 strings out of 493308
- 482530 string characters out of 6137823
+ 27080 strings out of 493308
+ 482632 string characters out of 6137823
  839881 words of memory out of 5000000
- 29803 multiletter control sequences out of 15000+600000
+ 29808 multiletter control sequences out of 15000+600000
  19772 words of font info for 72 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  62i,18n,77p,1768b,1109s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1617,10 +1611,10 @@ msy10.pfb></opt/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></o
 pt/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></opt/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></opt/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on template.pdf (44 pages, 646115 bytes).
+Output written on template.pdf (46 pages, 655331 bytes).
 PDF statistics:
- 875 PDF objects out of 1000 (max. 8388607)
- 789 compressed objects within 8 object streams
- 174 named destinations out of 1000 (max. 500000)
+ 898 PDF objects out of 1000 (max. 8388607)
+ 809 compressed objects within 9 object streams
+ 179 named destinations out of 1000 (max. 500000)
  421 words of extra memory for PDF output out of 10000 (max. 10000000)
 
