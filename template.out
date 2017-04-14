@@ -15,8 +15,8 @@
 \BOOKMARK [1][-]{section.2.2}{Dimensionality Reduction}{chapter.2}% 15
 \BOOKMARK [2][-]{subsection.2.2.1}{Basis Transformations - PCA, MFCC}{section.2.2}% 16
 \BOOKMARK [2][-]{subsection.2.2.2}{Convolution neural network}{section.2.2}% 17
-\BOOKMARK [1][-]{section.2.3}{Temporal pooling}{chapter.2}% 18
-\BOOKMARK [2][-]{subsection.2.3.1}{Clustering}{section.2.3}% 19
+\BOOKMARK [1][-]{section.2.3}{Temporal Approximation}{chapter.2}% 18
+\BOOKMARK [2][-]{subsection.2.3.1}{Bag Of Frames}{section.2.3}% 19
 \BOOKMARK [2][-]{subsection.2.3.2}{Recurrent Neural Networks}{section.2.3}% 20
 \BOOKMARK [1][-]{section.2.4}{Training}{chapter.2}% 21
 \BOOKMARK [0][-]{chapter.3}{Literature Survey and Model Selection }{}% 22
@@ -37,9 +37,10 @@
 \BOOKMARK [2][-]{subsection.4.2.1}{Experiments with pre-trained CNNs as feature extractor}{section.4.2}% 37
 \BOOKMARK [2][-]{subsection.4.2.2}{Experiments with MFCCs as feature extractor}{section.4.2}% 38
 \BOOKMARK [1][-]{section.4.3}{Summary of Results}{chapter.4}% 39
-\BOOKMARK [0][-]{Appendix.1.A}{Appendix}{}% 40
-\BOOKMARK [1][-]{section.1.A.1}{Basis Transformation}{Appendix.1.A}% 41
-\BOOKMARK [1][-]{section.1.A.2}{Convolution}{Appendix.1.A}% 42
-\BOOKMARK [2][-]{subsection.1.A.2.1}{1D Convolution}{section.1.A.2}% 43
-\BOOKMARK [2][-]{subsection.1.A.2.2}{2D Convolution}{section.1.A.2}% 44
-\BOOKMARK [0][-]{chapter*.20}{Bibliography}{}% 45
+\BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 40
+\BOOKMARK [0][-]{Appendix.1.A}{Appendix}{}% 41
+\BOOKMARK [1][-]{section.1.A.1}{Basis Transformation}{Appendix.1.A}% 42
+\BOOKMARK [1][-]{section.1.A.2}{Convolution}{Appendix.1.A}% 43
+\BOOKMARK [2][-]{subsection.1.A.2.1}{1D Convolution}{section.1.A.2}% 44
+\BOOKMARK [2][-]{subsection.1.A.2.2}{2D Convolution}{section.1.A.2}% 45
+\BOOKMARK [0][-]{chapter*.20}{Bibliography}{}% 46

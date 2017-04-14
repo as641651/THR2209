@@ -45,26 +45,38 @@
 \newlabel{MFCC}{{2}{17}{$\textbf {Y}$ = MFCC($\textbf {a}$) \relax }{algorithm.2}{}}
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Convolution neural network}{17}{subsection.2.2.2}}
 \newlabel{stacked}{{2.2.2}{17}{Convolution neural network}{subsection.2.2.2}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Feature engineering Vs Feature Learning}{18}{section*.13}}
-\newlabel{feature}{{2.2.2}{18}{Feature engineering Vs Feature Learning}{section*.13}{}}
-\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces $\textbf  {Y}$ = MFCC($\textbf  {a}$) \relax }}{18}{algorithm.3}}
-\newlabel{MFCC_engineer}{{3}{18}{$\textbf {Y}$ = MFCC($\textbf {a}$) \relax }{algorithm.3}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Feature engineering Vs Unsupervised Feature Learning Vs Supervised feature learning}{18}{section*.13}}
+\newlabel{feature}{{2.2.2}{18}{Feature engineering Vs Unsupervised Feature Learning Vs Supervised feature learning}{section*.13}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Approximating MFCC with CNN}{18}{section*.14}}
+\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces $\textbf  {Y}$ = MFCC($\textbf  {a}$) \relax }}{19}{algorithm.3}}
+\newlabel{MFCC_engineer}{{3}{19}{$\textbf {Y}$ = MFCC($\textbf {a}$) \relax }{algorithm.3}{}}
 \@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces $\textbf  {Y}$ = CNN($\textbf  {a}$) \relax }}{19}{algorithm.4}}
 \newlabel{MFCC_learn}{{4}{19}{$\textbf {Y}$ = CNN($\textbf {a}$) \relax }{algorithm.4}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{CNN as a general purpose feature extractor}{19}{section*.14}}
-\newlabel{general}{{2.2.2}{19}{CNN as a general purpose feature extractor}{section*.14}{}}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces General purpose feature extractor\relax }}{20}{figure.caption.15}}
-\newlabel{fig:deep learning}{{2.3}{20}{General purpose feature extractor\relax }{figure.caption.15}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.3}Temporal pooling}{20}{section.2.3}}
-\newlabel{temporal}{{2.3}{20}{Temporal pooling}{section.2.3}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}Clustering}{20}{subsection.2.3.1}}
-\newlabel{clustering}{{2.3.1}{20}{Clustering}{subsection.2.3.1}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Recurrent Neural Networks}{20}{subsection.2.3.2}}
-\newlabel{rnn}{{2.3.2}{20}{Recurrent Neural Networks}{subsection.2.3.2}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.4}Training}{20}{section.2.4}}
-\newlabel{training}{{2.4}{20}{Training}{section.2.4}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{CNN as a general purpose feature extractor}{19}{section*.15}}
+\newlabel{general}{{2.2.2}{19}{CNN as a general purpose feature extractor}{section*.15}{}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces General purpose feature extractor\relax }}{20}{figure.caption.16}}
+\newlabel{fig:deep learning}{{2.3}{20}{General purpose feature extractor\relax }{figure.caption.16}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.3}Temporal Approximation}{20}{section.2.3}}
+\newlabel{temporal}{{2.3}{20}{Temporal Approximation}{section.2.3}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}Bag Of Frames}{21}{subsection.2.3.1}}
+\newlabel{clustering}{{2.3.1}{21}{Bag Of Frames}{subsection.2.3.1}{}}
+\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {5}{\ignorespaces $\textbf  {f}$ = BagOfFrames($\textbf  {Y}$) \relax }}{21}{algorithm.5}}
+\newlabel{bof}{{5}{21}{$\textbf {f}$ = BagOfFrames($\textbf {Y}$) \relax }{algorithm.5}{}}
+\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {6}{\ignorespaces K-MEANS($\textbf  {Y}_{0}, \textbf  {Y}_{2},..., \textbf  {Y}_{N-1}$) \relax }}{21}{algorithm.6}}
+\newlabel{alg:kmeans}{{6}{21}{K-MEANS($\textbf {Y}_{0}, \textbf {Y}_{2},..., \textbf {Y}_{N-1}$) \relax }{algorithm.6}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Recurrent Neural Networks}{22}{subsection.2.3.2}}
+\newlabel{rnn}{{2.3.2}{22}{Recurrent Neural Networks}{subsection.2.3.2}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Long-Short Term Memory RNN}{22}{section*.17}}
+\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {7}{\ignorespaces $\textbf  {f}$ = $Seq2One\_LSTM$($\textbf  {Y}$) \relax }}{23}{algorithm.7}}
+\newlabel{alg:s2olstm}{{7}{23}{$\textbf {f}$ = $Seq2One\_LSTM$($\textbf {Y}$) \relax }{algorithm.7}{}}
+\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {8}{\ignorespaces $\textbf  {f}$ = $LSTM2(\textbf  {Y})$\relax }}{23}{algorithm.8}}
+\newlabel{alg:2lstm}{{8}{23}{$\textbf {f}$ = $LSTM2(\textbf {Y})$\relax }{algorithm.8}{}}
+\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {9}{\ignorespaces $\textbf  {F}$ = $Seq2Seq\_LSTM$($\textbf  {Y}$) \relax }}{23}{algorithm.9}}
+\newlabel{alg:s2slstm}{{9}{23}{$\textbf {F}$ = $Seq2Seq\_LSTM$($\textbf {Y}$) \relax }{algorithm.9}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.4}Training}{23}{section.2.4}}
+\newlabel{training}{{2.4}{23}{Training}{section.2.4}{}}
 \@setckpt{Chapters/Chapter2}{
-\setcounter{page}{21}
+\setcounter{page}{24}
 \setcounter{equation}{17}
 \setcounter{enumi}{4}
 \setcounter{enumii}{0}
@@ -194,8 +206,8 @@
 \setcounter{subfigure}{0}
 \setcounter{subtable}{0}
 \setcounter{float@type}{8}
-\setcounter{algorithm}{4}
-\setcounter{ALG@line}{3}
+\setcounter{algorithm}{9}
+\setcounter{ALG@line}{5}
 \setcounter{ALG@rem}{0}
 \setcounter{ALG@nested}{0}
 \setcounter{ALG@Lnr}{2}

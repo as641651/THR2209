@@ -333,10 +333,15 @@ The index based notations for this operation are shown in appendix ??. If the fi
 \end{itemize}
 However, it is not clear if such defined filters really encodes the information in $\textbf{Y}$ relevant for certain classification task at hand. But, when a set of task-specific observations are available, it is possible to solve for the filters $\textbf{w}_{k}$, so that the resulting transformation $\textbf{Y}$ is optimal for the considered task. This is done using iterative optimization techniques, starting by random initializing of $\textbf{w}_{k}$ and updating it's values after every iteration. Computational models that solves by \textbf{first-order gradient descent} methods (a class of optimization techniques) are represented as first order \textbf{artificial neural networks}. The filters $\textbf{w}_{k}$ which we are attempting to solve are also termed as \textit{parameters} or \textit{weights} of the network. The iterative steps involving finding these \textit{weights} is termed as \textit{training} the neural network (Details of training neural network are explained in section \ref{training}). Since the transformation operation by the \textit{filters} are represented as convolution over the input, the neural network is termed as \textbf{convolution neural network}.   
 
-\subsubsection{Feature engineering Vs Feature Learning}
+\subsubsection{Feature engineering Vs Unsupervised Feature Learning Vs Supervised feature learning}
 \label{feature}
-The features obtained as a result of defined \textit{filter functions} are known as \textit{engineered} features. On the other hand, the features obtained as a result of training a neural network are known as \textit{learned} features. Transition from feature engineering to feature learning is realized by replacing the defined filters with learnable filters $\textbf{w}_{k}$. An illustration of realizing MFCCs with an architecture of Convolution Neural Network (CNN) have been described.
+When the \textit{filter functions} are computed by using the domain knowledge of data, then the resulting features are \textit{engineered features}.MFCCs are engineered features. When the \textit{filter functions} are obtained by exploiting the representations from data, then the resulting features are \textit{learned features}. Feature learning can be divided into two categories : \textit{unsupervised} and \textit{supervised} feature learning. In \textit{unsupervised} feature learning, filters are computed from data representations without requiring labelled data. \textit{Filter functions} used for PCA are obtained by computing the basis of covariance matrix from the data. Hence PCA features are obtained as a result of \textit{unsupervised learning}. On the contrary, when labelled data is required for computing the \textit{filter functions}, the resulting features are then known to be obtained through \textit{supervised feature learning}. Features obtained by training a neural network are resulting from \textit{supervised feature learning}.   
 \bigskip
+
+\subsubsection{Approximating MFCC with CNN}
+\textit{Supervised} feature learning has an advantage over \textit{unsupervised} feature learning when we wish to find filters $\textbf{w}_{k}$ optimal for context based classification tasks. Feature learning with CNN fall under \textit{supervised} feature learning category.
+To show that CNN can do atleast as good as MFCCs, an illustration is discussed by approximating MFCC with CNN. Setting up a CNN architecture requires defining the \textit{hyper parameters} of like number of filters, filter dimensions and stride of the filter. The domain knowledge of MFCC computation is used to set these hyper parameters.
+\bigskip  
 
 \noindent To compute MFCC features, the input signal $\textbf{a}$ is convolved with complex negative exponentials ($\textbf{W}_{STFT}$). After element-wise squaring operation, the resulting transformation is convolved with mel-filters ($\textbf{W}_{MEL}$). Logarithm of the resulting transformation is then convolved with cosine filters ($\textbf{W}_{MFCC}$). The motivation and description of these so called \textit{engineered} filters were described in section \ref{time} and \ref{dimension}. 
 
@@ -353,7 +358,7 @@ The features obtained as a result of defined \textit{filter functions} are known
   \end{algorithmic}
 \end{algorithm}
 \FloatBarrier
-Defining an architecture for CNN requires setting the \textit{hyper-parameters} : number of filters, filter dimensions, stride of the filter. An equivalent of MFCC computation can be realized with three layers of convolution by replacing the engineered filters by learnable filters and setting the following hyper parameters :
+\noindent An equivalent of MFCC computation can be realized with three layers of convolution by replacing the engineered filters by learnable filters and setting the following hyper parameters :
 \begin{itemize}
 \setlength\itemsep{0em}
 \item $\textbf{W}_{L1}$ : $M$ filters (representing discrete frequencies) of size $F$ (STFT window size) and stride $s$ (STFT hop length)
@@ -376,7 +381,7 @@ The non-linearity in between each layer is needed. Otherwise, the filters accros
 
 \subsubsection{CNN as a general purpose feature extractor}  
 \label{general}
-In music information retrieval, several task-specific features have been engineered. The MFCC features along with it's derivatives (the derivative is useful to encode the temporal evolution) are often used for genre and mood recognition tasks. Instead of convolving with mel-filters on STFT representation, one might opt for filters that would result in chroma-gram (combines frequencies by exploiting the periodicity of pitches) or tempo-gram (encodes change of frequencies over time). Features derived from chroma-gram find application for automatic mixing, chord recognition tasks. Features derived from tempo-gram find applications for tasks like on-set detection, tempo-estimation etc.. But more often, combination of features are used to boost classifier performance. For all the features that can be realized in terms of hierarchy of convolution operations, it is possible to find mathematical equivalence in convolution neural network.     
+In music information retrieval, several task-specific features have been engineered. The MFCC features along with it's derivatives (the derivative is useful to encode the temporal evolution) are often used for genre and mood recognition tasks. Instead of convolving with mel-filters on STFT representation, one might opt for filters that would result in chroma-gram (combines frequencies by exploiting the periodicity of pitches) or tempo-gram (encodes change of frequencies over time). Features derived from chroma-gram find application for automatic mixing, chord recognition tasks. Features derived from tempo-gram find applications for tasks like on-set detection, tempo-estimation etc.. But more often, combination of features are used to boost classifier performance. For all these features that can be realized in terms of hierarchy of convolution operations, it is possible to find mathematical equivalence in convolution neural network.     
 
 \begin{figure}[h] 
 \centering
@@ -387,14 +392,142 @@ In music information retrieval, several task-specific features have been enginee
 \FloatBarrier
 \bigskip
 
-{\color{gray}
-\section{Temporal pooling}
+\section{Temporal Approximation}
 \label{temporal}
-\subsection{Clustering}
+The size of resulting features computed through reduction operations discussed in the previous section depends on length of the audio. But classifiers like \textit{support vector machines} and \textit{multi layer perceptron} requires features of fixed size for all data to compute the parameters while training. Therefore, frame-wise features over time are approximated to a fixed size feature representation. Temporal approximation $T$ of the reduced representation $\textbf{Y}$ is  
+\[
+\textbf{f} = T(\textbf{Y}) \qquad \textbf{f} \in \mathbb{R}^{Z}, \textbf{Y} \in \mathbb{R}^{T \times W}
+\]
+$W$ depends on length of the audio. $\textbf{f}$ is usually the final fixed size feature that is given as input to the classifier.  
+\bigskip
+
+\noindent The transformation by approximation function $T$ is done by using one of the methods,
+\begin{itemize}
+\setlength\itemsep{0em}
+\item \textit{unsupervised} methods like \textit{statistical pooling} or \textit{clustering techniques} (Bag Of Frames, Gaussian mixture models)
+\item \textit{supervised} methods with \textit{recurrent neural network}. 
+\end{itemize} 
+ 
+\subsection{Bag Of Frames}
 \label{clustering}
+In Bag of Frames(BoF) model, the \textit{frequency} of each reduced frame is used as a feature for training a classifier. To reduce to a fixed size representation (of size $Z$), $Z$ cluster centres are computed from the data. Each frame-wise feature is assigned to it's nearest cluster. The number of assignments to each cluster now becomes the feature. 
+\begin{algorithm}
+  \caption{$\textbf{f}$ = BagOfFrames($\textbf{Y}$) }\label{bof}
+  \begin{algorithmic}[1]
+    \Statex \textbf{Input :} $\textbf{Y} \in \mathbb{R}^{T \times W}$
+    \Statex \textbf{Output :} $\textbf{f} \in \mathbb{R}^{Z}$
+    \State $\textbf{f} = 0$
+    \For{$ i \in \{0,1,..,W-1\}$}
+    \State $j = \argmin\limits_{j} \norm{\textbf{Y}[:,i] - \bm{\mu}_{j}}^{2}$ \Comment{$\bm{\mu}_{j} \in \mathbb{R}^{T}, j \in \{0,1..Z-1\}$}
+    \State $\textbf{f}[j] \leftarrow \textbf{f}[j] + 1$
+    \EndFor
+  \end{algorithmic}
+\end{algorithm}
+\FloatBarrier
+\noindent The cluster centres are computed by clustering algorithms likes gaussian mixture models or K-Means clustering. Computation of $\bm{\mu}_{j}$ by K-Means is illustrated in algorithm \ref{alg:kmeans}. The cluster centres are computed for the entire dataset. Each of the $N$ sample track could have $W$ frame-wise features. To compute these centres, $\bm{\mu}_{j}$ are first randomly initialized. Then each frame level feature is assigned to the nearest centre. After the assignment of all frame features, the cluster centres $\bm{\mu}_{j}$ are re-computed. The frame features are then assigned to these new centres. This assignment and re-computation of $\bm{\mu}_{j}$ is iterated until convergence.  
+\begin{algorithm}
+  \caption{K-MEANS($\textbf{Y}_{0}, \textbf{Y}_{2},..., \textbf{Y}_{N-1}$) }\label{alg:kmeans}
+  \begin{algorithmic}[1]
+    \Statex \textbf{Input :} $\textbf{Y}_{n} \in \mathbb{R}^{T \times W}, n \in \{0,1,...,N-1\}$
+    \Statex \textbf{Output :} $\bm{\mu}_{j} \in \mathbb{R}^{T}, j \in \{0,1,..,Z-1\}$
+    \State Randomly initialize $\bm{\mu}_{j}$
+    \While{$\bm{\mu}_{j}$ have not converged}
+    \For{$n \in \{0,1,..,N-1$}
+      \For{$ i \in \{0,1,..,W-1\}$}
+         \State $j = \argmin\limits_{j} \norm{\textbf{Y}_{n}[:,i] - \bm{\mu}_{j}}^{2}$
+          \State Assign $\textbf{Y}_{n}[:,i]$ to cluster $j$
+      \EndFor
+    \EndFor
+   \State Recompute cluster means $\bm{\mu}_{j}$
+   \EndWhile
+  \end{algorithmic}
+\end{algorithm}
+\FloatBarrier
+
 \subsection{Recurrent Neural Networks}
 \label{rnn}
+The idea behind RNN is to learn a feature representation by sequentially combining the input into an internal state $\textbf{h}$. The resulting feature is a projection from this internal state.
+\[ 
+\textbf{f} = \textbf{W}\textbf{h}_{W} \qquad \textbf{W} \in \mathbb{R}^{Z \times K}, \textbf{h}_{W} \in \mathbb{R}^{K}
+\]
+\[
+\textbf{h}_{W} = \bm{\Theta}(\textbf{Y}[:,W], \textbf{h}_{W-1}) \qquad \textbf{Y} \in \mathbb{R}^{T \times W}
+\]
+$\bm{\Theta}$ is the internal state function which sequentially combines the input. The operator $\textbf{W}$ and other operators resulting from the function $\bm{\Theta}$ are solved for optimality using a labelled dataset. These operators can be computed by training an RNN (see Section \ref{training}). The function $\bm{\Theta}$ should sufficiently hold the information from beginning to end of the sequence. RNNs face challenge in remembering the information in the earlier part of the sequence. Because of this, different flavours of RNN have been developed to hold the sequence information longer and to battle the vanishing gradient problem while training neural network (see Section \ref{training}). Depending on how $\bm{\Theta}$ is defined, at least two RNN architectures are popular in the literature: Long-Short Term Memory (LSTM) RNN and Gated Recurrent Unit(GRU) RNN. In this thesis, only LSTMs [] are considered.   
 
+\subsubsection{Long-Short Term Memory RNN}
+The LSTM internal state is contained by three gates that control the information flow. This is done by multiplying the output of each sequence $\textbf{o}_{w}$ with the corresponding cell state function $\textbf{c}_{w}$.
+\[
+\textbf{h}_{w} = \textbf{o}_{w} \odot \sigma_{h}(\textbf{c}_{w}) \qquad w \in \{1,2,...,W\}
+\] 
+$\sigma_{h}$ is hyperbolic tangent function which projects the values between -1 and 1. The output gate $\textbf{o}_{w}$ combines the $w^{th}$ vector in sequence with the previous internal state ($\textbf{h}_{w-1}$) and projects the result between 0 and 1 with sigmoid activation ($\sigma$). This indicates the contribution of current sequence $w$ to the cell state. 
+\[
+\textbf{o}_{w} = \sigma(\textbf{W}_{o}\textbf{Y}[:,w] + \textbf{U}_{o}\textbf{h}_{w-1})
+\]
+The cell state $\textbf{c}_{w}$ acts as a conveyor belt where the information can either flow unchanged or get modified with update ($\textbf{i}_{w}$) and forget functions ($\textbf{g}_{w}$).
+\[
+\textbf{c}_{w} = \textbf{g}_{w} \odot \textbf{c}_{w-1} + \textbf{i}_{w} \odot \sigma_{h}(\textbf{W}_{c}\textbf{Y}[:,w] + \textbf{U}_{c}\textbf{h}_{w-1})
+\] 
+The operators of forget gate $\textbf{W}_{g}$ and $\textbf{U}_{g}$ control the deletion of information from the\textit{ previous} sequence. The output of $g_{w}$ is between 0 (delete the information) and 1 (keep the information). 
+\[
+\textbf{g}_{w} = \sigma(\textbf{W}_{g}\textbf{Y}[:,w] + \textbf{U}_{g}\textbf{h}_{w-1})
+\] 
+The operators of update gate $\textbf{W}_{i}$ and $\textbf{U}_{i}$ control the addition of information from the \textit{current} sequence. The output of $i_{w}$ is also between 0 and 1.
+\[
+\textbf{i}_{w} = \sigma(\textbf{W}_{i}\textbf{Y}[:,w] + \textbf{U}_{i}\textbf{h}_{w-1})
+\] 
+The operators $\textbf{W}_{o}, \textbf{U}_{o}, \textbf{W}_{i}, \textbf{U}_{i}, \textbf{W}_{g}, \textbf{U}_{g}, \textbf{W}_{c}$ and $ \textbf{U}_{c}$ are solved by training the RNN.
+\bigskip
+
+\noindent To get a fixed size temporal approximation, the RNN should project all the input sequence to a single output. This architecture of RNN is called \textit{Sequence to One} RNN. 
+\begin{algorithm}
+  \caption{$\textbf{f}$ = $Seq2One\_LSTM$($\textbf{Y}$) }\label{alg:s2olstm}
+  \begin{algorithmic}[1]
+    \Statex \textbf{Input :} $\textbf{Y} \in \mathbb{R}^{T \times W}$
+    \Statex \textbf{Output :} $\textbf{f} \in \mathbb{R}^{Z}$
+    \State Initialize $\textbf{h}_{0}$
+    \For{$ w \in \{1,2,..,W\}$}
+    \State  $\textbf{h}_{w} \leftarrow \bm{\Theta}_{LSTM}(\textbf{Y}[:,w],\textbf{h}_{w-1})$
+    \EndFor
+    \State $\textbf{f} = \textbf{W}\textbf{h}_{W}$
+  \end{algorithmic}
+\end{algorithm}
+\FloatBarrier
+
+\noindent Often times, multiple layers of RNN are used. An illustration of  two layer LSTM with a \textit{sequence to sequence} LSTM in between is shown in algorithm \ref{alg:2lstm}. The input sequence transformed in to a hidden sequence, which is then projected to a single output by the second layer. The functions in between ($\Phi_{1}, \Phi_{2}$) represents the transition operation between the layers. Several non-linear activations and transition operations have been developed to address the problems while training deep neural network (see Sec. \ref{training}). 
+  
+\begin{minipage}[t]{7.5cm}
+  \vspace{0pt}  
+\begin{algorithm}[H]
+  \caption{$\textbf{f}$ = $LSTM2(\textbf{Y})$}\label{alg:2lstm}
+  \begin{algorithmic}[1]
+    \Statex \textbf{Input :} $\textbf{Y} \in \mathbb{R}^{T \times W}$
+    \Statex \textbf{Output :} $\textbf{f} \in \mathbb{R}^{Z}$
+    \Statex
+    \Statex
+    \Statex
+    \State $\textbf{F}_{1} = \Phi_{1}(Seq2Seq\_LSTM(\textbf{Y}))$
+    \State $\textbf{f} = \Phi_{2}(Seq2One\_LSTM(\textbf{F}_{1})$
+  \end{algorithmic}
+\end{algorithm}
+\end{minipage}%
+\begin{minipage}[t]{7.5cm}
+  \vspace{0pt}
+\begin{algorithm}[H]
+  \caption{$\textbf{F}$ = $Seq2Seq\_LSTM$($\textbf{Y}$) }\label{alg:s2slstm}
+  \begin{algorithmic}[1]
+    \Statex \textbf{Input :} $\textbf{Y} \in \mathbb{R}^{T \times W}$
+    \Statex \textbf{Output :} $\textbf{F} \in \mathbb{R}^{Z \times W}$
+    \State Initialize $\textbf{h}_{0}$
+    \For{$ w \in \{1,2,..,W\}$}
+    \State  $\textbf{h}_{w} \leftarrow \bm{\Theta}_{LSTM}(\textbf{Y}[:,w],\textbf{h}_{w-1})$
+    \State $\textbf{F}[:,w] = \textbf{W}\textbf{h}_{W}$
+    \EndFor
+  \end{algorithmic}
+\end{algorithm}
+\end{minipage}
+\FloatBarrier
+{\color{gray}
 \section{Training}
 \label{training}
 }
