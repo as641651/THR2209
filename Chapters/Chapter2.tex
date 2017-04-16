@@ -25,65 +25,66 @@ The general aim of Music Information Retrieval (MIR) is to extract information a
 
 \subsection{Sampling of continuous-time signal}
 \label{sampling}
-The digital formats contain the discrete version of the signal obtained by sampling continuous-time signal. Let $s(t)$ be a continuous function (or "signal") to be sampled, and let sampling be performed by measuring the value of the continuous function every T seconds, which is called the sampling interval or the sampling period. The sampling frequency or sampling rate, $f_{s}$, is the average number of samples obtained in one second (samples per second),  
+The digital formats contain the discrete version of the signal obtained by sampling continuous-time signal. Let $s(t)$ be the continuous signal to be sampled, and let sampling be performed by measuring the value of the continuous signal every T seconds, which is called the sampling interval or the sampling period. The sampling frequency or sampling rate, $f_{s}$, is the average number of samples obtained in one second (samples per second),  
 \[
  f_{s} = \frac{1}{T}.
 \]
 The optimum sampling rate is given by Nyquist-Shannon sampling theorem which says, the sampling frequency $f_{s}$ should be at least twice the highest frequency contained in the signal. Given the human hearing range lies between 20Hz - 20KHz, most of the digital audio formats use a standard sampling frequency of 44.4Khz. The signal is further down sampled depending on the kind of feature information needed for classification. 
 
-
 \subsection{Time-Frequency transformations}
 \label{time}
-The signal represented in the time domain is a set of ordered \textit{n}-tuples of real numbers \( (a_{1},a_{2}, ...,a_{N}) \in \mathbb{R}^N \) in the vector space \textit{V} , specifically \textit{Euclidean n-space}. That is to say, a discrete-time signal can be represented as a linear combination of Cartesian basis vectors. 
-\begin{equation}
-\textbf{a}(t) = (a_{1},a_{2}, ...,a_{N}) = a_{1}\textbf{e}_{1} + a_{2}\textbf{e}_{2} + ... + a_{N}\textbf{e}_{N} = \displaystyle\sum_{i=1}^{N}a_{i}\textbf{e}_{i}
-\end{equation} 
-where:\\
-\indent \textbf{a} is a discrete-time signal\\
-\indent $\textbf{e}_{1} ... \textbf{e}_{N}$ are Cartesian basis vectors (Unit vectors).
+The digital signal is represented in the time domain with amplitude values at each time $t$. This representation has to be changed to frequency domain. Mapping from time-domain to frequency-domain is looked up on as basis transformation. 
+
+\subsubsection{Basis transformation from time to frequency domain}
+\noindent The signal in the time domain $\textbf{a}$ is a set of ordered \textit{n}-tuples of real numbers \( (a_{1},a_{2}, ...,a_{N}) \in \mathbb{R}^N \) in the vector space \textit{V} , specifically \textit{Euclidean n-space}. That is to say, a discrete-time signal can be represented as a linear combination of Cartesian basis vectors. The coefficients in linear combination are then the co-ordinates of the corresponding basis system.  
+\[
+\textbf{a} = (a_{1},a_{2}, ...,a_{N}) = a_{1}\textbf{e}_{1} + a_{2}\textbf{e}_{2} + ... + a_{N}\textbf{e}_{N} = \displaystyle\sum_{t=1}^{N}a_{t}\textbf{e}_{t} = \mathbb{I}\textbf{a}
+\]
+Where $(a_{1},a_{2}, ...,a_{N})$ are the co-ordinates of Cartesian basis formed by basis vectors $\textbf{e}_{1} ... \textbf{e}_{N}$ with $t \in \{1,2,..N\}$. The unit vector $\textbf{e}_{t} \in \mathbb{R}^{N}$ has 1 in the $t^{th}$ index and 0 everywhere else.
 \bigskip
 
-\noindent Mapping from time-domain to frequency-domain is looked up on as basis transformation. We need to find a set of basis vectors $\bm{\phi}_{ \omega }$, whose coefficients $c_{ \omega }$ then represents the components in frequency domain. 
+\noindent To transform to frequency domain, we need to find a set of basis vectors $\bm{\phi}_{ \omega }$ that are functions of frequencies ($\omega$). Then the co-ordinates of this basis system $c_{ \omega }$ represents the signal in frequency domain. 
 \begin{equation}
 \label{exp_fourier}
-\textbf{a}(t) = \displaystyle\sum_{ \omega =0}^{M-1}c_{ \omega }\bm{\phi}_{ \omega }(t) 
+\textbf{a} = \displaystyle\sum_{ \omega =1}^{M}c_{ \omega }\bm{\phi}_{ \omega } = \bm{\Phi}\textbf{c} \qquad \bm{\Phi} \in \mathbb{C}^{N \times M}, \textbf{c} \in \mathbb{C}^{M}
 \end{equation}
-for some integer $0 < M < \infty$. Then $\textbf{c}(\phi) = (c_{0},c_{1}, ...,c_{M-1}) \in \mathbb{C}^M $ represents the components in frequency domain. Thus our aim is to compute $\textbf{c}(\phi)$ by defining basis vectors $\bm{\phi}_{\omega}$ which are functions of frequency. Computing the Fourier coefficients for periodic and aperiodic signals are discussed below.
+If $\bm{\Phi}$ is known, then the transformed co-ordinates $\textbf{c} = (c_{1},c_{2},..,c_{M})$ can be computed as,
+\[
+\textbf{c} = \bm{\Phi}^{-1}\textbf{a}
+\]
+$\textbf{c}$ is the transformed representation. $\bm{\Phi}^{-1}$ is the operator that transforms the signal. 
 
-\subsubsection{Periodic Signals}
-If $\textbf{a}(t)$ is periodic in \textbf{T}, then we can apply the definition of \textbf{Exponential Fourier Series} expansion and define $\bm{\phi}$ in equation \ref{exp_fourier} as,
-\begin{equation}
-\bm{\phi}_{k}(t) = \frac{1}{\sqrt{T}}e^{ik \omega t}
-\end{equation}    
-Whose basis functions $\bm{\phi}$ now form \textit{complete orthonormal} set \cite{allen}. That is, 
-\begin{equation}
-\label{ortho}
- < \bm{\phi}_{i}, \bm{\phi}_{j} > =
-	\begin{cases}
-	  0 & i \neq j \\
-	  1 &  i = j \\ 
-	\end{cases}
-\end{equation}
-The fourier series finds a set of discrete coefficients of \textbf{harmonically related frequencies} $(k \omega )$ . To retrieve $c_{k}$, multiply $\bm{\phi}_{k}$ on both sides of equation \ref{exp_fourier} and apply the conditions of orthonormality in equation \ref{ortho}. Thus
-\begin{equation}
-c_{k} = <\textbf{a}(t), \bm{\phi}_{k}(t)>
-\end{equation}
+\subsubsection{Exponential Fourier Series and Fourier Transform}
+From the definition of \textit{exponential Fourier Series}, any function \textit{periodic} in $\{1,2,...T\}$ can be expanded with series of complex exponentials\cite{allen}. These complex exponentials which are functions of harmonically related frequencies($k \omega$) form basis 
+\[
+\bm{\phi}_{k}(t) = \frac{1}{\sqrt{T}}e^{ik \omega t} \qquad t \in \{1,2,..T\}
+\] 
+It is difficult to assume periodicity for a generalized signal. Hence, the Fourier series can not be applied directly and Fourier Transform was developed. By Fourier transform, quantity of each frequency component $\omega$ in an arbitrary signal $\textbf{a}(t)$ can be computed by dividing by $e^{i \omega t}$. Application of Fourier transform to a discrete signal is called \textit{Discrete Fourier Transform}
+\[
+c_{\omega} =  \displaystyle\sum_{t=1}^{N}a_{t}e^{-i \omega t} \qquad t \in \{1,2,...,N\}
+\] 
+Thus the transformation operator 
+\[
+\bm{\Phi}^{-1}[ \omega ] = e^{-i \omega \textbf{t}} \qquad \textbf{t} \in \mathbb{R}^{N}, \omega \in \{1,2,..,M\}
+\]
+Fast Fourier Transform(FFT) is an efficient implementation of Discrete Fourier Transform(DFT) which exploits the symmetry of $sines$ and $cosines$ in the complex exponential. While DFT requires $O(N^2)$ operations, FFT requires only $O(NlogN)$ \cite{allen}. 
 
-
-\subsubsection{Aperiodic Signals}
-It is difficult to assume periodicity for a generalized signal. We need to estimate the coefficients $\textbf{c}$ for continuous frequency variable $\bm{\omega}$ instead of discrete harmonics $\textbf{k}\bm{\omega}$. The Fourier series can not be applied directly and hence Fourier Transform was developed. Here we aim to find out quantity of each sinusoids is the signal $\textbf{a}(t)$. This can be done by dividing  $\textbf{a}(t)$ by $e^{i \omega t}$ over the time domain. Thus, the coefficients in the frequency domain are 
-\begin{equation}
-c_{\omega} =  \displaystyle\sum_{t=0}^{N-1}a(t)e^{-i \omega t}
-\end{equation}  
-This is the N-point \textbf{Discrete Fourier Transform}. For the proof of existence of such coefficients, please refer to chapter ?? in \cite{allen}. \textbf{Fast Fourier Transform}(FFT) is an efficient implementation of Discrete Fourier Transform(DFT) which exploits the symmetry of $sines$ and $cosines$. While DFT requires $O(N^2)$ operations, FFT requires only $O(NlogN)$ \cite{allen}.  
 
 \subsection{STFT, Mel-Spectrogram}
 \label{stft}
-It is useful to perform FFT locally over short segments. This is because we are more interested in the evolution of frequency content rather than the frequency content of the entire signal. Hence, the full length signal is divided into short segments, and FFT is computed separately for each segment. This is known as \textbf{Short Time Fourier Transform (STFT)}. To avoid \textit{spectral leakage}, the original signal is modified by applying some window function. The most common window function is the \textbf{Hamming Window} defined as,
+It is useful to perform FFT locally over short segments. This is because we are more interested in the evolution of frequency content rather than the frequency content of the entire signal. Hence, the full length signal is divided into short segments, and FFT is computed separately for each segment. This is known as \textbf{Short Time Fourier Transform (STFT)}. One common problem with STFT is the \textit{spectral leakage}, which is addressed by modifying the original signal with some window function. The most common window function is the \textbf{Hamming Window} defined as,
 \begin{equation}
 h[n] = 0.54 - 0.46cos(\frac{2 \pi n}{N-1})
 \end{equation}
-Where $n \in {0,1,...,N-1}$. The signal approaches zero near $n=0$ and $n=N-1$, but reaches peak near $n=N/2$ \cite{specLeak}. To overcome the information loss at the ends of the window, signal is divided into segments that are partly \textit{overlapping} with eachother. Figure \ref{fig:stftPipe} shows the extraction of spectral frames of a spectrogram.  
+Where $n \in {1,2,...,F}$ is index of the window function of size $F$ .The signal approaches zero near $n=1$ and $n=N$, but reaches peak near $n=N/2$ \cite{specLeak}. To overcome the information loss at the ends of the window, signal is divided into segments that are partly \textit{overlapping} with each other. The distance between the start of two adjacent segments is called \textit{hop-length}. Figure \ref{fig:stftPipe} shows the extraction of spectral frames of a spectrogram. Thus, the parameters of STFT include 
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Choice of window function
+    \item Size of each segment in $\textbf{a}$ ($F$)
+    \item Hop length or stride ($s$) of the transformation operator
+    \item Size of frequency dimension $M$ (also known as FFT size)
+\end{itemize}
+
 \begin{figure}[h]
        \begin{subfigure}[b]{0.6\textwidth}
         \includegraphics[width=\textwidth]{stft_pipe}
@@ -99,41 +100,39 @@ Where $n \in {0,1,...,N-1}$. The signal approaches zero near $n=0$ and $n=N-1$, 
        \end{subfigure}
        \caption{(a) Shows STFT Pipeline. (b) Shows the application of \\Window function}\label{fig:STFT}
 \end{figure}
-\bigskip
+\FloatBarrier
 
-\noindent The discrete STFT (\textit{slow}) for $p^{th}$ frame of signal $\textbf{a}$ is obtained as,
+\subsubsection{STFT as Convolution}
+\noindent The strided operation over the signal $\textbf{a}$ is mathematically represented as a \textbf{convolution}. The resulting spectrogram has $P$ frames. The discrete STFT (\textit{slow}) for $p^{th}$ frame of signal $\textbf{a}$ is obtained as,
 \begin{equation}
 \label{stfteq}
-\textbf{C}(p, \omega ) = \displaystyle\sum_{n=p.s}^{p.s + F}\textbf{a}(n)\textbf{h}(n-p.s)e^{-i \omega (n-p.s)}
+\textbf{C}[p, \omega ] = \displaystyle\sum_{n=p.s}^{p.s + F}\textbf{a}[n] \Big( \textbf{h}[n-p.s] . e^{-i \omega (n-p.s)} \Big)
 \end{equation}
 Where:
 \begin{itemize}[label=]
     \setlength\itemsep{0em}
-    \item $P$: is the number of spectral frames; $p \in [0,1..P-1]$ 
+    \item $P$: is the number of spectral frames; $p \in [1,2...,P]$ 
     \item $M$: is the dimension of discrete frequency space ; $\omega \in \mathbb{R}^{M}$
     \item $F$: is the frame length 
     \item $s$: is stride (or) hop-length for the next segment
-    \item $\textbf{a} \in  \mathbb{R}^{N}$ ; $n \in [0,1...N-1]$
+    \item $\textbf{a} \in  \mathbb{R}^{N}$ ; $n \in [1,2,...,N]$
     \item $\textbf{h} \in  \mathbb{R}^{F}$
     \item $\omega \in  \mathbb{R}^{M}$
-    \item $\textbf{C}$: is Fourier Coefficient Matrix ; $\textbf{C} : \mathbb{R}^{F.P} \rightarrow \mathbb{C}^{M \times P}$
+    \item $\textbf{C} \in \mathbb{C}^{M \times P}$
 \end{itemize}
-
-\noindent Equation \ref{stfteq} can be seen as a \textbf{convolution} over the signal \textbf{a} with \textbf{W} which has finite support over the set $\left\{0,1..,F \right\}$
+\noindent Equation \ref{stfteq} can be seen as a \textbf{discrete convolution} over the signal \textbf{a} with the operator $\textbf{W}_{STFT}$ which has finite support over the set $\{1..,F\}$ with stride $s$
+\[
+\textbf{C} = \textbf{a} \star \big( \textbf{h} \bm{\Phi}^{-1} \big)
+\]
 \begin{equation}
 \label{eq:stft}
-\boxed
-{
-  \textbf{C}(p, \omega ) = \textbf{a}(n) \star \textbf{W}_{\omega}(n- \tau)
-}
+\textbf{C} = \textbf{a} \star {\textbf{W}^{(s)}}_{STFT}
 \end{equation}
-Where:
-\begin{itemize}[label=]
-    \setlength\itemsep{0em}
-    \item $ \tau$ = $p.s$
-    \item $\textbf{W}_{\omega}(n- \tau)$ = $\textbf{h}(n- \tau )e^{-i \omega (n- \tau)}$
-\end{itemize}
-It is important to note that the coefficients $c_{\omega}$ may be complex valued. To obtain useful metrics, we need to extract some physical quantity from the coefficients. This is where \textbf{Parseval's theorem} is used, which relates and time and frequency domain components in DFT as follows \cite{allen} :
+where $\textbf{W}_{STFT} = \textbf{h} \bm{\Phi}^{-1}$ is the STFT operator that transforms the signal $\textbf{a}$ from time to frequency domain. 
+\bigskip
+
+\subsubsection{Power spectrogram}
+\noindent It is important to note that the coefficient matrix $\textbf{C}$ may be complex valued. To obtain useful metrics, we need to extract some physical quantity from the coefficients. This is where \textbf{Parseval's theorem} is used, which relates and time and frequency domain components in DFT as follows \cite{allen} :
 \begin{equation}
 {\|\textbf{c}\|}^2 \propto {\|\textbf{a}\|}^2
 \end{equation}
@@ -141,86 +140,84 @@ If \textbf{a} represents amplitude in the time-domain, then as a consequence of 
 \begin{equation}
 Energy \propto amplitude^2
 \end{equation}
-Relating equation 2.11 and 2.12, it can be inferred that \textbf{square} of the Fourier coefficients is proportional to the energy distributed in the corresponding frequencies. This is called the \textbf{Power Spectrum (E)}. It is often motivating to use this representation because \textit{loudness} is proportional to \textit{energy}.
+Thus, it can be inferred that \textbf{square} of the Fourier coefficients is proportional to the energy distributed in the corresponding frequencies. This spectrogram with squared coefficients is called the \textbf{Power Spectrum (P)}. It is often motivating to use this representation because \textit{loudness} is proportional to \textit{energy}.
 \begin{equation}
 \label{energy}
-\textbf{E} = \textbf{C} \odot \textbf{C}
+\textbf{P} = \textbf{C} \odot \textbf{C}
 \end{equation}
 
-\noindent The frequencies in the considered range are  grouped into bins. It is useful to do so, not only to reduce dimension but also due to the aliasing effect of human auditory system. This is motivated by the human cochlea (an organ in the ear) which vibrates at different spots depending on the frequency of the incoming sounds.
+\noindent The frequencies in the considered range are  grouped into bins. It is useful to do so, due to the aliasing effect of human auditory system. This is motivated by the human cochlea (an organ in the ear) which vibrates at different spots depending on the frequency of the incoming sounds.
   
-\subsubsection{Mel Spectrogram}
+\subsubsection{Mel Power Spectrogram}
 \label{mel}
 
 The \textit{mel-scale} was developed to express measured frequency in terms of psychological metrics (i.e perceived pitch). The mel-scale was developed
 by experimenting with the human ears interpretation of a pitch. The experiment showed that the pitch is linearly perceived in the frequency range 0-1000 Hz. Above
-1000 Hz, the scale becomes logarithmic. There are several formulae to convert Hertz to mel. A popularly used formula is noted in \cite{speech}
+1000 Hz, the scale becomes logarithmic. There are several formulae to convert Hertz to mel. The following formula is used in this thesis\cite{speech}
 \begin{equation}
 \omega_{m} = 2595log_{10}\bigg(1+\frac{ \omega }{700}\bigg)
 \end{equation}
-Where $\omega$ is the frequency in Hertz. In a mel spectrogram, the frequencies and converted to mels and then grouped into mel-spaced bins. This is done by multiplying the spectrum with some \textbf{filter bank ($\textbf{M}_{\omega_{m}}$)}. For details about computation of mel-filter banks, refer \cite{mel}. Each filter bank is centered at a specific frequency. Hence, to compute R mel bins, we need R mel-filter banks. 
+Where $\omega$ is the frequency in Hertz. In a mel spectrogram, the frequencies and converted to mels and then grouped into mel-spaced bins. This is done by multiplying the spectrum with some \textbf{filter bank ($\textbf{W}_{MEL}$)}. For details about computation of mel-filter banks, refer \cite{mel}. Each filter bank is centered at a specific frequency. Hence, to compute R mel bins, we need R mel-filter banks. The resulting mel power spectrogram ($\textbf{X}$) is
 \begin{equation}
 \label{mel_conv}
-\textbf{Mel}(p,\omega_{m}) = \displaystyle\sum_{ \omega = 0}^{M}\textbf{Y}(p, \omega)\textbf{M}_{\omega_{m}}(\omega)
+\textbf{X} = \textbf{W}_{MEL}\textbf{P}
 \end{equation}
-Where:
-\begin{itemize}[label=]
-    \setlength\itemsep{0em}
-    \item $\textbf{Y}$ = $f(\textbf{C})$
-    \item $\omega_{m}$ = mel frequency
-\end{itemize}    
-When the function $f$ is an defined by equation \ref{energy}, we get \textbf{mel power spectrogram}
-\bigskip
+\[
+ \textbf{W}_{MEL} \in  \mathbb{R}^{R \times M}, \textbf{P} \in \mathbb{R}^{M \times P}, \textbf{X} \in \mathbb{R}^{R \times P}
+\]
 
-\noindent We can re-write equation \ref{mel_conv} as, 
+\noindent The above Matrix-Matrix multiplication can be represented as a convolution with window size and stride equal to $M$. We can re-write equation \ref{mel_conv} as, 
 \begin{equation}
 \label{mel_conv_flat}
-\textbf{Mel}(p,\omega_{m}) = \displaystyle\sum_{k=p.M}^{p.M + K}\textbf{U}(k)\textbf{M}_{\omega_{m}}(k-p.M)
+\textbf{X}[p,\omega_{m}] = \displaystyle\sum_{k=p.M}^{p.M + K}\textbf{p}[k]\textbf{W}_{MEL}(k-p.M)
 \end{equation}
 Where:
 \begin{itemize}[label=]
     \setlength\itemsep{0em}
-    \item $\textbf{Mel}$: is Mel Spectrum Matrix ; $\textbf{Mel} : \mathbb{R}^{M.P} \rightarrow \mathbb{R}^{R \times P}$
-    \item $P$: is the number of spectral frames; $p \in [0,1..P-1]$ 
-    \item $M$: is the dimension of discrete frequency space ; $\omega = k-p.M \in \mathbb{R}^{M}$
-    \item $K$ = $M.P$ and $k \in [0,1...K]$
-    \item $\textbf{U}(k)$ = $\textbf{Y}(i,j)$ ; $i = floor(\frac{k}{M})$ ; $j = k-floor(\frac{Mk}{M-1})$
-    \item $\textbf{Y} \in \mathbb{R}^{M \times P}$
-    \item $\textbf{U} \in \mathbb{R}^{M.P}$
+    \item $\textbf{p}[k]$ = $\textbf{P}[i,j]$ ; $i = floor(\frac{k}{M})$ ; $j = k-floor(\frac{Mk}{M-1})$
+    \item $\omega = k-p.M \in \mathbb{R}^{M}$
+    \item $\textbf{X} \in \mathbb{R}^{M \times P}$
+    \item $\textbf{p} \in \mathbb{R}^{M.P}$
     \item $\omega_{m} \in  \mathbb{R}^{R}$
 \end{itemize}
 
-\noindent Hence, we can represent mel-spectrogram as \textbf{M-strided convolution} over \textit{flattened} $\textbf{Y}$ with mel filters $\textbf{M}_{\omega_{m}}$ (i.e, the frequency axis of $\textbf{C}$ is contracted with each mel-filter, 
+\noindent Hence, we can represent mel-power spectrogram as \textbf{M-strided convolution} and stride $M$ over \textit{flattened} $\textbf{P}$ with mel filters $\textbf{W}_{MEL}$ (i.e, the frequency axis of $\textbf{P}$ is contracted with each mel-filter, 
 \begin{equation}
 \label{eq:mel}
 \boxed
 {
-  \textbf{Mel}(p, \omega_{m} ) = \textbf{U}(k) \star \textbf{M}_{\omega_{m}}(k - p.M)
+  \textbf{X} = \textbf{P} \star \textbf{W}_{MEL}
 }
-\end{equation}
-  
-\bigskip
+\end{equation}  
+Thus the extraction of mel-power spectrogram can be summarized in the following algorithm 
+\begin{algorithm}
+  \caption{$\textbf{X}$ = $R_{(MEL)}$($\textbf{a}$)}\label{alg:mel}
+  \begin{algorithmic}[1]
+    \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{N}$
+    \Statex \textbf{Output :} $\textbf{X} \in \mathbb{R}^{R \times P}$
+	\State $\textbf{C} = \textbf{a} \star \textbf{W}_{STFT}$
+	\State $\textbf{P} = \textbf{C} \odot \textbf{C}$
+	\State $\textbf{X} = \textbf{P} \star \textbf{W}_{MEL}$
+  \end{algorithmic}
+\end{algorithm}
+\FloatBarrier
 
 \section{Dimensionality Reduction}
 \label{dimension}
-The objective of dimensionality reduction is to retain only the information that contribute to discrimination and discard the rest. This is done because the representation ($\textbf{R}$) can be large for longer audio tracks (because number of frames $P$ depends on length of the audio). Reduction over a large frame at once can lead to loss of temporal information. Hence, dimensionality reduction is done hierarchically, sometimes by stacking combination of these techniques. We generalize the operations on input signal $\textbf{a}$ as follows,
+The objective of dimensionality reduction is to retain only the information that contribute to discrimination and discard the rest. This is done because the \textit{representation} ($\textbf{X}$) can be large for longer audio tracks (because number of frames $P$ depends on length of the audio). In this thesis, only \textit{mel-spectrogram representation} is considered. The dimensionality reduction of input signal $\textbf{a}$ is generalized as follows,
 \[
-   \textbf{R} = Rep(\textbf{a}) \qquad Rep : \mathbb{R}^{N} \rightarrow \mathbb{R}^{R \times P}
-\]
-\[
-   \textbf{X} = f(\textbf{R}) \qquad f : \mathbb{R}^{R \times P} \rightarrow \mathbb{R}^{S \times Q} 
+   \textbf{X} = R(\textbf{a}) \qquad R : \mathbb{R}^{N} \rightarrow \mathbb{R}^{R \times P}
 \]
 \begin{equation}
 \label{dim_red_abstract}
-   \textbf{Y} = D(\textbf{X}) \qquad D : \mathbb{R}^{S \times Q} \rightarrow \mathbb{R}^{T \times W} 
+   \textbf{Y} = D(\textbf{X}) \qquad D : \mathbb{R}^{R \times P} \rightarrow \mathbb{R}^{T \times W} 
 \end{equation}
  
-
-\noindent The representation operations defined in the previous section can be a part of the function $Rep$. Since dimension reductions can be stacked, $f$ represents the previous reductions applied. $Q$ and $W$ are number of frames as a result of hierarchical windowing operation shown in fig \ref{fig:Dimensionality Reduction}. For the first reduction however, $f$ does not exist and hence represented by conditional arrow (dotted). The output of reduction $\textbf{Y} \in \mathbb{R}^{T \times W}$ will then be the reduced representation ($T < S$ or $W < Q$). Depending on how the function $D$ is defined, we will classify the techniques into broad categories.
+\noindent The computation of mel-spectrogram defined in the previous section can be a part of the function $R$. The dimensionality reduction is defined by function $D$. The output of reduction $\textbf{Y} \in \mathbb{R}^{T \times W}$ will be the reduced representation ($T < R$ or $W < P$). Depending on how the function $D$ is defined, the following three methods will be discussed
 \begin{itemize}
-  \item Reduction by basis transformation
-  \item Reduction by stacked convolutions
-  \item Reduction by clustering 
+  \item \textbf{Principal Component Analysis} (PCA) : Reduction by \textit{unsupervised learning}.
+  \item \textbf{Mel-Frequency Cepstrum Coefficients} (MFCC) : Reduction by domain engineering.
+  \item \textbf{Convolution Neural Networks} (CNN) : Reduction by \textit{supervised learning}
 \end{itemize} 
 \begin{figure}[h] 
 \centering
@@ -231,83 +228,90 @@ The objective of dimensionality reduction is to retain only the information that
 \FloatBarrier
 \bigskip
 
-\subsection{Basis Transformations - PCA, MFCC}
-\label{basis}
+\subsection{Domain engineering Vs Unsupervised learning Vs Supervised learning}
+\textit{Reduction by Domain engineering :} When the operators performing reduction \textit{do not} use any information from the data, but are rather derived from knowing the domain specific properties of the data, then the resulting reduction is said to be \textit{engineered}. Coming up with such operators is usually time-consuming and requires expert knowledge.\\
+\\
+\textit{Reduction by Unsupervised learning :} When the operators performing reduction are computed by exploiting the representation \textit{structure} of the data, then the resulting reductions are said to be \textit{learned} from the data. When this learning problem \textit{does not} require any labelled data, then the reduction is said to be \textit{unsupervised}.\\
+\\
+\textit{Reduction by Supervised learning :} When the operators performing reduction computed by exploiting the information from labelled data, then the resulting reduction is said to be obtained by \textit{supervised learning} 
 
-In equation \ref{exp_fourier}, we used basis transformation to represent the signal in frequency domain. Now we want to use the same concept, but for dimensionality reduction. In general terms, this is done by changing to a reduced basis. That is, we need to find a change of coordinates matrix that will map the input to a basis system with lesser coordinates. 
-\bigskip
+\subsection{Principal Component Analysis (PCA)}
+\label{pca}
 
-\noindent The input frame $\textbf{X}_{w}$ is first operated with some window function $\textbf{w}$ involving statistical operation,
-\[
-  \textbf{z}_{w} = \{\textbf{X}_{w}\textbf{w} \quad | \quad \textbf{X}_{w} \in \mathbb{R}^{S \times J}, \textbf{w} \in \mathbb{R}^{J}, \textbf{z}_{w} \in \mathbb{R}^{S}\}
-\]    
-Now we have to compute $\textbf{y}_{w} \in \mathbb{R}^{T}$ which has least representation error with $\textbf{z}_{w} \in \mathbb{R}^{S}$ such that $T < S$. Let us say, $\textbf{z}_{w}$ can be written as a linear combination of some basis $\textbf{V} = [\textbf{v}_{1}, \textbf{v}_{2}, ..,\textbf{v}_{T}] \in \mathbb{R}^{S \times T}$ with coordinates $\textbf{y}_{w} = [y_{1}, y_{2},...,y_{T}]$. Then $\textbf{y}_{w}$ can be calculated by solving,
-\[
-\textbf{z}_{w} = \displaystyle\sum_{i=1}^{T}y_{i}\textbf{v}_{i} = \textbf{V}\textbf{y}_{w}
-\]
-\[
-\textbf{y}_{w} = \textbf{V}^{-1}\textbf{z}_{w}
-\]
-Thus, the operator $D$ in equation \ref{dim_red_abstract} is,
-\[
-\textbf{Y} = D(\textbf{X}, \textbf{V})
-\]
-Therefore, dimension reduction through basis transformation are those class of techniques where $D$ is a function of some invertible change of coordinates matrix $\textbf{V}$. Now, depending on how $\textbf{V}$ is defined, some methods are discussed.
+The representation $\textbf{X}$ is changed to a \textit{basis} that are functions of variance between the frequencies. This is done by computing the co-variance matrix $\bm{\Sigma}$ from the data and performing \textit{orthogonal decomposition} to compute it's basis. The co-ordinates of the resulting basis system are called \textit{principal components}. The key idea for reduction is to discard the information corresponding to \textit{low variance} basis. The computation of PCA reduction operator $\textbf{W}_{PCA}$ is elaborated below,  
 
-\subsubsection{Principal Component Analysis (PCA)}
-The frequencies in the adjacent bins can be highly correlated and therefore contain redundant information. Principal component Analysis is a procedure to transform large number of correlated variables into smaller number of uncorrelated variables. Moreover, only the information corresponding to high variance basis contributes to discrimination. This means, $\textbf{y}_{w}$ should be approximated with basis vectors that account for large variance. Hence, in PCA based techniques, dimension reduction is done through basis vectors of covariance matrix ($\bm{\Sigma}$). The coordinates of the resulting basis system are known as \textit{principal components}. The steps of this abstraction are enumerated,
 \begin{enumerate}[label=(\alph*)]
-\item Usually, large samples of inputs are concatenated to compute the covariance matrix. The rows of $\textbf{X}$ are centred by their mean and covariance is computed as,
+\item Usually, representations of large samples (say $S$ samples) from the dataset ($ \textbf{S} = [\textbf{X}_{1}, \textbf{X}_{2}, ..., \textbf{X}_{S}])$ are used to compute the co-variance matrix. The columns of $\textbf{S}$ are centred by their mean and the covariance matrix is computed as,
 \[
-   \bm{\Sigma} = \textbf{E}[(\textbf{X} - \textbf{E}[\textbf{X}])(\textbf{X} - \textbf{E}[\textbf{X}])^{T}] = \frac{1}{Q}\textbf{\^X}\textbf{\^X}^{T} \quad \in \mathbb{S}^{S \times S}
+   \bm{\Sigma} = \textbf{E}[(\textbf{S} - \textbf{E}[\textbf{S}])(\textbf{S} - \textbf{E}[\textbf{S}])^{T}] = \frac{1}{\displaystyle\sum_{s}{P_{s}}}\textbf{\^S}\textbf{\^S}^{T} \quad \in \mathbb{S}^{R \times R}
 \]
-\item The eigen values and eigen vectors of $\bm{\Sigma}$ are computed. At this point, we use the Orthogonal Eigenvector Decomposition Theorem (see Appendix ??) and infer that eigen vectors of symmetric matrix ($\bm{\Sigma}$) form an orthogonal basis in $\mathbb{R}^{S}$. 
+The covariance matrix $\bm{\Sigma}$ is symmetric positive definite and hence belongs to space of symmetric operators $\mathbb{S}$.
+\item The eigen values and eigen vectors of $\bm{\Sigma}$ are computed. At this point, we use the Orthogonal Eigenvector Decomposition Theorem and infer that eigen vectors of symmetric matrix ($\bm{\Sigma}$) form an orthogonal basis in $\mathbb{R}^{R}$. 
 \[
-\bm{\Sigma} = \textbf{V}\bm{\Lambda}\textbf{V}^{T} \qquad \textbf{V} \in \mathbb{O}^{S \times S}, \quad \bm{\Lambda} \in \mathbb{D}^{S \times S}
+\bm{\Sigma} = \textbf{V}\bm{\Lambda}\textbf{V}^{T} \qquad \textbf{V} \in \mathbb{O}^{R \times R}, \quad \bm{\Lambda} \in \mathbb{D}^{R \times R}
 \]
+The columns of matrix $\textbf{V}$ form the basis. Since the columns are orthogonal to each other, $\textbf{V}$ belongs to a space of orthogonal operators $\mathbb{O}$. $\bm{\Lambda}$ is a diagonal matrix of eigen values.
 
-\item The eigen values represent the magnitude of variance for each frequency.  Hence, eigenvectors corresponding to large eigen values gives the coordinates corresponding to greater variance. So eigen vectors corresponding to top $T$ eigen values are retained, while ignoring coordinates of lower variance. The resulting change of coordinates matrix is then $\textbf{\^V} \in \mathbb{O}^{S \times T}$
+\item The eigen values represent the magnitude of variance for each frequency dimension.  Hence, eigenvectors corresponding to large eigen values gives the coordinates corresponding to greater variance. So eigen vectors corresponding to top $T$ eigen values are retained, while ignoring coordinates of lower variance. The resulting change of coordinates matrix is then $\textbf{\^V} \in \mathbb{O}^{R \times T}$
    
-\item Since $\textbf{\^V}$ is orthogonal, $\textbf{\^{V}}^{-1} = \textbf{\^{V}}^{T}$, and we can compute $\textbf{y}_{w} = \textbf{\^{V}}^{T}\textbf{z}_{w}$
+\item Since $\textbf{\^V}$ is orthogonal, $\textbf{\^{V}}^{-1} = \textbf{\^{V}}^{T}$, and the resulting reduction for \textit{each sample} can computed as $\textbf{Y} = \textbf{\^{V}}^{T}\textbf{X}$, where $\textbf{X} \in \mathbb{R}^{R \times P}$, $\textbf{Y} \in \mathbb{R}^{T \times P}$ and $T < R$. Thus the reduction operator is
+\[
+\textbf{W}_{PCA} = \textbf{\^V}^{T}
+\]
 
 \end{enumerate}   
 
 \begin{algorithm}
-  \caption{$\textbf{Y}$ = PCA($\textbf{X}$)}\label{PCA}
+  \caption{$\textbf{W}_{PCA}$ = PCA($\textbf{X}_{1}, \textbf{X}_{2},..,\textbf{X}_{S}$)}\label{alg:pca}
   \begin{algorithmic}[1]
-    \Statex \textbf{Input :} $\textbf{X} \in \mathbb{R}^{S \times Q}$
-    \Statex \textbf{Output :} $\textbf{Y} \in \mathbb{R}^{T \times Q}$
-      \State $\bm{\Sigma} = \frac{1}{Q}\textbf{X}\textbf{X}^{T}$ \Comment{$\bm{\Sigma} \in \mathbb{S}^{S \times S}$}
-      \State $\textbf{V}^{T} \bm{\Lambda} \textbf{V} = \bm{\Sigma}$ \Comment{$\bm{\Lambda} \in \mathbb{D}^{T \times T}$ , $\textbf{V} \in \mathbb{O}^{S \times S}$}
-      \State $\textbf{V} \leftarrow \textbf{V}[:][:T]$ \Comment{$\textbf{V} \in \mathbb{O}^{S \times T}$}
-      \State $\textbf{\^{X}} = \textbf{X} - \textbf{E}[\textbf{X}]$
-      \State $\textbf{Y} \leftarrow \textbf{V}^{T}\textbf{\^{X}}$
+    \Statex \textbf{Input :} $\textbf{S} = [\textbf{X}_{1},..\textbf{X}_{S}] \qquad \textbf{X}_{s} \in \mathbb{R}^{R \times P_{s}}, \textbf{S} \in \mathbb{R}^{R \times Q},\qquad  Q = \displaystyle\sum_{s}{P_{s}}$
+    \Statex \textbf{Output :} $\textbf{W}_{PCA} \in \mathbb{R}^{T \times R}$
+      \State $\bm{\Sigma} = \frac{1}{Q}\textbf{S}\textbf{S}^{T}$ \Comment{$\bm{\Sigma} \in \mathbb{S}^{R \times R}$}
+      \State $\textbf{V}^{T} \bm{\Lambda} \textbf{V} = \bm{\Sigma}$ \Comment{$\bm{\Lambda} \in \mathbb{D}^{R \times R}$ , $\textbf{V} \in \mathbb{O}^{R \times R}$}
+      \State $\textbf{V} \leftarrow \textbf{V}[:][:T]$ \Comment{$\textbf{V} \in \mathbb{O}^{R \times T}$}
+      \State $\textbf{W}_{PCA} = \textbf{V}^{T}$
   \end{algorithmic}
 \end{algorithm}
 \FloatBarrier
-\bigskip
 
-\noindent Sometimes, to make the resulting reduction $\textbf{Y}$ uncorrelated, the corresponding dimensions are divided by their eigen values. This is because eigen values are proportional to the magnitude of variance in each frequency direction. This operation is known as \textbf{PCA Whitening}   
-\[
-\textbf{Y} \leftarrow \bm{\Lambda}^{-1}\textbf{V}^{T}\textbf{\^{X}}
-\]
-\bigskip
+\noindent Since the operator $\textbf{W}_{PCA}$ is computed from the data without requiring labelling, this method falls under \textit{unsupervised learning}. The columns of representation are first centred before applying the PCA reduction operation. An illustration of PCA reduction function $D_{(PCA)}$ is shown below,
 
-\subsubsection{Mel-frequency cepstrum coefficients (MFCC)}
-It has been studied that the spectral basis functions of cosine transform in mel-log power spectrogram are similar to the corresponding principal component basis[]. MFCC coefficients are obtained by taking discrete cosine transform of the mel log power spectrogram. Since these basis functions are similar to that of co-variance matrix, using the coefficients corresponding to low frequency cosine functions encodes the information corresponding to large variance. 
 \begin{algorithm}
-  \caption{$\textbf{Y}$ = MFCC($\textbf{a}$) }\label{MFCC}
+  \caption{$\textbf{Y}$ = $D_{(PCA)}$($\textbf{X}$)}\label{alg:dpca}
+  \begin{algorithmic}[1]
+    \Statex \textbf{Input :} $\textbf{X} \in \mathbb{R}^{R \times P}$
+    \Statex \textbf{Output :} $\textbf{Y} \in \mathbb{R}^{T \times P}$
+	\State $\textbf{\^X} = \textbf{X} - \textbf{E}[\textbf{X}]$
+	\State $\textbf{Y} = \textbf{W}_{PCA}\textbf{\^X}$
+  \end{algorithmic}
+\end{algorithm}
+\FloatBarrier
+
+\noindent Sometimes, to make the resulting reduction $\textbf{Y}$ uncorrelated (that is, unit variance in each frequency dimension), the corresponding dimensions are divided by their eigen values. This is because eigen values are proportional to the magnitude of variance in each frequency direction. This operation is known as \textbf{PCA Whitening} and the reduction operator is,
+\[
+\textbf{W}_{PCAW} = \bm{\Lambda}^{-1}\textbf{V}^{T}
+\]    
+The reduction function $D_{(PCAW)}$ is same as algorithm \ref{alg:dpca}, except that the operator $\textbf{W}_{PCAW}$ is used instead of $\textbf{W}_{PCA}$
+\bigskip
+
+\subsection{Mel-frequency cepstrum coefficients (MFCC)}
+\label{mfcc}
+It has been studied that the basis functions resulting from co-variance matrix of log-mel spectrogram representation are similar to cosine transform on log-mel spectrogram []. Therefore, instead of explicitly computing the basis functions from the data, one can simple use cosine basis. The co-ordinates of corresponding basis system are known as \textit{Mel-Frequency Cepstrum Coefficients}. The co-ordinates of high frequency cosine functions are discarded because they correspond to low-variance information. 
+\bigskip
+
+\noindent Since this reduction is engineered only for log mel spectrogram representation, the reduction function $D_{(MFCC)}$ takes the signal as input. $\textbf{W}_{MFCC}$ is the reduction operator.
+
+\begin{algorithm}
+  \caption{$\textbf{Y}$ = $D_{(MFCC)}$($\textbf{a}$) }\label{MFCC}
   \begin{algorithmic}[1]
     \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{N}$
-    \Statex \textbf{Output :} $\textbf{Y} \in \mathbb{R}^{T \times Q}$ \Comment{$T=S$, $Q=W=P$}
-    \State $\textbf{C} = STFT(\textbf{a})$ \Comment{$\textbf{C} \in \mathbb{C}^{M \times Q}$}
-    \State $\textbf{Y}_{r} = \textbf{C} \odot \textbf{C}$ \Comment{$\textbf{Y}_{r} \in \mathbb{R}^{M \times Q}$}
-    \State $\textbf{R} = MEL(\textbf{Y}_{r})$ \Comment{$\textbf{R} \in \mathbb{R}^{R \times Q}$, $\textbf{X}=\textbf{R}$}
-    \State $\textbf{R} \leftarrow ln(\textbf{R})$
+    \Statex \textbf{Output :} $\textbf{Y} \in \mathbb{R}^{T \times P}$
+    \State $\textbf{X} = R_{(MEL)} \big( \textbf{a} \big) $ \Comment{$\textbf{X} \in \mathbb{R}^{R \times P} $} 
+    \State $\textbf{X} \leftarrow ln(\textbf{X})$
     \For{$ \omega \in \{1,..,T\}$}
-    \State $\textbf{V}^{T}[ \omega ] \leftarrow \textbf{cos}( \omega \textbf{t})$  \Comment{$\textbf{V} \in \mathbb{R}^{R \times T}, \textbf{t} \in \mathbb{R}^{R}$}
+    \State $\textbf{W}_{MFCC}[ \omega ] \leftarrow \textbf{cos}( \omega \textbf{t})$  \Comment{$\textbf{W}_{MFCC} \in \mathbb{R}^{R \times T}, \textbf{t} \in \mathbb{R}^{R}$}
     \EndFor
-    \State $\textbf{Y} \leftarrow \textbf{V}^{T}\textbf{R}$
+    \State $\textbf{Y} \leftarrow \textbf{W}_{MFCC}\textbf{X}$
   \end{algorithmic}
 \end{algorithm}
  
@@ -333,11 +337,6 @@ The index based notations for this operation are shown in appendix ??. If the fi
 \end{itemize}
 However, it is not clear if such defined filters really encodes the information in $\textbf{Y}$ relevant for certain classification task at hand. But, when a set of task-specific observations are available, it is possible to solve for the filters $\textbf{w}_{k}$, so that the resulting transformation $\textbf{Y}$ is optimal for the considered task. This is done using iterative optimization techniques, starting by random initializing of $\textbf{w}_{k}$ and updating it's values after every iteration. Computational models that solves by \textbf{first-order gradient descent} methods (a class of optimization techniques) are represented as first order \textbf{artificial neural networks}. The filters $\textbf{w}_{k}$ which we are attempting to solve are also termed as \textit{parameters} or \textit{weights} of the network. The iterative steps involving finding these \textit{weights} is termed as \textit{training} the neural network (Details of training neural network are explained in section \ref{training}). Since the transformation operation by the \textit{filters} are represented as convolution over the input, the neural network is termed as \textbf{convolution neural network}.   
 
-\subsubsection{Feature engineering Vs Unsupervised Feature Learning Vs Supervised feature learning}
-\label{feature}
-When the \textit{filter functions} are computed by using the domain knowledge of data, then the resulting features are \textit{engineered features}.MFCCs are engineered features. When the \textit{filter functions} are obtained by exploiting the representations from data, then the resulting features are \textit{learned features}. Feature learning can be divided into two categories : \textit{unsupervised} and \textit{supervised} feature learning. In \textit{unsupervised} feature learning, filters are computed from data representations without requiring labelled data. \textit{Filter functions} used for PCA are obtained by computing the basis of covariance matrix from the data. Hence PCA features are obtained as a result of \textit{unsupervised learning}. On the contrary, when labelled data is required for computing the \textit{filter functions}, the resulting features are then known to be obtained through \textit{supervised feature learning}. Features obtained by training a neural network are resulting from \textit{supervised feature learning}.   
-\bigskip
-
 \subsubsection{Approximating MFCC with CNN}
 \textit{Supervised} feature learning has an advantage over \textit{unsupervised} feature learning when we wish to find filters $\textbf{w}_{k}$ optimal for context based classification tasks. Feature learning with CNN fall under \textit{supervised} feature learning category.
 To show that CNN can do atleast as good as MFCCs, an illustration is discussed by approximating MFCC with CNN. Setting up a CNN architecture requires defining the \textit{hyper parameters} of like number of filters, filter dimensions and stride of the filter. The domain knowledge of MFCC computation is used to set these hyper parameters.
@@ -352,9 +351,9 @@ To show that CNN can do atleast as good as MFCCs, an illustration is discussed b
     \Statex \textbf{Output :} $\textbf{Y} \in \mathbb{R}^{T \times Q}$ 
     \State $\textbf{C} = \textbf{a} \star {\textbf{W}_{STFT}}^{(s)}$ \Comment{$ \textbf{W}_{STFT} \in \mathbb{R}^{M \times F}, \textbf{C} \in \mathbb{C}^{M \times Q}$}
     \State $\textbf{C} \leftarrow \textbf{C} \odot \textbf{C}$ 
-    \State $\textbf{R} = \textbf{C} \star {\textbf{W}_{MEL}}^{(M)}$ \Comment{$ \textbf{W}_{MEL} \in \mathbb{R}^{R \times M}, \textbf{R} \in \mathbb{R}^{R \times Q}$}
-    \State $\textbf{R} \leftarrow ln(\textbf{R})$
-    \State $\textbf{Y} = \textbf{R} \star {\textbf{W}_{MFCC}}^{(R)}$ \Comment{$\textbf{W}_{MFCC} \in \mathbb{R}^{T \times R}$}
+    \State $\textbf{X} = \textbf{C} \star {\textbf{W}_{MEL}}^{(M)}$ \Comment{$ \textbf{W}_{MEL} \in \mathbb{R}^{R \times M}, \textbf{X} \in \mathbb{R}^{R \times Q}$}
+    \State $\textbf{X} \leftarrow ln(\textbf{X})$
+    \State $\textbf{Y} = \textbf{X} \star {\textbf{W}_{MFCC}}^{(R)}$ \Comment{$\textbf{W}_{MFCC} \in \mathbb{R}^{T \times R}$}
   \end{algorithmic}
 \end{algorithm}
 \FloatBarrier
@@ -372,8 +371,8 @@ The non-linearity in between each layer is needed. Otherwise, the filters accros
     \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{N}$
     \Statex \textbf{Output :} $\textbf{Y} \in \mathbb{R}^{T \times Q}$ 
     \State $\textbf{C} = \bm{\Phi}_{1} (\textbf{a} \star {\textbf{W}_{L1}}^{(s)})$ \Comment{$ \textbf{W}_{L1} \in \mathbb{R}^{M \times F}, \textbf{C} \in \mathbb{C}^{M \times Q}$}
-    \State $\textbf{R} = \bm{\Phi}_{2} (\textbf{C} \star {\textbf{W}_{L2}}^{(M)})$ \Comment{$ \textbf{W}_{L2} \in \mathbb{R}^{R \times M}, \textbf{R} \in \mathbb{R}^{R \times Q}$}
-    \State $\textbf{Y} = \bm{\Phi}_{3} (\textbf{R} \star {\textbf{W}_{L3}}^{(R)})$ \Comment{$\textbf{W}_{L3} \in \mathbb{R}^{T \times R}$}
+    \State $\textbf{X} = \bm{\Phi}_{2} (\textbf{C} \star {\textbf{W}_{L2}}^{(M)})$ \Comment{$ \textbf{W}_{L2} \in \mathbb{R}^{R \times M}, \textbf{X} \in \mathbb{R}^{R \times Q}$}
+    \State $\textbf{Y} = \bm{\Phi}_{3} (\textbf{X} \star {\textbf{W}_{L3}}^{(R)})$ \Comment{$\textbf{W}_{L3} \in \mathbb{R}^{T \times R}$}
   \end{algorithmic}
 \end{algorithm}
 \FloatBarrier
@@ -424,7 +423,7 @@ In Bag of Frames(BoF) model, the \textit{frequency} of each reduced frame is use
   \end{algorithmic}
 \end{algorithm}
 \FloatBarrier
-\noindent The cluster centres are computed by clustering algorithms likes gaussian mixture models or K-Means clustering. Computation of $\bm{\mu}_{j}$ by K-Means is illustrated in algorithm \ref{alg:kmeans}. The cluster centres are computed for the entire dataset. Each of the $N$ sample track could have $W$ frame-wise features. To compute these centres, $\bm{\mu}_{j}$ are first randomly initialized. Then each frame level feature is assigned to the nearest centre. After the assignment of all frame features, the cluster centres $\bm{\mu}_{j}$ are re-computed. The frame features are then assigned to these new centres. This assignment and re-computation of $\bm{\mu}_{j}$ is iterated until convergence.  
+\noindent The cluster centres are computed by clustering algorithms likes gaussian mixture models or K-Means clustering. Computation of $\bm{\mu}_{j}$ by K-Means is illustrated in algorithm \ref{alg:kmeans}. The cluster centres are computed for the entire dataset. Each of the $N$ sample track could have $W$ frame-wise features. To compute these centres, $\bm{\mu}_{j}$ are first randomly initialized. Then each frame level feature is assigned to the nearest centre. After the assignment of all frame features, the cluster centres $\bm{\mu}_{j}$ are re-computed. The frame features are then re-assigned to these new centres. This re-assignment and re-computation of $\bm{\mu}_{j}$ is iterated until convergence.  
 \begin{algorithm}
   \caption{K-MEANS($\textbf{Y}_{0}, \textbf{Y}_{2},..., \textbf{Y}_{N-1}$) }\label{alg:kmeans}
   \begin{algorithmic}[1]
@@ -453,7 +452,7 @@ The idea behind RNN is to learn a feature representation by sequentially combini
 \[
 \textbf{h}_{W} = \bm{\Theta}(\textbf{Y}[:,W], \textbf{h}_{W-1}) \qquad \textbf{Y} \in \mathbb{R}^{T \times W}
 \]
-$\bm{\Theta}$ is the internal state function which sequentially combines the input. The operator $\textbf{W}$ and other operators resulting from the function $\bm{\Theta}$ are solved for optimality using a labelled dataset. These operators can be computed by training an RNN (see Section \ref{training}). The function $\bm{\Theta}$ should sufficiently hold the information from beginning to end of the sequence. RNNs face challenge in remembering the information in the earlier part of the sequence. Because of this, different flavours of RNN have been developed to hold the sequence information longer and to battle the vanishing gradient problem while training neural network (see Section \ref{training}). Depending on how $\bm{\Theta}$ is defined, at least two RNN architectures are popular in the literature: Long-Short Term Memory (LSTM) RNN and Gated Recurrent Unit(GRU) RNN. In this thesis, only LSTMs [] are considered.   
+$\textbf{h}_{W}$ is the internal state after combining $W$ columns of $\textbf{Y}$. $\bm{\Theta}$ is the internal state function which sequentially combines the input. The operator $\textbf{W}$ and other operators resulting from the function $\bm{\Theta}$ are solved for optimality using a labelled dataset. These operators can be computed by training an RNN (see Section \ref{training}). The function $\bm{\Theta}$ should sufficiently hold the information from beginning to end of the sequence. RNNs face challenge in remembering the information in the earlier part of the sequence. Because of this, different flavours of RNN have been developed to hold the sequence information longer and to battle the vanishing gradient problem while training neural network (see Section \ref{training}). Depending on how $\bm{\Theta}$ is defined, at least two RNN architectures are popular in the literature: Long-Short Term Memory (LSTM) RNN and Gated Recurrent Unit(GRU) RNN. In this thesis, only LSTMs [] are considered.   
 
 \subsubsection{Long-Short Term Memory RNN}
 The LSTM internal state is contained by three gates that control the information flow. This is done by multiplying the output of each sequence $\textbf{o}_{w}$ with the corresponding cell state function $\textbf{c}_{w}$.

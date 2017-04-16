@@ -9,13 +9,11 @@
 \newlabel{sampling}{{2.1.1}{9}{Sampling of continuous-time signal}{subsection.2.1.1}{}}
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}Time-Frequency transformations}{10}{subsection.2.1.2}}
 \newlabel{time}{{2.1.2}{10}{Time-Frequency transformations}{subsection.2.1.2}{}}
-\newlabel{exp_fourier}{{2.2}{10}{Time-Frequency transformations}{equation.2.1.2}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Periodic Signals}{10}{section*.6}}
-\newlabel{ortho}{{2.4}{10}{Periodic Signals}{equation.2.1.4}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Aperiodic Signals}{10}{section*.7}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Basis transformation from time to frequency domain}{10}{section*.6}}
+\newlabel{exp_fourier}{{2.1}{10}{Basis transformation from time to frequency domain}{equation.2.1.1}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Exponential Fourier Series and Fourier Transform}{10}{section*.7}}
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.3}STFT, Mel-Spectrogram}{11}{subsection.2.1.3}}
 \newlabel{stft}{{2.1.3}{11}{STFT, Mel-Spectrogram}{subsection.2.1.3}{}}
-\newlabel{stfteq}{{2.8}{11}{STFT, Mel-Spectrogram}{equation.2.1.8}{}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fig:stftPipe}{{2.1a}{12}{Windowing is applied on overlapping segments\\ followed by FFT \relax }{figure.caption.8}{}}
 \newlabel{sub@fig:stftPipe}{{a}{12}{Windowing is applied on overlapping segments\\ followed by FFT \relax }{figure.caption.8}{}}
@@ -23,61 +21,67 @@
 \newlabel{sub@fig:HammingWindow}{{b}{12}{Application of Hamming Window on \\a segment of input signal \relax }{figure.caption.8}{}}
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces (a) Shows STFT Pipeline. (b) Shows the application of  Window function\relax }}{12}{figure.caption.8}}
 \newlabel{fig:STFT}{{2.1}{12}{(a) Shows STFT Pipeline. (b) Shows the application of \\Window function\relax }{figure.caption.8}{}}
-\newlabel{eq:stft}{{2.9}{12}{STFT, Mel-Spectrogram}{equation.2.1.9}{}}
-\newlabel{energy}{{2.12}{12}{STFT, Mel-Spectrogram}{equation.2.1.12}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Mel Spectrogram}{13}{section*.9}}
-\newlabel{mel}{{2.1.3}{13}{Mel Spectrogram}{section*.9}{}}
-\newlabel{mel_conv}{{2.14}{13}{Mel Spectrogram}{equation.2.1.14}{}}
-\newlabel{mel_conv_flat}{{2.15}{13}{Mel Spectrogram}{equation.2.1.15}{}}
-\newlabel{eq:mel}{{2.16}{14}{Mel Spectrogram}{equation.2.1.16}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{STFT as Convolution}{12}{section*.9}}
+\newlabel{stfteq}{{2.3}{12}{STFT as Convolution}{equation.2.1.3}{}}
+\newlabel{eq:stft}{{2.4}{13}{STFT as Convolution}{equation.2.1.4}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Power spectrogram}{13}{section*.10}}
+\newlabel{energy}{{2.7}{13}{Power spectrogram}{equation.2.1.7}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Mel Power Spectrogram}{13}{section*.11}}
+\newlabel{mel}{{2.1.3}{13}{Mel Power Spectrogram}{section*.11}{}}
+\newlabel{mel_conv}{{2.9}{13}{Mel Power Spectrogram}{equation.2.1.9}{}}
+\newlabel{mel_conv_flat}{{2.10}{14}{Mel Power Spectrogram}{equation.2.1.10}{}}
+\newlabel{eq:mel}{{2.11}{14}{Mel Power Spectrogram}{equation.2.1.11}{}}
+\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces $\textbf  {X}$ = $R_{(MEL)}$($\textbf  {a}$)\relax }}{14}{algorithm.1}}
+\newlabel{alg:mel}{{1}{14}{$\textbf {X}$ = $R_{(MEL)}$($\textbf {a}$)\relax }{algorithm.1}{}}
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.2}Dimensionality Reduction}{14}{section.2.2}}
 \newlabel{dimension}{{2.2}{14}{Dimensionality Reduction}{section.2.2}{}}
-\newlabel{dim_red_abstract}{{2.17}{14}{Dimensionality Reduction}{equation.2.2.17}{}}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Dimensionality Reduction Pipeline\relax }}{15}{figure.caption.10}}
-\newlabel{fig:Dimensionality Reduction}{{2.2}{15}{Dimensionality Reduction Pipeline\relax }{figure.caption.10}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Basis Transformations - PCA, MFCC}{15}{subsection.2.2.1}}
-\newlabel{basis}{{2.2.1}{15}{Basis Transformations - PCA, MFCC}{subsection.2.2.1}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Principal Component Analysis (PCA)}{16}{section*.11}}
-\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces $\textbf  {Y}$ = PCA($\textbf  {X}$)\relax }}{16}{algorithm.1}}
-\newlabel{PCA}{{1}{16}{$\textbf {Y}$ = PCA($\textbf {X}$)\relax }{algorithm.1}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Mel-frequency cepstrum coefficients (MFCC)}{17}{section*.12}}
-\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces $\textbf  {Y}$ = MFCC($\textbf  {a}$) \relax }}{17}{algorithm.2}}
-\newlabel{MFCC}{{2}{17}{$\textbf {Y}$ = MFCC($\textbf {a}$) \relax }{algorithm.2}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Convolution neural network}{17}{subsection.2.2.2}}
-\newlabel{stacked}{{2.2.2}{17}{Convolution neural network}{subsection.2.2.2}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Feature engineering Vs Unsupervised Feature Learning Vs Supervised feature learning}{18}{section*.13}}
-\newlabel{feature}{{2.2.2}{18}{Feature engineering Vs Unsupervised Feature Learning Vs Supervised feature learning}{section*.13}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Approximating MFCC with CNN}{18}{section*.14}}
-\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces $\textbf  {Y}$ = MFCC($\textbf  {a}$) \relax }}{19}{algorithm.3}}
-\newlabel{MFCC_engineer}{{3}{19}{$\textbf {Y}$ = MFCC($\textbf {a}$) \relax }{algorithm.3}{}}
-\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces $\textbf  {Y}$ = CNN($\textbf  {a}$) \relax }}{19}{algorithm.4}}
-\newlabel{MFCC_learn}{{4}{19}{$\textbf {Y}$ = CNN($\textbf {a}$) \relax }{algorithm.4}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{CNN as a general purpose feature extractor}{19}{section*.15}}
-\newlabel{general}{{2.2.2}{19}{CNN as a general purpose feature extractor}{section*.15}{}}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces General purpose feature extractor\relax }}{20}{figure.caption.16}}
-\newlabel{fig:deep learning}{{2.3}{20}{General purpose feature extractor\relax }{figure.caption.16}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.3}Temporal Approximation}{20}{section.2.3}}
-\newlabel{temporal}{{2.3}{20}{Temporal Approximation}{section.2.3}{}}
+\newlabel{dim_red_abstract}{{2.12}{14}{Dimensionality Reduction}{equation.2.2.12}{}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Dimensionality Reduction Pipeline\relax }}{15}{figure.caption.12}}
+\newlabel{fig:Dimensionality Reduction}{{2.2}{15}{Dimensionality Reduction Pipeline\relax }{figure.caption.12}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Domain engineering Vs Unsupervised learning Vs Supervised learning}{15}{subsection.2.2.1}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Principal Component Analysis (PCA)}{16}{subsection.2.2.2}}
+\newlabel{pca}{{2.2.2}{16}{Principal Component Analysis (PCA)}{subsection.2.2.2}{}}
+\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces $\textbf  {W}_{PCA}$ = PCA($\textbf  {X}_{1}, \textbf  {X}_{2},..,\textbf  {X}_{S}$)\relax }}{17}{algorithm.2}}
+\newlabel{alg:pca}{{2}{17}{$\textbf {W}_{PCA}$ = PCA($\textbf {X}_{1}, \textbf {X}_{2},..,\textbf {X}_{S}$)\relax }{algorithm.2}{}}
+\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces $\textbf  {Y}$ = $D_{(PCA)}$($\textbf  {X}$)\relax }}{17}{algorithm.3}}
+\newlabel{alg:dpca}{{3}{17}{$\textbf {Y}$ = $D_{(PCA)}$($\textbf {X}$)\relax }{algorithm.3}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Mel-frequency cepstrum coefficients (MFCC)}{17}{subsection.2.2.3}}
+\newlabel{mfcc}{{2.2.3}{17}{Mel-frequency cepstrum coefficients (MFCC)}{subsection.2.2.3}{}}
+\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces $\textbf  {Y}$ = $D_{(MFCC)}$($\textbf  {a}$) \relax }}{18}{algorithm.4}}
+\newlabel{MFCC}{{4}{18}{$\textbf {Y}$ = $D_{(MFCC)}$($\textbf {a}$) \relax }{algorithm.4}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.4}Convolution neural network}{18}{subsection.2.2.4}}
+\newlabel{stacked}{{2.2.4}{18}{Convolution neural network}{subsection.2.2.4}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Approximating MFCC with CNN}{19}{section*.13}}
+\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {5}{\ignorespaces $\textbf  {Y}$ = MFCC($\textbf  {a}$) \relax }}{19}{algorithm.5}}
+\newlabel{MFCC_engineer}{{5}{19}{$\textbf {Y}$ = MFCC($\textbf {a}$) \relax }{algorithm.5}{}}
+\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {6}{\ignorespaces $\textbf  {Y}$ = CNN($\textbf  {a}$) \relax }}{20}{algorithm.6}}
+\newlabel{MFCC_learn}{{6}{20}{$\textbf {Y}$ = CNN($\textbf {a}$) \relax }{algorithm.6}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{CNN as a general purpose feature extractor}{20}{section*.14}}
+\newlabel{general}{{2.2.4}{20}{CNN as a general purpose feature extractor}{section*.14}{}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces General purpose feature extractor\relax }}{21}{figure.caption.15}}
+\newlabel{fig:deep learning}{{2.3}{21}{General purpose feature extractor\relax }{figure.caption.15}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.3}Temporal Approximation}{21}{section.2.3}}
+\newlabel{temporal}{{2.3}{21}{Temporal Approximation}{section.2.3}{}}
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}Bag Of Frames}{21}{subsection.2.3.1}}
 \newlabel{clustering}{{2.3.1}{21}{Bag Of Frames}{subsection.2.3.1}{}}
-\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {5}{\ignorespaces $\textbf  {f}$ = BagOfFrames($\textbf  {Y}$) \relax }}{21}{algorithm.5}}
-\newlabel{bof}{{5}{21}{$\textbf {f}$ = BagOfFrames($\textbf {Y}$) \relax }{algorithm.5}{}}
-\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {6}{\ignorespaces K-MEANS($\textbf  {Y}_{0}, \textbf  {Y}_{2},..., \textbf  {Y}_{N-1}$) \relax }}{21}{algorithm.6}}
-\newlabel{alg:kmeans}{{6}{21}{K-MEANS($\textbf {Y}_{0}, \textbf {Y}_{2},..., \textbf {Y}_{N-1}$) \relax }{algorithm.6}{}}
+\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {7}{\ignorespaces $\textbf  {f}$ = BagOfFrames($\textbf  {Y}$) \relax }}{22}{algorithm.7}}
+\newlabel{bof}{{7}{22}{$\textbf {f}$ = BagOfFrames($\textbf {Y}$) \relax }{algorithm.7}{}}
+\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {8}{\ignorespaces K-MEANS($\textbf  {Y}_{0}, \textbf  {Y}_{2},..., \textbf  {Y}_{N-1}$) \relax }}{22}{algorithm.8}}
+\newlabel{alg:kmeans}{{8}{22}{K-MEANS($\textbf {Y}_{0}, \textbf {Y}_{2},..., \textbf {Y}_{N-1}$) \relax }{algorithm.8}{}}
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Recurrent Neural Networks}{22}{subsection.2.3.2}}
 \newlabel{rnn}{{2.3.2}{22}{Recurrent Neural Networks}{subsection.2.3.2}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Long-Short Term Memory RNN}{22}{section*.17}}
-\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {7}{\ignorespaces $\textbf  {f}$ = $Seq2One\_LSTM$($\textbf  {Y}$) \relax }}{23}{algorithm.7}}
-\newlabel{alg:s2olstm}{{7}{23}{$\textbf {f}$ = $Seq2One\_LSTM$($\textbf {Y}$) \relax }{algorithm.7}{}}
-\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {8}{\ignorespaces $\textbf  {f}$ = $LSTM2(\textbf  {Y})$\relax }}{23}{algorithm.8}}
-\newlabel{alg:2lstm}{{8}{23}{$\textbf {f}$ = $LSTM2(\textbf {Y})$\relax }{algorithm.8}{}}
-\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {9}{\ignorespaces $\textbf  {F}$ = $Seq2Seq\_LSTM$($\textbf  {Y}$) \relax }}{23}{algorithm.9}}
-\newlabel{alg:s2slstm}{{9}{23}{$\textbf {F}$ = $Seq2Seq\_LSTM$($\textbf {Y}$) \relax }{algorithm.9}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.4}Training}{23}{section.2.4}}
-\newlabel{training}{{2.4}{23}{Training}{section.2.4}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Long-Short Term Memory RNN}{23}{section*.16}}
+\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {9}{\ignorespaces $\textbf  {f}$ = $Seq2One\_LSTM$($\textbf  {Y}$) \relax }}{24}{algorithm.9}}
+\newlabel{alg:s2olstm}{{9}{24}{$\textbf {f}$ = $Seq2One\_LSTM$($\textbf {Y}$) \relax }{algorithm.9}{}}
+\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {10}{\ignorespaces $\textbf  {f}$ = $LSTM2(\textbf  {Y})$\relax }}{24}{algorithm.10}}
+\newlabel{alg:2lstm}{{10}{24}{$\textbf {f}$ = $LSTM2(\textbf {Y})$\relax }{algorithm.10}{}}
+\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {11}{\ignorespaces $\textbf  {F}$ = $Seq2Seq\_LSTM$($\textbf  {Y}$) \relax }}{24}{algorithm.11}}
+\newlabel{alg:s2slstm}{{11}{24}{$\textbf {F}$ = $Seq2Seq\_LSTM$($\textbf {Y}$) \relax }{algorithm.11}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.4}Training}{24}{section.2.4}}
+\newlabel{training}{{2.4}{24}{Training}{section.2.4}{}}
 \@setckpt{Chapters/Chapter2}{
-\setcounter{page}{24}
-\setcounter{equation}{17}
+\setcounter{page}{25}
+\setcounter{equation}{12}
 \setcounter{enumi}{4}
 \setcounter{enumii}{0}
 \setcounter{enumiii}{0}
@@ -96,7 +100,7 @@
 \setcounter{parentequation}{0}
 \setcounter{Item}{4}
 \setcounter{Hfootnote}{0}
-\setcounter{bookmark@seq@number}{21}
+\setcounter{bookmark@seq@number}{23}
 \setcounter{tabx@nest}{0}
 \setcounter{listtotal}{0}
 \setcounter{listcount}{0}
@@ -106,7 +110,7 @@
 \setcounter{citetotal}{0}
 \setcounter{multicitecount}{0}
 \setcounter{multicitetotal}{0}
-\setcounter{instcount}{22}
+\setcounter{instcount}{21}
 \setcounter{maxnames}{3}
 \setcounter{minnames}{1}
 \setcounter{maxitems}{3}
@@ -206,7 +210,7 @@
 \setcounter{subfigure}{0}
 \setcounter{subtable}{0}
 \setcounter{float@type}{8}
-\setcounter{algorithm}{9}
+\setcounter{algorithm}{11}
 \setcounter{ALG@line}{5}
 \setcounter{ALG@rem}{0}
 \setcounter{ALG@nested}{0}

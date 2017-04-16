@@ -30,39 +30,41 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.1.2}Time-Frequency transformations}{10}{subsection.2.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Periodic Signals}{10}{section*.6}
+\contentsline {subsubsection}{Basis transformation from time to frequency domain}{10}{section*.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Aperiodic Signals}{10}{section*.7}
+\contentsline {subsubsection}{Exponential Fourier Series and Fourier Transform}{10}{section*.7}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.1.3}STFT, Mel-Spectrogram}{11}{subsection.2.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Mel Spectrogram}{13}{section*.9}
+\contentsline {subsubsection}{STFT as Convolution}{12}{section*.9}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Power spectrogram}{13}{section*.10}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Mel Power Spectrogram}{13}{section*.11}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.2}Dimensionality Reduction}{14}{section.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.1}Basis Transformations - PCA, MFCC}{15}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.1}Domain engineering Vs Unsupervised learning Vs Supervised learning}{15}{subsection.2.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Principal Component Analysis (PCA)}{16}{section*.11}
+\contentsline {subsection}{\numberline {2.2.2}Principal Component Analysis (PCA)}{16}{subsection.2.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Mel-frequency cepstrum coefficients (MFCC)}{17}{section*.12}
+\contentsline {subsection}{\numberline {2.2.3}Mel-frequency cepstrum coefficients (MFCC)}{17}{subsection.2.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.2}Convolution neural network}{17}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.4}Convolution neural network}{18}{subsection.2.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Feature engineering Vs Unsupervised Feature Learning Vs Supervised feature learning}{18}{section*.13}
+\contentsline {subsubsection}{Approximating MFCC with CNN}{19}{section*.13}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Approximating MFCC with CNN}{18}{section*.14}
+\contentsline {subsubsection}{CNN as a general purpose feature extractor}{20}{section*.14}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{CNN as a general purpose feature extractor}{19}{section*.15}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.3}Temporal Approximation}{20}{section.2.3}
+\contentsline {section}{\numberline {2.3}Temporal Approximation}{21}{section.2.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.3.1}Bag Of Frames}{21}{subsection.2.3.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.3.2}Recurrent Neural Networks}{22}{subsection.2.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Long-Short Term Memory RNN}{22}{section*.17}
+\contentsline {subsubsection}{Long-Short Term Memory RNN}{23}{section*.16}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.4}Training}{23}{section.2.4}
+\contentsline {section}{\numberline {2.4}Training}{24}{section.2.4}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {3}Literature Survey and Model Selection }{25}{chapter.3}
 \defcounter {refsection}{0}\relax 
@@ -112,4 +114,4 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {A.2.2}2D Convolution}{46}{subsection.1.A.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{49}{chapter*.20}
+\contentsline {chapter}{Bibliography}{49}{chapter*.19}
