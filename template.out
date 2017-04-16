@@ -20,29 +20,33 @@
 \BOOKMARK [1][-]{section.2.3}{Temporal Approximation}{chapter.2}% 20
 \BOOKMARK [2][-]{subsection.2.3.1}{Bag Of Frames}{section.2.3}% 21
 \BOOKMARK [2][-]{subsection.2.3.2}{Recurrent Neural Networks}{section.2.3}% 22
-\BOOKMARK [1][-]{section.2.4}{Training}{chapter.2}% 23
-\BOOKMARK [0][-]{chapter.3}{Literature Survey and Model Selection }{}% 24
-\BOOKMARK [1][-]{section.3.1}{Literature Review}{chapter.3}% 25
-\BOOKMARK [2][-]{subsection.3.1.1}{From classifier to feature emphasis}{section.3.1}% 26
-\BOOKMARK [2][-]{subsection.3.1.2}{From hand-crafting to feature learning}{section.3.1}% 27
-\BOOKMARK [2][-]{subsection.3.1.3}{Transfer Learning by supervised pre-training}{section.3.1}% 28
-\BOOKMARK [2][-]{subsection.3.1.4}{Convolutional Neural Networks}{section.3.1}% 29
-\BOOKMARK [1][-]{section.3.2}{Model Selection}{chapter.3}% 30
-\BOOKMARK [2][-]{subsection.3.2.1}{Transfer learning Vs MFCC}{section.3.2}% 31
-\BOOKMARK [2][-]{subsection.3.2.2}{Bag Of Frames vs RNN}{section.3.2}% 32
-\BOOKMARK [0][-]{chapter.4}{Experiments and Results}{}% 33
-\BOOKMARK [1][-]{section.4.1}{Dataset and Evaluation}{chapter.4}% 34
-\BOOKMARK [2][-]{subsection.4.1.1}{Dataset for source task}{section.4.1}% 35
-\BOOKMARK [2][-]{subsection.4.1.2}{Dataset for target task}{section.4.1}% 36
-\BOOKMARK [2][-]{subsection.4.1.3}{Evaluation metrics}{section.4.1}% 37
-\BOOKMARK [1][-]{section.4.2}{Experiments}{chapter.4}% 38
-\BOOKMARK [2][-]{subsection.4.2.1}{Experiments with pre-trained CNNs as feature extractor}{section.4.2}% 39
-\BOOKMARK [2][-]{subsection.4.2.2}{Experiments with MFCCs as feature extractor}{section.4.2}% 40
-\BOOKMARK [1][-]{section.4.3}{Summary of Results}{chapter.4}% 41
-\BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 42
-\BOOKMARK [0][-]{Appendix.1.A}{Appendix}{}% 43
-\BOOKMARK [1][-]{section.1.A.1}{Basis Transformation}{Appendix.1.A}% 44
-\BOOKMARK [1][-]{section.1.A.2}{Convolution}{Appendix.1.A}% 45
-\BOOKMARK [2][-]{subsection.1.A.2.1}{1D Convolution}{section.1.A.2}% 46
-\BOOKMARK [2][-]{subsection.1.A.2.2}{2D Convolution}{section.1.A.2}% 47
-\BOOKMARK [0][-]{chapter*.19}{Bibliography}{}% 48
+\BOOKMARK [1][-]{section.2.4}{Multi-label Classifier}{chapter.2}% 23
+\BOOKMARK [2][-]{subsection.2.4.1}{Two-layer perceptron}{section.2.4}% 24
+\BOOKMARK [1][-]{section.2.5}{Training}{chapter.2}% 25
+\BOOKMARK [2][-]{subsection.2.5.1}{First-order gradient descent}{section.2.5}% 26
+\BOOKMARK [2][-]{subsection.2.5.2}{Deep learning}{section.2.5}% 27
+\BOOKMARK [0][-]{chapter.3}{Literature Survey and Model Selection }{}% 28
+\BOOKMARK [1][-]{section.3.1}{Literature Review}{chapter.3}% 29
+\BOOKMARK [2][-]{subsection.3.1.1}{From classifier to feature emphasis}{section.3.1}% 30
+\BOOKMARK [2][-]{subsection.3.1.2}{From hand-crafting to feature learning}{section.3.1}% 31
+\BOOKMARK [2][-]{subsection.3.1.3}{Transfer Learning by supervised pre-training}{section.3.1}% 32
+\BOOKMARK [2][-]{subsection.3.1.4}{Convolutional Neural Networks}{section.3.1}% 33
+\BOOKMARK [1][-]{section.3.2}{Model Selection}{chapter.3}% 34
+\BOOKMARK [2][-]{subsection.3.2.1}{Transfer learning Vs MFCC}{section.3.2}% 35
+\BOOKMARK [2][-]{subsection.3.2.2}{Bag Of Frames vs RNN}{section.3.2}% 36
+\BOOKMARK [0][-]{chapter.4}{Experiments and Results}{}% 37
+\BOOKMARK [1][-]{section.4.1}{Dataset and Evaluation}{chapter.4}% 38
+\BOOKMARK [2][-]{subsection.4.1.1}{Dataset for source task}{section.4.1}% 39
+\BOOKMARK [2][-]{subsection.4.1.2}{Dataset for target task}{section.4.1}% 40
+\BOOKMARK [2][-]{subsection.4.1.3}{Evaluation metrics}{section.4.1}% 41
+\BOOKMARK [1][-]{section.4.2}{Experiments}{chapter.4}% 42
+\BOOKMARK [2][-]{subsection.4.2.1}{Experiments with pre-trained CNNs as feature extractor}{section.4.2}% 43
+\BOOKMARK [2][-]{subsection.4.2.2}{Experiments with MFCCs as feature extractor}{section.4.2}% 44
+\BOOKMARK [1][-]{section.4.3}{Summary of Results}{chapter.4}% 45
+\BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 46
+\BOOKMARK [0][-]{Appendix.1.A}{Appendix}{}% 47
+\BOOKMARK [1][-]{section.1.A.1}{Basis Transformation}{Appendix.1.A}% 48
+\BOOKMARK [1][-]{section.1.A.2}{Convolution}{Appendix.1.A}% 49
+\BOOKMARK [2][-]{subsection.1.A.2.1}{1D Convolution}{section.1.A.2}% 50
+\BOOKMARK [2][-]{subsection.1.A.2.2}{2D Convolution}{section.1.A.2}% 51
+\BOOKMARK [0][-]{chapter*.23}{Bibliography}{}% 52

@@ -393,7 +393,7 @@ In music information retrieval, several task-specific features have been enginee
 
 \section{Temporal Approximation}
 \label{temporal}
-The size of resulting features computed through reduction operations discussed in the previous section depends on length of the audio. But classifiers like \textit{support vector machines} and \textit{multi layer perceptron} requires features of fixed size for all data to compute the parameters while training. Therefore, frame-wise features over time are approximated to a fixed size feature representation. Temporal approximation $T$ of the reduced representation $\textbf{Y}$ is  
+The size of resulting features computed through reduction operations discussed in the previous section depends on length of the audio. But classifiers like \textit{support vector machines} and \textit{multi layer perceptron} requires features of fixed size to compute the parameters while training. Therefore, frame-wise features over time are approximated to a fixed size feature representation. Temporal approximation $T$ of the reduced representation $\textbf{Y}$ is  
 \[
 \textbf{f} = T(\textbf{Y}) \qquad \textbf{f} \in \mathbb{R}^{Z}, \textbf{Y} \in \mathbb{R}^{T \times W}
 \]
@@ -409,7 +409,7 @@ $W$ depends on length of the audio. $\textbf{f}$ is usually the final fixed size
  
 \subsection{Bag Of Frames}
 \label{clustering}
-In Bag of Frames(BoF) model, the \textit{frequency} of each reduced frame is used as a feature for training a classifier. To reduce to a fixed size representation (of size $Z$), $Z$ cluster centres are computed from the data. Each frame-wise feature is assigned to it's nearest cluster. The number of assignments to each cluster now becomes the feature. 
+In Bag of Frames(BoF) model, the \textit{frequency} of each reduced frame is used as a feature for training a classifier. To reduce to a fixed size representation (of size $Z$), $Z$ cluster centres are computed from the data. Each frame-wise feature is assigned to it's nearest cluster. The number of assignments to each cluster now becomes the feature $\textbf{f}$. 
 \begin{algorithm}
   \caption{$\textbf{f}$ = BagOfFrames($\textbf{Y}$) }\label{bof}
   \begin{algorithmic}[1]
@@ -445,7 +445,7 @@ In Bag of Frames(BoF) model, the \textit{frequency} of each reduced frame is use
 
 \subsection{Recurrent Neural Networks}
 \label{rnn}
-The idea behind RNN is to learn a feature representation by sequentially combining the input into an internal state $\textbf{h}$. The resulting feature is a projection from this internal state.
+The idea behind RNN is to learn a feature representation by sequentially combining the input into an internal state $\textbf{h}$. The resulting feature ($\textbf{f}$) is a projection from this internal state.
 \[ 
 \textbf{f} = \textbf{W}\textbf{h}_{W} \qquad \textbf{W} \in \mathbb{R}^{Z \times K}, \textbf{h}_{W} \in \mathbb{R}^{K}
 \]
@@ -526,7 +526,115 @@ The operators $\textbf{W}_{o}, \textbf{U}_{o}, \textbf{W}_{i}, \textbf{U}_{i}, \
 \end{algorithm}
 \end{minipage}
 \FloatBarrier
-{\color{gray}
+
+\section{Multi-label Classifier}
+\label{classifier}
+The classifier takes the feature $\textbf{f}$ as input and performs the classification task. A \textit{discriminative} \footnote{The classification model can either be \textit{generative} (approximates class distribution) or \textit{discriminative} (approximates class boundaries). For a binary classifier, the classes are either 0 or 1} binary classifier can be formalised as, 
+\[
+\ell_{i} = p_{i}(\zeta_{i} | \textbf{f}) =
+\begin{cases}
+1, & \text{if  } \zeta_{i} > \epsilon \\
+0, & \text{otherwise}
+\end{cases}
+\qquad i \in \{1,2,..,L\}, \ell_{i} \in \{0,1\}, \textbf{f} \in \mathbb{R}^{Z}
+\]
+where $p_{i}$ is a binary classifier for label $i$, given the feature vector $\textbf{f}$. The output of a binary classifier $\ell_{i}$ is either 0 or 1. There are $L$ binary classifiers for $L$ labels. $\zeta_{i}$ is the $i^{th}$ output of the classification function $C$ and the classifier output $\ell_{i}$ is 1 if $\zeta_{i}$ is greater than certain threshold $\epsilon$ 
+\[
+\bm{\zeta} = C(\textbf{f}) \qquad \bm{\zeta} \in \mathbb{R}^{L}
+\]
+The final prediction ($\textbf{pred}$) is an index set of all classifier outputs that is equal to 1 
+\[
+\textbf{pred} = \{\ell_{i} | \ell_{i} = 1 \}
+\]
+The following equivalent notation will be used in algorithms of upcoming chapters 
+\[
+\textbf{pred}_{(\epsilon)} = \{ p_{i}(\zeta_{i}) | p_{i}(\zeta_{i}) = 1 \} \qquad i \in \{1,2,..,L\}
+\]
+The classification function $C$ projects the feature $\textbf{f}$ to the vector $\bm{\zeta}$ in the label space. Depending on how this function is defined, there are several discriminative classifiers like \textit{multi-layer perceptrons}, \textit{support vector machines}, \textit{random-forest}. In this thesis, only \textit{multi-layer perceptron} is considered.
+
+
+\subsection{Two-layer perceptron}
+A two layer perceptron first projects the features $\textbf{f}$ to a hidden layer $\textbf{h}$ and some element-wise non-linear operation $\Phi$ is applied.
+\[
+\textbf{h} = \Phi(\textbf{W}_{L1}\textbf{f}) \qquad \textbf{h} \in \mathbb{R}^{L1}, \textbf{W}_{L1} \in \mathbb{R}^{L1 \times Z}
+\]
+Without the non-linear operation $\Phi$, the operators $\textbf{W}_{L1}$ and $\textbf{W}$ can multiply out to generalize a single layer perceptron. The motivation for using a two layer perceptron is because single layer perceptron can approximate only linear class boundries. But \textit{universal approximation theorem} [] states that a single hidden layer with some non-linear activation function can approximate any function. The choice of $\Phi$ will be explained in section \ref{training}. The second operator $\textbf{W}$ performs the projection from hidden vector $\textbf{h}$  
+\[
+\bm{\zeta} = \sigma (\textbf{W}\textbf{h}) \qquad \bm{\zeta} \in \mathbb{R}^{L}, \textbf{W} \in \mathbb{R}^{L \times L1}
+\]
+where $\sigma$ is a sigmoid function, which projects the output of second layer between 0 and 1. 
+\begin{equation}
+\label{sigmoid}
+\sigma (x) = \frac{1}{1 + e^{-x}}
+\end{equation}
+Thus $0 \leq \zeta_{i} \leq 1$ and threshold $\epsilon$ can be set in-between 0 and 1 and eventually the final prediction $\textbf{pred}$ can be computed. 
+
 \section{Training}
 \label{training}
-}
+The iterative steps involving the computation of the operators that is optimal for transformations for our context-based classification task is called \textit{training}. When we train only the operators of classifying function $C$ (that is, $\textbf{W}$ and $\textbf{W}_{L1}$), the classification performance will only be as good as the information encoded in the feature $\textbf{f}$. Let us assume that the features $\textbf{f}$ obtained as a result of transformations $R$, $D$, and $T$ is optimal for the task at hand. Hence, only the classifier $C$ is trained. The abstract prediction model is shown in algorithm \ref{abstraction}.
+\begin{algorithm}
+  \caption{$\textbf{pred}$ = $Model$($\textbf{a}$) }\label{abstraction}
+  \begin{algorithmic}[1]
+    \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{N}$
+    \Statex \textbf{Output :} $\textbf{pred}$ \Comment{indices of predicted labels}
+    \State $\textbf{X} = R(\textbf{a})$ \Comment{$\textbf{X} \in \mathbb{R}^{R \times P}$}
+    \State $\textbf{Y} = D(\textbf{X})$ \Comment{$\textbf{Y} \in \mathbb{R}^{T \times W}$}
+    \State $\textbf{f} = T(\textbf{Y})$ \Comment{$\textbf{f} \in \mathbb{R}^{Z}$}
+    \State $\bm{\zeta} = C(\textbf{f} \quad |\textbf{W},\textbf{W}_{L1})$ \Comment{$\bm{\zeta} \in \mathbb{R}^{L}$}
+    \State $\textbf{pred} = \{ p_{i}(\zeta_{i}) | p_{i}(\zeta_{i}) = 1 \} \qquad i \in \{1,2,..,L\}$
+  \end{algorithmic}
+\end{algorithm}
+\FloatBarrier
+\noindent Considering a two layer perceptron for classification, $\bm{\zeta}$ is computed as,
+\[
+\bm{\zeta} = \sigma ( \textbf{W} \Phi (\textbf{W}_{L1}\textbf{f})) 
+\]
+Computing $\textbf{W}$ and $\textbf{W}_{L1}$ is an inverse problem. That is, we need a target $\textbf{t}$ that approximates $\bm{\zeta}$ for true classifications from a set of observations. To do this, recall that $\bm{\zeta}$ is a $L$ dimensional vector and $L$ is the number of labels in consideration. $\zeta_{i}$ is the classifier output for $i^{th}$ label and $i \in \{1,2,..,L\}$. With sigmoid ($\sigma$) projection we know that $0 \leq \zeta_{i} \leq 1$. If we assume $t_{i}$ equal to 1 for true classifications and 0 for the rest, then the transformation operators ($\textbf{W}$ and $\textbf{W}_{L1}$) can be solved such that the classifier output $\zeta_{i}$ is close to 1 for true classifications.
+
+\subsection{First-order gradient descent}
+Solving for the operators by \textit{first-order gradient descent} involves the following steps : 
+\begin{enumerate}
+\setlength\itemsep{0em}
+\item Initialize $\textbf{W}, \textbf{W}_{L1}$
+\item Run the model for a sample and compute loss $E$ = $loss(\bm{\zeta}, \textbf{t})$
+\item Compute the gradient of loss with respect to the operators ($ \frac{\partial E}{\partial \textbf{W}}, \frac{\partial E}{\partial \textbf{W}_{L1}}$)
+\item Update $\textbf{W}$ and $\textbf{W}_{L1}$
+\item Recompute loss, gradients and update the parameters until convergence.
+\end{enumerate}
+
+\subsubsection{Loss function}
+
+\subsubsection{Computing gradients}
+
+\subsubsection{Updating the parameters}
+
+\subsection{Deep learning}
+\begin{algorithm}
+  \caption{$\textbf{pred}$ = $Model$($\textbf{a}$) }\label{abstraction2}
+  \begin{algorithmic}[1]
+    \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{N}$
+    \Statex \textbf{Output :} $\textbf{pred}$ \Comment{indices of predicted labels}
+    \State $\textbf{X} = R(\textbf{a})$ \Comment{$\textbf{X} \in \mathbb{R}^{R \times P}$}
+    \State $\textbf{Y} = D(\textbf{X})$ \Comment{$\textbf{Y} \in \mathbb{R}^{T \times W}$}
+    \State $\textbf{f} = Seq2One\_LSTM(\textbf{Y} \quad | \textbf{W}_{k}, \textbf{U}_{k})$ \Comment{$ k = \{ i_{r},o,g,c\}, \textbf{f} \in \mathbb{R}^{Z}$}
+    \State $\bm{\zeta} = C(\textbf{f} \quad |\textbf{W},\textbf{W}_{L1})$ \Comment{$\bm{\zeta} \in \mathbb{R}^{L}$}
+    \State $\textbf{pred} = \{ p_{i}(\zeta_{i}) | p_{i}(\zeta_{i}) = 1 \} \qquad i \in \{1,2,..,L\}$
+  \end{algorithmic}
+\end{algorithm}
+\FloatBarrier
+
+\begin{algorithm}
+  \caption{$\textbf{pred}$ = $Model$($\textbf{a}$) }\label{abstraction3}
+  \begin{algorithmic}[1]
+    \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{N}$
+    \Statex \textbf{Output :} $\textbf{pred}$ \Comment{indices of predicted labels}
+    \State $\textbf{X} = R(\textbf{a})$ \Comment{$\textbf{X} \in \mathbb{R}^{R \times P}$}
+    \State $\textbf{Y} = CNN(\textbf{X} \quad | \textbf{W}_{C1}, \textbf{W}_{C2}, \textbf{W}_{C3})$ \Comment{$\textbf{Y} \in \mathbb{R}^{T \times W}$}
+    \State $\textbf{f} = Seq2One\_LSTM(\textbf{Y} \quad | \textbf{W}_{k}, \textbf{U}_{k})$ \Comment{$ k = \{ i_{r},o,g,c\}, \textbf{f} \in \mathbb{R}^{Z}$}
+    \State $\bm{\zeta} = C(\textbf{f} \quad |\textbf{W},\textbf{W}_{L1})$ \Comment{$\bm{\zeta} \in \mathbb{R}^{L}$}
+    \State $\textbf{pred} = \{ p_{i}(\zeta_{i}) | p_{i}(\zeta_{i}) = 1 \} \qquad i \in \{1,2,..,L\}$
+  \end{algorithmic}
+\end{algorithm}
+\FloatBarrier
+
+\subsubsection{Issues}
