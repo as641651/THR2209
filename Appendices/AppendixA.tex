@@ -28,6 +28,7 @@ $\textbf{V}$ is also known as \textbf{change of coordinates matrix} (also stated
 Only discrete convolutions with finite support are discussed below,
 
 \subsection{1D Convolution}
+\label{1dconv}
 Convolution of a vector $\textbf{f}$ with filter $\textbf{w}_{k}$ of stride $s$ is defined as, 
 \begin{equation}
 \textbf{C}(k, i) = \displaystyle\sum_{n=i.s}^{i.s + F}\textbf{f}(n)\textbf{w}_{k}(n-i.s) \qquad \textbf{f} \in \mathbb{R}^{N}, \textbf{w}_{k} \in \mathbb{R}^{F}, \textbf{C} \in \mathbb{R}^{K \times I}
@@ -49,6 +50,7 @@ Where:
 \]
 
 \subsection{2D Convolution}
+\label{2dconv}
 Convolution of a matrix $\textbf{F}$ with filter $\textbf{W}_{k}$ of row-stride $s$ and column-stride $t$ is defined as, 
 \begin{equation}
 \textbf{C}(k, j, i) = \displaystyle\sum_{n=i.s}^{i.s + F}\displaystyle\sum_{m=j.t}^{j.t + G}\textbf{F}(m,n):\textbf{W}_{k}(m-j.t, n-i.s) \qquad \textbf{F} \in \mathbb{R}^{M \times N}, \textbf{W}_{k} \in \mathbb{R}^{G \times F}, \textbf{C} \in \mathbb{R}^{K \times J \times I}

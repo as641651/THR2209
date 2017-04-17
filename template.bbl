@@ -36,6 +36,44 @@
   \field{year}{1987}
 \endentry
 
+\entry{LSTM}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Hochreiter}{H.}%
+     {Sepp}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Schmidhuber}{S.}%
+     {J\"{u}rgen}{J.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {MIT Press}%
+  }
+  \strng{namehash}{HSSJ1}
+  \strng{fullhash}{HSSJ1}
+  \field{sortinit}{1}
+  \verb{doi}
+  \verb 10.1162/neco.1997.9.8.1735
+  \endverb
+  \field{issn}{0899-7667}
+  \field{number}{8}
+  \field{pages}{1735\bibrangedash 1780}
+  \field{title}{Long Short-Term Memory}
+  \verb{url}
+  \verb http://dx.doi.org/10.1162/neco.1997.9.8.1735
+  \endverb
+  \field{volume}{9}
+  \list{location}{1}{%
+    {Cambridge, MA, USA}%
+  }
+  \field{journaltitle}{Neural Comput.}
+  \field{month}{11}
+  \field{year}{1997}
+\endentry
+
 \entry{survey3}{misc}{}
   \name{author}{2}{}{%
     {{}%
@@ -78,6 +116,41 @@
   \field{isbn}{9780471660361}
   \field{title}{Signal Analysis: Time, Frequency, Scale, and Structure}
   \field{year}{2004}
+\endentry
+
+\entry{BoF}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Aucouturier}{A.}%
+     {Jean-Julien}{J.-J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Defreville}{D.}%
+     {Boris}{B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Pachet}{P.}%
+     {Francois}{F.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{article}
+  \strng{namehash}{AJJDBPF1}
+  \strng{fullhash}{AJJDBPF1}
+  \field{sortinit}{2}
+  \verb{doi}
+  \verb http://dx.doi.org/10.1121/1.2750160
+  \endverb
+  \field{number}{1}
+  \field{pages}{881}
+  \field{title}{\href{https://www.researchgate.net/publication/6165924_The_bag-of-frames_approach_to_audio_pattern_recognition_A_sufficient_model_for_urban_soundscapes_but_not_for_polyphonic_music}{The
+  bag-of-frames approach to audio pattern recognition: A sufficient model for
+  urban soundscapes but not for polyphonic music}}
+  \field{volume}{122}
+  \field{journaltitle}{The Journal of the Acoustical Society of America}
+  \field{year}{2007}
 \endentry
 
 \entry{survey2}{misc}{}
@@ -155,28 +228,6 @@
   \endverb
   \field{volume}{14}
   \field{journaltitle}{Journal of the Brazilian Computer Society}
-  \field{year}{2008}
-\endentry
-
-\entry{MusicTherapy}{article}{}
-  \name{author}{1}{}{%
-    {{}%
-     {Tsiris}{T.}%
-     {Giorgos}{G.}%
-     {}{}%
-     {}{}}%
-  }
-  \strng{namehash}{TG1}
-  \strng{fullhash}{TG1}
-  \field{sortinit}{2}
-  \field{number}{3}
-  \field{title}{Aesthetic Experience and Transformation in Music Therapy: A
-  Critical Essay}
-  \verb{url}
-  \verb https://voices.no/index.php/voices/article/view/416
-  \endverb
-  \field{volume}{8}
-  \field{journaltitle}{Voices: A World Forum for Music Therapy}
   \field{year}{2008}
 \endentry
 
@@ -323,6 +374,32 @@
   speech}
   \field{year}{2010}
   \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{relu}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Nair}{N.}%
+     {Vinod}{V.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Hinton}{H.}%
+     {Geoffrey~E.}{G.~E.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{NVHGE1}
+  \strng{fullhash}{NVHGE1}
+  \field{sortinit}{2}
+  \field{booktitle}{Proceedings of the 27th International Conference on Machine
+  Learning (ICML-10), June 21-24, 2010, Haifa, Israel}
+  \field{pages}{807\bibrangedash 814}
+  \field{title}{Rectified Linear Units Improve Restricted Boltzmann Machines}
+  \verb{url}
+  \verb http://www.icml2010.org/papers/432.pdf
+  \endverb
+  \field{year}{2010}
 \endentry
 
 \entry{MSD}{inproceedings}{}
@@ -513,6 +590,32 @@
   \warn{\item Invalid format of field 'month'}
 \endentry
 
+\entry{adam}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Kingma}{K.}%
+     {Diederik~P.}{D.~P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Ba}{B.}%
+     {Jimmy}{J.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{dblp}
+  \strng{namehash}{KDPBJ1}
+  \strng{fullhash}{KDPBJ1}
+  \field{sortinit}{2}
+  \field{title}{Adam: A Method for Stochastic Optimization.}
+  \verb{url}
+  \verb http://dblp.uni-trier.de/db/journals/corr/corr1412.html#KingmaB14
+  \endverb
+  \field{volume}{abs/1412.6980}
+  \field{journaltitle}{CoRR}
+  \field{year}{2014}
+\endentry
+
 \entry{TransferLearning}{inproceedings}{}
   \name{author}{3}{}{%
     {{}%
@@ -546,6 +649,37 @@
     {Taipei}%
   }
   \field{year}{2014}
+\endentry
+
+\entry{elu}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Clevert}{C.}%
+     {Djork{-}Arn{\'{e}}}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Unterthiner}{U.}%
+     {Thomas}{T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Hochreiter}{H.}%
+     {Sepp}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{CDUTHS1}
+  \strng{fullhash}{CDUTHS1}
+  \field{sortinit}{2}
+  \field{title}{Fast and Accurate Deep Network Learning by Exponential Linear
+  Units (ELUs)}
+  \verb{url}
+  \verb http://arxiv.org/abs/1511.07289
+  \endverb
+  \field{volume}{abs/1511.07289}
+  \field{journaltitle}{CoRR}
+  \field{year}{2015}
 \endentry
 
 \entry{choi_cnn}{inproceedings}{}
@@ -656,6 +790,25 @@
   \field{year}{2016}
 \endentry
 
+\entry{ml}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Leibe}{L.}%
+     {Bastian}{B.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{LB1}
+  \strng{fullhash}{LB1}
+  \field{sortinit}{2}
+  \field{title}{Lecture - Machine Learning, RWTH Aachen}
+  \verb{url}
+  \verb http://www.vision.rwth-aachen.de/media/course/SS/2016/machine-learning/
+  \verb ml16-part06-linear_discriminants2.pdf
+  \endverb
+  \field{year}{2016}
+\endentry
+
 \entry{MusicMotive}{inproceedings}{}
   \name{author}{3}{}{%
     {{}%
@@ -687,6 +840,44 @@
   networks}
   \field{year}{2016}
   \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{adam_o}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Ruder}{R.}%
+     {Sebastian}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{RS1}
+  \strng{fullhash}{RS1}
+  \field{sortinit}{2}
+  \field{title}{An overview of gradient descent optimization algorithms}
+  \verb{url}
+  \verb http://sebastianruder.com/optimizing-gradient-descent/
+  \endverb
+  \field{year}{2016}
+\endentry
+
+\entry{mfcc_pca}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Wikipedia}{W.}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{W1}
+  \strng{fullhash}{W1}
+  \field{sortinit}{2}
+  \field{note}{[Online; accessed 17-April-2017]}
+  \field{title}{Mel-frequency cepstrum --- Wikipedia{,} The Free Encyclopedia}
+  \verb{url}
+  \verb https://en.wikipedia.org/w/index.php?title=Mel-frequency_cepstrum&oldid
+  \verb =747054068
+  \endverb
+  \field{year}{2016}
 \endentry
 
 \entry{choi_transfer}{online}{}
@@ -727,6 +918,64 @@
   \field{eprinttype}{arXiv}
   \field{eprintclass}{cs.CV}
   \field{month}{03}
+  \field{year}{2017}
+\endentry
+
+\entry{spec_dia}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Costa}{C.}%
+     {Yandre~M.G.}{Y.~M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Oliveira}{O.}%
+     {Luiz~S.}{L.~S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Jr.}{J.}%
+     {Carlos N.~Silla}{C.~N.~S.}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{Music genre recognition}
+  \strng{namehash}{CYMOLSJCNS1}
+  \strng{fullhash}{CYMOLSJCNS1}
+  \field{sortinit}{2}
+  \verb{doi}
+  \verb http://doi.org/10.1016/j.asoc.2016.12.024
+  \endverb
+  \field{issn}{1568-4946}
+  \field{pages}{28 \bibrangedash  38}
+  \field{title}{An evaluation of Convolutional Neural Networks for music
+  classification using spectrograms}
+  \verb{url}
+  \verb http://www.sciencedirect.com/science/article/pii/S1568494616306421
+  \endverb
+  \field{volume}{52}
+  \field{journaltitle}{Applied Soft Computing}
+  \field{year}{2017}
+\endentry
+
+\entry{upt}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Wikipedia}{W.}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{W1}
+  \strng{fullhash}{W1}
+  \field{sortinit}{2}
+  \field{note}{[Online; accessed 17-April-2017]}
+  \field{title}{Universal approximation theorem --- Wikipedia{,} The Free
+  Encyclopedia}
+  \verb{url}
+  \verb https://en.wikipedia.org/w/index.php?title=Universal_approximation_theo
+  \verb rem&oldid=771987359
+  \endverb
   \field{year}{2017}
 \endentry
 

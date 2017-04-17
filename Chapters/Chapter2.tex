@@ -4,6 +4,7 @@
 \externaldocument{chapter4}
 \externaldocument{chapter5}
 \externaldocument{chapter1}
+\externaldocument{AppendixA}
 \chapter{Formalisms} % Main chapter title
 
 \label{Chapter2} % For referencing the chapter elsewhere, use \ref{Chapter2} 
@@ -13,23 +14,21 @@
 
 %\section{Welcome and Thank You}
 %In this chapter, acoustical characteristics of music signal that enables general MIR tasks will be introduced.We will examine the Fourier Series representations of sound waves and see how they relate to harmonics and tonal color of instruments  
-
-
-
+To map a music to it's semantic descriptions, the signal is first transformed to a lower dimensional space. The resulting transformation is called \textit{feature}. The classifier then takes these features as input and performs the classification task. The performance of the classifier can only be as good as the information encoded in the features. In this chapter, formalisms required for the analysis of feature extraction are introduced. The raw signal is first changed to a representation that can be mathematically analysed (see Sec. \ref{rep}). This representation is then transformed to a lower dimensional space by discarding information that does not contribute to discrimination (see Sec. \ref{dimension}). The resulting reduction is then approximated to a fixed size representation (see Sec. \ref{temporal}) which is then taken as input by a multi-label classifier (see Sec. \ref{classifier}). In section \ref{training}, training procedure that can optimize feature representations for supervised classification task is discussed. 
 %----------------------------------------------------------------------------------------
 
 \section{Representation of music signal}
-
-The general aim of Music Information Retrieval (MIR) is to extract information about it's discriminants from the observed data. This observed signal is traditionally represented in the time domain. The time domain is a record of what happened to a parameter of the system versus time. Standard formats use amplitude versus time. The observed signal is then discretised by sampling and stored in digital format (see \ref{sampling}). This signal in the time domain is then changed to frequency domain. This is simply because our ear-brain combination is an excellent frequency domain analyser. Our brain splits the audio spectrum into many narrow bands and determines the power present in each band. Conversion from time domain to frequency domain is done using the foundations from \textit{Fourier theorem} (see \ref{time}). Currently used music signal representations for general MIR tasks are explained in section \ref{stft}.
+\label{rep}
+The observed signal is traditionally represented in the time domain. The time domain is a record of what happened to a parameter of the system versus time. Standard formats use amplitude versus time. The observed signal is then discretised by sampling and stored in digital format (see \ref{sampling}). This signal in the time domain is then changed to frequency domain (see \ref{time}). This is simply because our ear-brain combination is an excellent frequency domain analyser. Currently used music signal representations for general MIR tasks are explained in section \ref{stft}.
 
 
 \subsection{Sampling of continuous-time signal}
 \label{sampling}
-The digital formats contain the discrete version of the signal obtained by sampling continuous-time signal. Let $s(t)$ be the continuous signal to be sampled, and let sampling be performed by measuring the value of the continuous signal every T seconds, which is called the sampling interval or the sampling period. The sampling frequency or sampling rate, $f_{s}$, is the average number of samples obtained in one second (samples per second),  
+The digital formats contain the discrete version of the signal obtained by sampling continuous-time signal. Sampling is performed by measuring the value of the continuous signal every $T$ seconds. This interval $T$ is called the sampling interval or the sampling period. The sampling frequency or sampling rate ($f_{s}$) is the number of samples obtained in one second (samples per second),  
 \[
  f_{s} = \frac{1}{T}.
 \]
-The optimum sampling rate is given by Nyquist-Shannon sampling theorem which says, the sampling frequency $f_{s}$ should be at least twice the highest frequency contained in the signal. Given the human hearing range lies between 20Hz - 20KHz, most of the digital audio formats use a standard sampling frequency of 44.4Khz. The signal is further down sampled depending on the kind of feature information needed for classification. 
+The optimum sampling rate is given by Nyquist-Shannon sampling theorem which says, the sampling frequency $f_{s}$ should be at least twice the highest frequency contained in the signal. Given the human hearing range lies between 20Hz - 20KHz, most of the digital audio formats use a standard sampling frequency of 44.4Khz. Sampling rate determines the initial dimension of the raw signal. The signal may be further down sampled if higher sampling rate does not contribute to classification performance.
 
 \subsection{Time-Frequency transformations}
 \label{time}
@@ -55,7 +54,7 @@ If $\bm{\Phi}$ is known, then the transformed co-ordinates $\textbf{c} = (c_{1},
 $\textbf{c}$ is the transformed representation. $\bm{\Phi}^{-1}$ is the operator that transforms the signal. 
 
 \subsubsection{Exponential Fourier Series and Fourier Transform}
-From the definition of \textit{exponential Fourier Series}, any function \textit{periodic} in $\{1,2,...T\}$ can be expanded with series of complex exponentials\cite{allen}. These complex exponentials which are functions of harmonically related frequencies($k \omega$) form basis 
+From the definition of \textit{exponential Fourier Series}, any function \textit{periodic} in $\{1,2,..,T\}$ can be expanded with series of complex exponentials\cite{allen}. These complex exponentials which are functions of harmonically related frequencies($k \omega$) form basis 
 \[
 \bm{\phi}_{k}(t) = \frac{1}{\sqrt{T}}e^{ik \omega t} \qquad t \in \{1,2,..T\}
 \] 
@@ -63,7 +62,7 @@ It is difficult to assume periodicity for a generalized signal. Hence, the Fouri
 \[
 c_{\omega} =  \displaystyle\sum_{t=1}^{N}a_{t}e^{-i \omega t} \qquad t \in \{1,2,...,N\}
 \] 
-Thus the transformation operator 
+Thus the transformation operator is,
 \[
 \bm{\Phi}^{-1}[ \omega ] = e^{-i \omega \textbf{t}} \qquad \textbf{t} \in \mathbb{R}^{N}, \omega \in \{1,2,..,M\}
 \]
@@ -76,7 +75,7 @@ It is useful to perform FFT locally over short segments. This is because we are 
 \begin{equation}
 h[n] = 0.54 - 0.46cos(\frac{2 \pi n}{N-1})
 \end{equation}
-Where $n \in {1,2,...,F}$ is index of the window function of size $F$ .The signal approaches zero near $n=1$ and $n=N$, but reaches peak near $n=N/2$ \cite{specLeak}. To overcome the information loss at the ends of the window, signal is divided into segments that are partly \textit{overlapping} with each other. The distance between the start of two adjacent segments is called \textit{hop-length}. Figure \ref{fig:stftPipe} shows the extraction of spectral frames of a spectrogram. Thus, the parameters of STFT include 
+where $n \in \{1,2,..,F\}$ and $F$ is the size of window function. The signal approaches zero near $n=1$ and $n=N$, but reaches peak near $n=N/2$ \cite{specLeak}. To overcome the information loss at the ends of the window, signal is divided into segments that are partly \textit{overlapping} with each other. The distance between the start of two adjacent segments is called \textit{hop-length}. Figure \ref{fig:stftPipe} shows the extraction of spectral frames of a spectrogram. Thus, the parameters of STFT include 
 \begin{itemize}
     \setlength\itemsep{0em}
     \item Choice of window function
@@ -98,7 +97,7 @@ Where $n \in {1,2,...,F}$ is index of the window function of size $F$ .The signa
         }
         \label{fig:HammingWindow}
        \end{subfigure}
-       \caption{(a) Shows STFT Pipeline. (b) Shows the application of \\Window function}\label{fig:STFT}
+       \caption{\cite{spec_dia} (a) Shows STFT Pipeline. (b) Shows the application of \\Window function}\label{fig:STFT}
 \end{figure}
 \FloatBarrier
 
@@ -132,11 +131,11 @@ where $\textbf{W}_{STFT} = \textbf{h} \bm{\Phi}^{-1}$ is the STFT operator that 
 \bigskip
 
 \subsubsection{Power spectrogram}
-\noindent It is important to note that the coefficient matrix $\textbf{C}$ may be complex valued. To obtain useful metrics, we need to extract some physical quantity from the coefficients. This is where \textbf{Parseval's theorem} is used, which relates and time and frequency domain components in DFT as follows \cite{allen} :
+\noindent It is important to note that the coefficient matrix $\textbf{C}$ may be complex valued. To obtain useful metrics, we need to extract some physical quantity from the coefficients. This is where \textbf{Parseval's theorem} is used, which relates time and frequency domain components in DFT as follows \cite{allen} :
 \begin{equation}
 {\|\textbf{c}\|}^2 \propto {\|\textbf{a}\|}^2
 \end{equation}
-If \textbf{a} represents amplitude in the time-domain, then as a consequence of Hook's law  on energy equation, we know that
+If \textbf{a} represents amplitude in the time-domain, then we know that the energy of a wave is related to it's amplitude as,
 \begin{equation}
 Energy \propto amplitude^2
 \end{equation}
@@ -181,7 +180,7 @@ Where:
     \item $\omega_{m} \in  \mathbb{R}^{R}$
 \end{itemize}
 
-\noindent Hence, we can represent mel-power spectrogram as \textbf{M-strided convolution} and stride $M$ over \textit{flattened} $\textbf{P}$ with mel filters $\textbf{W}_{MEL}$ (i.e, the frequency axis of $\textbf{P}$ is contracted with each mel-filter, 
+\noindent Hence, we can represent mel-power spectrogram as \textbf{M-strided convolution} over \textit{flattened} $\textbf{P}$ with mel filters $\textbf{W}_{MEL}$ (i.e, the frequency axis of $\textbf{P}$ is contracted with each mel-filter) 
 \begin{equation}
 \label{eq:mel}
 \boxed
@@ -221,7 +220,7 @@ The objective of dimensionality reduction is to retain only the information that
 \end{itemize} 
 \begin{figure}[h] 
 \centering
-\includegraphics[width=0.5\textwidth]{dim_red}
+\includegraphics[width=0.7\textwidth]{dim_red}
 \caption{Dimensionality Reduction Pipeline}
  \label{fig:Dimensionality Reduction}
  \end{figure}
@@ -238,10 +237,10 @@ The objective of dimensionality reduction is to retain only the information that
 \subsection{Principal Component Analysis (PCA)}
 \label{pca}
 
-The representation $\textbf{X}$ is changed to a \textit{basis} that are functions of variance between the frequencies. This is done by computing the co-variance matrix $\bm{\Sigma}$ from the data and performing \textit{orthogonal decomposition} to compute it's basis. The co-ordinates of the resulting basis system are called \textit{principal components}. The key idea for reduction is to discard the information corresponding to \textit{low variance} basis. The computation of PCA reduction operator $\textbf{W}_{PCA}$ is elaborated below,  
+The representation $\textbf{X}$ is changed to a \textit{basis} that are functions of variance between the frequency components. This is done by computing the co-variance matrix $\bm{\Sigma}$ from the data and performing \textit{orthogonal decomposition} to compute it's basis. The co-ordinates of the resulting basis system are called \textit{principal components}. The key idea for reduction is to discard the information corresponding to \textit{low variance} basis. The computation of PCA reduction operator $\textbf{W}_{PCA}$ is elaborated below,  
 
 \begin{enumerate}[label=(\alph*)]
-\item Usually, representations of large samples (say $S$ samples) from the dataset ($ \textbf{S} = [\textbf{X}_{1}, \textbf{X}_{2}, ..., \textbf{X}_{S}])$ are used to compute the co-variance matrix. The columns of $\textbf{S}$ are centred by their mean and the covariance matrix is computed as,
+\item Usually, large samples (say $S$ samples) of representations from the dataset ($ \textbf{S} = [\textbf{X}_{1}, \textbf{X}_{2}, ..., \textbf{X}_{S}])$ are used to compute the co-variance matrix. The columns of $\textbf{S}$ are centred by their mean and the covariance matrix is computed as,
 \[
    \bm{\Sigma} = \textbf{E}[(\textbf{S} - \textbf{E}[\textbf{S}])(\textbf{S} - \textbf{E}[\textbf{S}])^{T}] = \frac{1}{\displaystyle\sum_{s}{P_{s}}}\textbf{\^S}\textbf{\^S}^{T} \quad \in \mathbb{S}^{R \times R}
 \]
@@ -287,7 +286,7 @@ The columns of matrix $\textbf{V}$ form the basis. Since the columns are orthogo
 \end{algorithm}
 \FloatBarrier
 
-\noindent Sometimes, to make the resulting reduction $\textbf{Y}$ uncorrelated (that is, unit variance in each frequency dimension), the corresponding dimensions are divided by their eigen values. This is because eigen values are proportional to the magnitude of variance in each frequency direction. This operation is known as \textbf{PCA Whitening} and the reduction operator is,
+\noindent Sometimes, to make the resulting reduction $\textbf{Y}$ uncorrelated (the resulting transformation should have identity co-variance matrix), the corresponding dimensions are divided by their eigen values. This is because eigen values are proportional to the magnitude of variance in each frequency direction. This operation is known as \textbf{PCA Whitening} and the reduction operator is,
 \[
 \textbf{W}_{PCAW} = \bm{\Lambda}^{-1}\textbf{V}^{T}
 \]    
@@ -296,13 +295,13 @@ The reduction function $D_{(PCAW)}$ is same as algorithm \ref{alg:dpca}, except 
 
 \subsection{Mel-frequency cepstrum coefficients (MFCC)}
 \label{mfcc}
-It has been studied that the basis functions resulting from co-variance matrix of log-mel spectrogram representation are similar to cosine transform on log-mel spectrogram []. Therefore, instead of explicitly computing the basis functions from the data, one can simple use cosine basis. The co-ordinates of corresponding basis system are known as \textit{Mel-Frequency Cepstrum Coefficients}. The co-ordinates of high frequency cosine functions are discarded because they correspond to low-variance information. 
+It has been studied that the basis functions resulting from co-variance matrix of log-mel spectrogram representation are similar to cosine transform on log-mel spectrogram\cite{mfcc_pca}. Therefore, instead of explicitly computing the basis functions from the data, one can simple use cosine basis. The co-ordinates of corresponding basis system are known as \textit{Mel-Frequency Cepstrum Coefficients}. The co-ordinates of high frequency cosine functions are discarded because they correspond to low-variance information. 
 \bigskip
 
-\noindent Since this reduction is engineered only for log mel spectrogram representation, the reduction function $D_{(MFCC)}$ takes the signal as input. $\textbf{W}_{MFCC}$ is the reduction operator.
+\noindent Since this reduction is engineered only for log mel spectrogram representation, the reduction function $MFCC$ takes the signal as input. $\textbf{W}_{MFCC}$ is the reduction operator.
 
 \begin{algorithm}
-  \caption{$\textbf{Y}$ = $D_{(MFCC)}$($\textbf{a}$) }\label{MFCC}
+  \caption{$\textbf{Y}$ = $MFCC$($\textbf{a}$) }\label{MFCC}
   \begin{algorithmic}[1]
     \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{N}$
     \Statex \textbf{Output :} $\textbf{Y} \in \mathbb{R}^{T \times P}$
@@ -326,16 +325,16 @@ The operator $\textbf{w}$ is known as a \textit{filter function} and the length 
 \[
 	\textbf{Y}[k] = \textbf{a} \star {\textbf{w}_{k}}^{(s)} = \textbf{a} \star \textbf{W}^{(s)} \qquad k \in {0,1..K-1}
 \] 
-The index based notations for this operation are shown in appendix ??. If the filters $\textbf{w}_{k}$ are \textit{defined}, then computation of $\textbf{Y}$ is straight forward. All the operations explained in the previous section are forward convolutions with defined filters,
+The index based notations for this operation are shown in appendix \ref{1dconv}. If the filters $\textbf{w}_{k}$ are \textit{defined}, then computation of $\textbf{Y}$ is straight forward. All the operations explained in the previous section are forward convolutions with defined filters,
 \begin{itemize}
 \setlength\itemsep{0em}
 
 \item \textbf{STFT} in equation \ref{eq:stft}, where the filter functions are complex negative exponentials.
 \item Transformation to \textbf{Mel} frequency scale in equation \ref{eq:mel}, where a set of mel-frequency centred filters are used.
-\item \textbf{Principal components} and \textbf{MFCC} can be realized as a convolution of the input with transformation matrix $\textbf{V}^{T}$ defined in section \ref{basis} (Recall that matrix multiplication can be represented as a convolution of stride equal to column length. An illustration was shown in section \ref{mel})  
+\item \textbf{Principal components} and \textbf{MFCC} can be realized as a convolution of the input with transformation matrix $\textbf{V}^{T}$ defined in section \ref{pca} (Recall that matrix multiplication can be represented as a convolution of stride equal to column length. An illustration was shown in section \ref{mel})  
 
 \end{itemize}
-However, it is not clear if such defined filters really encodes the information in $\textbf{Y}$ relevant for certain classification task at hand. But, when a set of task-specific observations are available, it is possible to solve for the filters $\textbf{w}_{k}$, so that the resulting transformation $\textbf{Y}$ is optimal for the considered task. This is done using iterative optimization techniques, starting by random initializing of $\textbf{w}_{k}$ and updating it's values after every iteration. Computational models that solves by \textbf{first-order gradient descent} methods (a class of optimization techniques) are represented as first order \textbf{artificial neural networks}. The filters $\textbf{w}_{k}$ which we are attempting to solve are also termed as \textit{parameters} or \textit{weights} of the network. The iterative steps involving finding these \textit{weights} is termed as \textit{training} the neural network (Details of training neural network are explained in section \ref{training}). Since the transformation operation by the \textit{filters} are represented as convolution over the input, the neural network is termed as \textbf{convolution neural network}.   
+However, it is not clear if such defined filters really encodes the information in $\textbf{Y}$ relevant for certain context-based classification task. But, when a set of task-specific observations are available, it is possible to solve for the filters $\textbf{w}_{k}$, so that the resulting transformation $\textbf{Y}$ is optimal for the considered task. This is done using iterative optimization techniques, starting by random initializing of $\textbf{w}_{k}$ and updating it's values after every iteration. Computational models that solves by \textbf{first-order gradient descent} methods (a class of optimization techniques) are represented as first order \textbf{artificial neural networks}. The filters $\textbf{w}_{k}$ which we are attempting to solve are also termed as \textit{parameters} or \textit{weights} of the network. The iterative steps involving finding these \textit{weights} is termed as \textit{training} the neural network (Details of training neural network are explained in section \ref{training}). Since the transformation operation by the \textit{filters} are represented as convolution over the input, the neural network is termed as \textbf{convolution neural network}.   
 
 \subsubsection{Approximating MFCC with CNN}
 \textit{Supervised} feature learning has an advantage over \textit{unsupervised} feature learning when we wish to find filters $\textbf{w}_{k}$ optimal for context based classification tasks. Feature learning with CNN fall under \textit{supervised} feature learning category.
@@ -376,7 +375,7 @@ The non-linearity in between each layer is needed. Otherwise, the filters accros
   \end{algorithmic}
 \end{algorithm}
 \FloatBarrier
-\noindent It is possible to with-hold the engineered filters at earlier levels and just introduce learning at later stages. For instance, it is sometimes optimal to compute the STFT and mel-filters and just perform convolutions over the mel-spectrogram\cite{EndToEnd}\cite{choi_cnn} (see Chapter 3, Sec. ??). Sometimes it is also useful to generalize the convolution as a 2 dimensional operation\cite{MusicMotive}.(see Chapter 3, Sec. ??). 2D convolution operation is shown in appendix ??. 
+\noindent It is possible to with-hold the engineered filters at earlier levels and just introduce learning at later stages. For instance, it is sometimes optimal to compute the STFT and mel-filters and just perform convolutions over the mel-spectrogram\cite{EndToEnd}\cite{choi_cnn}. Sometimes it is also useful to generalize the convolution as a 2 dimensional operation\cite{MusicMotive}.(see Chapter 3, Sec. \ref{convolution}). 2D convolution operation is shown in appendix \ref{2dconv}. 
 
 \subsubsection{CNN as a general purpose feature extractor}  
 \label{general}
@@ -409,7 +408,7 @@ $W$ depends on length of the audio. $\textbf{f}$ is usually the final fixed size
  
 \subsection{Bag Of Frames}
 \label{clustering}
-In Bag of Frames(BoF) model, the \textit{frequency} of each reduced frame is used as a feature for training a classifier. To reduce to a fixed size representation (of size $Z$), $Z$ cluster centres are computed from the data. Each frame-wise feature is assigned to it's nearest cluster. The number of assignments to each cluster now becomes the feature $\textbf{f}$. 
+In Bag of Frames(BoF) model\cite{BoF}, the \textit{frequency} of each reduced frame is used as a feature for training a classifier. To reduce to a fixed size representation (of size $Z$), $Z$ cluster centres are computed from the data. Each frame-wise feature is assigned to it's nearest cluster. The number of assignments to each cluster now becomes the feature $\textbf{f}$. 
 \begin{algorithm}
   \caption{$\textbf{f}$ = BagOfFrames($\textbf{Y}$) }\label{bof}
   \begin{algorithmic}[1]
@@ -452,7 +451,7 @@ The idea behind RNN is to learn a feature representation by sequentially combini
 \[
 \textbf{h}_{W} = \bm{\Theta}(\textbf{Y}[:,W], \textbf{h}_{W-1}) \qquad \textbf{Y} \in \mathbb{R}^{T \times W}
 \]
-$\textbf{h}_{W}$ is the internal state after combining $W$ columns of $\textbf{Y}$. $\bm{\Theta}$ is the internal state function which sequentially combines the input. The operator $\textbf{W}$ and other operators resulting from the function $\bm{\Theta}$ are solved for optimality using a labelled dataset. These operators can be computed by training an RNN (see Section \ref{training}). The function $\bm{\Theta}$ should sufficiently hold the information from beginning to end of the sequence. RNNs face challenge in remembering the information in the earlier part of the sequence. Because of this, different flavours of RNN have been developed to hold the sequence information longer and to battle the vanishing gradient problem while training neural network (see Section \ref{training}). Depending on how $\bm{\Theta}$ is defined, at least two RNN architectures are popular in the literature: Long-Short Term Memory (LSTM) RNN and Gated Recurrent Unit(GRU) RNN. In this thesis, only LSTMs [] are considered.   
+$\textbf{h}_{W}$ is the internal state after combining $W$ columns of $\textbf{Y}$. $\bm{\Theta}$ is the internal state function which sequentially combines the input. The operator $\textbf{W}$ and other operators resulting from the function $\bm{\Theta}$ are solved for optimality using a labelled dataset. These operators can be computed by training an RNN (see Section \ref{training}). The function $\bm{\Theta}$ should sufficiently hold the information from beginning to end of the sequence. RNNs face challenge in remembering the information in the earlier part of the sequence. Because of this, different flavours of RNN have been developed to hold the sequence information longer and to battle the vanishing gradient problem while training neural network (see Section \ref{training}). Depending on how $\bm{\Theta}$ is defined, at least two RNN architectures are popular in the literature: Long-Short Term Memory (LSTM) RNN and Gated Recurrent Unit(GRU) RNN. In this thesis, only LSTMs\cite{LSTM} are considered.   
 
 \subsubsection{Long-Short Term Memory RNN}
 The LSTM internal state is contained by three gates that control the information flow. This is done by multiplying the output of each sequence $\textbf{o}_{w}$ with the corresponding cell state function $\textbf{c}_{w}$.
@@ -531,14 +530,14 @@ The operators $\textbf{W}_{o}, \textbf{U}_{o}, \textbf{W}_{i}, \textbf{U}_{i}, \
 \label{classifier}
 The classifier takes the feature $\textbf{f}$ as input and performs the classification task. A \textit{discriminative} \footnote{The classification model can either be \textit{generative} (approximates class distribution) or \textit{discriminative} (approximates class boundaries). For a binary classifier, the classes are either 0 or 1} binary classifier can be formalised as, 
 \[
-\ell_{i} = p_{i}(\zeta_{i} | \textbf{f}) =
+\ell_{i} = b(\zeta_{i}) =
 \begin{cases}
 1, & \text{if  } \zeta_{i} > \epsilon \\
 0, & \text{otherwise}
 \end{cases}
 \qquad i \in \{1,2,..,L\}, \ell_{i} \in \{0,1\}, \textbf{f} \in \mathbb{R}^{Z}
 \]
-where $p_{i}$ is a binary classifier for label $i$, given the feature vector $\textbf{f}$. The output of a binary classifier $\ell_{i}$ is either 0 or 1. There are $L$ binary classifiers for $L$ labels. $\zeta_{i}$ is the $i^{th}$ output of the classification function $C$ and the classifier output $\ell_{i}$ is 1 if $\zeta_{i}$ is greater than certain threshold $\epsilon$ 
+where $b$ is a binary classifier, given the feature vector $\textbf{f}$. The output of a binary classifier $\ell_{i}$ is either 0 or 1. There are $L$ binary classifier outputs for $L$ labels. $\zeta_{i}$ is the $i^{th}$ output of the classification function $C$ and the classifier output $\ell_{i}$ is 1 if $\zeta_{i}$ is greater than certain threshold $\epsilon$ 
 \[
 \bm{\zeta} = C(\textbf{f}) \qquad \bm{\zeta} \in \mathbb{R}^{L}
 \]
@@ -548,7 +547,7 @@ The final prediction ($\textbf{pred}$) is an index set of all classifier outputs
 \]
 The following equivalent notation will be used in algorithms of upcoming chapters 
 \[
-\textbf{pred}_{(\epsilon)} = \{ p_{i}(\zeta_{i}) | p_{i}(\zeta_{i}) = 1 \} \qquad i \in \{1,2,..,L\}
+\textbf{pred}_{(\epsilon)} = \{ b(\zeta_{i}) | b(\zeta_{i}) = 1 \} \qquad i \in \{1,2,..,L\}
 \]
 The classification function $C$ projects the feature $\textbf{f}$ to the vector $\bm{\zeta}$ in the label space. Depending on how this function is defined, there are several discriminative classifiers like \textit{multi-layer perceptrons}, \textit{support vector machines}, \textit{random-forest}. In this thesis, only \textit{multi-layer perceptron} is considered.
 
@@ -558,7 +557,7 @@ A two layer perceptron first projects the features $\textbf{f}$ to a hidden laye
 \[
 \textbf{h} = \Phi(\textbf{W}_{L1}\textbf{f}) \qquad \textbf{h} \in \mathbb{R}^{L1}, \textbf{W}_{L1} \in \mathbb{R}^{L1 \times Z}
 \]
-Without the non-linear operation $\Phi$, the operators $\textbf{W}_{L1}$ and $\textbf{W}$ can multiply out to generalize a single layer perceptron. The motivation for using a two layer perceptron is because single layer perceptron can approximate only linear class boundries. But \textit{universal approximation theorem} [] states that a single hidden layer with some non-linear activation function can approximate any function. The choice of $\Phi$ will be explained in section \ref{training}. The second operator $\textbf{W}$ performs the projection from hidden vector $\textbf{h}$  
+Without the non-linear operation $\Phi$, the operators $\textbf{W}_{L1}$ and $\textbf{W}$ can multiply out to generalize a single layer perceptron. The motivation for using a two layer perceptron is because single layer perceptron can approximate only linear class boundries. But \textit{universal approximation theorem}\cite{upt} states that a single hidden layer with some non-linear activation function can approximate any function. The choice of $\Phi$ will be explained in section \ref{training}. The second operator $\textbf{W}$ performs the projection from hidden vector $\textbf{h}$  
 \[
 \bm{\zeta} = \sigma (\textbf{W}\textbf{h}) \qquad \bm{\zeta} \in \mathbb{R}^{L}, \textbf{W} \in \mathbb{R}^{L \times L1}
 \]
@@ -581,7 +580,7 @@ The iterative steps involving the computation of the operators that is optimal f
     \State $\textbf{Y} = D(\textbf{X})$ \Comment{$\textbf{Y} \in \mathbb{R}^{T \times W}$}
     \State $\textbf{f} = T(\textbf{Y})$ \Comment{$\textbf{f} \in \mathbb{R}^{Z}$}
     \State $\bm{\zeta} = C(\textbf{f} \quad |\textbf{W},\textbf{W}_{L1})$ \Comment{$\bm{\zeta} \in \mathbb{R}^{L}$}
-    \State $\textbf{pred} = \{ p_{i}(\zeta_{i}) | p_{i}(\zeta_{i}) = 1 \} \qquad i \in \{1,2,..,L\}$
+    \State $\textbf{pred} = \{ b(\zeta_{i}) | b(\zeta_{i}) = 1 \}$ \Comment{$ i \in \{1,2,..,L\}, b( \zeta_{i}) \in \{0,1\}$}
   \end{algorithmic}
 \end{algorithm}
 \FloatBarrier
@@ -603,12 +602,63 @@ Solving for the operators by \textit{first-order gradient descent} involves the 
 \end{enumerate}
 
 \subsubsection{Loss function}
+To train a classifier, a loss function (or error function) have to be defined. The \textit{least square} error function is sensitive to outliers in the training data. Hence \textit{cross-entropy}\cite{ml} loss function is considered. Error function defined as the negative log-likelihood is the \textit{cross-entropy} error function. \textit{Likelihood} that the parameters ($\textbf{W}, \textbf{W}_{L1}$) approximate a set of targets for label $i$ for $N$ training samples $({t_{i}}^{1}, {t_{i}}^{2},...,{t_{i}}^{N})$ is
+\[
+\mathcal{L} (\textbf{W}, \textbf{W}_{L1} | {t_{i}}^{1}, {t_{i}}^{2},...,{t_{i}}^{N} ) =  \displaystyle\prod_{n=1}^{N} {\zeta_{i(n)}}^{{t_{i}}^{(n)}}{(1-\zeta_{i(n)})}^{1 - {t_{i}}^{(n)}} \qquad t_{i} \in \{0,1\}
+\]
+where the \textit{likelihood} is 1, as the classifier output $\zeta_{i}$ approaches the target $t_{i}$. The log-likelihood is taken to get rid of the multiplication that would cause numerical problems over large $N$. The negative of the log-likelihood is taken to pose the optimization as a \textit{minimization} problem. Therefore, minimizing the \textit{cross-entropy} loss for label $i$ is equivalent to minimizing the \textit{negative log likelihood}
+\[
+\text{Minimize } E_{i}  = -ln(\mathcal{L}) = - \displaystyle\sum_{n=1}^{N} \{ {t_{i}}^{(n)} ln \zeta_{i(n)} + (1-{t_{i}}^{(n)}) ln (1-\zeta_{i(n)}) \}
+\]
+For $L$ labels, the total loss is minimized,
+\[
+\text{Minimize } \displaystyle\sum_{i=1}^{L}E_{i} 
+\]
+Moreover, with gradient descent optimization, the loss is minimized for a batch of samples ($B$) for every iteration. $B$ is called the \textit{batch-size}. Thus, loss for every iteration would be,
+\[
+{E_{i}}^{(B)} = - \displaystyle\sum_{i=1}^{L}\displaystyle\sum_{n=1}^{B} \{ {t_{i}}^{(n)} ln \zeta_{i(n)} + (1-{t_{i}}^{(n)}) ln (1-\zeta_{i(n)}) \}
+\]
 
 \subsubsection{Computing gradients}
+After every iteration, the gradient of the total loss ($E$) with respect to the parameters ($\textbf{W}, \textbf{W}_{L1}$) have to computed. This gradient will then be used to update the parameters for next iteration. The gradients are computed by applying the chain rule. An illustration for computing the gradients for the two layer perceptron is shown
+\begin{equation}
+\label{grad1}
+\frac{\partial E}{\partial \textbf{W}} = \frac{\partial E}{\partial \bm{\zeta}}  \frac{\partial \bm{\zeta}}{\partial \sigma}  \frac{\partial \sigma}{\partial \textbf{W}}
+\end{equation}
+\begin{equation}
+\label{grad2}
+\frac{\partial E}{\partial \textbf{W}_{L1}} = \frac{\partial E}{\partial \bm{\zeta}}  \frac{\partial \bm{\zeta}}{\partial \sigma}  \frac{\partial \sigma}{\partial \Phi} \frac{\partial \Phi}{\partial \textbf{W}_{L1}}
+\end{equation}
+Efficient computation of the gradients is achieved with \textit{back-propagation} algorithm. To ease the computations, the non-linearities and loss functions are usually chosen in such a way that the variables required for gradient computation are known in the forward pass.
 
 \subsubsection{Updating the parameters}
+Standard stochastic gradient descent update for every iteration is,
+\[
+\textbf{W} = \textbf{W} - \eta \frac{\partial E}{\partial \textbf{W}}
+\]
+where $\eta$ is the learning rate. But choosing a proper learning rate is difficult because if $\eta$ is too small, convergence can be too slow, while $\eta$ that is too high can hinder convergence. Additionally, the same learning rate is applied to all parameters across the layers. Moreover, the neural networks lead to highly non convex optimization problem and to avoid getting trapped in a local optima is challenging. Therefore, several optimization algorithms specialized for neural network training emerged to deal with the aforementioned challenges. In this thesis, Adaptive Moment (ADAM) Estimation updates\cite{adam} will be used. ADAM uses the exponentially decaying average of past moments (first moment $m$ and second moment $v$) and squared gradients ($g$) to update the parameters. Update for iteration $t$ is,
+\[
+m_{t} = \beta_{1}m_{t-1} + (1- \beta_{1})g_{t}
+\]
+\[
+v_{t} = \beta_{2}v_{t-1} + (1-\beta_{2}){g_{t}}^{2}
+\]
+As $m_{t}$ and $v_{t}$ are initialized as vectors of 0's, the authors of ADAM observe that they are biased towards zero, especially during the initial time steps, and especially when the decay rates are small (i.e. $\beta_{1}$ and $\beta_{2}$ are close to 1). They counteract these biases by computing bias-corrected first and second moment estimates\cite{adam_o}:
+\[
+{m}_{t} = \frac{m_{t}}{1-{\beta_{1}}^{t}}
+\]
+\[
+{v}_{t} = \frac{v_{t}}{1-{\beta_{2}}^{t}}
+\]
+Thus, update of each parameter for the next iteration is,
+\[
+W_{t+1} = W_{t} - \frac{\eta}{\sqrt{v_{t}} + \epsilon}m_{t}
+\]
+The authors propose default hyper-parameter values of 0.9 for $\beta_{1}$, 0.999 for $\beta_{2}$, and ${10}^{-8}$ for $\epsilon$
 
 \subsection{Deep learning}
+As mentioned before, if we train only the operators of classifying function $C$, then the classification performance will only be as good as the information encoded in the feature $\textbf{f}$. But, if it is possible to solve for the transformation operators that compute the features $\textbf{f}$, then it is possible to obtain features optimal for the considered task. That is, if we push the supervision into the temporal approximator function $T$ with a \textit{sequence to one} LSTM, then the classifier performance is no longer limited by the encodings in the feature $\textbf{f}$. Because, now the operators of RNN can be solved for optimality in addition to the operators of 2 layer perceptron, and therefore $\textbf{f}$ can be optimal for the task. Now we have to update every iteration not just $\textbf{W}, \textbf{W}_{L1}$, but also $\textbf{W}_{o}, \textbf{U}_{o}, \textbf{W}_{i}, \textbf{U}_{i}, \textbf{W}_{g}, \textbf{U}_{g}, \textbf{W}_{c}$ and $ \textbf{U}_{c}$   
+
 \begin{algorithm}
   \caption{$\textbf{pred}$ = $Model$($\textbf{a}$) }\label{abstraction2}
   \begin{algorithmic}[1]
@@ -618,11 +668,11 @@ Solving for the operators by \textit{first-order gradient descent} involves the 
     \State $\textbf{Y} = D(\textbf{X})$ \Comment{$\textbf{Y} \in \mathbb{R}^{T \times W}$}
     \State $\textbf{f} = Seq2One\_LSTM(\textbf{Y} \quad | \textbf{W}_{k}, \textbf{U}_{k})$ \Comment{$ k = \{ i_{r},o,g,c\}, \textbf{f} \in \mathbb{R}^{Z}$}
     \State $\bm{\zeta} = C(\textbf{f} \quad |\textbf{W},\textbf{W}_{L1})$ \Comment{$\bm{\zeta} \in \mathbb{R}^{L}$}
-    \State $\textbf{pred} = \{ p_{i}(\zeta_{i}) | p_{i}(\zeta_{i}) = 1 \} \qquad i \in \{1,2,..,L\}$
+    \State $\textbf{pred} = \{ b(\zeta_{i}) | b(\zeta_{i}) = 1 \}$ \Comment{$ i \in \{1,2,..,L\}, b( \zeta_{i}) \in \{0,1\}$}
   \end{algorithmic}
 \end{algorithm}
 \FloatBarrier
-
+\noindent However, the performance is still limited by the frame-wise features $\textbf{Y}$. But the supervision can be further pushed inside by using convolution neural networks and solving for it's operators ($\textbf{W}_{C1}, \textbf{W}_{C2}, \textbf{W}_{C3}$) in addition to the operators of RNN and perceptron.
 \begin{algorithm}
   \caption{$\textbf{pred}$ = $Model$($\textbf{a}$) }\label{abstraction3}
   \begin{algorithmic}[1]
@@ -632,9 +682,34 @@ Solving for the operators by \textit{first-order gradient descent} involves the 
     \State $\textbf{Y} = CNN(\textbf{X} \quad | \textbf{W}_{C1}, \textbf{W}_{C2}, \textbf{W}_{C3})$ \Comment{$\textbf{Y} \in \mathbb{R}^{T \times W}$}
     \State $\textbf{f} = Seq2One\_LSTM(\textbf{Y} \quad | \textbf{W}_{k}, \textbf{U}_{k})$ \Comment{$ k = \{ i_{r},o,g,c\}, \textbf{f} \in \mathbb{R}^{Z}$}
     \State $\bm{\zeta} = C(\textbf{f} \quad |\textbf{W},\textbf{W}_{L1})$ \Comment{$\bm{\zeta} \in \mathbb{R}^{L}$}
-    \State $\textbf{pred} = \{ p_{i}(\zeta_{i}) | p_{i}(\zeta_{i}) = 1 \} \qquad i \in \{1,2,..,L\}$
+    \State $\textbf{pred} = \{ b(\zeta_{i}) | b(\zeta_{i}) = 1 \}$ \Comment{$ i \in \{1,2,..,L\}, b( \zeta_{i}) \in \{0,1\}$}
   \end{algorithmic}
 \end{algorithm}
 \FloatBarrier
+\noindent From the illustration in algorithm \ref{MFCC_learn}, it can be seen that the learning problem can pushed up to the point of even replacing the $STFT$ operators. That is, the model can be now trained to detect the pattern directly from the raw audio signal for our classification task. Since the training data is now able to affect the operators of feature computations, the context of learning problem is now called \textit{deep learning} 
 
 \subsubsection{Issues}
+As exciting as it may sound, deep learning has two major issues,\\
+\\
+\textit{\textbf{Requires large training data} :}\\
+\\
+Looking at all the application domains where deep learning is successful (image /speech recognition), they are the ones where acquiring a lot of data is feasible. As the number of parameters to optimize increases, not only that more iterations are needed to converge, but there is also a risk that the solutions converge to learning the noise in data. This is called \textit{over-fitting}.\\
+\\
+\textit{Transfer-learning :} This is one way to address this issue for smaller datasets. \textit{Transfer learning} is possible only when an alternate large dataset for similar task (\textit{source task}) is available. It is  then possible to train with the smaller dataset by initializing the weights with the values converged in the source task. This is called \textit{fine-tuning} the model.\\
+\\
+\textit{Drop-out :} This is a regularizer that counter over fitting by randomly setting parameters to zero. This is called \textit{dropping} the connection. At each training iteration, the connections can be \textit{dropped out} with probability $p$. ($Drop_{(p)}$)\\  
+\\
+\textit{\textbf{Vanishing gradients} :}\\  
+\\
+As the number of layers in the neural network increases, the risk of gradients approaching zero in the earlier layers increases. This will increase the number of iterations required for convergence. As an illustration, looking at the gradient computation equations for the final layer in equation \ref{grad1} and the penultimate layer in equation \ref{grad2}, it can be seen that as we move deeper, the number of multiplications in the chain rule required for calculating the gradient increases. If one of those gradients in chain have a value close to zero, then the gradient with respect to the parameters will also be close to zero. Thus, the non-linearities $\Phi$ are chosen such that the gradient is boosted. The non-linearities - Rectified linear units ($ReLU$)\cite{relu} and Exponential linear units ($ELU$)\cite{elu} have been used in this thesis.  
+\[
+ReLU(x) = max(0,x)
+\]     
+\[
+ELU(x) = 
+\begin{cases}
+x, & \text{if } x \geq 0 \\
+a(e^{x}-1), & \text{otherwise}
+\end{cases}
+\]
+where $a > 0$ is a hyper-parameter.

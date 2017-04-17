@@ -31,48 +31,55 @@ Warning--I'm ignoring combining's extra "keywords" field
 --line 40 of file bibliography.bib
 Warning--I'm ignoring combining's extra "keywords" field
 --line 42 of file bibliography.bib
+Warning--I'm ignoring spec_dia's extra "keywords" field
+--line 262 of file bibliography.bib
+Warning--I'm ignoring spec_dia's extra "keywords" field
+--line 264 of file bibliography.bib
+A bad cross reference---entry "relu"
+refers to entry "DBLP:conf/icml/2010", which doesn't exist
+Warning--I didn't find a database entry for "DBLP:conf/icml/2010"
 Biblatex version: 2.8
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
-You've used 24 entries,
+You've used 33 entries,
             6047 wiz_defined-function locations,
-            1301 strings with 14534 characters,
-and the built_in function-call counts, 78485 in all, are:
-= -- 2479
-> -- 3284
-< -- 835
-+ -- 1286
-- -- 1542
-* -- 6384
-:= -- 5273
+            1365 strings with 16687 characters,
+and the built_in function-call counts, 107102 in all, are:
+= -- 3414
+> -- 4351
+< -- 1166
++ -- 1579
+- -- 1971
+* -- 8634
+:= -- 6965
 add.period$ -- 0
-call.type$ -- 24
-change.case$ -- 23
-chr.to.int$ -- 183
-cite$ -- 46
-duplicate$ -- 8717
-empty$ -- 8035
-format.name$ -- 1800
-if$ -- 17070
+call.type$ -- 33
+change.case$ -- 32
+chr.to.int$ -- 225
+cite$ -- 64
+duplicate$ -- 11920
+empty$ -- 11055
+format.name$ -- 2429
+if$ -- 23587
 int.to.chr$ -- 0
-int.to.str$ -- 54
+int.to.str$ -- 76
 missing$ -- 0
-newline$ -- 715
-num.names$ -- 1002
-pop$ -- 7575
+newline$ -- 959
+num.names$ -- 1408
+pop$ -- 10468
 preamble$ -- 1
-purify$ -- 356
+purify$ -- 504
 quote$ -- 0
-skip$ -- 4552
+skip$ -- 6374
 stack$ -- 0
-substring$ -- 1361
-swap$ -- 3038
-text.length$ -- 709
-text.prefix$ -- 23
+substring$ -- 1864
+swap$ -- 4148
+text.length$ -- 968
+text.prefix$ -- 32
 top$ -- 1
-type$ -- 900
+type$ -- 1242
 warning$ -- 0
-while$ -- 527
+while$ -- 707
 width$ -- 0
-write$ -- 690
-(There were 5 warnings)
+write$ -- 925
+(There was 1 error message)
