@@ -27,26 +27,25 @@
 \BOOKMARK [2][-]{subsection.2.5.2}{Deep learning}{section.2.5}% 27
 \BOOKMARK [0][-]{chapter.3}{Literature Survey and Model Selection }{}% 28
 \BOOKMARK [1][-]{section.3.1}{Literature Review}{chapter.3}% 29
-\BOOKMARK [2][-]{subsection.3.1.1}{From classifier to feature emphasis}{section.3.1}% 30
-\BOOKMARK [2][-]{subsection.3.1.2}{From hand-crafting to feature learning}{section.3.1}% 31
-\BOOKMARK [2][-]{subsection.3.1.3}{Transfer Learning by supervised pre-training}{section.3.1}% 32
-\BOOKMARK [2][-]{subsection.3.1.4}{Convolutional Neural Networks}{section.3.1}% 33
-\BOOKMARK [1][-]{section.3.2}{Model Selection}{chapter.3}% 34
-\BOOKMARK [2][-]{subsection.3.2.1}{Transfer learning Vs MFCC}{section.3.2}% 35
-\BOOKMARK [2][-]{subsection.3.2.2}{Bag Of Frames vs RNN}{section.3.2}% 36
-\BOOKMARK [0][-]{chapter.4}{Experiments and Results}{}% 37
-\BOOKMARK [1][-]{section.4.1}{Dataset and Evaluation}{chapter.4}% 38
-\BOOKMARK [2][-]{subsection.4.1.1}{Dataset for source task}{section.4.1}% 39
-\BOOKMARK [2][-]{subsection.4.1.2}{Dataset for target task}{section.4.1}% 40
-\BOOKMARK [2][-]{subsection.4.1.3}{Evaluation metrics}{section.4.1}% 41
-\BOOKMARK [1][-]{section.4.2}{Experiments}{chapter.4}% 42
-\BOOKMARK [2][-]{subsection.4.2.1}{Experiments with pre-trained CNNs as feature extractor}{section.4.2}% 43
-\BOOKMARK [2][-]{subsection.4.2.2}{Experiments with MFCCs as feature extractor}{section.4.2}% 44
-\BOOKMARK [1][-]{section.4.3}{Summary of Results}{chapter.4}% 45
-\BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 46
-\BOOKMARK [0][-]{Appendix.1.A}{Appendix}{}% 47
-\BOOKMARK [1][-]{section.1.A.1}{Basis Transformation}{Appendix.1.A}% 48
-\BOOKMARK [1][-]{section.1.A.2}{Convolution}{Appendix.1.A}% 49
-\BOOKMARK [2][-]{subsection.1.A.2.1}{1D Convolution}{section.1.A.2}% 50
-\BOOKMARK [2][-]{subsection.1.A.2.2}{2D Convolution}{section.1.A.2}% 51
-\BOOKMARK [0][-]{chapter*.25}{Bibliography}{}% 52
+\BOOKMARK [2][-]{subsection.3.1.1}{From hand-crafting to feature learning}{section.3.1}% 30
+\BOOKMARK [2][-]{subsection.3.1.2}{Transfer Learning by supervised pre-training}{section.3.1}% 31
+\BOOKMARK [2][-]{subsection.3.1.3}{Convolutional Neural Networks}{section.3.1}% 32
+\BOOKMARK [1][-]{section.3.2}{Model Selection}{chapter.3}% 33
+\BOOKMARK [2][-]{subsection.3.2.1}{Transfer learning Vs MFCC}{section.3.2}% 34
+\BOOKMARK [2][-]{subsection.3.2.2}{Bag Of Frames vs RNN}{section.3.2}% 35
+\BOOKMARK [0][-]{chapter.4}{Experiments and Results}{}% 36
+\BOOKMARK [1][-]{section.4.1}{Dataset and Evaluation}{chapter.4}% 37
+\BOOKMARK [2][-]{subsection.4.1.1}{Dataset for source task}{section.4.1}% 38
+\BOOKMARK [2][-]{subsection.4.1.2}{Dataset for target task}{section.4.1}% 39
+\BOOKMARK [2][-]{subsection.4.1.3}{Evaluation metrics}{section.4.1}% 40
+\BOOKMARK [1][-]{section.4.2}{Experiments}{chapter.4}% 41
+\BOOKMARK [2][-]{subsection.4.2.1}{Experiments with pre-trained CNNs as feature extractor}{section.4.2}% 42
+\BOOKMARK [2][-]{subsection.4.2.2}{Experiments with MFCCs as feature extractor}{section.4.2}% 43
+\BOOKMARK [1][-]{section.4.3}{Summary of Results}{chapter.4}% 44
+\BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 45
+\BOOKMARK [0][-]{Appendix.1.A}{Appendix}{}% 46
+\BOOKMARK [1][-]{section.1.A.1}{Basis Transformation}{Appendix.1.A}% 47
+\BOOKMARK [1][-]{section.1.A.2}{Convolution}{Appendix.1.A}% 48
+\BOOKMARK [2][-]{subsection.1.A.2.1}{1D Convolution}{section.1.A.2}% 49
+\BOOKMARK [2][-]{subsection.1.A.2.2}{2D Convolution}{section.1.A.2}% 50
+\BOOKMARK [0][-]{chapter*.23}{Bibliography}{}% 51

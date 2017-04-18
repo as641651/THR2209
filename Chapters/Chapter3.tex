@@ -10,23 +10,15 @@ Using content-based music information for solving several music information retr
 
 \section{Literature Review}
 \label{literature}
-A number of surveys\cite{survey1}\cite{survey2} amply document what is a decades-long research effort at the intersection of music, machine learning and signal processing. In a broader sense, all techniques have a two-stage architecture: first, features are extracted from music audio signals to transform them into a more meaningful representation. These features are then used as input to a classifier, which is trained to perform the task at hand. This dedicated analysis for music features emerged due to the fact that music signals possess specific acoustic and structural characteristics that distinguish them from spoken language or other non musical signals.
-\bigskip
+Dedicated analysis for music features emerged due to the fact that music signals possess specific acoustic and structural characteristics that distinguish them from spoken language or other non musical signals. In the previous chapter, computing the optimal features for a context-based classification task using deep learning was formalised. However, it is not always true that such \textit{learned} features will perform better than \textit{hand-crafted} features. The underlying issue is ultimately one of \textit{organization} and \textit{variance} of the features. 
+\bigskip 
 
-\noindent In a general sense, the goal of classification tasks in music informatics is to attach a semantic meaning to the content. The underlying issue is ultimately one of \textit{organization} and \textit{variance} of the features. 
-\bigskip
-
-\noindent \textit{\textbf{Feature organization :}} The better organized a feature is to answer some question, the simpler it is to assign or infer semantic meaning. Thus a feature representation should explicitly reflect a desired semantic organization. That is, the information about the discriminants (refered in \ref{discriminants} ) should not be lost.
+\noindent \textit{\textbf{Feature organization :}} The better organized a feature is to answer some question, the simpler it is to assign or infer semantic meaning. Thus a feature representation should explicitly reflect a desired semantic organization. 
 
 \noindent \textit{\textbf{Feature variance :}} A feature representation is said to be \textit{noisy} when variance in the data is misleading or uninformative, and \textit{robust} when it predictably encodes these invariant attributes. Complicated classifying methods are necessary only to compensate for any noise and hence a \textit{robust} feature representation is important.
 \bigskip
 
-\noindent In subsection \ref{feature}, some of the early works indicating the need for better \textit{feature organization} are discussed. In the remaining subsections, adoption of feature learning techniques for multi-label classification task are elaborated. The general motivation of all the works from section \ref{featurelearning} - \ref{convolution}, was to use feature learning to obtain \textit{robust} and \textit{organized} features. (In section \ref{stacked}, how feature learning can increase \textit{robustness} was explained) All the models (except \cite{MusicMotive}) were experimented on Magna Tag a Tune dataset(MTT)\cite{MTT} with about 29K clips which are 29.1s long.
-
-
-\subsection{From classifier to feature emphasis}
-\label{feature}
-Looking back to our history before 2010, there is a clear trend in MIR of applying increasingly more powerful machine learning algorithms to the same feature representations to solve a given task. There are also ample surveys with evidence suggesting that appropriate feature representations significantly reduce the need for complex semantic interpretation methods\cite{survey3}. Particularly in \cite{feature1}, ten different classifiers were compared on same set of features for genre classification task. It was seen that ceiling performance of 80\% was achieved on GTZAN dataset, thereby suggesting the need for robust feature representation for further improvements. In \cite{feature2}, significant improvements were reported even for simplest classifiers by using appropriate filtering of features for chord recognition task. 
+\noindent In the following subsections, adoption of feature learning techniques for multi-label classification task are elaborated. The general motivation of all the works from section \ref{featurelearning} - \ref{convolution}, was to use feature learning to obtain \textit{robust} and \textit{organized} features.  All the models (except \cite{MusicMotive}) were experimented on Magna Tag a Tune dataset(MTT)\cite{MTT} with about 29K clips which are 29.1s long.
 
 \subsection{From hand-crafting to feature learning}
 \label{featurelearning}
