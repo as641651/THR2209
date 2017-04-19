@@ -5,7 +5,7 @@
 
 \label{Chapter3} % For referencing the chapter elsewhere, use \ref{Chapter2} 
 
-Using content-based music information for solving several music information retrieval tasks is not new, but a decade long research efforts have been put. Hunting for the right model for our task and to justify it to be superior to the rest requires thorough understanding of evolution of such techniques. In section \ref{literature}, the dynamics of the literature that has lead to the use of deep learning techniques for MIR tasks have been discussed. In section \ref{model}, the inferences from state of art techniques have been used to short list models for the experiments.       
+Using content-based music information for solving several music information retrieval tasks is not new, but a decade long research efforts have been put. In section \ref{literature}, the dynamics of the literature that has lead to the use of deep learning techniques for MIR tasks have been discussed. In the previous chapter, the abstract algorithm for music classification task was introduced. However, it can be seen that there are plenty of parameters (like sampling rate, STFT parameters, CNN hyper-parameters) to fix. Therefore, in this chapter, we also briefly dive into some of the successful algorithms in the literature to demonstrate the optimal choice parameters or network settings one can use. In section \ref{model}, the inferences from state of art techniques have been used to short list models for the experiments.       
 
 
 \section{Literature Review}
@@ -18,32 +18,33 @@ Dedicated analysis for music features emerged due to the fact that music signals
 \noindent \textit{\textbf{Feature variance :}} A feature representation is said to be \textit{noisy} when variance in the data is misleading or uninformative, and \textit{robust} when it predictably encodes these invariant attributes. Complicated classifying methods are necessary only to compensate for any noise and hence a \textit{robust} feature representation is important.
 \bigskip
 
-\noindent In the following subsections, adoption of feature learning techniques for multi-label classification task are elaborated. The general motivation of all the works from section \ref{featurelearning} - \ref{convolution}, was to use feature learning to obtain \textit{robust} and \textit{organized} features.  All the models (except \cite{MusicMotive}) were experimented on Magna Tag a Tune dataset(MTT)\cite{MTT} with about 29K clips which are 29.1s long.
+\noindent In the following subsections, adoption of feature learning techniques for multi-label classification task are elaborated. All the models (except \cite{MusicMotive}) were experimented for \textit{multi-label classification task} on Magna Tag a Tune dataset(MTT)\cite{MTT} with about 29K clips which are 29.1s long.
 
 \subsection{From hand-crafting to feature learning}
 \label{featurelearning}
-Great amount of technical research have been done to develop robust features. A number of features relevant for different MIR tasks were formulated (hand-crafted) and tested. MFCC features (ref. \ref{basis}), originally developed for speech recognition task often proved efficient for genre classification and tagging. At the same time, some machine learning algorithms were also used to adopt feature learning on spectrogram frames. Several subsequent works rely on a Bag of Frames approach - where a collection of features are computed for each frame and then statistically aggregated (ref. \ref{clustering}). Some early feature learning approaches that proved more efficient than MFCCs are discussed in this section.
+A number of features have been engineered in the past that are relevant for different MIR tasks. MFCC features (ref. \ref{mfcc}), originally developed for speech recognition task often proved efficient for genre classification and tagging. At the same time, some machine learning algorithms were also used to adopt feature learning on spectrogram frames. Results from some proceedings that compare MFCCs (feature engineering) with feature learning for \textit{multi-label classification task} have been discussed.
 \bigskip
 
 \noindent \textbf{Temporal pooling and multiscale learning for automatic annotation and ranking of music audio. 2011 \cite{featurelearn1}:}\\
 \\
-\noindent The pipe line of their algorithm is shown below. The formalism of the notations used are consistent with explanations in chapter 2. The PCA whitened mel-power spectrogram (ref. \ref{basis}) is compared with MFCC features on Magna tag a tune dataset. It was shown that the former achieve a performance of \textbf{AUC 0.87} out performing MFCCs which was 0.77.  
+\noindent The pipe line of their algorithm is shown below. The formalism of the notations used are consistent with explanations in chapter 2. The PCA whitened mel-power spectrogram (ref. \ref{pca}) (unsupervised learning for frame features) is compared with MFCC features (engineered features) on Magna tag a tune dataset. It was shown that the former achieve a performance of \textbf{AUC 0.87} out performing MFCCs which was 0.77. From this research, we can infer that unsupervised learning can extract features more relevant than MFCCs for music tagging.  
 \bigskip
 
-\noindent Signal ($\textbf{a}$) is sampled at 22.1 KHz. Then STFT with window length 1024 and stride 512 is computed with FFT algorithm (ref. \ref{stft}). This is followed by conversion to mel power-spectrogram with 128 bins, followed by PCA Whitening which selects the top 120 variant frequencies. Another transformation is done by stacking a single layer perceptron ($L(\textbf{W})$ means the weight matrix $\textbf{W}$ is learned by training a neural network). The temporal pooling is done by summarizing every 2.3s frame with suitable functions (see \cite{featurelearn1} for details). The matrix $\textbf{W}_{1}$ learns the optimal features for pooling. The resulting feature is then classified by two layer perceptron with 1000 hidden units with sigmoid ($\sigma$) activations.
+\noindent \textbf{\textit{Parameter settings :}} Signal ($\textbf{a}$) is sampled at 22.1 KHz. Then STFT with window length 1024 and stride 512 is computed with FFT algorithm (ref. \ref{stft}). This is followed by conversion to mel power-spectrogram with 128 bins, followed by PCA Whitening which selects the top 120 variant frequencies. The resulting reduction is transformed by the operator $\textbf{W}_{L1}$ that learns (supervised) optimal features for some pooling function $T_{(POOL)}$. The temporal pooling is done by summarizing every 2.3s frame with suitable functions (see \cite{featurelearn1} for details). The resulting feature is then classified by two layer perceptron with 1000 hidden units with sigmoid ($\sigma$) activations. This algorithm is also an illustration for how supervised feature learning is pushed beyond the classifier and into the temporal pooler, but not into the frame-wise reduction stage (see chapter 2 \ref{training}).
 
 \begin{algorithm}
-  \caption{$Pred$ = MODEL($\textbf{a}$) }\label{Temporal Pooling}
+  \caption{$\textbf{pred}$ = MODEL($\textbf{a}$) }\label{Temporal Pooling}
   \begin{algorithmic}[1]
     \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{N}$
-    \Statex \textbf{Output :} $Pred \in \mathbb{R}^{L}$ 
-    \State $\textbf{C} = STFT(\textbf{a})$ \Comment{$\textbf{C} \in \mathbb{C}^{M \times P}$}
-    \State $\textbf{Y}_{r} = \textbf{C} \odot \textbf{C}$ \Comment{$\textbf{Y}_{r} \in \mathbb{R}^{M \times P}$}
-    \State $\textbf{R} = MEL(\textbf{Y}_{r})$ \Comment{$\textbf{R} \in \mathbb{R}^{128 \times P}$}
-    \State $\textbf{X}_{1} = PCA\_WHITEN(\textbf{R})$ \Comment{$\textbf{X}_{1} \in \mathbb{R}^{120 \times P}$}
-    \State $\textbf{X}_{2} = L(\textbf{W}_{1})\textbf{X}_{1}$  \Comment{$\textbf{W}_{1} \in \mathbb{R}^{S \times 120}, \textbf{X}_{2} \in \mathbb{R}^{S \times P}$}
-    \State $\textbf{y} = POOL(\textbf{X}_{2})$ \Comment{$\textbf{y} \in \mathbb{R}^{S.W}$}
-    \State $Pred = \sigma(L(\textbf{W}_{3})\sigma(L(\textbf{W}_{2})\textbf{y}))$ \Comment{$\textbf{W}_{2} \in \mathbb{R}^{1000 \times S.W}, \textbf{W}_{3} \in \mathbb{R}^{L \times 1000}$}
+    \Statex \textbf{Output :} $\textbf{pred}$ \Comment{indices of predicted labels} 
+    \State $\textbf{C} = \textbf{a} \star \textbf{W}_{STFT}$ \Comment{$\textbf{C} \in \mathbb{C}^{M \times P}$}
+    \State $\textbf{C} \leftarrow \textbf{C} \odot \textbf{C}$ 
+    \State $\textbf{X} = \textbf{C} \star \textbf{W}_{MEL}$ \Comment{$\textbf{X} \in \mathbb{R}^{128 \times P}$}
+    \State $\textbf{Y}_{1} = D_{(PCAW)}(\textbf{X})$ \Comment{$\textbf{Y}_{1} \in \mathbb{R}^{120 \times P}$}
+    \State $\textbf{Y}_{2} = \textbf{W}_{L1}\textbf{Y}_{1}$  \Comment{$\textbf{W}_{L1} \in \mathbb{R}^{S \times 120}, \textbf{Y}_{2} \in \mathbb{R}^{T \times P}$}
+    \State $\textbf{f} = T_{(POOL)}(\textbf{Y}_{2})$ \Comment{$\textbf{f} \in \mathbb{R}^{T.W}$}
+    \State $\bm{\zeta} = \sigma(\textbf{W}_{L3}\sigma(\textbf{W}_{L2}\textbf{f}))$ \Comment{$\textbf{W}_{L2} \in \mathbb{R}^{1000 \times T.W}, \textbf{W}_{L3} \in \mathbb{R}^{L \times 1000}$}
+    \State $\textbf{pred} = \{ b(\zeta_{i}) | b(\zeta_{i}) = 1 \}$ \Comment{$ i \in \{1,2,..,L\}, b( \zeta_{i}) \in \{0,1\}$}
   \end{algorithmic}
 \end{algorithm}
 \FloatBarrier
@@ -52,27 +53,28 @@ Great amount of technical research have been done to develop robust features. A 
 
 \noindent \textbf{Multiscale Approaches To Music Audio Feature Learning. 2012\cite{MultiScale}:}\\
 \\
-\noindent The result reported by this model is the current state-of-art on MTT dataset (\textbf{AUC 0.898}). Here, features are extracted from mel-power spectrogram by convolving with window functions (\textit{gaussian pyramids}). This is done for $\textit{W}$ window functions of different sizes (time length). The resulting features are then concatenated. PCA whitened frames in the mel-spectrogram are subjected to unsupervised learning with K-Means to get the Bag of Frames features (see \ref{clustering}). The efficient performance attributed to use of window functions of different time length suggests the existence of overlapping rhythms. (Recall the discussion about rhythmic traces in \ref{discriminants}) 
+\noindent The result reported by this model is the current state-of-art on MTT dataset (\textbf{AUC 0.898}). In this research, supervision is introduced only in the classifier. The reduction and temporal approximation are done with sophisticated unsupervised learning. Here the mel-spectrogram is transformed to $W$ \textit{gaussian pyramids} and features from each level of the pyramid are extracted separately and concatenated. At each level, the spectrogram is divided into T segments and Bag of Frames features are extracted separately on every segment after PCA whitening operation. The signal is sampled at 16 KHz and the STFT window size is 1024 and hop size 512. The mel-spectrogram has 200 bins. 
 \begin{algorithm}
-  \caption{$Pred$ = MODEL($\textbf{a}$) }\label{multiscale}
+  \caption{$\textbf{pred}$ = MODEL($\textbf{a}$) }\label{multiscale}
   \begin{algorithmic}[1]
     \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{N}$
-    \Statex \textbf{Output :} $Pred \in \mathbb{R}^{L}$ 
-    \State $\textbf{C} = STFT(\textbf{a})$ \Comment{$\textbf{C} \in \mathbb{C}^{M \times P}$}
-    \State $\textbf{Y}_{r} = \textbf{C} \odot \textbf{C}$ \Comment{$\textbf{Y}_{r} \in \mathbb{R}^{M \times P}$}
-    \State $\textbf{R} = MEL(\textbf{Y}_{r})$ \Comment{$\textbf{R} \in \mathbb{R}^{R \times P}$}
-    \For{$i \in \{1,..,W\}$}
-     \State $\textbf{X}_{1} \leftarrow GAUSSIAN\_PYRAMID(\textbf{R},i)$ \Comment{$\textbf{X}_{1} \in \mathbb{R}^{R \times Q1_{i}}$}
-    \State $\textbf{X}_{2} \leftarrow PCA\_WHITEN(\textbf{X}_{1})$ \Comment{$\textbf{X}_{2} \in \mathbb{R}^{S1 \times Q1_{i}}$}
-     \State $\textbf{X}_{3} \leftarrow BAG\_OF\_FRAMES(\textbf{X}_{2},S2)$ \Comment{$\textbf{X}_{3} \in \mathbb{R}^{S2 \times Q2_{i}}$}
-    \State $\textbf{Y}[i] \leftarrow MAX\_POOL(\textbf{X}_{3})$ \Comment{$\textbf{Y}[i] \in \mathbb{R}^{S2}, \textbf{Y} \in \mathbb{R}^{S2 \times W}$}
+    \Statex \textbf{Output :} $\textbf{pred}$ \Comment{indices of predicted labels} 
+    \State $\textbf{C} = \textbf{a} \star \textbf{W}_{STFT}$ \Comment{$\textbf{C} \in \mathbb{C}^{M \times P}$}
+    \State $\textbf{C} \leftarrow \textbf{C} \odot \textbf{C}$ 
+    \State $\textbf{X} = \textbf{C} \star \textbf{W}_{MEL}$ \Comment{$\textbf{X} \in \mathbb{R}^{R \times P}$}
+    \For{$i \in \{1,..,Z\}$}
+     \State $\textbf{Y} \leftarrow Gaussian\_Pyramid(\textbf{X},i)$ \Comment{$\textbf{Y} \in \mathbb{R}^{R \times W1_{i}}$}
+     \For{$j \in \{1,...,T\}$}
+       \State $\textbf{F}_{1}[:,j] \leftarrow BagOfFrames(D_{(PCAW)}(\textbf{Y}_{1}))$ \Comment{$\textbf{F}_{1} \in \mathbb{R}^{T \times W_{i}}$}
+      \EndFor
+    \State $\textbf{F}[i] \leftarrow T_{MaxPool}(\textbf{F}_{1})$ \Comment{$\textbf{F} \in \mathbb{R}^{T \times W}$}
     \EndFor
-    \State $\textbf{y} = FLATTEN(\textbf{Y})$ \Comment{$\textbf{y} \in \mathbb{R}^{S2.W}$}
-    \State $Pred = \sigma(L(\textbf{W}_{3})ReLU(L(\textbf{W}_{2})\textbf{y}))$ \Comment{$\textbf{W}_{2} \in \mathbb{R}^{1000 \times S2.W}, \textbf{W}_{3} \in \mathbb{R}^{L \times 1000}$}
+    \State $\textbf{f} = Flatten(\textbf{F})$ \Comment{$\textbf{f} \in \mathbb{R}^{T.W}$}
+    \State $\bm{\zeta} = \sigma(\textbf{W}_{L3})ReLU(\textbf{W}_{L2}\textbf{f}))$ \Comment{$\textbf{W}_{L2} \in \mathbb{R}^{1000 \times T.W}, \textbf{W}_{L3} \in \mathbb{R}^{L \times 1000}$}
+    \State $\textbf{pred} = \{ b(\zeta_{i}) | b(\zeta_{i}) = 1 \}$ \Comment{$ i \in \{1,2,..,L\}, b( \zeta_{i}) \in \{0,1\}$}
   \end{algorithmic}
 \end{algorithm}
 \FloatBarrier
-\noindent The take-away is that modelling relation between features at rhythmic intervals does help.
 
 \subsection{Transfer Learning by supervised pre-training}
 \label{transfer}
