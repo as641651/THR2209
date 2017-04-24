@@ -94,38 +94,48 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.2}Model Selection}{38}{section.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2.1}Transfer learning Vs MFCC}{38}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.1}Supervised learning of Reduction, Temporal approximation and Classification operators}{38}{subsection.3.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2.2}Bag Of Frames vs RNN}{38}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.2}Supervised learning of Temporal approximation and Classification operators}{39}{subsection.3.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Experiments and Results}{41}{chapter.4}
+\contentsline {subsection}{\numberline {3.2.3}Supervised learning only for Classification operators}{40}{subsection.3.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Dataset and Evaluation}{41}{section.4.1}
+\contentsline {chapter}{\numberline {4}Experiments and Results}{43}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.1}Dataset for source task}{41}{subsection.4.1.1}
+\contentsline {section}{\numberline {4.1}Dataset and Evaluation}{43}{section.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.2}Dataset for target task}{42}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.1}Dataset for source task}{43}{subsection.4.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.3}Evaluation metrics}{42}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.2}Dataset for target task}{44}{subsection.4.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Experiments}{43}{section.4.2}
+\contentsline {subsection}{\numberline {4.1.3}Evaluation metrics}{44}{subsection.4.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.1}Experiments with pre-trained CNNs as feature extractor}{44}{subsection.4.2.1}
+\contentsline {section}{\numberline {4.2}Experiments}{45}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.2}Experiments with MFCCs as feature extractor}{46}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.1}Representation Parameters :}{45}{subsection.4.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}Summary of Results}{47}{section.4.3}
+\contentsline {subsection}{\numberline {4.2.2}Analyses of Convolution Neural Networks}{46}{subsection.4.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Conclusion}{49}{chapter.5}
+\contentsline {subsection}{\numberline {4.2.3}Comparision of MFCC with CNN features}{48}{subsection.4.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}Appendix}{51}{Appendix.1.A}
+\contentsline {section}{\numberline {4.3}Summary of Results}{49}{section.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.1}Basis Transformation}{51}{section.1.A.1}
+\contentsline {chapter}{\numberline {5}Conclusion}{51}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.2}Convolution}{51}{section.1.A.2}
+\contentsline {chapter}{\numberline {A}Appendix}{53}{Appendix.1.A}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.2.1}1D Convolution}{51}{subsection.1.A.2.1}
+\contentsline {section}{\numberline {A.1}Basis Transformation}{53}{section.1.A.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.2.2}2D Convolution}{52}{subsection.1.A.2.2}
+\contentsline {section}{\numberline {A.2}Convolution}{53}{section.1.A.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{55}{chapter*.23}
+\contentsline {subsection}{\numberline {A.2.1}1D Convolution}{53}{subsection.1.A.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {A.2.2}2D Convolution}{54}{subsection.1.A.2.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {B}Experiments}{55}{Appendix.2.B}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {B.1}Validation Tags}{55}{section.2.B.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {B.2}Validation Set}{56}{section.2.B.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Bibliography}{61}{chapter*.29}

@@ -8,11 +8,11 @@ The aim of this thesis is to find the optimal algorithm for content-based multi-
 
 \section{Dataset and Evaluation}
 \label{dataset}
-More specific to our task than representing audio is finding a proper dataset of labelled pairs. Recalling that our aim is to identify the aesthetic properties of music from the audio content, a dataset that is free from \textit{audio-semantic} noise is needed. Furthermore, to test \textit{transfer learning}, a large dataset is needed for the \textit{source task} (ref. \ref{transfer}). Popularly used \textit{Million Song Dataset} (MSD) \cite{MSD} contains a cluster of complimentary datasets, most of them annotated with \textit{social tags}. For instance, \textit{Last.fm} which forms a part of MSD contains annotations from users of an online radio application. But such social tags contribute to the \textit{audio-semantic} noise which we want to eliminate. The dataset that is mostly used for evaluating content-based algorithms is \textit{Magna Tag A Tune} dataset \cite{MTT}, where annotations are gathered through a game application that attracts users who are familiar with technical terms related to music. Hence the tags in this dataset are usually clean. Hence this would be a decent choice for our \textit{source task}.
+More specific to our task than representing audio is finding a proper dataset of labelled pairs. To analyse \textit{transfer learning}, a large dataset is needed for the \textit{source task}. Popularly used \textit{Million Song Dataset} (MSD) \cite{MSD} contains a cluster of complimentary datasets, most of them annotated with \textit{social tags}. For instance, \textit{Last.fm} which forms a part of MSD contains annotations from users of an online radio application. But such social tags contribute to the \textit{audio-semantic} noise which we want to eliminate. The dataset that is mostly used for evaluating content-based algorithms is \textit{Magna Tag A Tune} dataset \cite{MTT}, where annotations are gathered through a game application that attracts users who are familiar with technical terms related to music. Hence the tags in this dataset are usually clean. Hence this would be a decent choice for our \textit{source task}.
 
 \subsection{Dataset for source task}
 \label{source}
-The MagnaTagATune dataset consists of 25,856 clips of 29.1-s, 16 kHz-sampled mp3 files with 188 tags. These annotations are gathered from an online game called \textit{Tag a Tune}. A player is partnered up with another random player who cannot be communicated. Both listen to some track, and have to select appropriate tags. Then the players are asked one simple question : "Are we listening to same song?". Answering this correctly will earn them points. This dataset is the largest available that comes close to minimizing the \textit{audio-semantic} noise. However, social factor still plays a role here. This is partly indicated by tag frequency where the most frequent tag is used 4,851 times while the $50^{th}$ most frequent one used 490 times in the training set. We use only the top-50 tags for training from this dataset.  
+The MagnaTagATune dataset consists of 25,856 clips of 29.1-s mp3 files with 188 tags. These annotations are gathered from an online game called \textit{Tag a Tune}. A player is partnered up with another random player who cannot be communicated. Both listen to some track, and have to select appropriate tags. Then the players are asked one simple question : "Are we listening to same song?". Answering this correctly will earn them points. Frequently matched tags are collected to build a labelled dataset. This dataset is the largest available that comes close to minimizing the \textit{audio-semantic} noise. We use only the top-50 tags for training from this dataset.  
 
 \subsection{Dataset for target task}
 \label{target}
@@ -59,23 +59,37 @@ Therefore, in all our experiments, \textit{Weighted averaged AUC} (WAUC) will be
 
 \section{Experiments}
 \label{experiments}
-As with any MIR task, the raw audio signal containing amplitude values in time domain is first down sampled and representation parameters are fixed (ref. \ref{stft}). This is because computational cost is heavily affected by the size of the input layers.
-\bigskip
  
-\noindent \textbf{Sampling Parameters : } Although most of the available audio in digital format are sampled at 44KHz (ref. \ref{sampling}), it is important to note that most of the information lie in the lower range of the spectrum. In \cite{choi_cnn}, a pilot experiment was conducted to demonstrate similar performance with 12KHz and 16KHz for top 50 tags (Recall that MTT clips are already downsampled to 16KHz). Hence we sample all our tracks to 12KHz. 
-\bigskip
+As with any MIR task, the raw audio signal containing amplitude values in time domain is first down sampled and representation parameters are fixed (ref. \ref{stft}). This is because computational cost is heavily affected by the size of the input layers.
 
-\noindent Next step is to extract relevant features. General pipeline is \textit{sampling} (ref. \ref{sampling}), \textit{representation} (ref. \ref{stft}), stacks of \textit{dimensionality reduction} (ref. \ref{dimension}) followed by \textit{temporal summarization} (ref. \ref{temporal}). Feature learning can be introduced at different stages. Introducing in earlier stages would require training with huge amount of data. Feature learning on raw sampled signal proved sub-optimal in \cite{EndToEnd}. Same was the case when convolved over STFT frame \cite{choi_cnn}. Convolutions over mel-spectrogram performed better than MFCC in many previous work \cite{choi_cnn}\cite{EndToEnd}. Hence we stick to engineered features until the extraction of mel-spectrogram.  
-\bigskip 
+\subsection{Representation Parameters :}
+\label{repPara}
+As discussed in section \ref{model} of previous chapter, supervision is not imposed for representation operators. Hence, the following  representation parameters from \cite{choi_cnn} are fixed to compute \textit{log mel power spectrogram} for all experiments. 
 
-\noindent \textbf{Mel-Spectrogram Parameters :}
-The signal in the time domain is converted to frequency domain by Short-Time-Fourier-Transform ($STFT$) using Fast-Fourier-Transform(FFT) algorithm. The arguments for doing this were presented in Chapter 2 (ref. \ref{stft}). The parameters for FFT are the size (often referred as FFT Size) and stride (often referred as hop-length) of the window function. FFT size was fixed to 512 (42 ms) and hop-length was fixed to 256. Motivated by the human auditory system, the frequency axis is binned to mel-scale and log of squared STFT coefficients (proportional to loudness) are calculated. In \cite{choi_cnn}, it was stated that 96 mel-bins were optimum.   
-\bigskip
+\begin{table}[H]
+\label{tab:repPara}
+\centering
+\begin{tabular}{| p{.4\textwidth} | p{.3\textwidth}|}
+\hline
+\textbf{Parameter} & \textbf{Setting}\\
+\hline
+Sampling rate & 12 KHz\\
+\hline
+STFT window function & Hamming window\\
+\hline
+Size of each segment in STFT & 512 (42 ms)\\
+\hline
+Hop-Length & 256\\
+\hline
+FFT Size & 512\\
+\hline
+Mel bins & 96\\
+\hline
+\end{tabular}
+\caption{Representation Parameters} 
+\end{table}
 
-\noindent Feature learning over mel-spectrogram still requires large dataset, but our target dataset is small. Hence by questing the effectiveness of feature learning over spectrogram with MFCCs, we decided  to compare both.
-\bigskip
-
-\subsection{Experiments with pre-trained CNNs as feature extractor}
+\subsection{Analyses of Convolution Neural Networks}
 \label{pretrained}
 In Chapter 2 (ref. \ref{stacked}), it was shown how Convolution Neural Networks (CNN) are motivating to be used as feature extractor for music signal. In Chapter 3 (ref. \ref{convolution}) some of the successful mel-spectrogram convolution architectures trained on MTT dataset showing state-of-art performance were discussed. Now we would like to see if such features extracted through these models can be used for auxiliary tasks. That is to say, the learned CNN parameters (weights) from \textit{source} dataset are used as initialization setting for \textit{target} tasks.    
 \bigskip
@@ -140,7 +154,7 @@ The CNN is first finetuned for 10K iterations with algorithm \ref{alg:cnnrnn}. T
 \end{algorithm}
 \FloatBarrier
     
-\subsection{Experiments with MFCCs as feature extractor}    
+\subsection{Comparision of MFCC with CNN features}    
 \label{mfcc}  
 MFCCs are still de-facto standard for classifications on small datasets. If CNNs had to outperform MFCCs, the learned parameters should have to encode discriminants similar to MFCCs. MFCCs are computed by taking discrete-cosine transform on log mel-spectrogram (ref. \ref{basis}). Following the comparison strategies from \cite{choi_cnn}, we retain 30 coefficients, their first and second derivative, resulting in a vector of size 90 for each STFT frame.
 \bigskip

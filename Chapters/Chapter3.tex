@@ -238,18 +238,57 @@ It was shown that supervised learning can be pushed deep into the feature extrac
 
 \section{Model Selection}
 \label{model}
-In section \ref{literature}, it was stated that when the feature is well \textit{organized} and encodes the \textit{variance} in the data, it becomes easier to attach a semantic meaning. Feature learning can increase robustness, but to learn an organized representation is not guaranteed. That is to say, the extracted feature should encode the information about it's discriminants  related to the task. Our brain differentiates sounds with energy changes, and this is approximated by MFCCs (ref \ref{basis}) through proportionate energy variance from a mel-spaced spectrogram (ref \ref{mel}). But in section \ref{discriminants}, it was argued that the difference between music and speech is that, a music signal is composed of several superimposed \textit{rhythmic traces}. It was not clear if the classifier could decompose the rhythms from engineered features and hence there was this movement from feature engineering to feature learning. The results from the work \cite{MultiScale}, where fully unsupervised technique is adopted for feature learning, shows that hand-crafted features does lose some information necessary for classification. But even the learned features were extracted from mel-spaced frequency spectrogram that does not exploit the harmonic encodings. That is, we still do not know if the learning algorithms extract the rhythms, thereby questioning the optimality of \textit{feature organization} (i.e, would the features learned for one task be optimal for auxiliary but related task?). However in general, it could be seen that feature learning performs better than MFCCs for multi-label classification task.   
+The performance of content based music tagging task will be better if the features extracted from the signal does not lose the information required for discriminating the semantics. CNNs and RNNs together can be used to impose supervision into the feature extraction pipeline. The transformation operators that reduce the signal (or some intermediate representation) to features could then be optimal for the task. But the challenge is that, deep neural networks require large amount of data to realize operators that can out-perform solutions by engineered and unsupervised methods (eg. \cite{featurelearn1}\cite{MultiScale}). Given that our target dataset is small, we cannot use it directly to train the deep neural network. Therefore, the model is first trained with MTT dataset and the resulting converged weights can be used as initialization while training with the target dataset\cite{TransferLearning} . In this thesis, transfer learning is analysed by controlling the depth of supervision in the target dataset. 
 \bigskip
 
-\noindent Music tagging problem is further complicated by the complexity of semantic assignments that reflect user preference. To get the right discriminants, the training method should be properly defined in the first place. In section \ref{problems}, the problems with content based methods that stem from training assumptions were pointed out. One of which was the social-factor assumption resulting from training on large datasets. But we want train on a specialized dataset which is small. This leaves us with the question, if the models trained by supervised learning on larger datasets\cite{choi_cnn}\cite{EndToEnd} can be used for smaller datasets with different label-context. Secondly, the assumptions resulting by training on short excerpts of music rather than whole song cause  vagueness. This is because, the currently available large datasets only contain short clips and the current algorithms generalize the tags for the whole song by merging tags from short sections of the song. Therefore, methods that hold better feature organization for songs of arbitrary length are also explored.   
+\noindent Recall that the feature extraction pipeline was divided in to three stages : Representation, Reduction and Temporal approximation. With this formalism, the depth of supervision can be controlled by training on our target dataset at following supervision levels :
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Supervised learning of Representation, Reduction, Temporal approximation and Classification operators (end to end learning)
+    \item Supervised learning of Reduction, Temporal approximation and Classification operators
+    \item Supervised learning of Temporal approximation and Classification operators
+    \item Supervised learning only for Classification operators
+\end{itemize}
+The classifier always requires supervised training because of the nature of our task. Multi-layer perceptron is fixed as the classifier for all our experiments. Training through representation was shown sub-optimal in  \cite{EndToEnd} and \cite{choi_cnn}. Hence we do not analyse supervision pushed to this level. 
 
-\subsection{Transfer learning Vs MFCC}
-\label{transfer}
-To check if models trained on large datasets can be exploited for smaller datasets, \textit{transfer learning} from the model which achieves state of art performance with CNN\cite{choi_cnn} is compared with MFCC features. (It makes perfect sense to compare the state of art unsupervised feature learning algorithm\cite{MultiScale} as well, but in this thesis I stick to analysing CNNs). This will also show if features learned (stacked convolutions - ref. \ref{stacked}) through supervised training on large dataset attain better \textit{feature organization} than MFCCs. It is important to note that, better \textit{feature organization} simply does not mean that classifier identifies the \textit{rhythmic traces}.
+\subsection{Supervised learning of Reduction, Temporal approximation and Classification operators}
+\label{fe1}
+The representation operators are fixed and the operators for dimensionality reduction, temporal approximation and classification are solved for optimality. That is, the gradient of the error is back-propagated upto reduction operations. Deeper the network, more data is required for convergence. This model is first trained on MTT dataset and then further fine-tuned on the target dataset.
+\begin{figure}[h] 
+\centering
+\includegraphics[width=0.4\textwidth]{fe1}
+\caption{Error Back-propagation upto reduction operations }
+ \label{fig:fe1}
+ \end{figure}
+\FloatBarrier
 
-\subsection{Bag Of Frames vs RNN}
-\label{kmeans}
-To summarize tags for songs of arbitrary length, most of the current algorithms classify short sections of the spectrogram separately and finally merge tags across different sections\cite{EndToEnd}. It is also possible to stack a \textit{decision tree} over section-wise tags and improve performance, but that would not tell anything about the optimality of \textit{feature organization}. Hence for temporal pooling, only methods that directly work on content information are considered. Algorithm in \cite{MultiScale} is designed to handle songs of arbitrary length and it was seen that Bag of Frames features trained using K-Means algorithm (see \ref{clustering}) proved efficient while testing on 29.1s excerpts from MTT dataset. However, it is not clear if these features are optimal choice for identifying rhythms.  It is also not known if the efficiency of K-Means will be retrained when tested on songs longer than 30s. Hence, this algorithm is compared with temporal approximation using Recurrent Neural Network (see \ref{rnn}). Supervised training with RNN might force the classifier to look for rhythmic content.    
+\noindent \textbf{Representation :} In \cite{choi_cnn} and \cite{EndToEnd}, CNN with log mel-power spectrogram as input was shown to be optimal for the music tagging task. Hence we compute the log-mel power spectrogram for all the analyses.\\
+\\  
+\textbf{Reduction :} The log mel power spectrogram is convolved with learnable filters. In \cite{MusicMotive}, 2D convolutions were shown to be more motivating than 1D. In \cite{choi_cnn}, a 5 layers of 2D convolutions were used to reduction, which achieves close to state of art performance on MTT dataset. Therefore, we choose their CNN model (algorithm \ref{alg:choicnn}) for dimensionality reduction.\\
+\\  
+\textbf{Temporal approximation :} Supervision can be introduced at this stage with a sequence to one Recurrent Neural Network (see chapter 2 \ref{rnn}). Long Short-term memory(LSTM) and Gated recurrent units(GRU) are the choices at our disposal. In this thesis, we investigate only LSTMs. 
         
- 
- 
+\subsection{Supervised learning of Temporal approximation and Classification operators}
+\label{fe2}
+The representation and reduction operators are not supervised on our target dataset. The representation and temporal approximation models are same as described in section \ref{fe1}. This model is also first trained on MTT dataset and then further fine-tuned on the target dataset. 
+\begin{figure}[h] 
+\centering
+\includegraphics[width=0.4\textwidth]{fe2}
+\caption{Error Back-propagation upto temporal approximation operations }
+ \label{fig:fe2}
+ \end{figure}
+\FloatBarrier
+\noindent \textbf{Reduction:} The CNN trained on large dataset is used as a black box feature extractor for the target classification task. That is, the weights converged on large dataset are not further modified by fine tuning on target dataset. In addition to black box CNN, we also investigate MFCCs because it is still not clear if CNNs can out perform MFCCs for a small dataset.
+
+\subsection{Supervised learning only for Classification operators}
+\label{fe3}
+Supervision is not imposed on the feature extraction pipeline. The representation and reduction models are same as described in section \ref{fe2}
+\begin{figure}[h] 
+\centering
+\includegraphics[width=0.4\textwidth]{fe3}
+\caption{Error Back-propagation only through classifier }
+ \label{fig:fe3}
+ \end{figure}
+\FloatBarrier 
+
+\noindent \textbf{Temporal Approximation:} Bag of frames features (see chapter ) obtained with unsupervised learning using K-means clustering algorithm was shown to be optimal for music tagging task in []. Comparing Bag of frames features with RNN tells if deep learning with transfer learning can boost performance when training dataset is small. 
