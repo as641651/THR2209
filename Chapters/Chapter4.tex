@@ -61,10 +61,23 @@ Therefore, in all our experiments, \textit{Weighted averaged AUC} (WAUC) will be
 \label{experiments}
  
 As with any MIR task, the raw audio signal containing amplitude values in time domain is first down sampled and representation parameters are fixed (ref. \ref{stft}). This is because computational cost is heavily affected by the size of the input layers.
+\begin{algorithm}
+  \caption{$\textbf{pred}$ = $Model$($\textbf{a}$) }\label{exp:abstraction}
+  \begin{algorithmic}[1]
+    \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{N}$
+    \Statex \textbf{Output :} $\textbf{pred}$ \Comment{indices of predicted labels}
+    \State $\textbf{X} = R(\textbf{a})$ \Comment{$\textbf{X} \in \mathbb{R}^{R \times P}$}
+    \State $\textbf{Y} = D(\textbf{X})$ \Comment{$\textbf{Y} \in \mathbb{R}^{T \times W}$}
+    \State $\textbf{f} = T(\textbf{Y})$ \Comment{$\textbf{f} \in \mathbb{R}^{Z}$}
+    \State $\bm{\zeta} = C(\textbf{f})$ \Comment{$\bm{\zeta} \in \mathbb{R}^{63}$}
+    \State $\textbf{pred} = \{ b(\zeta_{i}) | b(\zeta_{i}) = 1 \}$ \Comment{$ i \in \{1,2,..,63\}, b( \zeta_{i}) \in \{0,1\}$}
+  \end{algorithmic}
+\end{algorithm}
+\FloatBarrier
 
 \subsection{Representation Parameters :}
 \label{repPara}
-As discussed in section \ref{model} of previous chapter, supervision is not imposed for representation operators. Hence, the following  representation parameters from \cite{choi_cnn} are fixed to compute \textit{log mel power spectrogram} for all experiments. 
+As discussed in section \ref{model} of previous chapter, supervision is not imposed to compute representation operators. Hence, the following  representation parameters from \cite{choi_cnn} are fixed to compute \textit{log mel power spectrogram} for all experiments. 
 
 \begin{table}[H]
 \label{tab:repPara}
@@ -89,8 +102,172 @@ Mel bins & 96\\
 \caption{Representation Parameters} 
 \end{table}
 
+\begin{algorithm}
+  \caption{$\textbf{pred}$ = $Model$($\textbf{a}$) }\label{exp:a1}
+  \begin{algorithmic}[1]
+    \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{12000.t}$
+    \Statex \textbf{Output :} $\textbf{pred}$ \Comment{indices of predicted labels}
+    \State $\textbf{C} = \textbf{a} \star {\textbf{W}_{STFT}}^{(256)}$ \Comment{$\textbf{C} \in \mathbb{R}^{512 \times P}, \textbf{W}_{STFT} \in \mathbb{R}^{512 \times 512}$}
+    \State $\textbf{C} \leftarrow \textbf{C} \odot \textbf{C}$
+    \State $\textbf{X} = \textbf{C} \star {\textbf{W}_{MEL}}^{(512)}$ \Comment{$\textbf{X} \in \mathbb{R}^{96 \times P}, \textbf{W}_{MEL} \in \mathbb{R}^{96 \times 512}$}
+    \State $\textbf{X} \leftarrow ln(\textbf{X})$
+    \State $\textbf{Y} = D(\textbf{X})$ \Comment{$\textbf{Y} \in \mathbb{R}^{T \times W}$}
+    \State $\textbf{f} = T(\textbf{Y})$ \Comment{$\textbf{f} \in \mathbb{R}^{Z}$}
+    \State $\bm{\zeta} = C(\textbf{f})$ \Comment{$\bm{\zeta} \in \mathbb{R}^{63}$}
+    \State $\textbf{pred} = \{ b(\zeta_{i}) | b(\zeta_{i}) = 1 \}$ \Comment{$ i \in \{1,2,..,63\}, b( \zeta_{i}) \in \{0,1\}$}
+  \end{algorithmic}
+\end{algorithm}
+\FloatBarrier
+
+\subsection{Perceptron Settings}
+
+\begin{algorithm}
+\begin{minipage}{0.15\textwidth}
+\includegraphics[width=0.75\textwidth]{ce1}
+\end{minipage}
+  \begin{minipage}{0.80\textwidth}
+  \caption{$\textbf{pred}$ = $Model$($\textbf{a}$) }\label{exp:a2}
+  \begin{algorithmic}[1]
+    \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{12000.t}$
+    \Statex \textbf{Output :} $\textbf{pred}$ \Comment{indices of predicted labels}
+    \State $\textbf{C} = \textbf{a} \star {\textbf{W}_{STFT}}^{(256)}$ \Comment{$\textbf{C} \in \mathbb{R}^{512 \times P}, \textbf{W}_{STFT} \in \mathbb{R}^{512 \times 512}$}
+    \State $\textbf{C} \leftarrow \textbf{C} \odot \textbf{C}$
+    \State $\textbf{X} = \textbf{C} \star {\textbf{W}_{MEL}}^{(512)}$ \Comment{$\textbf{X} \in \mathbb{R}^{96 \times P}, \textbf{W}_{MEL} \in \mathbb{R}^{96 \times 512}$}
+    \State $\textbf{X} \leftarrow ln(\textbf{X})$
+    \State $\textbf{Y} = \textbf{X} \star {\textbf{W}_{MFCC}}^{(96)}$ \Comment{$\textbf{Y} \in  \mathbb{R}^{90 \times P}, \textbf{W}_{MFCC} \in \mathbb{R}^{90 \times 96}$}
+    \State $\textbf{f} = BagOfFrames(\textbf{Y})$ \Comment{$\textbf{f} \in \mathbb{R}^{Z}$}
+    \State $\bm{\zeta} = \sigma ({\color{red} \textbf{W}_{L2}} ReLU ({\color{red}\textbf{W}_{L1}}\textbf{f})) $ \Comment{$\bm{\zeta} \in \mathbb{R}^{63}, \textbf{W}_{L2} \in \mathbb{R}^{63 \times H}, \textbf{W}_{L1} \in \mathbb{R}^{H \times Z}$}
+    \State $\textbf{pred} = \{ b(\zeta_{i}) | b(\zeta_{i}) = 1 \}$ \Comment{$ i \in \{1,2,..,63\}, b( \zeta_{i}) \in \{0,1\}$}
+  \end{algorithmic}
+  \end{minipage}
+\end{algorithm}
+\FloatBarrier
+\begin{table}[H]
+\label{tab:a2}
+\centering
+\begin{tabular}{| p{.3\textwidth} | p{.3\textwidth} | p{.3\textwidth} |}
+\hline
+\textbf{Hyper-parameter} & \textbf{Source task} & \textbf{Target task}\\
+\hline
+${\eta}_{c}$ & $1^{-2}$ & $1^{-3}$ \\ 
+\hline
+${\gamma}_{c}$ & $0.1$ & $ 0.1$\\
+\hline
+${step}_{c}$ & 10000 & 3000 \\
+\hline
+\end{tabular}
+\caption{Training Hyper-Parameters for Classifier} 
+\end{table}
+\begin{table}[H]
+\label{tab:a2}
+\centering
+\begin{tabular}{| p{.24\textwidth} | p{.24\textwidth}| p{.24\textwidth}| p{.24\textwidth} |}
+\hline
+& $H = \textbf{512}$ & $H = \textbf{1024}$ & $H = \textbf{2048}$\\
+\hline
+$Z = \textbf{512}$  & 0.63 & 0.64 & 0.63\\
+\hline
+$Z = \textbf{1024}$ & 0.64 & \textbf{0.67 }& 0.62\\ 
+\hline
+$Z = \textbf{2048}$ & 0.61 & 0.61 & 0.59\\
+\hline
+\end{tabular}
+\caption{Hyper parameter search : Classifier hidden dimension (H), Feature dimension (Z)} 
+\end{table}
+
+\subsection{RNN Settings}
+
+\begin{algorithm}
+\begin{minipage}{0.15\textwidth}
+\includegraphics[width=0.75\textwidth]{ce2}
+\end{minipage}
+  \begin{minipage}{0.80\textwidth}
+  \caption{$\textbf{pred}$ = $Model$($\textbf{a}$) }\label{exp:a3}
+   {\fontsize{8}{0}
+  \begin{algorithmic}[1]
+    \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{12000.t}$
+    \Statex \textbf{Output :} $\textbf{pred}$ \Comment{indices of predicted labels}
+    \State $\textbf{C} = \textbf{a} \star {\textbf{W}_{STFT}}^{(256)}$ \Comment{$\textbf{C} \in \mathbb{R}^{512 \times P}, \textbf{W}_{STFT} \in \mathbb{R}^{512 \times 512}$}
+    \State $\textbf{C} \leftarrow \textbf{C} \odot \textbf{C}$
+    \State $\textbf{X} = \textbf{C} \star {\textbf{W}_{MEL}}^{(512)}$ \Comment{$\textbf{X} \in \mathbb{R}^{96 \times P}, \textbf{W}_{MEL} \in \mathbb{R}^{96 \times 512}$}
+    \State $\textbf{X} \leftarrow ln(\textbf{X})$
+    \State $F = 1366$
+    \State $W = floor(\frac{P}{F})$
+    \For{$i \in \{0,..,W\}$}
+      \State $ \textbf{G} \leftarrow \textbf{X}[:,(i+1)F]$
+      \State $\textbf{Y} \leftarrow \textbf{G} \star {\textbf{W}_{MFCC}}^{(96)}$ \Comment{$\textbf{Y} \in \mathbb{R}^{90 \times F}, \textbf{W}_{MFCC} \in \mathbb{R}^{90 \times 96}$}
+      \State $\textbf{F}[i] = {Drop}_{(p)}(Seq2One\_LSTM(\textbf{Y} | {\color{red}\bm{\Phi}_{R2}} ))$ \Comment{$\textbf{F} \in \mathbb{R}^{T \times W}$}
+    \EndFor
+    \State $\textbf{f} = {Drop}_{(p)}(Seq2One\_LSTM(\textbf{F} | {\color{red}\bm{\Phi}_{R1}}))$ \Comment{$\textbf{f} \in \mathbb{R}^{1024}$}
+    \State $\bm{\zeta} = \sigma ({\color{red} \textbf{W}_{L2}} ReLU ({\color{red}\textbf{W}_{L1}}\textbf{f})) $ \Comment{$\bm{\zeta} \in \mathbb{R}^{63}, \textbf{W}_{L2} \in \mathbb{R}^{63 \times 1024}, \textbf{W}_{L1} \in \mathbb{R}^{1024 \times 1024}$}
+    \State $\textbf{pred} = \{ b(\zeta_{i}) | b(\zeta_{i}) = 1 \}$ \Comment{$ i \in \{1,2,..,63\}, b( \zeta_{i}) \in \{0,1\}$}
+  \end{algorithmic}
+  }
+  \end{minipage}
+\end{algorithm}
+\FloatBarrier
+
+\begin{table}[H]
+\label{tab:a2}
+\centering
+\begin{tabular}{| p{.24\textwidth} | p{.24\textwidth}| p{.24\textwidth}| p{.24\textwidth} |}
+\hline
+& $T = \textbf{512}$ & $T = \textbf{1024}$ & $T = \textbf{2048}$\\
+\hline
+$p = \textbf{0}$  & 0.66 & 0.61 & 0.59\\
+\hline
+$p = \textbf{0.3}$ & 0.68 & \textbf{0.74} & 0.68\\ 
+\hline
+$p = \textbf{0.5}$ & 0.67 & 0.71 & 0.64\\
+\hline
+\end{tabular}
+\caption{Hyper parameter search : RNN hidden dimension (T), Drop-out probability (p)} 
+\end{table}
+
+\subsubsection{Black-box LSTM}
+
+\subsection{CNN Settings}
+
+\begin{algorithm}
+\begin{minipage}{0.15\textwidth}
+\includegraphics[width=0.75\textwidth]{ce3}
+\end{minipage}
+  \begin{minipage}{0.80\textwidth}
+  \caption{$\textbf{pred}$ = $Model$($\textbf{a}$) }\label{exp:a4}
+   {\fontsize{8}{0}
+  \begin{algorithmic}[1]
+    \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{12000.t}$
+    \Statex \textbf{Output :} $\textbf{pred}$ \Comment{indices of predicted labels}
+    \State $\textbf{C} = \textbf{a} \star {\textbf{W}_{STFT}}^{(256)}$ \Comment{$\textbf{C} \in \mathbb{R}^{512 \times P}, \textbf{W}_{STFT} \in \mathbb{R}^{512 \times 512}$}
+    \State $\textbf{C} \leftarrow \textbf{C} \odot \textbf{C}$
+    \State $\textbf{X} = \textbf{C} \star {\textbf{W}_{MEL}}^{(512)}$ \Comment{$\textbf{X} \in \mathbb{R}^{96 \times P}, \textbf{W}_{MEL} \in \mathbb{R}^{96 \times 512}$}
+    \State $\textbf{X} \leftarrow ln(\textbf{X})$
+    \State $F = 1366$
+    \State $W = floor(\frac{P}{F})$
+    \For{$i \in \{0,..,W\}$}
+      \State $ \textbf{G} \leftarrow \textbf{X}[:,(i+1)F]$
+      \State $\textbf{Y}[i] = CHOI\_CNN(\textbf{G} | {\color{red} \bm{\Phi}_{C}})$ \Comment{$\textbf{Y} \in \mathbb{R}^{1024 \times W}$}
+     \EndFor
+     \State $\textbf{F} = {Drop}_{(0.3)}(Seq2Seq\_LSTM(\textbf{Y} | {\color{red}\bm{\Phi}_{R2}} ))$ \Comment{$\textbf{F} \in \mathbb{R}^{1024 \times W}$}
+    \State $\textbf{f} = {Drop}_{(0.3)}(Seq2One\_LSTM(\textbf{F} | {\color{red}\bm{\Phi}_{R1}}))$ \Comment{$\textbf{f} \in \mathbb{R}^{1024}$}
+    \State $\bm{\zeta} = \sigma ({\color{red} \textbf{W}_{L2}} ReLU ({\color{red}\textbf{W}_{L1}}\textbf{f})) $ \Comment{$\bm{\zeta} \in \mathbb{R}^{63}, \textbf{W}_{L2} \in \mathbb{R}^{63 \times 1024}, \textbf{W}_{L1} \in \mathbb{R}^{1024 \times 1024}$}
+    \State $\textbf{pred} = \{ b(\zeta_{i}) | b(\zeta_{i}) = 1 \}$ \Comment{$ i \in \{1,2,..,63\}, b( \zeta_{i}) \in \{0,1\}$}
+  \end{algorithmic}
+  }
+  \end{minipage}
+\end{algorithm}
+\FloatBarrier
+
+\subsubsection{Black-box CNN + Fine-tune LSTM}
+\subsubsection{Black-box CNN + Black-box LSTM}
+\subsubsection{Black-box CNN + Bag of Frames}
+
 \subsection{Analyses of Convolution Neural Networks}
 \label{pretrained}
+
+\subsubsection{Fine-tune CNN + Fine-tune LSTM}
+
+
 In Chapter 2 (ref. \ref{stacked}), it was shown how Convolution Neural Networks (CNN) are motivating to be used as feature extractor for music signal. In Chapter 3 (ref. \ref{convolution}) some of the successful mel-spectrogram convolution architectures trained on MTT dataset showing state-of-art performance were discussed. Now we would like to see if such features extracted through these models can be used for auxiliary tasks. That is to say, the learned CNN parameters (weights) from \textit{source} dataset are used as initialization setting for \textit{target} tasks.    
 \bigskip
 
@@ -100,6 +277,7 @@ In Chapter 2 (ref. \ref{stacked}), it was shown how Convolution Neural Networks 
 \begin{algorithm}
   \caption{$Pred$ = MODEL($\textbf{a}$) }
   \label{alg:cnnrnn}
+  {\fontsize{1}{0}
   \begin{algorithmic}[1]
     \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{N}$
     \Statex \textbf{Output :} $Pred \in \mathbb{R}^{L}$ 
@@ -115,6 +293,7 @@ In Chapter 2 (ref. \ref{stacked}), it was shown how Convolution Neural Networks 
     \State $\textbf{y}_{2} = Drop_{(0.3)}(Seq2One\_LSTM(\textbf{Y}_{1}))$ \Comment{$\textbf{y}_{2} \in \mathbb{R}^{1024}$}
     \State $Pred = \sigma(L(\textbf{W})\textbf{y}_{2}))$ \Comment{$\textbf{W} \in \mathbb{R}^{L \times 1024}$}
   \end{algorithmic}
+  }
 \end{algorithm}
 \FloatBarrier
 

@@ -41,16 +41,19 @@
 \BOOKMARK [2][-]{subsection.4.1.3}{Evaluation metrics}{section.4.1}% 41
 \BOOKMARK [1][-]{section.4.2}{Experiments}{chapter.4}% 42
 \BOOKMARK [2][-]{subsection.4.2.1}{Representation Parameters :}{section.4.2}% 43
-\BOOKMARK [2][-]{subsection.4.2.2}{Analyses of Convolution Neural Networks}{section.4.2}% 44
-\BOOKMARK [2][-]{subsection.4.2.3}{Comparision of MFCC with CNN features}{section.4.2}% 45
-\BOOKMARK [1][-]{section.4.3}{Summary of Results}{chapter.4}% 46
-\BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 47
-\BOOKMARK [0][-]{Appendix.1.A}{Appendix}{}% 48
-\BOOKMARK [1][-]{section.1.A.1}{Basis Transformation}{Appendix.1.A}% 49
-\BOOKMARK [1][-]{section.1.A.2}{Convolution}{Appendix.1.A}% 50
-\BOOKMARK [2][-]{subsection.1.A.2.1}{1D Convolution}{section.1.A.2}% 51
-\BOOKMARK [2][-]{subsection.1.A.2.2}{2D Convolution}{section.1.A.2}% 52
-\BOOKMARK [0][-]{Appendix.2.B}{Experiments}{}% 53
-\BOOKMARK [1][-]{section.2.B.1}{Validation Tags}{Appendix.2.B}% 54
-\BOOKMARK [1][-]{section.2.B.2}{Validation Set}{Appendix.2.B}% 55
-\BOOKMARK [0][-]{chapter*.29}{Bibliography}{}% 56
+\BOOKMARK [2][-]{subsection.4.2.2}{Perceptron Settings}{section.4.2}% 44
+\BOOKMARK [2][-]{subsection.4.2.3}{RNN Settings}{section.4.2}% 45
+\BOOKMARK [2][-]{subsection.4.2.4}{CNN Settings}{section.4.2}% 46
+\BOOKMARK [2][-]{subsection.4.2.5}{Analyses of Convolution Neural Networks}{section.4.2}% 47
+\BOOKMARK [2][-]{subsection.4.2.6}{Comparision of MFCC with CNN features}{section.4.2}% 48
+\BOOKMARK [1][-]{section.4.3}{Summary of Results}{chapter.4}% 49
+\BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 50
+\BOOKMARK [0][-]{Appendix.1.A}{Appendix}{}% 51
+\BOOKMARK [1][-]{section.1.A.1}{Basis Transformation}{Appendix.1.A}% 52
+\BOOKMARK [1][-]{section.1.A.2}{Convolution}{Appendix.1.A}% 53
+\BOOKMARK [2][-]{subsection.1.A.2.1}{1D Convolution}{section.1.A.2}% 54
+\BOOKMARK [2][-]{subsection.1.A.2.2}{2D Convolution}{section.1.A.2}% 55
+\BOOKMARK [0][-]{Appendix.2.B}{Experiments}{}% 56
+\BOOKMARK [1][-]{section.2.B.1}{Validation Tags}{Appendix.2.B}% 57
+\BOOKMARK [1][-]{section.2.B.2}{Validation Set}{Appendix.2.B}% 58
+\BOOKMARK [0][-]{chapter*.37}{Bibliography}{}% 59
