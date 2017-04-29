@@ -585,10 +585,11 @@ The iterative steps involving the computation of the operators that is optimal f
 \end{algorithm}
 \FloatBarrier
 \noindent Considering a two layer perceptron for classification, $\bm{\zeta}$ is computed as,
-\[
-\bm{\zeta} = \sigma ( \textbf{W} \Phi (\textbf{W}_{L1}\textbf{f})) 
-\]
-Computing $\textbf{W}$ and $\textbf{W}_{L1}$ is an inverse problem. That is, we need a target $\textbf{t}$ that approximates $\bm{\zeta}$ for true classifications from a set of observations. To do this, recall that $\bm{\zeta}$ is a $L$ dimensional vector and $L$ is the number of labels in consideration. $\zeta_{i}$ is the classifier output for $i^{th}$ label and $i \in \{1,2,..,L\}$. With sigmoid ($\sigma$) projection we know that $0 \leq \zeta_{i} \leq 1$. If we assume $t_{i}$ equal to 1 for true classifications and 0 for the rest, then the transformation operators ($\textbf{W}$ and $\textbf{W}_{L1}$) can be solved such that the classifier output $\zeta_{i}$ is close to 1 for true classifications.
+\begin{equation}
+\label{eq:mlp}
+\bm{\zeta} = \sigma ( \textbf{W} \Phi (\textbf{W}_{L1}\textbf{f}))
+\end{equation}
+\noindent Computing $\textbf{W}$ and $\textbf{W}_{L1}$ is an inverse problem. That is, we need a target $\textbf{t}$ that approximates $\bm{\zeta}$ for true classifications from a set of observations. To do this, recall that $\bm{\zeta}$ is a $L$ dimensional vector and $L$ is the number of labels in consideration. $\zeta_{i}$ is the classifier output for $i^{th}$ label and $i \in \{1,2,..,L\}$. With sigmoid ($\sigma$) projection we know that $0 \leq \zeta_{i} \leq 1$. If we assume $t_{i}$ equal to 1 for true classifications and 0 for the rest, then the transformation operators ($\textbf{W}$ and $\textbf{W}_{L1}$) can be solved such that the classifier output $\zeta_{i}$ is close to 1 for true classifications.
 
 \subsection{First-order gradient descent}
 Solving for the operators by \textit{first-order gradient descent} involves the following steps : 

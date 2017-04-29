@@ -114,44 +114,44 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.2.1}Representation Parameters :}{46}{subsection.4.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.2}Perceptron Settings}{46}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.2}Perceptron Settings}{47}{subsection.4.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.3}RNN Settings}{47}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.3}RNN Settings}{48}{subsection.4.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Black-box LSTM}{48}{section*.30}
+\contentsline {subsubsection}{Black-box LSTM}{50}{section*.30}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.4}CNN Settings}{48}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.4}CNN Settings}{50}{subsection.4.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Black-box CNN + Fine-tune LSTM}{49}{section*.31}
+\contentsline {subsubsection}{Black-box CNN + Fine-tune LSTM}{52}{section*.35}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Black-box CNN + Black-box LSTM}{49}{section*.32}
+\contentsline {subsubsection}{Black-box CNN + Black-box LSTM}{52}{section*.36}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Black-box CNN + Bag of Frames}{49}{section*.33}
+\contentsline {subsubsection}{Black-box CNN + Bag of Frames}{52}{section*.37}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.5}Analyses of Convolution Neural Networks}{49}{subsection.4.2.5}
+\contentsline {subsection}{\numberline {4.2.5}Analyses of Convolution Neural Networks}{52}{subsection.4.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Fine-tune CNN + Fine-tune LSTM}{49}{section*.34}
+\contentsline {subsubsection}{Fine-tune CNN + Fine-tune LSTM}{52}{section*.38}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.6}Comparision of MFCC with CNN features}{51}{subsection.4.2.6}
+\contentsline {subsection}{\numberline {4.2.6}Comparision of MFCC with CNN features}{54}{subsection.4.2.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}Summary of Results}{52}{section.4.3}
+\contentsline {section}{\numberline {4.3}Summary of Results}{55}{section.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Conclusion}{53}{chapter.5}
+\contentsline {chapter}{\numberline {5}Conclusion}{57}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}Appendix}{55}{Appendix.1.A}
+\contentsline {chapter}{\numberline {A}Appendix}{59}{Appendix.1.A}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.1}Basis Transformation}{55}{section.1.A.1}
+\contentsline {section}{\numberline {A.1}Basis Transformation}{59}{section.1.A.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.2}Convolution}{55}{section.1.A.2}
+\contentsline {section}{\numberline {A.2}Convolution}{59}{section.1.A.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.2.1}1D Convolution}{55}{subsection.1.A.2.1}
+\contentsline {subsection}{\numberline {A.2.1}1D Convolution}{59}{subsection.1.A.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.2.2}2D Convolution}{56}{subsection.1.A.2.2}
+\contentsline {subsection}{\numberline {A.2.2}2D Convolution}{60}{subsection.1.A.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {B}Experiments}{57}{Appendix.2.B}
+\contentsline {chapter}{\numberline {B}Experiments}{61}{Appendix.2.B}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {B.1}Validation Tags}{57}{section.2.B.1}
+\contentsline {section}{\numberline {B.1}Validation Tags}{61}{section.2.B.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {B.2}Validation Set}{58}{section.2.B.2}
+\contentsline {section}{\numberline {B.2}Validation Set}{62}{section.2.B.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{63}{chapter*.37}
+\contentsline {chapter}{Bibliography}{67}{chapter*.39}

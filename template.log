@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2017.3.23)  26 APR 2017 02:22
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2017.2.20)  28 APR 2017 16:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -977,12 +977,6 @@ LaTeX Warning: Label `fig:STFT' multiply defined.
 
 ) (./Chapters/Chapter4.aux
 
-LaTeX Warning: Label `tab:a2' multiply defined.
-
-
-LaTeX Warning: Label `tab:a2' multiply defined.
-
-
 LaTeX Warning: Label `mfcc' multiply defined.
 
 ) (./Chapters/Chapter5.aux) (./Appendices/AppendixA.aux)
@@ -1355,32 +1349,32 @@ Overfull \hbox (11.43306pt too wide) in paragraph at lines 497--527
  []
 
 [24] [25] [26] [27] [28]
-Underfull \hbox (badness 10000) in paragraph at lines 693--706
+Underfull \hbox (badness 10000) in paragraph at lines 694--707
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 693--706
+Underfull \hbox (badness 10000) in paragraph at lines 694--707
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 693--706
+Underfull \hbox (badness 10000) in paragraph at lines 694--707
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 693--706
+Underfull \hbox (badness 10000) in paragraph at lines 694--707
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 693--706
+Underfull \hbox (badness 10000) in paragraph at lines 694--707
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 693--706
+Underfull \hbox (badness 10000) in paragraph at lines 694--707
 
  []
 
@@ -1425,7 +1419,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 53--76
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [33]
-<Figures/specLeak1.png, id=706, 621.82312pt x 270.25969pt>
+<Figures/specLeak1.png, id=707, 621.82312pt x 270.25969pt>
 File: Figures/specLeak1.png Graphic file (type png)
 
 <use Figures/specLeak1.png>
@@ -1452,19 +1446,19 @@ Overfull \hbox (11.43306pt too wide) in paragraph at lines 113--148
 [][][] 
  []
 
-<Figures/square.png, id=722, 144.54pt x 125.71968pt>
+<Figures/square.png, id=723, 144.54pt x 125.71968pt>
 File: Figures/square.png Graphic file (type png)
  <use Figures/square.png>
 Package pdftex.def Info: Figures/square.png used on input line 157.
 (pdftex.def)             Requested size: 129.10878pt x 112.30258pt.
 
-<Figures/time.png, id=723, 167.87718pt x 121.20282pt>
+<Figures/time.png, id=724, 167.87718pt x 121.20282pt>
 File: Figures/time.png Graphic file (type png)
  <use Figures/time.png>
 Package pdftex.def Info: Figures/time.png used on input line 162.
 (pdftex.def)             Requested size: 129.10878pt x 93.21364pt.
 
-<Figures/freq.png, id=724, 155.83218pt x 123.46124pt>
+<Figures/freq.png, id=725, 155.83218pt x 123.46124pt>
 File: Figures/freq.png Graphic file (type png)
  <use Figures/freq.png>
 Package pdftex.def Info: Figures/freq.png used on input line 169.
@@ -1480,7 +1474,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 182--185
  []
 
 [36 <./Figures/square.png> <./Figures/time.png> <./Figures/freq.png>] [37]
-<Figures/fe1.png, id=761, 416.55624pt x 491.8375pt>
+<Figures/fe1.png, id=762, 416.55624pt x 491.8375pt>
 File: Figures/fe1.png Graphic file (type png)
  <use Figures/fe1.png>
 Package pdftex.def Info: Figures/fe1.png used on input line 259.
@@ -1499,7 +1493,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 265--270
 
  []
 
-<Figures/fe2.png, id=773, 408.52625pt x 468.75125pt>
+<Figures/fe2.png, id=774, 408.52625pt x 468.75125pt>
 File: Figures/fe2.png Graphic file (type png)
  <use Figures/fe2.png>
 Package pdftex.def Info: Figures/fe2.png used on input line 276.
@@ -1508,7 +1502,7 @@ Package pdftex.def Info: Figures/fe2.png used on input line 276.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[39 <./Figures/fe1.png>] <Figures/fe3.png, id=780, 372.39125pt x 468.75125pt>
+[39 <./Figures/fe1.png>] <Figures/fe3.png, id=781, 372.39125pt x 468.75125pt>
 File: Figures/fe3.png Graphic file (type png)
 
 <use Figures/fe3.png>
@@ -1575,113 +1569,180 @@ Underfull \hbox (badness 10000) in paragraph at lines 55--59
 
  []
 
-[45] <Figures/ce1.png, id=819, 130.4875pt x 329.23pt>
+[45] [46] <Figures/ce1.png, id=833, 130.4875pt x 329.23pt>
 File: Figures/ce1.png Graphic file (type png)
- <use Figures/ce1.png>
-Package pdftex.def Info: Figures/ce1.png used on input line 126.
+
+<use Figures/ce1.png>
+Package pdftex.def Info: Figures/ce1.png used on input line 130.
 (pdftex.def)             Requested size: 48.41331pt x 122.14977pt.
 
-[46]
-Overfull \hbox (30.79512pt too wide) in paragraph at lines 164--175
+
+Package caption Warning: \label without proper \caption on input line 153.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `tab:a2' on page 47 undefined on input line 150.
+
+
+Package caption Warning: \label without proper \caption on input line 173.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `tab:a3' on page 47 undefined on input line 170.
+
+
+Overfull \hbox (30.79512pt too wide) in paragraph at lines 175--186
  [][] 
  []
 
-<Figures/ce2.png, id=827, 143.53625pt x 339.2675pt>
+[47 <./Figures/ce1.png>] <Figures/ce2.png, id=847, 143.53625pt x 339.2675pt>
 File: Figures/ce2.png Graphic file (type png)
- <use Figures/ce2.png>
-Package pdftex.def Info: Figures/ce2.png used on input line 182.
-(pdftex.def)             Requested size: 48.41331pt x 114.42795pt.
 
-[47 <./Figures/ce1.png>]
-Overfull \hbox (30.79512pt too wide) in paragraph at lines 213--224
+<use Figures/ce2.png>
+Package pdftex.def Info: Figures/ce2.png used on input line 200.
+(pdftex.def)             Requested size: 48.41331pt x 114.42795pt.
+ [48]
+
+Package caption Warning: \label without proper \caption on input line 230.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `tabl:a4' on page 49 undefined on input line 228.
+
+
+Overfull \hbox (30.79512pt too wide) in paragraph at lines 232--243
  [][] 
  []
 
-<Figures/ce3.png, id=835, 140.525pt x 334.24875pt>
+File: Figures/ce1.png Graphic file (type png)
+<use Figures/ce1.png>
+Package pdftex.def Info: Figures/ce1.png used on input line 251.
+(pdftex.def)             Requested size: 48.41331pt x 122.14977pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [49 <./Figures/ce2.png>] <Figures/ce3.png, id=867, 140.525pt x 334.24875pt>
 File: Figures/ce3.png Graphic file (type png)
- <use Figures/ce3.png>
-Package pdftex.def Info: Figures/ce3.png used on input line 233.
+
+<use Figures/ce3.png>
+Package pdftex.def Info: Figures/ce3.png used on input line 261.
 (pdftex.def)             Requested size: 48.41331pt x 115.15273pt.
 
-[48 <./Figures/ce2.png>] [49 <./Figures/ce3.png>]
+Overfull \hbox (14.47418pt too wide) in paragraph at lines 292--309
+ [][] 
+ []
+
+
+Overfull \hbox (14.47418pt too wide) in paragraph at lines 315--340
+ [][] 
+ []
+
+[50 <./Figures/ce3.png>]
+Overfull \hbox (14.47418pt too wide) in paragraph at lines 346--363
+ [][] 
+ []
+
+
+Overfull \hbox (14.47418pt too wide) in paragraph at lines 369--384
+ [][] 
+ []
+
+File: Figures/ce2.png Graphic file (type png)
+<use Figures/ce2.png>
+Package pdftex.def Info: Figures/ce2.png used on input line 389.
+(pdftex.def)             Requested size: 48.41331pt x 114.42795pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [51]
+File: Figures/ce1.png Graphic file (type png)
+
+<use Figures/ce1.png>
+Package pdftex.def Info: Figures/ce1.png used on input line 397.
+(pdftex.def)             Requested size: 48.41331pt x 122.14977pt.
+File: Figures/ce1.png Graphic file (type png)
+ <use Figures/ce1.png>
+Package pdftex.def Info: Figures/ce1.png used on input line 405.
+(pdftex.def)             Requested size: 48.41331pt x 122.14977pt.
+ [52]
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <1> not available
-(Font)              size <5> substituted on input line 282.
+(Font)              size <5> substituted on input line 428.
 
-LaTeX Font Info:    Calculating math sizes for size <1> on input line 282.
+LaTeX Font Info:    Calculating math sizes for size <1> on input line 428.
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <1> not available
-(Font)              size <5> substituted on input line 282.
+(Font)              size <5> substituted on input line 428.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <0.7> not available
-(Font)              size <5> substituted on input line 282.
+(Font)              size <5> substituted on input line 428.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <0.5> not available
-(Font)              size <5> substituted on input line 282.
+(Font)              size <5> substituted on input line 428.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <1> not available
-(Font)              size <5> substituted on input line 282.
+(Font)              size <5> substituted on input line 428.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <0.7> not available
-(Font)              size <5> substituted on input line 282.
+(Font)              size <5> substituted on input line 428.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <0.5> not available
-(Font)              size <5> substituted on input line 282.
+(Font)              size <5> substituted on input line 428.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <1> not available
-(Font)              size <5> substituted on input line 282.
+(Font)              size <5> substituted on input line 428.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <0.7> not available
-(Font)              size <5> substituted on input line 282.
+(Font)              size <5> substituted on input line 428.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <0.5> not available
-(Font)              size <5> substituted on input line 282.
+(Font)              size <5> substituted on input line 428.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <0.7> not available
-(Font)              size <5> substituted on input line 282.
+(Font)              size <5> substituted on input line 428.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <0.5> not available
-(Font)              size <5> substituted on input line 282.
+(Font)              size <5> substituted on input line 428.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <1> not available
-(Font)              size <5> substituted on input line 282.
+(Font)              size <5> substituted on input line 428.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <0.7> not available
-(Font)              size <5> substituted on input line 282.
+(Font)              size <5> substituted on input line 428.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <0.5> not available
-(Font)              size <5> substituted on input line 282.
+(Font)              size <5> substituted on input line 428.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <1> not available
-(Font)              size <5> substituted on input line 282.
+(Font)              size <5> substituted on input line 428.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <0.7> not available
-(Font)              size <5> substituted on input line 282.
+(Font)              size <5> substituted on input line 428.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <0.5> not available
-(Font)              size <5> substituted on input line 282.
+(Font)              size <5> substituted on input line 428.
 
-[50]
+[53]
 
-LaTeX Warning: Reference `basis' on page 51 undefined on input line 338.
+LaTeX Warning: Reference `basis' on page 54 undefined on input line 484.
 
-[51]) [52]
+[54]) [55]
 \openout2 = `Chapters/Chapter5.aux'.
 
  (./Chapters/Chapter5.tex
@@ -1691,9 +1752,14 @@ No file chapter1.aux
 LABELS NOT IMPORTED.
  on input line 1.
 
+[56
+
+
+
+]
 Chapter 5.
 
-LaTeX Warning: Reference `discriminants' on page 53 undefined on input line 12.
+LaTeX Warning: Reference `discriminants' on page 57 undefined on input line 12.
 
 
 )
@@ -1701,20 +1767,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 12--75
 
  []
 
-[53
-
-
-
-]
+[57]
 \openout2 = `Appendices/AppendixA.aux'.
 
- (./Appendices/AppendixA.tex [54
+ (./Appendices/AppendixA.tex [58
 
 
 
 ]
 Appendix A.
-[55]) [56]
+[59]) [60]
 \openout2 = `Appendices/AppendixB.aux'.
 
  (./Appendices/AppendixB.tex
@@ -1744,7 +1806,7 @@ Overfull \hbox (89.41254pt too wide) in paragraph at lines 10--155
 []  []  [] 
  []
 
-[57
+[61
 
 
 
@@ -1772,7 +1834,7 @@ Overfull \hbox (23.99998pt too wide) in alignment at lines 280--320
  [] [] 
  []
 
-[58
+[62
 
 ]
 Overfull \hbox (23.99998pt too wide) in alignment at lines 320--360
@@ -1784,11 +1846,11 @@ Overfull \hbox (23.99998pt too wide) in alignment at lines 360--361
  [] [] 
  []
 
-[59]) [60] (./template.gls) [61
+[63]) [64]
+No file template.gls.
+[65
 
-
-
-] [62
+] [66
 
 ]
 
@@ -1801,7 +1863,7 @@ Missing character: There is no © in font cmr10!
 
 Package biblatex Warning: Setting 'defernumbers=true' recommended.
 
-[63]
+[67]
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ¡ in font cmr10!
 Missing character: There is no Ã in font cmr10!
@@ -1812,7 +1874,7 @@ Missing character: There is no ¶ in font cmr10!
 
 Package biblatex Warning: Setting 'defernumbers=true' recommended.
 
-[64]
+[68]
 
 Package biblatex Warning: Setting 'defernumbers=true' recommended.
 
@@ -1820,7 +1882,7 @@ Package biblatex Warning: Setting 'defernumbers=true' recommended.
 Package biblatex Warning: Setting 'defernumbers=true' recommended.
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 107.
-[65]
+[69]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 107.
  (./template.aux (./Chapters/Chapter1.aux) (./Chapters/Chapter2.aux)
 (./Chapters/Chapter3.aux) (./Chapters/Chapter4.aux) (./Chapters/Chapter5.aux)
@@ -1828,7 +1890,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 107.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 107.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 107.
 Package rerunfilecheck Info: File `template.out' has not changed.
-(rerunfilecheck)             Checksum: FC86B66570C1522980C27FA2C3E7158C;4436.
+(rerunfilecheck)             Checksum: 995F0E7EBAE5E6E008E9588064F8EC55;4436.
 
 
 LaTeX Font Warning: Size substitutions with differences
@@ -1846,15 +1908,18 @@ Package logreq Info: Writing requests to 'template.run.xml'.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 107.
  ) 
 Here is how much of TeX's memory you used:
- 25815 strings out of 493304
+ 25822 strings out of 493304
  443847 string characters out of 6139871
- 833263 words of memory out of 5000000
- 28452 multiletter control sequences out of 15000+600000
+ 833264 words of memory out of 5000000
+ 28456 multiletter control sequences out of 15000+600000
  26709 words of font info for 99 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  63i,18n,77p,1768b,1117s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{glo:linearly\040independent} has been referenced 
-but does not exist, replaced by a fixed one
+pdfTeX warning (dest): name{glo:linear\040combination} has been referenced bu
+t does not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{glo:basis} has been referenced but does not exist, 
+replaced by a fixed one
 
 pdfTeX warning (dest): name{cite.0@choi_transfer} has been referenced but does 
 not exist, replaced by a fixed one
@@ -1891,10 +1956,10 @@ st/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texlive/texmf-dist/font
 s/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /public/amsfonts/symbols/msbm5.pfb>
-Output written on template.pdf (66 pages, 863146 bytes).
+Output written on template.pdf (70 pages, 873376 bytes).
 PDF statistics:
- 1206 PDF objects out of 1440 (max. 8388607)
- 1076 compressed objects within 11 object streams
- 259 named destinations out of 1000 (max. 500000)
+ 1229 PDF objects out of 1440 (max. 8388607)
+ 1095 compressed objects within 11 object streams
+ 264 named destinations out of 1000 (max. 500000)
  555 words of extra memory for PDF output out of 10000 (max. 10000000)
 

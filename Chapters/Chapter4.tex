@@ -60,7 +60,8 @@ Therefore, in all our experiments, \textit{Weighted averaged AUC} (WAUC) will be
 \section{Experiments}
 \label{experiments}
  
-As with any MIR task, the raw audio signal containing amplitude values in time domain is first down sampled and representation parameters are fixed (ref. \ref{stft}). This is because computational cost is heavily affected by the size of the input layers.
+As with any MIR task, the raw audio signal containing amplitude values in time domain is first down sampled and representation parameters are fixed (ref. \ref{stft}). The abstract algorithm for content based multi-label classifier is shown in algorithm \ref{exp:abstraction}. Function $R$ is the representation operation, $D$ represents dimensionality reduction operations, $T$ is the temporal approximation and $C$ is the classifier. 
+ 
 \begin{algorithm}
   \caption{$\textbf{pred}$ = $Model$($\textbf{a}$) }\label{exp:abstraction}
   \begin{algorithmic}[1]
@@ -101,7 +102,9 @@ Mel bins & 96\\
 \end{tabular}
 \caption{Representation Parameters} 
 \end{table}
+\FloatBarrier
 
+\noindent The function $R$ is thus replaced with log-mel power spectrogram computations. Step 1 - 4 in algorithm \ref{exp:a1} represents the computation of log mel-power spectrogram (see Chapter 2, Sec. \ref{mel}). The abstract algorithm for our experiments is shown below.  
 \begin{algorithm}
   \caption{$\textbf{pred}$ = $Model$($\textbf{a}$) }\label{exp:a1}
   \begin{algorithmic}[1]
@@ -120,6 +123,7 @@ Mel bins & 96\\
 \FloatBarrier
 
 \subsection{Perceptron Settings}
+Two layer perceptron (equation \ref{eq:mlp}) with rectified linear units activation ($ReLU$) activation in the hidden layer is used for classification $C$ (step 7 of algorithm \ref{exp:a2}). $ReLU$ is used to handle the vanishing gradient problem. The operators $\textbf{W}_{L1}$ and $\textbf{W}_{L2}$ are solved for optimality. (see Sec. \ref{training}). To find the optimal settings for perceptron, $D$ and $T$ are fixed. Thus, log mel-power spectrogram is reduced to MFCC features and approximated to a fixed size representation with Bag of Frames features. Hence, the error is back-propagated only to the classifier $C$ and the resulting learning problem is said to be shallow.  
 
 \begin{algorithm}
 \begin{minipage}{0.15\textwidth}
@@ -142,6 +146,9 @@ Mel bins & 96\\
   \end{minipage}
 \end{algorithm}
 \FloatBarrier
+
+\noindent The network is trained with ADAM optimizer. The training settings that are used in this thesis were explained in Chapter 2, section \ref{training}. All ADAM parameters except the learning rate $\eta$ are used as proposed in  \cite{adam_o}. The learning rate can be different for different sections of the network and hence we differentiate the learning rate of the classifier with subscript $c$ ($\eta_{c}$). The learning rate is reduced by factor $\gamma_{c}$ every $step_{c}$ iterations. This is done because in the beginning, large learning rate is needed to approach the solution, but as the training approaches actual solution learning rate has to be reduced. Otherwise, the solution might be sub optimal. Even though the classifier is shallow, the network is fixed trained on the MTT dataset (source task) until convergence. The resulting weights are used as initialization for training on target dataset. Since our aim is to analyse only the CNNs, the training hyper-parameters values for the classifier are fixed with values shown in table \ref{tab:a2}.  
+
 \begin{table}[H]
 \label{tab:a2}
 \centering
@@ -158,8 +165,12 @@ ${step}_{c}$ & 10000 & 3000 \\
 \end{tabular}
 \caption{Training Hyper-Parameters for Classifier} 
 \end{table}
+\FloatBarrier
+
+\noindent To set up a two layer neural network, the size of the classifier input (or feature) $Z$, the dimension of hidden layer $H$ and the size of the output $L$ should be known. The size of the output is equal to the number of labels in test. 63 labels are used for validation in target set. The experiments for different $H$ and $Z$ and their resulting WAUC scores are shown in table \ref{tab:a3}. (Here the features size ($Z$) resulting from the Bag of frames is equal to the number of cluster centres to be chosen)
+ 
 \begin{table}[H]
-\label{tab:a2}
+\label{tab:a3}
 \centering
 \begin{tabular}{| p{.24\textwidth} | p{.24\textwidth}| p{.24\textwidth}| p{.24\textwidth} |}
 \hline
@@ -174,9 +185,16 @@ $Z = \textbf{2048}$ & 0.61 & 0.61 & 0.59\\
 \end{tabular}
 \caption{Hyper parameter search : Classifier hidden dimension (H), Feature dimension (Z)} 
 \end{table}
+\FloatBarrier
+
+\noindent When the feature size is 512, it can be seen that the performance is capped around 0.64 for different hidden size. The performance improves with feature size 1024. However, the performance decreases when the dimension increases to 2048. This tells us that the model begins to over fit (learn the noisy data) when the number of parameters increases to 2048. Hence the feature dimension ($Z$) and hidden dimension ($H$) are fixed to \textbf{1024} for all the remaining analyses. 
 
 \subsection{RNN Settings}
-
+The error from classifier $C$ is back-propagated into the temporal approximation function $T$ with a 2 layer LSTM. Therefore, the Bag of frames algorithm is replaced with LSTM. The operators of LSTM $\bm{\Phi_{R1}}$ and $\bm{\Phi_{R2}}$ are solved to sequentially combine MFCC features from each STFT frame into a fixed size projection. The LSTM operators
+\[
+\bm{\Phi}_{Rj} = \{\textbf{W}_{(k,j)}, \textbf{U}_{(k,j)}\} \qquad k \in \{i,o,g,c\}, k \in \{1,2\}
+\] 
+were described in Chapter 2, section \ref{rnn}. Thus the learning is pushed into the temporal approximation function. But the number of STFT frames can be large for longer songs and the information at the beginning of sequence can get lost. To get around this problem, the first layer of LSTM is a \textit{sequence to one} network that combines frames up to 29.1s. The second layer of \textit{sequence to one} LSTM combines features from every 29.1s frame to a fixed sized projection. This computation is illustrated in step 6 - 12 of algorithm \ref{exp:a3}. There are 1366 STFT frames for 29.1s of 12 KHz sampled signal. Drop out with probability $p$ is used as the transition operation (referred in chapter 2, algorithm \ref{alg:2lstm}). Drop out acts as a regularizer that prevents the network from over-fitting.
 \begin{algorithm}
 \begin{minipage}{0.15\textwidth}
 \includegraphics[width=0.75\textwidth]{ce2}
@@ -207,8 +225,9 @@ $Z = \textbf{2048}$ & 0.61 & 0.61 & 0.59\\
 \end{algorithm}
 \FloatBarrier
 
+\noindent To set up a 2 layer LSTM, the size of hidden projection $T$ and the drop-out probability $p$ have to be known. Training settings for source and target tasks are same as that of the classifier. WAUC scores for different  $p$ and $T$ are shown in table \ref{tabl:a4}.
 \begin{table}[H]
-\label{tab:a2}
+\label{tabl:a4}
 \centering
 \begin{tabular}{| p{.24\textwidth} | p{.24\textwidth}| p{.24\textwidth}| p{.24\textwidth} |}
 \hline
@@ -223,8 +242,17 @@ $p = \textbf{0.5}$ & 0.67 & 0.71 & 0.64\\
 \end{tabular}
 \caption{Hyper parameter search : RNN hidden dimension (T), Drop-out probability (p)} 
 \end{table}
+\FloatBarrier
+
+\noindent The optimum classifier settings from experiments in previous section is used ($H = Z = 1024$). The hidden dimension ($T$) 1024 is found to be optimal. It can be seen that the network over-fits without the drop-out ($p = 0$). Therefore, $p = 0.3$ and $T = 1024$ is used fixed for remaining analyses.
 
 \subsubsection{Black-box LSTM}
+\begin{minipage}{0.15\textwidth}
+\includegraphics[width=0.75\textwidth]{ce1}
+\end{minipage}
+\begin{minipage}{0.80\textwidth}
+The operators of LSTM trained on the source task can also be used as black-box feature extractor for the target task (that is, LSTM is not further trained with target data). Sometimes, fine-tuning on the target training set might degrade the operators. This could either be because of convergence of source task training towards general purpose features or because of in-sufficient training data in the target set. To check this, LSTM trained on the source dataset is used as a black-box feature extractor for the target task. But, for the optimal LSTM settings from experiments in previous section ($p = 0.3$, $T=1024$), WAUC drops to \textbf{0.65}. This shows that the source task features cannot be used as general purpose features and still needs task-dependent training. 
+\end{minipage}
 
 \subsection{CNN Settings}
 
@@ -258,9 +286,127 @@ $p = \textbf{0.5}$ & 0.67 & 0.71 & 0.64\\
 \end{algorithm}
 \FloatBarrier
 
+\begin{table}[H]
+\label{tab:a5}
+\centering
+\begin{tabular}{| p{.40\textwidth} | p{.40\textwidth}| p{.15\textwidth}| }
+\hline
+$\textbf{Layer = 1,2}$ & $\textbf{Layer = 3,4,5}$ & \textbf{WAUC}\\
+\hline
+Freeze & $(1^{-3}; 30K)$ & 0.79\\
+\hline
+Freeze & $(1^{-3}; 50K)$ & \textbf{0.81}\\
+\hline
+Freeze & $(1^{-3}; 70K)$ & 0.74\\
+\hline
+Freeze & $(1^{-4}; 30K)$ & 0.79\\
+\hline
+Freeze & $(1^{-4}; 50K)$ & \textbf{0.81}\\
+\hline
+Freeze & $(1^{-4}; 70K)$ & 0.77\\
+\hline
+\end{tabular}
+\caption{Source task experiments with 1st two layers freezed : $(\eta_{f}, {step}_{f})$} 
+\end{table}
+
+\begin{table}[H]
+\label{tab:a6}
+\centering
+\begin{tabular}{| p{.40\textwidth} | p{.40\textwidth}| p{.15\textwidth}| }
+\hline
+$\textbf{Layer = 1,2}$ & $\textbf{Layer = 3,4,5}$ & \textbf{WAUC}\\
+\hline
+$(1^{-5}; 50K)$ & $(1^{-3}; 50K)$ & 0.82\\
+\hline
+$(1^{-5}; 50K)$ & $(1^{-4}; 50K)$ & 0.79\\
+\hline
+$(1^{-4}; 50K)$ & $(1^{-3}; 50K)$ & \textbf{0.84}\\
+\hline
+$(1^{-4}; 50K)$ & $(1^{-4}; 50K)$ & 0.77\\
+\hline
+$(1^{-4}; 70K)$ & $(1^{-3}; 50K)$ & 0.82\\
+\hline
+$(1^{-4}; 70K)$ & $(1^{-4}; 50K)$ & 0.79\\
+\hline
+$(1^{-3}; 50K)$ & $(1^{-3}; 50K)$ & 0.83\\
+\hline
+$(1^{-3}; 50K)$ & $(1^{-4}; 50K)$ & 0.76\\
+\hline
+$(1^{-3}; 70K)$ & $(1^{-3}; 50K)$ & 0.81\\
+\hline
+$(1^{-3}; 70K)$ & $(1^{-4}; 50K)$ & 0.76\\
+\hline
+\end{tabular}
+\caption{Source task experiments with all layers trained : $(\eta_{f}, {step}_{f})$}
+\end{table}
+
+\begin{table}[H]
+\label{tab:a7}
+\centering
+\begin{tabular}{| p{.40\textwidth} | p{.40\textwidth}| p{.15\textwidth}| }
+\hline
+$\textbf{Layer = 1,2}$ & $\textbf{Layer = 3,4,5}$ & \textbf{WAUC}\\
+\hline
+Freeze & $(1^{-3}; 5K)$ & 0.65\\
+\hline
+Freeze & $(1^{-3}; 10K)$ & 0.63\\
+\hline
+Freeze & $(1^{-3}; 20K)$ & 0.61\\
+\hline
+Freeze & $(1^{-4}; 5K)$ & 0.67\\
+\hline
+Freeze & $(1^{-4}; 10K)$ & \textbf{0.68}\\
+\hline
+Freeze & $(1^{-4}; 20K)$ & 0.63\\
+\hline
+\end{tabular}
+\caption{Target task experiments with 1st two layers freezed : $(\eta_{f}, {step}_{f})$} 
+\end{table}
+
+\begin{table}[H]
+\label{tab:a8}
+\centering
+\begin{tabular}{| p{.40\textwidth} | p{.40\textwidth}| p{.15\textwidth}| }
+\hline
+$\textbf{Layer = 1,2}$ & $\textbf{Layer = 3,4,5}$ & \textbf{WAUC}\\
+\hline
+$(1^{-6}; NA)$ & $(1^{-4}; 10K)$ & 0.64\\
+\hline
+$(1^{-5}; 10K)$ & $(1^{-4}; 10K)$ & \textbf{0.71}\\
+\hline
+$(1^{-5}; 20K)$ & $(1^{-4}; 10K)$ & 0.69\\
+\hline
+$(1^{-4}; 10K)$ & $(1^{-4}; 10K)$ & 0.68\\
+\hline
+$(1^{-4}; 20K)$ & $(1^{-4}; 10K)$ & 0.67\\
+\hline
+\end{tabular}
+\caption{Target task experiments with all layers trained : $(\eta_{f}, {step}_{f})$}
+\end{table}
+
 \subsubsection{Black-box CNN + Fine-tune LSTM}
+\begin{minipage}{0.15\textwidth}
+\includegraphics[width=0.75\textwidth]{ce2}
+\end{minipage}
+\begin{minipage}{0.80\textwidth}
+Text goes here
+\end{minipage}
+
 \subsubsection{Black-box CNN + Black-box LSTM}
+\begin{minipage}{0.15\textwidth}
+\includegraphics[width=0.75\textwidth]{ce1}
+\end{minipage}
+\begin{minipage}{0.80\textwidth}
+Text goes here
+\end{minipage}
+
 \subsubsection{Black-box CNN + Bag of Frames}
+\begin{minipage}{0.15\textwidth}
+\includegraphics[width=0.75\textwidth]{ce1}
+\end{minipage}
+\begin{minipage}{0.80\textwidth}
+Text goes here
+\end{minipage}
 
 \subsection{Analyses of Convolution Neural Networks}
 \label{pretrained}
