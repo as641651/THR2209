@@ -35,7 +35,7 @@ The optimum sampling rate is given by Nyquist-Shannon sampling theorem which say
 The digital signal is represented in the time domain with amplitude values at each time $t$. This representation has to be changed to frequency domain. Mapping from time-domain to frequency-domain is looked up on as basis transformation. 
 
 \subsubsection{Basis transformation from time to frequency domain}
-\noindent The signal in the time domain $\textbf{a}$ is a set of ordered \textit{n}-tuples of real numbers \( (a_{1},a_{2}, ...,a_{N}) \in \mathbb{R}^N \) in the vector space \textit{V} , specifically \textit{Euclidean n-space}. That is to say, a discrete-time signal can be represented as a linear combination of Cartesian basis vectors. The coefficients in linear combination are then the co-ordinates of the corresponding basis system.  
+\noindent The signal in the time domain $\textbf{a}$ is a set of ordered \textit{n}-tuples of real numbers \( (a_{1},a_{2}, ...,a_{N}) \in \mathbb{R}^N \) in the vector space \textit{V}, specifically \textit{Euclidean n-space}. That is to say, a discrete-time signal can be represented as a linear combination of Cartesian basis vectors. The coefficients in linear combination are then the co-ordinates of the corresponding basis system.  
 \[
 \textbf{a} = (a_{1},a_{2}, ...,a_{N}) = a_{1}\textbf{e}_{1} + a_{2}\textbf{e}_{2} + ... + a_{N}\textbf{e}_{N} = \displaystyle\sum_{t=1}^{N}a_{t}\textbf{e}_{t} = \mathbb{I}\textbf{a}
 \]
@@ -113,7 +113,7 @@ Where:
     \item $P$: is the number of spectral frames; $p \in [1,2...,P]$ 
     \item $M$: is the dimension of discrete frequency space ; $\omega \in \mathbb{R}^{M}$
     \item $F$: is the frame length 
-    \item $s$: is stride (or) hop-length for the next segment
+    \item $s$: is stride (or) hop-length to the next segment
     \item $\textbf{a} \in  \mathbb{R}^{N}$ ; $n \in [1,2,...,N]$
     \item $\textbf{h} \in  \mathbb{R}^{F}$
     \item $\omega \in  \mathbb{R}^{M}$
@@ -156,7 +156,7 @@ by experimenting with the human ears interpretation of a pitch. The experiment s
 \begin{equation}
 \omega_{m} = 2595log_{10}\bigg(1+\frac{ \omega }{700}\bigg)
 \end{equation}
-Where $\omega$ is the frequency in Hertz. In a mel spectrogram, the frequencies and converted to mels and then grouped into mel-spaced bins. This is done by multiplying the spectrum with some \textbf{filter bank ($\textbf{W}_{MEL}$)}. For details about computation of mel-filter banks, refer \cite{mel}. Each filter bank is centered at a specific frequency. Hence, to compute R mel bins, we need R mel-filter banks. The resulting mel power spectrogram ($\textbf{X}$) is
+where $\omega$ is the frequency in Hertz. In a mel spectrogram, the frequencies and converted to mels and then grouped into mel-spaced bins. This is done by multiplying the spectrum with \textbf{mel filter bank ($\textbf{W}_{MEL}$)}. For details about computation of mel-filter banks, refer \cite{mel}. Each filter bank is centered at a specific frequency. Hence, to compute R mel bins, we need R mel-filter banks. The resulting mel power spectrogram ($\textbf{X}$) is
 \begin{equation}
 \label{mel_conv}
 \textbf{X} = \textbf{W}_{MEL}\textbf{P}
@@ -288,7 +288,7 @@ The columns of matrix $\textbf{V}$ form the basis. Since the columns are orthogo
 
 \noindent Sometimes, to make the resulting reduction $\textbf{Y}$ uncorrelated (the resulting transformation should have identity co-variance matrix), the corresponding dimensions are divided by their eigen values. This is because eigen values are proportional to the magnitude of variance in each frequency direction. This operation is known as \textbf{PCA Whitening} and the reduction operator is,
 \[
-\textbf{W}_{PCAW} = \bm{\Lambda}^{-1}\textbf{V}^{T}
+\textbf{W}_{PCAW} = \bm{\Lambda}^{-1}\textbf{\^V}^{T}
 \]    
 The reduction function $D_{(PCAW)}$ is same as algorithm \ref{alg:dpca}, except that the operator $\textbf{W}_{PCAW}$ is used instead of $\textbf{W}_{PCA}$
 \bigskip
@@ -298,7 +298,7 @@ The reduction function $D_{(PCAW)}$ is same as algorithm \ref{alg:dpca}, except 
 It has been studied that the basis functions resulting from co-variance matrix of log-mel spectrogram representation are similar to cosine transform on log-mel spectrogram\cite{mfcc_pca}. Therefore, instead of explicitly computing the basis functions from the data, one can simple use cosine basis. The co-ordinates of corresponding basis system are known as \textit{Mel-Frequency Cepstrum Coefficients}. The co-ordinates of high frequency cosine functions are discarded because they correspond to low-variance information. 
 \bigskip
 
-\noindent Since this reduction is engineered only for log mel spectrogram representation, the reduction function $MFCC$ takes the signal as input. $\textbf{W}_{MFCC}$ is the reduction operator.
+\noindent This reduction is engineered only for log mel spectrogram representation. $\textbf{W}_{MFCC}$ is the reduction operator.
 
 \begin{algorithm}
   \caption{$\textbf{Y}$ = $MFCC$($\textbf{a}$) }\label{MFCC}
@@ -338,7 +338,7 @@ However, it is not clear if such defined filters really encodes the information 
 
 \subsubsection{Approximating MFCC with CNN}
 \textit{Supervised} feature learning has an advantage over \textit{unsupervised} feature learning when we wish to find filters $\textbf{w}_{k}$ optimal for context based classification tasks. Feature learning with CNN fall under \textit{supervised} feature learning category.
-To show that CNN can do atleast as good as MFCCs, an illustration is discussed by approximating MFCC with CNN. Setting up a CNN architecture requires defining the \textit{hyper parameters} of like number of filters, filter dimensions and stride of the filter. The domain knowledge of MFCC computation is used to set these hyper parameters.
+To show that CNN can do atleast as good as MFCCs, an illustration is discussed by approximating MFCC with CNN. Setting up a CNN architecture requires defining the \textit{hyper parameters} like number of filters, filter dimensions and stride of the filter. The domain knowledge of MFCC computation is used to set these hyper parameters.
 \bigskip  
 
 \noindent To compute MFCC features, the input signal $\textbf{a}$ is convolved with complex negative exponentials ($\textbf{W}_{STFT}$). After element-wise squaring operation, the resulting transformation is convolved with mel-filters ($\textbf{W}_{MEL}$). Logarithm of the resulting transformation is then convolved with cosine filters ($\textbf{W}_{MFCC}$). The motivation and description of these so called \textit{engineered} filters were described in section \ref{time} and \ref{dimension}. 

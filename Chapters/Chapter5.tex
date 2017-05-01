@@ -1,15 +1,15 @@
 \externaldocument{chapter1}
+\externaldocument{chapter2}
 \chapter{Conclusion} % Main chapter title
 
 \label{Chapter5}
-The model settings for the task of \textit{aesthetic tagging} have been analysed in this thesis. From the machine learning end, the performance can be further pushed by 
+The performance of music tagging algorithm will be higher if the extracted features encode the acoustic cues necessary for discriminating the semantics. Supervised feature learning is used to obtain features that could be optimal for our context of music tagging. Convolution and recurrent neural networks were used to induct supervised learning into the feature extraction pipeline. The number of parameters to solve increases as the learning problem becomes deeper and hence more training data is required for convergence. Therefore, in this thesis, transfer learning with models trained on \textit{MagnaTagaTune} dataset were analysed by comparing different levels of fine-tuning on the target dataset. It has been found that fine-tuning entire CNN + RNN on target data boosts the performance and there were significant performance difference with black-box CNN. It would be useful to bridge this gap to improve performance, because deep levels of training on our target data, which is small, struggles to out-perform MFCC features.     
+
+\subsubsection{Proposal for improvements}
 \begin{itemize}
 \setlength\itemsep{0em}
-\item Searching or testing other CNN models\cite{choi_transfer}
-\item Working with the label space. For instance, there can be broad subsets and each tag can be belong to one or many of the subset. Then a separate model is trained for each subset 
+\item Since MFCC performs better than fine-tuned CNNs, it would be worthy to analyse CNN architectures trained on the source data by initializing CNN filters with cosine functions to get richer features. (In chapter 2, section \ref{stacked}, an illustration of MFCC computation as convolution operations was shown)
+\item Singular value decomposition of the converged filters at each CNN layer can be performed to see if they are converging to any known mathematical function. If it does, then it would be useful to set those functions as initialization before training.   
 \end{itemize}
+ 
 
-\noindent However, it is seen that the performance gap is still huge to serve any real-time application arising from aesthetic auto-tagging. Hence, to develop an algorithm that could come close to human artist, just a dataset with clean tags is not sufficient but also proper understanding of mathematical modelling of musical discriminants (ref. \ref{discriminants}) is important.
-\\
-\\
-\textbf{TODO:} more ideas, discussion   

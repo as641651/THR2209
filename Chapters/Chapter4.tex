@@ -4,63 +4,63 @@
 
 \label{Chapter4} % For referencing the chapter elsewhere, use\ref{Chapter2} 
 
-The aim of this thesis is to find the optimal algorithm for content-based multi-label classification of music tracks, that can be solved with minimal training data. We are looking for a classifier that can discriminate aesthetics in music, but the public datasets are socially biased and contains only short excerpts. Hence the multi-label classifiers have to be tested on our unbiased target dataset which has full clips. In Chapter 3, the state of art models were reviewed and in section \ref{model}, the short-comings of these algorithms in addressing the problems discussed in Chapter 1 (see \ref{problems}) were pointed out. In this chapter, the experiments that will lead to finding the best algorithm using the components short-listed in \ref{model} will be described.
+Performance of features from Convolution Neural Network are analysed in this chapter. To analyse CNNs, the datasets, evaluation metrics and network settings have to be fixed. In section \ref{dataset}, the details of source and target dataset are presented. In section \ref{evaluation}, the evaluation metrics that will be used are discussed. In section \ref{experiments}, experiments to analyse transfer learning on models selected in chapter 3, section \ref{model} are performed.
 
-\section{Dataset and Evaluation}
+\section{Dataset}
 \label{dataset}
 More specific to our task than representing audio is finding a proper dataset of labelled pairs. To analyse \textit{transfer learning}, a large dataset is needed for the \textit{source task}. Popularly used \textit{Million Song Dataset} (MSD) \cite{MSD} contains a cluster of complimentary datasets, most of them annotated with \textit{social tags}. For instance, \textit{Last.fm} which forms a part of MSD contains annotations from users of an online radio application. But such social tags contribute to the \textit{audio-semantic} noise which we want to eliminate. The dataset that is mostly used for evaluating content-based algorithms is \textit{Magna Tag A Tune} dataset \cite{MTT}, where annotations are gathered through a game application that attracts users who are familiar with technical terms related to music. Hence the tags in this dataset are usually clean. Hence this would be a decent choice for our \textit{source task}.
 
 \subsection{Dataset for source task}
 \label{source}
-The MagnaTagATune dataset consists of 25,856 clips of 29.1-s mp3 files with 188 tags. These annotations are gathered from an online game called \textit{Tag a Tune}. A player is partnered up with another random player who cannot be communicated. Both listen to some track, and have to select appropriate tags. Then the players are asked one simple question : "Are we listening to same song?". Answering this correctly will earn them points. Frequently matched tags are collected to build a labelled dataset. This dataset is the largest available that comes close to minimizing the \textit{audio-semantic} noise. We use only the top-50 tags for training from this dataset.  
+The MagnaTagATune(MTT) dataset consists of 25,856 clips of 29.1-s mp3 files with 188 tags. These annotations are gathered from an online game called \textit{Tag a Tune}. A player is partnered up with another random player who cannot be communicated. Both listen to some track, and have to select appropriate tags. Then the players are asked one simple question : "Are we listening to same song?". Answering this correctly will earn them points. Frequently matched tags are collected to build a labelled dataset. This dataset is the largest available that comes close to minimizing the \textit{audio-semantic} noise. Only the top-50 tags from MTT are used for source task training. This is because, the CNN architecture in \cite{choi_cnn} for our analyses was also trained with top 50 tags (These tags were from MSD dataset. However, only the number '50' is important, which would otherwise change the size of final layer in neural network and might destroy the richness of pre-trained features). Since our target task is to approximate features for songs of arbitrary length, clips from same songs in MTT dataset are merged as a single sample.    
 
 \subsection{Dataset for target task}
 \label{target}
-To gather annotations with clean mapping to aesthetic properties, we adopt the most straightforward and costly method - ask someone to listen to songs and tag them. Around 900 songs approximately 5 - 8 min long, were tagged by my supervisor Prof. Paolo Bientinesi in association with Prof. Marco Aluno (Professor of Composition and Theory at University EAFIT, Columbia). Out of 900 songs, 100 are used for validation.  
+The annotations were gathered with one of the most straightforward approach - ask someone to listen to songs and tag them. This was done to have a clean mapping of perceptual properties to semantics. 842 songs approximately 5 - 8 min long , tagged by my supervisor Prof. Paolo Bientinesi in association with Prof. Marco Aluno (Professor of Composition and Theory at University EAFIT, Columbia) were used. Out of 842 songs, 100 are used for validation. The validation set is listed in appendix \ref{validationset}. 63 tags listed in appendix \ref{validationtags} were used for validation. 
 
-\subsection{Evaluation metrics}
+\section{Evaluation}
 \label{evaluation}
-For multi-label classification with L labels, the performance of L binary classifiers is computed and averaged. Each label can belong to one of the class - \textit{positive} (1) or \textit{negative} (0). To discuss about a fair performance measure, lets first recall some important terminologies,\\
+For multi-label classification with L labels, the performance of L binary classifiers are computed and averaged. Each label can belong to one of the class - \textit{positive} (1) or \textit{negative} (0). Area under Receiver operating characteristic Curve (AUC) is computed for each label. Mean of AUCs weighted by number of occurrence of each tag is reported. In this section, the need for this performance measure is discussed by comparing with other standard measures. To do this, some terminologies from information retrieval are recalled,\\
 \\
 \textbf{True Positives (TP) :} If the classifier admits a label as positive when the ground truth is also positive.\\
 \textbf{True Negative (TN) :} If the classifier admits a label as negative when the ground truth is also negative.\\
 \textbf{False Positives (FP) :} If the classifier admits a label as positive when the ground truth is negative.\\
 \textbf{False Negative (FN) :} If the classifier admits a label as negative when the ground truth is positive.\\
 \\
-For a general tagging problem, most of the tags are \textit{negative} for most of the clips (That is, out of 900 songs, if 20 songs have the tag '\textit{electro}', then for this tag there are 20 \textit{ground truth positives} and 880 \textit{ground truth negatives}.\\
+For a general tagging problem, most of the ground truth are \textit{negative} for most of the clips (That is, out of 900 songs, if 20 songs have the tag '\textit{electro}', then for this tag there are 20 \textit{ground truth positives} and 880 \textit{ground truth negatives}.\\
 \\
-\textbf{Accuracy :} To see why \textit{accuracy} will be an unfair measure, lets look at the definition of \textit{accuracy} for the label 'electro',
+\textbf{Accuracy :} To see why \textit{accuracy} will be an unfair measure, let us look at the definition of \textit{accuracy} for the label 'electro',
 \[
   Accuracy = \frac{\sum TP + \sum TN}{900} = \frac{0+880}{900}
 \]
 Even if the classifier did not classify one 'electro' as positive, accuracy will be 0.98 with the contribution from 880 true negative samples.\\
 \\
-\textbf{Precision :} This is also not a comprehensive measure to indicate the strength of the classifier because it does not tell anything about the percentage of negatively classified samples (false negatives). That is, even if the classifier \textit{correctly} admits one 'electro' as positive and 899 as negative, \textit{precision} would be 1.0   
+\textbf{Precision :} This does not tell anything about the percentage of false negatives. That is, even if the classifier \textit{correctly} admits one 'electro' as positive and 899 as negative (19 false negatives), \textit{precision} would be 1.0   
 \[
   Precission = \frac{\sum TP}{\sum TP + \sum FP} = \frac{1}{1+0}
 \]
 \\
-\textbf{Recall :} This is also not comprehensive because it does not tell anything about false positives or in other words, it does not say if your classifier is a \textit{liar}. That is, even if the classifier admits 900 samples as positive (20 true positives and 880 false positives), \textit{recall} will be 1.0
+\textbf{Recall :} This is also not comprehensive because it does not tell anything about false positives. That is, even if the classifier admits 900 samples as positive (20 true positives and 880 false positives), \textit{recall} will be 1.0
 \[
   Recall = \frac{\sum TP}{\sum TP + \sum FN} = \frac{20}{20+0} 
 \]
 \\
-To strike a balance between \textit{recall} and \textit{precision}, the harmonic mean of both is often used, which is called \textit{F1} score. But to calculate all the metrics mentioned so far, some classifier threshold is required (That is, a binary classifier spits a number between 0 and 1 and if the number is above the threshold, the sample is classified as positive, otherwise negative). If someone changes the threshold then the performance can change. To find a comprehensive measure for classifier performance, the metric should consider all threshold values.\\
+To strike a balance between \textit{recall} and \textit{precision}, the harmonic mean of both is often used, which is called \textit{F1} score. But to calculate all the metrics mentioned so far, some classifier threshold is required (That is, a binary classifier spits a number between 0 and 1 and if the number is above the threshold, the sample is classified as positive, otherwise negative). If the threshold is changed, then the performance can also change. To find a comprehensive measure for classifier performance, the metric should consider all threshold values.\\
 \\ 
-\textbf{Area under precision-recall curve :} When the\textit{ precision} and \textit{recall} are plotted for various threshold and the area under the precision-recall curve is found, the metric is termed as \textit{average precision}. Averaging the \textit{average precision} of L labels gives \textit{Mean average precision}, which is a useful metric and can be found in some research works.\\
+\textbf{Area under precision-recall curve :} When the\textit{ precision} and \textit{recall} are plotted for various threshold and the area under the precision-recall curve is found, the metric is termed as \textit{average precision}. Averaging the \textit{average precision} of L labels gives \textit{Mean average precision}.\\
 \\
 \textbf{Area under receiver operating characteristic curve (AUC) :} The \textit{fall-out} and \textit{recall} are plotted for various threshold and the area under the this curve is found. \textit{Fall-out} is defined as
 \[
    Fall\_out = \frac{\sum FP}{\sum FP + \sum TN} 
 \]
-\textit{Recall} answers the question, 'when the ground truth is positive, how often does the classifier admit it as a positive'. \textit{Fall-out} answers the question, 'when the ground truth is negative, how often does the classifier admit it as positive'. A random classifier would have an AUC of 0.5, meaning, for a binary random classification of an unknown sample there is 50\% chance for it to be true. Therefore, AUC can be thought of as a probability that a classifier would rank a randomly chosen positive ground truth higher than a randomly chosen negative observation. AUC measures how well the positive and negative classes are separated. AUC is computed for L labels and averaged. Since the publications reviewed in previous chapter report this metric, we will also use the same. But in addition, we use \textit{weighted average} because our validation set is small and number of occurrences of each label is not balanced.\\
+\textit{Recall} answers the question, 'when the ground truth of a sample is positive, how often does the classifier admits this sample as positive'. \textit{Fall-out} answers the question, 'when the ground truth of a sample is negative, how often does the classifier admits this sample as positive'. A random classifier would have an AUC of 0.5, meaning, for a binary random classification of an unknown sample there is 50\% chance for it to be true. Therefore, AUC can be thought of as a probability that a classifier would rank a randomly chosen observation with positive ground truth higher than a randomly chosen observation with negative ground truth. AUC is computed for L labels and averaged. Since the publications reviewed in previous chapter report this metric, we will also use the same. But in addition, we use \textit{weighted average} because our validation set is small and number of occurrences of each label is not balanced.\\
 \\
 Therefore, in all our experiments, \textit{Weighted averaged AUC} (WAUC) will be reported.
 
 \section{Experiments}
 \label{experiments}
  
-As with any MIR task, the raw audio signal containing amplitude values in time domain is first down sampled and representation parameters are fixed (ref. \ref{stft}). The abstract algorithm for content based multi-label classifier is shown in algorithm \ref{exp:abstraction}. Function $R$ is the representation operation, $D$ represents dimensionality reduction operations, $T$ is the temporal approximation and $C$ is the classifier. 
+As with any MIR task, the raw audio signal containing amplitude values in time domain is first down sampled and representation parameters are fixed (ref. \ref{stft}). The abstract algorithm for content based multi-label classifier is shown in algorithm \ref{exp:abstraction}. Function $R$ is the representation operation, $D$ represents dimensionality reduction operations (see Sec. \ref{dimension}), $T$ is the temporal approximation (see Sec. \ref{temporal}) and $C$ is the multi-label classifier (see Sec. \ref{classifier}). 
  
 \begin{algorithm}
   \caption{$\textbf{pred}$ = $Model$($\textbf{a}$) }\label{exp:abstraction}
@@ -123,7 +123,8 @@ Mel bins & 96\\
 \FloatBarrier
 
 \subsection{Perceptron Settings}
-Two layer perceptron (equation \ref{eq:mlp}) with rectified linear units activation ($ReLU$) activation in the hidden layer is used for classification $C$ (step 7 of algorithm \ref{exp:a2}). $ReLU$ is used to handle the vanishing gradient problem. The operators $\textbf{W}_{L1}$ and $\textbf{W}_{L2}$ are solved for optimality. (see Sec. \ref{training}). To find the optimal settings for perceptron, $D$ and $T$ are fixed. Thus, log mel-power spectrogram is reduced to MFCC features and approximated to a fixed size representation with Bag of Frames features. Hence, the error is back-propagated only to the classifier $C$ and the resulting learning problem is said to be shallow.  
+\label{percentron_s}
+Two layer perceptron (equation \ref{eq:mlp}) with rectified linear units activation ($ReLU$) activation in the hidden layer is used for classification $C$ (step 7 of algorithm \ref{exp:a2}). $ReLU$ is used to handle the vanishing gradient problem. The operators $\textbf{W}_{L1}$ and $\textbf{W}_{L2}$ are solved for optimality. (see Sec. \ref{training}). To find the optimal settings for perceptron, functions $D$ and $T$ are fixed. Thus, log mel-power spectrogram is reduced to MFCC features and approximated to a fixed size representation with Bag of Frames features. Hence, the error is back-propagated only to the classifier $C$ and the resulting learning problem is said to be shallow.  
 
 \begin{algorithm}
 \begin{minipage}{0.15\textwidth}
@@ -147,7 +148,7 @@ Two layer perceptron (equation \ref{eq:mlp}) with rectified linear units activat
 \end{algorithm}
 \FloatBarrier
 
-\noindent The network is trained with ADAM optimizer. The training settings that are used in this thesis were explained in Chapter 2, section \ref{training}. All ADAM parameters except the learning rate $\eta$ are used as proposed in  \cite{adam_o}. The learning rate can be different for different sections of the network and hence we differentiate the learning rate of the classifier with subscript $c$ ($\eta_{c}$). The learning rate is reduced by factor $\gamma_{c}$ every $step_{c}$ iterations. This is done because in the beginning, large learning rate is needed to approach the solution, but as the training approaches actual solution learning rate has to be reduced. Otherwise, the solution might be sub optimal. Even though the classifier is shallow, the network is fixed trained on the MTT dataset (source task) until convergence. The resulting weights are used as initialization for training on target dataset. Since our aim is to analyse only the CNNs, the training hyper-parameters values for the classifier are fixed with values shown in table \ref{tab:a2}.  
+\noindent The network is trained with ADAM optimizer. The training settings that are used in this thesis were explained in Chapter 2, section \ref{training}. All ADAM parameters except the learning rate $\eta$ are used as proposed in  \cite{adam_o}. The learning rate can be different for different sections of the network and hence we differentiate the learning rate of the classifier with subscript $c$ ($\eta_{c}$). The learning rate is reduced by factor $\gamma_{c}$ every $step_{c}$ iterations. This is done because in the beginning, large learning rate is needed to approach the solution, but as the training approaches actual solution, learning rate has to be reduced. Otherwise, the solution might be sub optimal. However, the learning rate is not reduced below $1^{-6}$. Even though the classifier is shallow, the network is first trained on the MTT dataset (source task) until convergence. The resulting weights are used as initialization for training on target dataset. Since our aim is to analyse only the CNNs, the training hyper-parameters values for the classifier are fixed with values shown in table \ref{tab:a2}.  
 
 \begin{table}[H]
 \label{tab:a2}
@@ -187,14 +188,15 @@ $Z = \textbf{2048}$ & 0.61 & 0.61 & 0.59\\
 \end{table}
 \FloatBarrier
 
-\noindent When the feature size is 512, it can be seen that the performance is capped around 0.64 for different hidden size. The performance improves with feature size 1024. However, the performance decreases when the dimension increases to 2048. This tells us that the model begins to over fit (learn the noisy data) when the number of parameters increases to 2048. Hence the feature dimension ($Z$) and hidden dimension ($H$) are fixed to \textbf{1024} for all the remaining analyses. 
+\noindent When the feature size is 512, it can be seen that the performance is capped around 0.64 for different hidden size. The performance improves with feature size 1024. However, the performance decreases when the dimension increases to 2048. This tells us that the classifier complexity with hidden size 512 is in-sufficient. But the model begins to over fit (learns the noisy data) when the size increases to 2048. Hence the feature dimension ($Z$) and hidden dimension ($H$) are fixed to \textbf{1024} for all the remaining analyses. 
 
 \subsection{RNN Settings}
-The error from classifier $C$ is back-propagated into the temporal approximation function $T$ with a 2 layer LSTM. Therefore, the Bag of frames algorithm is replaced with LSTM. The operators of LSTM $\bm{\Phi_{R1}}$ and $\bm{\Phi_{R2}}$ are solved to sequentially combine MFCC features from each STFT frame into a fixed size projection. The LSTM operators
+\label{rnn_s}
+The error from classifier $C$ is back-propagated into the temporal approximation function $T$ with a 2 layer LSTM. Therefore, the Bag of frames algorithm is replaced with LSTM. The operators of LSTM $\bm{\Phi_{R1}}$ and $\bm{\Phi_{R2}}$ are solved to sequentially combine frame-wise features into a fixed size projection. The LSTM operators
 \[
-\bm{\Phi}_{Rj} = \{\textbf{W}_{(k,j)}, \textbf{U}_{(k,j)}\} \qquad k \in \{i,o,g,c\}, k \in \{1,2\}
+\bm{\Phi}_{Rj} = \{\textbf{W}_{(k,j)}, \textbf{U}_{(k,j)}\} \qquad k \in \{i,o,g,c\}, j \in \{1,2\}
 \] 
-were described in Chapter 2, section \ref{rnn}. Thus the learning is pushed into the temporal approximation function. But the number of STFT frames can be large for longer songs and the information at the beginning of sequence can get lost. To get around this problem, the first layer of LSTM is a \textit{sequence to one} network that combines frames up to 29.1s. The second layer of \textit{sequence to one} LSTM combines features from every 29.1s frame to a fixed sized projection. This computation is illustrated in step 6 - 12 of algorithm \ref{exp:a3}. There are 1366 STFT frames for 29.1s of 12 KHz sampled signal. Drop out with probability $p$ is used as the transition operation (referred in chapter 2, algorithm \ref{alg:2lstm}). Drop out acts as a regularizer that prevents the network from over-fitting.
+were described in Chapter 2, section \ref{rnn}. Thus the learning is pushed into the temporal approximation function. While combining MFCC features, the number of STFT frames can be large for longer songs and the information at the beginning of sequence can get lost. To get around this problem, the first layer of LSTM is a \textit{sequence to one} network that combines frames up to 29.1s. The second layer of \textit{sequence to one} LSTM combines features from every 29.1s frame to a fixed sized projection. This computation is illustrated in step 6 - 12 of algorithm \ref{exp:a3}. There are 1366 STFT frames for 29.1s of 12 KHz sampled signal. Drop out with probability $p$ is used as the transition operation (referred in chapter 2, algorithm \ref{alg:2lstm}). Drop out acts as a regularizer that prevents the network from over-fitting.
 \begin{algorithm}
 \begin{minipage}{0.15\textwidth}
 \includegraphics[width=0.75\textwidth]{ce2}
@@ -251,11 +253,16 @@ $p = \textbf{0.5}$ & 0.67 & 0.71 & 0.64\\
 \includegraphics[width=0.75\textwidth]{ce1}
 \end{minipage}
 \begin{minipage}{0.80\textwidth}
-The operators of LSTM trained on the source task can also be used as black-box feature extractor for the target task (that is, LSTM is not further trained with target data). Sometimes, fine-tuning on the target training set might degrade the operators. This could either be because of convergence of source task training towards general purpose features or because of in-sufficient training data in the target set. To check this, LSTM trained on the source dataset is used as a black-box feature extractor for the target task. But, for the optimal LSTM settings from experiments in previous section ($p = 0.3$, $T=1024$), WAUC drops to \textbf{0.65}. This shows that the source task features cannot be used as general purpose features and still needs task-dependent training. 
+The operators of LSTM trained on the source task can also be used as black-box feature extractor for the target task (that is, LSTM is not further trained with target data). This is done because fine-tuning on the target training set might degrade the operators sometimes. This could either be because of convergence of source task training towards general purpose features or because of in-sufficient training data in the target set. To check this, LSTM trained on the source dataset is used as a black-box feature extractor for the target task. But, for the optimal LSTM settings from experiments in previous section ($p = 0.3$, $T=1024$), WAUC drops to \textbf{0.65}. This shows that the source task features cannot be used as general purpose features and still needs task-dependent training. 
 \end{minipage}
 
-\subsection{CNN Settings}
-
+\subsection{Analyses of CNN}
+\label{cnn_s}
+With the percepton and RNN settings from section \ref{percentron_s} and \ref{rnn_s}, we are now ready to analyse CNNs. Instead of MFCC feature extraction operators ($\textbf{W}_{MFCC}$), hierarchical layers of learn-able operators $\bm{\Phi}_{C}$ are used (see Sec. \ref{stacked}). As discussed in chapter 3, section \ref{fe1}, 5 layers of 2D convolution neural network architecture from \cite{choi_cnn} is used (see algorithm \ref{alg:choicnn}). Thus,
+\[
+\bm{\Phi}_{C} = \{\textbf{W}_{Cj}\} \qquad j \in \{1,2,3,4,5\}
+\]    
+Features are extracted with CNN over 29.1s log mel-spectrogram. The resulting features from every 29.1s frames are sequentially combined to a fixed size representation with LSTM. (In algorithm \ref{exp:a3}, the input to first layer of RNN was features from every STFT frame. But now, the input is from every 29.1s frame, and this sequence is not as large as the former). Two layers of LSTM with \textit{sequence to sequence} layer in between is used (see algorithm \ref{alg:2lstm}).  
 \begin{algorithm}
 \begin{minipage}{0.15\textwidth}
 \includegraphics[width=0.75\textwidth]{ce3}
@@ -286,6 +293,9 @@ The operators of LSTM trained on the source task can also be used as black-box f
 \end{algorithm}
 \FloatBarrier
 
+\subsubsection{Source task training}
+
+\noindent The CNN architecture that we use has been already analysed in \cite{choi_cnn} for multi-label classification task with fixed sized input on MSD dataset. These weights are used as initialization for training our source task model that handles input of arbitrary size. The CNN hyper parameters (number of layers, transition functions, filter sizes and number of filters in each layer) proposed in \cite{choi_cnn} is used. But we search for optimum training parameters for CNN ($\eta_{c}, step_{c}$). The reduction factor $\gamma_{c}$ is fixed at 0.1. $\eta_{c}$ and $step_{c}$ can be different for different CNN layers. However, the CNN is split into two sections : layer 1,2 and layer 3,4,5. The training hyper-parameters are set separately for each section. Table \ref{tab:a5} shows WAUC of experiments on source set where only the last three out of five layers of CNN is fine-tuned. That is, the learning rate for the first two layers is 0 (Freeze).    
 \begin{table}[H]
 \label{tab:a5}
 \centering
@@ -308,7 +318,7 @@ Freeze & $(1^{-4}; 70K)$ & 0.77\\
 \end{tabular}
 \caption{Source task experiments with 1st two layers freezed : $(\eta_{f}, {step}_{f})$} 
 \end{table}
-
+\noindent It can be seen that learning rate $1^{-3}$ and $1^{-4}$ stepping down every 50K iterations have similar performance. In table \ref{tab:a6}, WAUC of experiments where the whole CNN is trained are reported. The learning rate and step down for the last three layers are chosen from the experiments in table \ref{tab:a5}.  
 \begin{table}[H]
 \label{tab:a6}
 \centering
@@ -339,7 +349,10 @@ $(1^{-3}; 70K)$ & $(1^{-4}; 50K)$ & 0.76\\
 \end{tabular}
 \caption{Source task experiments with all layers trained : $(\eta_{f}, {step}_{f})$}
 \end{table}
-
+\noindent Training all the layers of CNN on the source dataset with learning rate $1^{-4}$ in layers 1,2 and $1^{-3}$ in layers 3,4,5 is shown to be optimal. It can also be inferred that the last layers of CNN tend to find task specific features not suited for general purpose classification. 
+ 
+\subsubsection{Target task training}
+After the training converges on the source dataset, the weights are initialized for training on target dataset. The training hyper-parameters can be different for the target task. The step down iteration is lower for the target task because of smaller training data. 
 \begin{table}[H]
 \label{tab:a7}
 \centering
@@ -383,13 +396,14 @@ $(1^{-4}; 20K)$ & $(1^{-4}; 10K)$ & 0.67\\
 \end{tabular}
 \caption{Target task experiments with all layers trained : $(\eta_{f}, {step}_{f})$}
 \end{table}
+\noindent Fine-tuning all the layers of CNN on the target dataset with learning rate $1^{-5}$ in layers 1,2 and $1^{-4}$ in layers 3,4,5 is shown to be optimal. However, the performance is slightly lesser than what is achieved with MFCC features.
 
-\subsubsection{Black-box CNN + Fine-tune LSTM}
+\subsubsection{Black-box CNN + Fine-tune LSTM}  
 \begin{minipage}{0.15\textwidth}
 \includegraphics[width=0.75\textwidth]{ce2}
 \end{minipage}
 \begin{minipage}{0.80\textwidth}
-Text goes here
+To see if the reduction in performance is because of fine-tuning on a small target dataset, CNN trained on source data is used as black-box feature extractor for target task (CNN is not trained on target data). This tells us if the features of CNN trained on source task are richer than MFCCs. The LSTM is however fine tuned with the settings discussed earlier. But WAUC drops to \textbf{0.65}, which shows that the CNN features from source task may not be rich enough. However, it is still not clear because we do not know if fine-tuning LSTM on target data is optimal for extracting information from CNN features. 
 \end{minipage}
 
 \subsubsection{Black-box CNN + Black-box LSTM}
@@ -397,7 +411,7 @@ Text goes here
 \includegraphics[width=0.75\textwidth]{ce1}
 \end{minipage}
 \begin{minipage}{0.80\textwidth}
-Text goes here
+Now both CNN and LSTM are used as black-box feature extractor. Thus, only the classifier is trained on target data. The WAUC further drops to \textbf{0.63}. It can be seen that training (source data) both CNN and LSTM in a single pipeline restricts the optimality of RNN (Recall that MFCC + LSTM performed better than MFCC + BoF). This could result in CNN features that are not as rich as MFCC. 
 \end{minipage}
 
 \subsubsection{Black-box CNN + Bag of Frames}
@@ -405,129 +419,48 @@ Text goes here
 \includegraphics[width=0.75\textwidth]{ce1}
 \end{minipage}
 \begin{minipage}{0.80\textwidth}
-Text goes here
+Replacing black-box LSTM with Bag of frames algorithm for black-box CNN features, WAUC increases to \textbf{0.67}. Thus, CNN features obtained by training CNN + LSTM on the source task data still contain information for classification. But, CNN features are not as rich as MFCC for our target task.
 \end{minipage}
 
-\subsection{Analyses of Convolution Neural Networks}
-\label{pretrained}
-
-\subsubsection{Fine-tune CNN + Fine-tune LSTM}
-
-
-In Chapter 2 (ref. \ref{stacked}), it was shown how Convolution Neural Networks (CNN) are motivating to be used as feature extractor for music signal. In Chapter 3 (ref. \ref{convolution}) some of the successful mel-spectrogram convolution architectures trained on MTT dataset showing state-of-art performance were discussed. Now we would like to see if such features extracted through these models can be used for auxiliary tasks. That is to say, the learned CNN parameters (weights) from \textit{source} dataset are used as initialization setting for \textit{target} tasks.    
-\bigskip
-
-\noindent The CNN architecture from \cite{choi_cnn} achieves the best AUC score on MTT dataset and hence this architecture is used for feature extraction. The algorithm for their model ($CHOI\_CNN$) is explained in section \ref{convolution} (Algorithm \ref{alg:choicnn}). The input to their CNN was 29.1s mel-spectrogram with representation parameters mentioned above (Thus resulting in 1366 time samples). So for our task, features are extracted every 29.1s and sequentially sent to RNN. The temporal summarization is done by 2 layer \textit{Long Short-Term Memory Recurrent Neural Network} (ref. \ref{rnn}). The RNN module does sequence to one mapping ($Seq2One$) of the input features. This entire model is then trained for 150K iteration on MTT dataset with top 50 tags. Their model was already trained on Million Song Dataset \cite{MSD} with top 50 \textit{Last.fm} tags. We just fine-tune their model on MTT dataset after merging clips from same song. Features of clips from same song are sequentially given as input to RNN with a dropout (ref. \ref{training}) of 0.3 after each layer, which then projects to a fixed sized feature vector. The output of RNN is then passed to a fully connected layer with 50 output units and \textit{sigmoid} activation. ADAM optimizer with \textit{binary-cross-entropy} loss function is used for training. The starting learning rate is $0.001$, decaying at $1^{-8}$ and beta $0.99$ (ref. \ref{training}). Algorithm for $L$ labels is described below and the notations used are consistent with formalisms in Chapter \ref{Chapter2}. The algorithm is implemented in \textit{Torch} [torch] and mel-spectrogram was extracted using \textit{Librosa} [librosa]
-\bigskip 
-
-\begin{algorithm}
-  \caption{$Pred$ = MODEL($\textbf{a}$) }
-  \label{alg:cnnrnn}
-  {\fontsize{1}{0}
-  \begin{algorithmic}[1]
-    \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{N}$
-    \Statex \textbf{Output :} $Pred \in \mathbb{R}^{L}$ 
-    \State $\textbf{C} = STFT(\textbf{a})$ \Comment{$\textbf{C} \in \mathbb{C}^{M \times P}$}
-    \State $\textbf{Y}_{r} = Log(\textbf{C} \odot \textbf{C})$ \Comment{$\textbf{Y}_{r} \in \mathbb{R}^{M \times P}$}
-    \State $\textbf{R} = MEL(\textbf{Y}_{r})$ \Comment{$\textbf{R} \in \mathbb{R}^{96 \times P}$}
-    \State $W = floor(\frac{P}{1366})$
-    \For{$i \in \{0,..,W\}$}
-      \State $\textbf{X} \leftarrow \textbf{R}[:][i:(i+1).1366]$ \Comment{$\textbf{X} \in \mathbb{R}^{96 \times 1366}$}
-      \State $\textbf{Y}[i] \leftarrow CHOI\_CNN(\textbf{X})$ \Comment{$\textbf{Y} \in \mathbb{R}^{1024 \times W}$} 
-    \EndFor
-    \State $\textbf{Y}_{1} = Drop_{(0.3)}(Seq2Seq\_LSTM(\textbf{Y}))$ \Comment{$\textbf{Y}_{1} \in \mathbb{R}^{1024 \times W}$}
-    \State $\textbf{y}_{2} = Drop_{(0.3)}(Seq2One\_LSTM(\textbf{Y}_{1}))$ \Comment{$\textbf{y}_{2} \in \mathbb{R}^{1024}$}
-    \State $Pred = \sigma(L(\textbf{W})\textbf{y}_{2}))$ \Comment{$\textbf{W} \in \mathbb{R}^{L \times 1024}$}
-  \end{algorithmic}
-  }
-\end{algorithm}
-\FloatBarrier
-
-\noindent This CNN model can either be used as a \textit{black-box} feature extractor (That is, weights of the model are not modified while training the \textit{target-task}) or certain layers can be \textit{fine-tuned} (That is, we continue the training on \textit{target-task}). Both the cases are looked separately,
-\bigskip
-
-\noindent \textbf{Blackbox CNN + RNN :}\\ 
-The weights of CNN trained on the source task are not modified (no fine-tuning). The weights of RNN are also initiazied with those trained on source task. The fully-connected layer in the source task is changed to 65 output units. (i.e 65 labels). The network is trained by back-propagating through the fully connected layer and RNN with \textit{binary-cross entropy} loss function (ref. \ref{training}). The optimization parameters are same as that of \textit{source task}. Training is stopped after 25K iterations, after which the model begins to over-fit. Weighted averaged AUC (WAUC) was \textbf{0.65}
-\bigskip
-
-\noindent \textbf{Fine-tune CNN + RNN :}\\
-With the same parameter settings, the last layer of CNN was finetuned after 5K iterations. Training was then continued until 25K iterations and WAUC went up to \textbf{0.69}. When last two CNN layers were finetuned WAUC further improved to \textbf{0.71}. Fine-tuning earlier layers proved sub-optimal. 
-\bigskip
-
-\noindent This tells us that in the final layers CNN tend to find features specific to task. (Recalling that labels for source and target tasks are different). However, we still do not know if convolutions over mel-spectrogram will be better than MFCCs which is proven to model audio discriminants. Before going there, the effectiveness of RNN should also be questioned. It was hypothesised in Chapter 3 (\ref{model}) that Bag-of-Frames (\ref{clustering}) features using K-Means (which was actually used in \cite{MultiScale} to attain state of art performance) may not be suitable for summarizing features for longer audio. So we test this by replacing RNN with Bag Of Frames (BoF) features.
-\bigskip
-
-\noindent \textbf{CNN + BoF :}
-The CNN is first finetuned for 10K iterations with algorithm \ref{alg:cnnrnn}. Then 1024 centroids of CNN features are found by unsupervised training on both MTT and our target dataset. This is followed by multi layer perceptron with a hidden layer of 512 units and ReLU activation. Having hidden size of 1024 did not improve the result. WAUC was \textbf{0.67}. The algorithm is described below,
-
-\begin{algorithm}
-  \caption{$Pred$ = MODEL($\textbf{a}$) }\label{alg:cnnbow}
-  \begin{algorithmic}[1]
-    \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{N}$
-    \Statex \textbf{Output :} $Pred \in \mathbb{R}^{65}$ 
-    \State $\textbf{C} = STFT(\textbf{a})$ \Comment{$\textbf{C} \in \mathbb{C}^{M \times P}$}
-    \State $\textbf{Y}_{r} = Log(\textbf{C} \odot \textbf{C})$ \Comment{$\textbf{Y}_{r} \in \mathbb{R}^{M \times P}$}
-    \State $\textbf{R} = MEL(\textbf{Y}_{r})$ \Comment{$\textbf{R} \in \mathbb{R}^{96 \times P}$}
-    \State $W = floor(\frac{P}{1366})$
-    \For{$i \in \{0,..,W\}$}
-      \State $\textbf{X} \leftarrow \textbf{R}[:][i:(i+1).1366]$ \Comment{$\textbf{X} \in \mathbb{R}^{96 \times 1366}$}
-      \State $\textbf{Y}[i] \leftarrow CHOI\_CNN(\textbf{X})$ \Comment{$\textbf{Y} \in \mathbb{R}^{1024 \times W}$} 
-    \EndFor
-    \State $\textbf{y}_{1} = BagOfFrames(\textbf{Y},1024)$ \Comment{$\textbf{y}_{1} \in \mathbb{R}^{1024}$}
-     \State $Pred = \sigma(L(\textbf{W}_{2})ReLU(L(\textbf{W}_{1})\textbf{y}_{1}))$ \Comment{$\textbf{W}_{2} \in \mathbb{R}^{65 \times 512}, \textbf{W}_{1} \in \mathbb{R}^{512 \times 1024}$}
-  \end{algorithmic}
-\end{algorithm}
-\FloatBarrier
-    
-\subsection{Comparision of MFCC with CNN features}    
-\label{mfcc}  
-MFCCs are still de-facto standard for classifications on small datasets. If CNNs had to outperform MFCCs, the learned parameters should have to encode discriminants similar to MFCCs. MFCCs are computed by taking discrete-cosine transform on log mel-spectrogram (ref. \ref{basis}). Following the comparison strategies from \cite{choi_cnn}, we retain 30 coefficients, their first and second derivative, resulting in a vector of size 90 for each STFT frame.
-\bigskip
-
-\noindent \textbf{MFCC + RNN :}\\
-Now, MFCCs from every STFT window is passed in a \textit{30s  Batched sequence} to a Sequence to one LSTM, which results in a projection for every 30s window. These sequence of 30s frames are then passed to another Sequence to One LSTM to get a final projection. This is done because a MFCCs from STFT frame will result in a long sequence and RNNs tend to forget the information in the earlier sequence samples. This network was first trained with MTT dataset before our target dataset. The parameter setting are same as those used while training \textbf{CNN+RNN}. The resulting WAUC was \textbf{0.74}   
-\begin{algorithm}
-  \caption{$Pred$ = MODEL($\textbf{a}$) }\label{alg:mfccrnn}
-  \begin{algorithmic}[1]
-    \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{N}$
-    \Statex \textbf{Output :} $Pred \in \mathbb{R}^{65}$ 
-    \State $\textbf{R} = MFCC(\textbf{a})$ \Comment{$\textbf{R} \in \mathbb{R}^{90 \times P}$}
-        \State $W = floor(\frac{P}{1366})$
-    \For{$i \in \{0,..,W\}$}
-      \State $\textbf{X} \leftarrow \textbf{R}[:][i:(i+1).1366]$ \Comment{$\textbf{X} \in \mathbb{R}^{90 \times 1366}$}
-    \State $\textbf{Y}[i] \leftarrow Drop_{(0.3)}(Seq2One\_LSTM(\textbf{X}))$ \Comment{$\textbf{Y} \in \mathbb{R}^{1024 \times W}$}
-    \EndFor
-    \State $\textbf{y} = Drop_{(0.3)}(Seq2One\_LSTM(\textbf{Y}))$ \Comment{$\textbf{y} \in \mathbb{R}^{1024}$}
-    \State $Pred = \sigma(L(\textbf{W})\textbf{y}))$ \Comment{$\textbf{W} \in \mathbb{R}^{65 \times 1024}$}
-  \end{algorithmic}
-\end{algorithm}
-\FloatBarrier
-
-\noindent \textbf{MFCC + BoF :}\\
-RNN is repalaced with Bag of Frames features. Now WAUC drops to \textbf{0.62}
-\begin{algorithm}
-  \caption{$Pred$ = MODEL($\textbf{a}$) }\label{alg:mfccbow}
-  \begin{algorithmic}[1]
-    \Statex \textbf{Input :} $\textbf{a} \in \mathbb{R}^{N}$
-    \Statex \textbf{Output :} $Pred \in \mathbb{R}^{65}$ 
-    \State $\textbf{R} = MFCC(\textbf{a})$ \Comment{$\textbf{R} \in \mathbb{R}^{90 \times P}$}
-   \State $\textbf{y} = BagOfFrames(\textbf{R},1024)$ \Comment{$\textbf{y} \in \mathbb{R}^{1024}$}
-     \State $Pred = \sigma(L(\textbf{W}_{2})ReLU(L(\textbf{W}_{1})\textbf{y}))$ \Comment{$\textbf{W}_{2} \in \mathbb{R}^{65 \times 512}, \textbf{W}_{1} \in \mathbb{R}^{512 \times 1024}$}
-  \end{algorithmic}
-\end{algorithm}
-\FloatBarrier    
-
-\section{Summary of Results}
+\section{Summary of results}
 \label{results}
-Summary of results is shown in the table below. It is seen that \textit{transfer learning} of convolutions over mel-spectrogram with architecture in \cite{choi_cnn}  cannot match with MFCCs for small datasets. This indicates that convolutional features from source dataset are more task-specific. It is also seen that \textit{Recurrent Neural Networks} perform better in summarizing features for longer audio. This indicates the existence of rhythmic patterns that discriminate music. 
+Transfer learning with CNN and LSTM for music tagging task were analysed by stage-wise induction of supervised learning deeper into the model. Classification on MFCC features approximated with Bag of frames algorithm does not require supervised learning and hence used as baseline for comparison. LSTM were used to introduce supervised learning of temporal approximation function. CNN and LSTM were then trained in a single pipeline to introduce supervision into reduction operations. Performances of features resulting from LSTM and CNN with and without (black-box) fine-tuning on target data have been discussed. 
 
-   \begin{tabular}{ | p{5cm} | l |}
+\subsubsection{Analyses of LSTM}
+LSTM analyses are summarized in table \ref{tab:a9}. LSTM trained on source task, but used as a black box extractor on target task performs below the BoF baseline. But when LSTM is fine-tuned on target data, performance improves significantly. Therefore, it is seen that LSTM is still not sufficient to realize general purpose approximation operators, but requires task dependent fine-tuning to out-perform BoF.   
+
+\begin{table}[H]
+\label{tab:a9}
+\centering
+   \begin{tabular}{ | p{0.7\textwidth} | p{0.2\textwidth} |}
     \hline
-    \textbf{Model} & \textbf{AUC} \\ \hline
-    Finetune CNN + RNN &  0.71\\ \hline
-    CNN + BoF  &  0.67\\ \hline
-    MFCC + RNN &  \textbf{0.74} \\ \hline
-    MFCC + BoF &  0.62 \\ \hline
+    \textbf{Model} & \textbf{WAUC} \\ \hline
+    MFCC + BoF &  0.67\\ \hline
+    MFCC + Black-box LSTM &  0.65 \\ \hline
+    MFCC + Fine-tune LSTM  &  \textbf{0.74}\\ \hline
     \hline
     \end{tabular}
+    \caption{Summary of LSTM analyses}
+\end{table}
+
+\subsubsection{Analyses of CNN}
+CNN analyses are summarized in table \ref{tab:a10}. CNN and LSTM were trained in a single pipeline on the source dataset. Performance of black-box CNN with Bag of frames approximation is again better than black-box LSTM. But performance of black-box CNN with fine-tuned LSTM is lesser than it's MFCC counter-part and this shows that CNN features are not as rich as MFCC to serve as general purpose feature extractor. Fine-tuning CNN improves the performance, but it is still slightly lesser than MFCC. This shows that fine-tuning CNN on smaller dataset still cannot outperform MFCC for our target task.
+  
+\begin{table}[H]
+\label{tab:a10}
+\centering
+   \begin{tabular}{ | p{0.7\textwidth} | p{0.2\textwidth} |}
+    \hline
+    \textbf{Model} & \textbf{WAUC} \\ \hline
+    Black-box CNN + BoF & 0.67 \\ \hline 
+    Black-box CNN + Black-box LSTM & 0.63 \\ \hline 
+    Black-box CNN + Fine-tune LSTM & 0.65 \\ \hline
+    Fine-tune CNN + Fine-tune LSTM &  0.71 \\ \hline
+    \hline
+    \end{tabular}
+    \caption{Summary of CNN + LSTM analyses}
+\end{table}
+
+
+
 

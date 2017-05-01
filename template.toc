@@ -4,23 +4,19 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.1}Motivation}{5}{section.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.1.1}Cold start problem with collaborative filtering methods}{5}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Challenges with collaborative filtering methods}{5}{subsection.1.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.1.2}Problems with content based methods}{6}{subsection.1.1.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Temporal summarization of audio content}{6}{section*.4}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Restricted glossary}{6}{section*.5}
+\contentsline {subsection}{\numberline {1.1.2}Challenges with content based methods}{6}{subsection.1.1.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.2}Overview}{6}{section.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.1}Signal Representation}{7}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.1}Signal Representation}{6}{subsection.1.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.2}Dimensionality reduction}{7}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {1.2.2}Dimensionality reduction}{6}{subsection.1.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.3}Temporal approximation}{8}{subsection.1.2.3}
+\contentsline {subsection}{\numberline {1.2.3}Temporal approximation}{7}{subsection.1.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.3}Outline of the report}{8}{section.1.3}
+\contentsline {section}{\numberline {1.3}Outline of the report}{7}{section.1.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {2}Formalisms}{9}{chapter.2}
 \defcounter {refsection}{0}\relax 
@@ -30,17 +26,17 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.1.2}Time-Frequency transformations}{10}{subsection.2.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Basis transformation from time to frequency domain}{10}{section*.6}
+\contentsline {subsubsection}{Basis transformation from time to frequency domain}{10}{section*.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Exponential Fourier Series and Fourier Transform}{10}{section*.7}
+\contentsline {subsubsection}{Exponential Fourier Series and Fourier Transform}{10}{section*.5}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.1.3}STFT, Mel-Spectrogram}{11}{subsection.2.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{STFT as Convolution}{12}{section*.9}
+\contentsline {subsubsection}{STFT as Convolution}{12}{section*.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Power spectrogram}{13}{section*.10}
+\contentsline {subsubsection}{Power spectrogram}{13}{section*.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Mel Power Spectrogram}{13}{section*.11}
+\contentsline {subsubsection}{Mel Power Spectrogram}{13}{section*.9}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.2}Dimensionality Reduction}{14}{section.2.2}
 \defcounter {refsection}{0}\relax 
@@ -52,9 +48,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.2.4}Convolution neural network}{18}{subsection.2.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Approximating MFCC with CNN}{19}{section*.13}
+\contentsline {subsubsection}{Approximating MFCC with CNN}{19}{section*.11}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{CNN as a general purpose feature extractor}{20}{section*.14}
+\contentsline {subsubsection}{CNN as a general purpose feature extractor}{20}{section*.12}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.3}Temporal Approximation}{21}{section.2.3}
 \defcounter {refsection}{0}\relax 
@@ -62,7 +58,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.3.2}Recurrent Neural Networks}{22}{subsection.2.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Long-Short Term Memory RNN}{23}{section*.16}
+\contentsline {subsubsection}{Long-Short Term Memory RNN}{23}{section*.14}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.4}Multi-label Classifier}{24}{section.2.4}
 \defcounter {refsection}{0}\relax 
@@ -72,15 +68,15 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.5.1}First-order gradient descent}{26}{subsection.2.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Loss function}{26}{section*.17}
+\contentsline {subsubsection}{Loss function}{26}{section*.15}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Computing gradients}{27}{section*.18}
+\contentsline {subsubsection}{Computing gradients}{27}{section*.16}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Updating the parameters}{27}{section*.19}
+\contentsline {subsubsection}{Updating the parameters}{27}{section*.17}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.5.2}Deep learning}{28}{subsection.2.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Issues}{29}{section*.20}
+\contentsline {subsubsection}{Issues}{29}{section*.18}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {3}Literature Survey and Model Selection }{31}{chapter.3}
 \defcounter {refsection}{0}\relax 
@@ -102,56 +98,60 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {4}Experiments and Results}{43}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Dataset and Evaluation}{43}{section.4.1}
+\contentsline {section}{\numberline {4.1}Dataset}{43}{section.4.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.1.1}Dataset for source task}{43}{subsection.4.1.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.1.2}Dataset for target task}{44}{subsection.4.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.3}Evaluation metrics}{44}{subsection.4.1.3}
+\contentsline {section}{\numberline {4.2}Evaluation}{44}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Experiments}{45}{section.4.2}
+\contentsline {section}{\numberline {4.3}Experiments}{45}{section.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.1}Representation Parameters :}{46}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.3.1}Representation Parameters :}{46}{subsection.4.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.2}Perceptron Settings}{47}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.3.2}Perceptron Settings}{47}{subsection.4.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.3}RNN Settings}{48}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.3.3}RNN Settings}{48}{subsection.4.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Black-box LSTM}{50}{section*.30}
+\contentsline {subsubsection}{Black-box LSTM}{50}{section*.28}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.4}CNN Settings}{50}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.3.4}Analyses of CNN}{50}{subsection.4.3.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Source task training}{51}{section*.29}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Target task training}{52}{section*.32}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{Black-box CNN + Fine-tune LSTM}{52}{section*.35}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Black-box CNN + Black-box LSTM}{52}{section*.36}
+\contentsline {subsubsection}{Black-box CNN + Black-box LSTM}{53}{section*.36}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Black-box CNN + Bag of Frames}{52}{section*.37}
+\contentsline {subsubsection}{Black-box CNN + Bag of Frames}{53}{section*.37}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.5}Analyses of Convolution Neural Networks}{52}{subsection.4.2.5}
+\contentsline {section}{\numberline {4.4}Summary of results}{53}{section.4.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Fine-tune CNN + Fine-tune LSTM}{52}{section*.38}
+\contentsline {subsubsection}{Analyses of LSTM}{53}{section*.38}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.6}Comparision of MFCC with CNN features}{54}{subsection.4.2.6}
+\contentsline {subsubsection}{Analyses of CNN}{54}{section*.40}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}Summary of Results}{55}{section.4.3}
+\contentsline {chapter}{\numberline {5}Conclusion}{55}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Conclusion}{57}{chapter.5}
+\contentsline {subsubsection}{Proposal for improvements}{55}{section*.42}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}Appendix}{59}{Appendix.1.A}
+\contentsline {chapter}{\numberline {A}Appendix}{57}{Appendix.1.A}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.1}Basis Transformation}{59}{section.1.A.1}
+\contentsline {section}{\numberline {A.1}Basis Transformation}{57}{section.1.A.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.2}Convolution}{59}{section.1.A.2}
+\contentsline {section}{\numberline {A.2}Convolution}{57}{section.1.A.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.2.1}1D Convolution}{59}{subsection.1.A.2.1}
+\contentsline {subsection}{\numberline {A.2.1}1D Convolution}{57}{subsection.1.A.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.2.2}2D Convolution}{60}{subsection.1.A.2.2}
+\contentsline {subsection}{\numberline {A.2.2}2D Convolution}{58}{subsection.1.A.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {B}Experiments}{61}{Appendix.2.B}
+\contentsline {chapter}{\numberline {B}Experiments}{59}{Appendix.2.B}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {B.1}Validation Tags}{61}{section.2.B.1}
+\contentsline {section}{\numberline {B.1}Validation Tags}{59}{section.2.B.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {B.2}Validation Set}{62}{section.2.B.2}
+\contentsline {section}{\numberline {B.2}Validation Set}{60}{section.2.B.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{67}{chapter*.39}
+\contentsline {chapter}{Bibliography}{65}{chapter*.43}
