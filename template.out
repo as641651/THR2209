@@ -52,6 +52,7 @@
 \BOOKMARK [2][-]{subsection.1.A.2.1}{1D Convolution}{section.1.A.2}% 52
 \BOOKMARK [2][-]{subsection.1.A.2.2}{2D Convolution}{section.1.A.2}% 53
 \BOOKMARK [0][-]{Appendix.2.B}{Experiments}{}% 54
-\BOOKMARK [1][-]{section.2.B.1}{Validation Tags}{Appendix.2.B}% 55
-\BOOKMARK [1][-]{section.2.B.2}{Validation Set}{Appendix.2.B}% 56
-\BOOKMARK [0][-]{chapter*.43}{Bibliography}{}% 57
+\BOOKMARK [1][-]{section.2.B.1}{Validation Set}{Appendix.2.B}% 55
+\BOOKMARK [1][-]{section.2.B.2}{Validation Tags}{Appendix.2.B}% 56
+\BOOKMARK [1][-]{section.2.B.3}{Tag-wise Performance}{Appendix.2.B}% 57
+\BOOKMARK [0][-]{chapter*.48}{Bibliography}{}% 58

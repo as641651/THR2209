@@ -8,6 +8,7 @@ A level-1 auxiliary file: Chapters/Chapter3.aux
 A level-1 auxiliary file: Chapters/Chapter4.aux
 A level-1 auxiliary file: Chapters/Chapter5.aux
 A level-1 auxiliary file: Appendices/AppendixA.aux
+A level-1 auxiliary file: Appendices/AppendixB.aux
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
@@ -21,16 +22,6 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: template-blx.bib
 Database file #2: bibliography.bib
-Warning--I'm ignoring combining's extra "keywords" field
---line 37 of file bibliography.bib
-Warning--I'm ignoring combining's extra "keywords" field
---line 38 of file bibliography.bib
-Warning--I'm ignoring combining's extra "keywords" field
---line 39 of file bibliography.bib
-Warning--I'm ignoring combining's extra "keywords" field
---line 40 of file bibliography.bib
-Warning--I'm ignoring combining's extra "keywords" field
---line 42 of file bibliography.bib
 Warning--I'm ignoring spec_dia's extra "keywords" field
 --line 262 of file bibliography.bib
 Warning--I'm ignoring spec_dia's extra "keywords" field
@@ -41,45 +32,45 @@ Warning--I didn't find a database entry for "DBLP:conf/icml/2010"
 Biblatex version: 2.8
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
-You've used 33 entries,
+You've used 27 entries,
             6047 wiz_defined-function locations,
-            1365 strings with 16687 characters,
-and the built_in function-call counts, 107102 in all, are:
-= -- 3414
-> -- 4351
-< -- 1166
-+ -- 1579
-- -- 1971
-* -- 8634
-:= -- 6965
+            1317 strings with 14797 characters,
+and the built_in function-call counts, 90215 in all, are:
+= -- 2879
+> -- 3778
+< -- 977
++ -- 1460
+- -- 1769
+* -- 7351
+:= -- 6007
 add.period$ -- 0
-call.type$ -- 33
-change.case$ -- 32
-chr.to.int$ -- 225
-cite$ -- 64
-duplicate$ -- 11920
-empty$ -- 11055
-format.name$ -- 2429
-if$ -- 23587
+call.type$ -- 27
+change.case$ -- 26
+chr.to.int$ -- 200
+cite$ -- 52
+duplicate$ -- 10006
+empty$ -- 9144
+format.name$ -- 2117
+if$ -- 19695
 int.to.chr$ -- 0
-int.to.str$ -- 76
+int.to.str$ -- 62
 missing$ -- 0
-newline$ -- 959
-num.names$ -- 1408
-pop$ -- 10468
+newline$ -- 832
+num.names$ -- 1156
+pop$ -- 8572
 preamble$ -- 1
-purify$ -- 504
+purify$ -- 432
 quote$ -- 0
-skip$ -- 6374
+skip$ -- 5370
 stack$ -- 0
-substring$ -- 1864
-swap$ -- 4148
-text.length$ -- 968
-text.prefix$ -- 32
+substring$ -- 1599
+swap$ -- 3452
+text.length$ -- 817
+text.prefix$ -- 26
 top$ -- 1
-type$ -- 1242
+type$ -- 1014
 warning$ -- 0
-while$ -- 707
+while$ -- 589
 width$ -- 0
-write$ -- 925
+write$ -- 804
 (There was 1 error message)

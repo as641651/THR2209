@@ -10,7 +10,7 @@
 \usepackage{aicescover}
 \usepackage{hyperref}
 \hypersetup{
-    colorlinks=true, %set true if you want colored links
+    colorlinks=false, %set true if you want colored links
     linktoc=all,     %set to all if you want both sections and subsections linked
     linkcolor=blue,  %choose some color if you want links to stand out
 }
@@ -49,7 +49,7 @@ maxbibnames=99
 \begin{document}
 
 \aicescovertitle{Analyses of Convolutional Neural Networks for Automatic tagging of music tracks }
-\aicescoverauthor{{\bf Master Thesis}\\Aravind Sankaran}
+\aicescoverauthor{{\bf Master Thesis}\\by\\Aravind Sankaran\\ \\May 2017}
 \aicescoversupervisor{Prof. Paolo Bientinesi \\ Prof. Marco Alunno}
 \aicescoverexaminer{Prof. Paolo Bientinesi \\ Prof. Bastian Leibe}
 \aicescoverpage
@@ -57,7 +57,9 @@ maxbibnames=99
 
 \section*{Abstract}
 
-Describing music can be quite tricky and talking about music may simply require as much vocabulary as any technical subject. Musicians and composers usually discuss their work with jargon describing certain aesthetics of the song. As the amount of music recordings are constantly growing, finding a song that matches these aesthetic description is challenging. This work is an attempt to take a step towards developing algorithms that could tag music like an artist. The currently available state-of-art algorithms are trained and tested on datasets with tags that are socially biased. Moreover these datasets contain just short clips of songs, but an artist describes a song as a whole. Therefore, in this thesis, a repertoire of 900 songs with carefully labelled data describing the whole track is used and the aim is to find the model settings that would best approximate the audio features for such a dataset. The Mel-Frequency-Cepstral-Coefficients (MFCC) features are compared with features extracted by pre-trained Convolution Neural Networks (CNN) over mel-log power spectrogram. These features are extracted every 29.1s and approximated over time to a fixed size representation. The temporal approximation by sequence to one Long Term Short Memory (LSTM) Recurrent Neural Network is compared with approximation by Bag of Frames (BoF) approach and the weighted area under receiver operating characteristic curve (AUC) is reported. The experiments show that MFCC features summarized by LSTM outperforms pre-trained convolutions counterpart. It is also seen that LSTM perform better than Bag of Frames features for temporal approximation.     
+Describing music can be quite tricky and talking about music may simply require as much vocabulary as any technical subject. This makes analysing music and communicating it's musical syntax challenging. An algorithm that  automate the task of attaching a semantic description to a song should extract relevant features from the audio signal for optimum performance.
+Supervised feature learning is used to obtain features that could be optimum for our context of music tagging. Convolution Neural Networks(CNN) and Sequence to One Long-Short Term Memory(LSTM) Recurrent neural networks are used to induct supervised learning into the feature extraction pipeline. A repertoire of 842 songs with carefully labelled data is used for training. Since our target dataset is small, the model is first trained on \textit{MagnaTagATune}(MTT) public dataset. The performance of transfer learning with CNN and LSTM are compared for different levels of supervised fine-tuning in the feature extraction pipeline and the Weighted averaged Area Under receiver operating characteristic Curve (WAUC) scores are reported. It has been found that the performance of CNN and LSTM, when fine-tuned on target dataset, is better than the corresponding models trained on MTT dataset used as black-box feature extractors for target task. These models are also compared with Mel-Frequency-Cepstral-coefficient(MFCC) features approximated by Bag of Frames algorithm which does not require labelled data. The performance with features extracted by fine-tuned CNN is lesser than MFCCs for our target task.   
+  
 
 \vspace{5cm}
 
@@ -65,7 +67,7 @@ Describing music can be quite tricky and talking about music may simply require 
 \newpage
 
 \section*{\bf Acknowledgments}
-I would like to thank \textit{Prof. Paolo Bientinesi} (High performance and automatic computing group, AICES, RWTH Aachen) for doing one of the most expensive work - \textit{Listen to almost thousand songs and tag them}. I also thank  \textit{Prof. Marco Alunno} (Professor of Composition and Theory at University EAFIT, Columbia) for his valuable association and advices.  
+I would like to thank \textit{Prof. Paolo Bientinesi} (High performance and automatic computing group, AICES, RWTH Aachen) for doing one of the most expensive work - \textit{Listen to the songs and tag them}. I also thank  \textit{Prof. Marco Alunno} (Professor of Composition and Theory at University EAFIT, Columbia) for his valuable association and advices.  
 \tableofcontents
 
 \include{Chapters/Chapter1}

@@ -74,26 +74,6 @@
   \field{year}{1997}
 \endentry
 
-\entry{survey3}{misc}{}
-  \name{author}{2}{}{%
-    {{}%
-     {Aucouturier}{A.}%
-     {Jean}{J.}%
-     {julien}{j.}%
-     {}{}}%
-    {{}%
-     {Pachet}{P.}%
-     {Francois}{F.}%
-     {}{}%
-     {}{}}%
-  }
-  \strng{namehash}{AJjPF1}
-  \strng{fullhash}{AJjPF1}
-  \field{sortinit}{2}
-  \field{title}{Music Similarity Measures: What's The Use ?}
-  \field{year}{2002}
-\endentry
-
 \entry{allen}{book}{}
   \name{author}{2}{}{%
     {{}%
@@ -153,84 +133,6 @@
   \field{year}{2007}
 \endentry
 
-\entry{survey2}{misc}{}
-  \name{author}{6}{}{%
-    {{}%
-     {Casey}{C.}%
-     {Michael~A.}{M.~A.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Veltkamp}{V.}%
-     {Remco}{R.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Goto}{G.}%
-     {Masataka}{M.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Leman}{L.}%
-     {Marc}{M.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Rhodes}{R.}%
-     {Christophe}{C.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Slaney}{S.}%
-     {Malcolm}{M.}%
-     {}{}%
-     {}{}}%
-  }
-  \strng{namehash}{CMA+1}
-  \strng{fullhash}{CMAVRGMLMRCSM1}
-  \field{sortinit}{2}
-  \field{title}{Content-Based Music Information Retrieval: Current Directions
-  and Future Challenges}
-  \field{year}{2008}
-\endentry
-
-\entry{feature1}{article}{}
-  \name{author}{3}{}{%
-    {{}%
-     {Silla}{S.}%
-     {Carlos~N.}{C.~N.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Koerich}{K.}%
-     {Alessandro~L.}{A.~L.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Kaestner}{K.}%
-     {Celso A.~A.}{C.~A.~A.}%
-     {}{}%
-     {}{}}%
-  }
-  \strng{namehash}{SCNKALKCAA1}
-  \strng{fullhash}{SCNKALKCAA1}
-  \field{sortinit}{2}
-  \verb{doi}
-  \verb 10.1007/BF03192561
-  \endverb
-  \field{issn}{1678-4804}
-  \field{number}{3}
-  \field{pages}{7\bibrangedash 18}
-  \field{title}{A Machine Learning Approach to Automatic Music Genre
-  Classification}
-  \verb{url}
-  \verb http://dx.doi.org/10.1007/BF03192561
-  \endverb
-  \field{volume}{14}
-  \field{journaltitle}{Journal of the Brazilian Computer Society}
-  \field{year}{2008}
-\endentry
-
 \entry{MTT}{article}{}
   \name{author}{5}{}{%
     {{}%
@@ -270,76 +172,6 @@
   \field{title}{\href{https://experts.illinois.edu/en/publications/evaluation-of-algorithms-using-games-the-case-of-music-tagging}{Evaluation
   of algorithms using games: The case of music tagging}}
   \field{year}{2009}
-\endentry
-
-\entry{combining}{article}{}
-  \name{author}{4}{}{%
-    {{}%
-     {Campos}{C.}%
-     {Luis~M.}{L.~M.}%
-     {de}{d.}%
-     {}{}}%
-    {{}%
-     {Fernández-Luna}{F.-L.}%
-     {Juan~M.}{J.~M.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Huete}{H.}%
-     {Juan~F.}{J.~F.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Rueda-Morales}{R.-M.}%
-     {Miguel~A.}{M.~A.}%
-     {}{}%
-     {}{}}%
-  }
-  \keyw{Content-based filtering}
-  \strng{namehash}{CLMd+1}
-  \strng{fullhash}{CLMdFLJMHJFRMMA1}
-  \field{sortinit}{2}
-  \verb{doi}
-  \verb http://dx.doi.org/10.1016/j.ijar.2010.04.001
-  \endverb
-  \field{issn}{0888-613X}
-  \field{number}{7}
-  \field{pages}{785 \bibrangedash  799}
-  \field{title}{Combining content-based and collaborative recommendations: A
-  hybrid approach based on Bayesian networks}
-  \verb{url}
-  \verb http://www.sciencedirect.com/science/article/pii/S0888613X10000460
-  \endverb
-  \field{volume}{51}
-  \field{journaltitle}{International Journal of Approximate Reasoning}
-  \field{year}{2010}
-\endentry
-
-\entry{feature2}{inproceedings}{}
-  \name{author}{3}{}{%
-    {{}%
-     {Cho}{C.}%
-     {Taemin}{T.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Weiss}{W.}%
-     {Ron~J.}{R.~J.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Bello}{B.}%
-     {Juan~P.}{J.~P.}%
-     {}{}%
-     {}{}}%
-  }
-  \strng{namehash}{CTWRJBJP1}
-  \strng{fullhash}{CTWRJBJP1}
-  \field{sortinit}{2}
-  \field{booktitle}{In Proc. of the Sound and Music Computing Conf. (SMC}
-  \field{title}{Exploring common variations in state of the art chord
-  recognition systems}
-  \field{year}{2010}
 \endentry
 
 \entry{mel}{article}{}
@@ -436,6 +268,32 @@
   \field{year}{2011}
 \endentry
 
+\entry{Torch}{inproceedings}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Collobert}{C.}%
+     {R.}{R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Kavukcuoglu}{K.}%
+     {K.}{K.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Farabet}{F.}%
+     {C.}{C.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{CRKKFC1}
+  \strng{fullhash}{CRKKFC1}
+  \field{sortinit}{2}
+  \field{booktitle}{BigLearn, NIPS Workshop}
+  \field{title}{Torch7: A Matlab-like Environment for Machine Learning}
+  \field{year}{2011}
+\endentry
+
 \entry{featurelearn1}{inproceedings}{}
   \name{author}{4}{}{%
     {{}%
@@ -467,51 +325,6 @@
   \field{title}{Temporal pooling and multiscale learning for automatic
   annotation and ranking of music audio}
   \field{year}{2011}
-\endentry
-
-\entry{survey1}{article}{}
-  \name{author}{4}{}{%
-    {{}%
-     {Muller}{M.}%
-     {M.}{M.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Ellis}{E.}%
-     {D.~P.~W.}{D.~P.~W.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Klapuri}{K.}%
-     {A.}{A.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Richard}{R.}%
-     {G.}{G.}%
-     {}{}%
-     {}{}}%
-  }
-  \keyw{audio signal processing;music;source separation;harmony;melody;music
-  analysis;music audio signal processing techniques;rhythm;timbre;Harmonic
-  analysis;Instruments;Multiple signal classification;Music;Spectrogram;Time
-  frequency analysis;Beat;digital signal processing;harmony;melody;music
-  analysis;music information retrieval;music signals;pitch;rhythm;source
-  separation;timbre;voice separation}
-  \strng{namehash}{MM+1}
-  \strng{fullhash}{MMEDPWKARG1}
-  \field{sortinit}{2}
-  \verb{doi}
-  \verb 10.1109/JSTSP.2011.2112333
-  \endverb
-  \field{issn}{1932-4553}
-  \field{number}{6}
-  \field{pages}{1088\bibrangedash 1110}
-  \field{title}{Signal Processing for Music Analysis}
-  \field{volume}{5}
-  \field{journaltitle}{IEEE Journal of Selected Topics in Signal Processing}
-  \field{year}{2011}
-  \warn{\item Invalid format of field 'month'}
 \endentry
 
 \entry{DC1}{article}{}
@@ -735,8 +548,8 @@
      {}{}}%
   }
   \keyw{preprint}
-  \strng{namehash}{CK+2}
-  \strng{fullhash}{CKFGSMCK2}
+  \strng{namehash}{CK+1}
+  \strng{fullhash}{CKFGSMCK1}
   \field{sortinit}{2}
   \verb{eprint}
   \verb 1609.04243
@@ -749,45 +562,6 @@
   \field{month}{12}
   \field{year}{2016}
   \warn{\item Can't use 'date' + 'year'}
-\endentry
-
-\entry{NoAccountingForTaste}{article}{}
-  \name{author}{4}{}{%
-    {{}%
-     {Juslin}{J.}%
-     {Patrik~N.}{P.~N.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Sakka}{S.}%
-     {Laura~S.}{L.~S.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Barradas}{B.}%
-     {Gonçalo~T.}{G.~T.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Liljeström}{L.}%
-     {Simon}{S.}%
-     {}{}%
-     {}{}}%
-  }
-  \keyw{article}
-  \strng{namehash}{JPN+1}
-  \strng{fullhash}{JPNSLSBGTLS1}
-  \field{sortinit}{2}
-  \verb{doi}
-  \verb 10.1037/aca0000034
-  \endverb
-  \field{number}{2}
-  \field{pages}{157\bibrangedash 170}
-  \field{title}{\href{https://www.researchgate.net/publication/294277163_No_Accounting_for_Taste_Idiographic_Models_of_Aesthetic_Judgment_in_Music}{No
-  Accounting for Taste? Idiographic Models of Aesthetic Judgmentin Music}}
-  \field{volume}{10}
-  \field{journaltitle}{Psychology of Aesthetics, Creativity, and the Arts}
-  \field{year}{2016}
 \endentry
 
 \entry{ml}{misc}{}
@@ -880,47 +654,6 @@
   \field{year}{2016}
 \endentry
 
-\entry{choi_transfer}{online}{}
-  \name{author}{4}{}{%
-    {{}%
-     {{Choi}}{C.}%
-     {K.}{K.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {{Fazekas}}{F.}%
-     {G.}{G.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {{Sandler}}{S.}%
-     {M.}{M.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {{Cho}}{C.}%
-     {K.}{K.}%
-     {}{}%
-     {}{}}%
-  }
-  \keyw{Computer Science - Computer Vision and Pattern Recognition, Computer
-  Science - Artificial Intelligence, Computer Science - Multimedia, Computer
-  Science - Sound}
-  \strng{namehash}{CK+1}
-  \strng{fullhash}{CKFGSMCK1}
-  \field{sortinit}{2}
-  \verb{eprint}
-  \verb 1703.09179
-  \endverb
-  \field{title}{{Transfer learning for music classification and regression
-  tasks}}
-  \field{journaltitle}{ArXiv e-prints}
-  \field{eprinttype}{arXiv}
-  \field{eprintclass}{cs.CV}
-  \field{month}{03}
-  \field{year}{2017}
-\endentry
-
 \entry{spec_dia}{article}{}
   \name{author}{3}{}{%
     {{}%
@@ -955,6 +688,133 @@
   \endverb
   \field{volume}{52}
   \field{journaltitle}{Applied Soft Computing}
+  \field{year}{2017}
+\endentry
+
+\entry{Librosa}{misc}{}
+  \name{author}{22}{}{%
+    {{}%
+     {McFee}{M.}%
+     {Brian}{B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {McVicar}{M.}%
+     {Matt}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Nieto}{N.}%
+     {Oriol}{O.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Balke}{B.}%
+     {Stefan}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Thome}{T.}%
+     {Carl}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Liang}{L.}%
+     {Dawen}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Battenberg}{B.}%
+     {Eric}{E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Moore}{M.}%
+     {Josh}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Bittner}{B.}%
+     {Rachel}{R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Yamamoto}{Y.}%
+     {Ryuichi}{R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Ellis}{E.}%
+     {Dan}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Stoter}{S.}%
+     {Fabian-Robert}{F.-R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Repetto}{R.}%
+     {Douglas}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Waloschek}{W.}%
+     {Simon}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Carr}{C.}%
+     {CJ}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Kranzler}{K.}%
+     {Seth}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Choi}{C.}%
+     {Keunwoo}{K.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Viktorin}{V.}%
+     {Petr}{P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Santos}{S.}%
+     {Joao~Felipe}{J.~F.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Holovaty}{H.}%
+     {Adrian}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Pimenta}{P.}%
+     {Waldir}{W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lee}{L.}%
+     {Hojin}{H.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{MB+1}
+  \strng{fullhash}{MBMMNOBSTCLDBEMJBRYREDSFRRDWSCCKSCKVPSJFHAPWLH1}
+  \field{sortinit}{2}
+  \verb{doi}
+  \verb 10.5281/zenodo.293021
+  \endverb
+  \field{title}{librosa 0.5.0}
+  \verb{url}
+  \verb https://doi.org/10.5281/zenodo.293021
+  \endverb
+  \field{month}{02}
   \field{year}{2017}
 \endentry
 

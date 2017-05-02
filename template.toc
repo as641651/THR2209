@@ -114,29 +114,29 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.3.3}RNN Settings}{48}{subsection.4.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Black-box LSTM}{50}{section*.28}
+\contentsline {subsubsection}{Black-box LSTM}{50}{section*.29}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.3.4}Analyses of CNN}{50}{subsection.4.3.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Source task training}{51}{section*.29}
+\contentsline {subsubsection}{Source task training}{51}{section*.30}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Target task training}{52}{section*.32}
+\contentsline {subsubsection}{Target task training}{52}{section*.33}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Black-box CNN + Fine-tune LSTM}{52}{section*.35}
+\contentsline {subsubsection}{Black-box CNN + Fine-tune LSTM}{52}{section*.36}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Black-box CNN + Black-box LSTM}{53}{section*.36}
+\contentsline {subsubsection}{Black-box CNN + Black-box LSTM}{53}{section*.37}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Black-box CNN + Bag of Frames}{53}{section*.37}
+\contentsline {subsubsection}{Black-box CNN + Bag of Frames}{53}{section*.38}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {4.4}Summary of results}{53}{section.4.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Analyses of LSTM}{53}{section*.38}
+\contentsline {subsubsection}{Analyses of LSTM}{53}{section*.39}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Analyses of CNN}{54}{section*.40}
+\contentsline {subsubsection}{Analyses of CNN}{54}{section*.41}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {5}Conclusion}{55}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Proposal for improvements}{55}{section*.42}
+\contentsline {subsubsection}{Proposal for improvements}{55}{section*.43}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {A}Appendix}{57}{Appendix.1.A}
 \defcounter {refsection}{0}\relax 
@@ -150,8 +150,10 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {B}Experiments}{59}{Appendix.2.B}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {B.1}Validation Tags}{59}{section.2.B.1}
+\contentsline {section}{\numberline {B.1}Validation Set}{59}{section.2.B.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {B.2}Validation Set}{60}{section.2.B.2}
+\contentsline {section}{\numberline {B.2}Validation Tags}{62}{section.2.B.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{65}{chapter*.43}
+\contentsline {section}{\numberline {B.3}Tag-wise Performance}{63}{section.2.B.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Bibliography}{67}{chapter*.48}

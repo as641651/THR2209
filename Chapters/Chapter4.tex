@@ -80,8 +80,7 @@ As with any MIR task, the raw audio signal containing amplitude values in time d
 \label{repPara}
 As discussed in section \ref{model} of previous chapter, supervision is not imposed to compute representation operators. Hence, the following  representation parameters from \cite{choi_cnn} are fixed to compute \textit{log mel power spectrogram} for all experiments. 
 
-\begin{table}[H]
-\label{tab:repPara}
+\begin{table}[!htb]
 \centering
 \begin{tabular}{| p{.4\textwidth} | p{.3\textwidth}|}
 \hline
@@ -100,11 +99,11 @@ FFT Size & 512\\
 Mel bins & 96\\
 \hline
 \end{tabular}
-\caption{Representation Parameters} 
+\caption{Representation Parameters}\label{tab:repPara} 
 \end{table}
 \FloatBarrier
 
-\noindent The function $R$ is thus replaced with log-mel power spectrogram computations. Step 1 - 4 in algorithm \ref{exp:a1} represents the computation of log mel-power spectrogram (see Chapter 2, Sec. \ref{mel}). The abstract algorithm for our experiments is shown below.  
+\noindent The function $R$ is thus replaced with log-mel power spectrogram computations. Step 1 - 4 in algorithm \ref{exp:a1} represents the computation of log mel-power spectrogram (see Chapter 2, Sec. \ref{mel}). The abstract algorithm for our experiments is shown below. FFT was computed using the python library \textit{Librosa}\cite{Librosa}. 
 \begin{algorithm}
   \caption{$\textbf{pred}$ = $Model$($\textbf{a}$) }\label{exp:a1}
   \begin{algorithmic}[1]
@@ -148,10 +147,9 @@ Two layer perceptron (equation \ref{eq:mlp}) with rectified linear units activat
 \end{algorithm}
 \FloatBarrier
 
-\noindent The network is trained with ADAM optimizer. The training settings that are used in this thesis were explained in Chapter 2, section \ref{training}. All ADAM parameters except the learning rate $\eta$ are used as proposed in  \cite{adam_o}. The learning rate can be different for different sections of the network and hence we differentiate the learning rate of the classifier with subscript $c$ ($\eta_{c}$). The learning rate is reduced by factor $\gamma_{c}$ every $step_{c}$ iterations. This is done because in the beginning, large learning rate is needed to approach the solution, but as the training approaches actual solution, learning rate has to be reduced. Otherwise, the solution might be sub optimal. However, the learning rate is not reduced below $1^{-6}$. Even though the classifier is shallow, the network is first trained on the MTT dataset (source task) until convergence. The resulting weights are used as initialization for training on target dataset. Since our aim is to analyse only the CNNs, the training hyper-parameters values for the classifier are fixed with values shown in table \ref{tab:a2}.  
+\noindent The network is trained with ADAM optimizer. The training settings that are used in this thesis were explained in Chapter 2, section \ref{training}. All ADAM parameters except the learning rate $\eta$ are used as proposed in  \cite{adam_o}. The learning rate can be different for different sections of the network and hence we differentiate the learning rate of the classifier with subscript $c$ ($\eta_{c}$). The learning rate is reduced by factor $\gamma_{c}$ every $step_{c}$ iterations. This is done because in the beginning, large learning rate is needed to approach the solution, but as the training approaches actual solution, learning rate has to be reduced. Otherwise, the solution might be sub optimal. However, the learning rate is not reduced below $1^{-6}$. Even though the classifier is shallow, the network is first trained on the MTT dataset (source task) until convergence. The resulting weights are used as initialization for training on target dataset. Since our aim is to analyse only the CNNs, the training hyper-parameters values for the classifier are fixed with values shown in table \ref{tab:a2}. Neural network modules from the framework \textit{Torch}\cite{Torch} were used for implementation and training. 
 
-\begin{table}[H]
-\label{tab:a2}
+\begin{table}[!htb]
 \centering
 \begin{tabular}{| p{.3\textwidth} | p{.3\textwidth} | p{.3\textwidth} |}
 \hline
@@ -164,14 +162,13 @@ ${\gamma}_{c}$ & $0.1$ & $ 0.1$\\
 ${step}_{c}$ & 10000 & 3000 \\
 \hline
 \end{tabular}
-\caption{Training Hyper-Parameters for Classifier} 
+\caption{Training Hyper-Parameters for Classifier}\label{tab:a2} 
 \end{table}
 \FloatBarrier
 
 \noindent To set up a two layer neural network, the size of the classifier input (or feature) $Z$, the dimension of hidden layer $H$ and the size of the output $L$ should be known. The size of the output is equal to the number of labels in test. 63 labels are used for validation in target set. The experiments for different $H$ and $Z$ and their resulting WAUC scores are shown in table \ref{tab:a3}. (Here the features size ($Z$) resulting from the Bag of frames is equal to the number of cluster centres to be chosen)
  
-\begin{table}[H]
-\label{tab:a3}
+\begin{table}[!htb]
 \centering
 \begin{tabular}{| p{.24\textwidth} | p{.24\textwidth}| p{.24\textwidth}| p{.24\textwidth} |}
 \hline
@@ -184,7 +181,7 @@ $Z = \textbf{1024}$ & 0.64 & \textbf{0.67 }& 0.62\\
 $Z = \textbf{2048}$ & 0.61 & 0.61 & 0.59\\
 \hline
 \end{tabular}
-\caption{Hyper parameter search : Classifier hidden dimension (H), Feature dimension (Z)} 
+\caption{Hyper parameter search : Classifier hidden dimension (H), Feature dimension (Z)}\label{tab:a3} 
 \end{table}
 \FloatBarrier
 
@@ -228,8 +225,7 @@ were described in Chapter 2, section \ref{rnn}. Thus the learning is pushed into
 \FloatBarrier
 
 \noindent To set up a 2 layer LSTM, the size of hidden projection $T$ and the drop-out probability $p$ have to be known. Training settings for source and target tasks are same as that of the classifier. WAUC scores for different  $p$ and $T$ are shown in table \ref{tabl:a4}.
-\begin{table}[H]
-\label{tabl:a4}
+\begin{table}[!htb]
 \centering
 \begin{tabular}{| p{.24\textwidth} | p{.24\textwidth}| p{.24\textwidth}| p{.24\textwidth} |}
 \hline
@@ -242,7 +238,7 @@ $p = \textbf{0.3}$ & 0.68 & \textbf{0.74} & 0.68\\
 $p = \textbf{0.5}$ & 0.67 & 0.71 & 0.64\\
 \hline
 \end{tabular}
-\caption{Hyper parameter search : RNN hidden dimension (T), Drop-out probability (p)} 
+\caption{Hyper parameter search : RNN hidden dimension (T), Drop-out probability (p)}\label{tabl:a4} 
 \end{table}
 \FloatBarrier
 
@@ -296,8 +292,7 @@ Features are extracted with CNN over 29.1s log mel-spectrogram. The resulting fe
 \subsubsection{Source task training}
 
 \noindent The CNN architecture that we use has been already analysed in \cite{choi_cnn} for multi-label classification task with fixed sized input on MSD dataset. These weights are used as initialization for training our source task model that handles input of arbitrary size. The CNN hyper parameters (number of layers, transition functions, filter sizes and number of filters in each layer) proposed in \cite{choi_cnn} is used. But we search for optimum training parameters for CNN ($\eta_{c}, step_{c}$). The reduction factor $\gamma_{c}$ is fixed at 0.1. $\eta_{c}$ and $step_{c}$ can be different for different CNN layers. However, the CNN is split into two sections : layer 1,2 and layer 3,4,5. The training hyper-parameters are set separately for each section. Table \ref{tab:a5} shows WAUC of experiments on source set where only the last three out of five layers of CNN is fine-tuned. That is, the learning rate for the first two layers is 0 (Freeze).    
-\begin{table}[H]
-\label{tab:a5}
+\begin{table}[!htb]
 \centering
 \begin{tabular}{| p{.40\textwidth} | p{.40\textwidth}| p{.15\textwidth}| }
 \hline
@@ -316,11 +311,11 @@ Freeze & $(1^{-4}; 50K)$ & \textbf{0.81}\\
 Freeze & $(1^{-4}; 70K)$ & 0.77\\
 \hline
 \end{tabular}
-\caption{Source task experiments with 1st two layers freezed : $(\eta_{f}, {step}_{f})$} 
+\caption{Source task experiments with 1st two layers freezed : $(\eta_{f}, {step}_{f})$}\label{tab:a5} 
 \end{table}
+\FloatBarrier
 \noindent It can be seen that learning rate $1^{-3}$ and $1^{-4}$ stepping down every 50K iterations have similar performance. In table \ref{tab:a6}, WAUC of experiments where the whole CNN is trained are reported. The learning rate and step down for the last three layers are chosen from the experiments in table \ref{tab:a5}.  
-\begin{table}[H]
-\label{tab:a6}
+\begin{table}[!htb]
 \centering
 \begin{tabular}{| p{.40\textwidth} | p{.40\textwidth}| p{.15\textwidth}| }
 \hline
@@ -347,14 +342,14 @@ $(1^{-3}; 70K)$ & $(1^{-3}; 50K)$ & 0.81\\
 $(1^{-3}; 70K)$ & $(1^{-4}; 50K)$ & 0.76\\
 \hline
 \end{tabular}
-\caption{Source task experiments with all layers trained : $(\eta_{f}, {step}_{f})$}
+\caption{Source task experiments with all layers trained : $(\eta_{f}, {step}_{f})$}\label{tab:a6}
 \end{table}
+\FloatBarrier
 \noindent Training all the layers of CNN on the source dataset with learning rate $1^{-4}$ in layers 1,2 and $1^{-3}$ in layers 3,4,5 is shown to be optimal. It can also be inferred that the last layers of CNN tend to find task specific features not suited for general purpose classification. 
  
 \subsubsection{Target task training}
 After the training converges on the source dataset, the weights are initialized for training on target dataset. The training hyper-parameters can be different for the target task. The step down iteration is lower for the target task because of smaller training data. 
-\begin{table}[H]
-\label{tab:a7}
+\begin{table}[!htb]
 \centering
 \begin{tabular}{| p{.40\textwidth} | p{.40\textwidth}| p{.15\textwidth}| }
 \hline
@@ -373,11 +368,10 @@ Freeze & $(1^{-4}; 10K)$ & \textbf{0.68}\\
 Freeze & $(1^{-4}; 20K)$ & 0.63\\
 \hline
 \end{tabular}
-\caption{Target task experiments with 1st two layers freezed : $(\eta_{f}, {step}_{f})$} 
+\caption{Target task experiments with 1st two layers freezed : $(\eta_{f}, {step}_{f})$}\label{tab:a7} 
 \end{table}
 
-\begin{table}[H]
-\label{tab:a8}
+\begin{table}[!htb]
 \centering
 \begin{tabular}{| p{.40\textwidth} | p{.40\textwidth}| p{.15\textwidth}| }
 \hline
@@ -394,9 +388,10 @@ $(1^{-4}; 10K)$ & $(1^{-4}; 10K)$ & 0.68\\
 $(1^{-4}; 20K)$ & $(1^{-4}; 10K)$ & 0.67\\
 \hline
 \end{tabular}
-\caption{Target task experiments with all layers trained : $(\eta_{f}, {step}_{f})$}
+\caption{Target task experiments with all layers trained : $(\eta_{f}, {step}_{f})$}\label{tab:a8}
 \end{table}
-\noindent Fine-tuning all the layers of CNN on the target dataset with learning rate $1^{-5}$ in layers 1,2 and $1^{-4}$ in layers 3,4,5 is shown to be optimal. However, the performance is slightly lesser than what is achieved with MFCC features.
+\FloatBarrier
+\noindent Fine-tuning all the layers of CNN on the target dataset with learning rate $1^{-5}$ in layers 1,2 and $1^{-4}$ in layers 3,4,5 is shown to be optimal. Individual performance of every label in validation is shown in appendix \ref{tagperformance}. However, the performance is slightly lesser than what is achieved with MFCC features.
 
 \subsubsection{Black-box CNN + Fine-tune LSTM}  
 \begin{minipage}{0.15\textwidth}
@@ -429,8 +424,7 @@ Transfer learning with CNN and LSTM for music tagging task were analysed by stag
 \subsubsection{Analyses of LSTM}
 LSTM analyses are summarized in table \ref{tab:a9}. LSTM trained on source task, but used as a black box extractor on target task performs below the BoF baseline. But when LSTM is fine-tuned on target data, performance improves significantly. Therefore, it is seen that LSTM is still not sufficient to realize general purpose approximation operators, but requires task dependent fine-tuning to out-perform BoF.   
 
-\begin{table}[H]
-\label{tab:a9}
+\begin{table}[!htb]
 \centering
    \begin{tabular}{ | p{0.7\textwidth} | p{0.2\textwidth} |}
     \hline
@@ -440,14 +434,14 @@ LSTM analyses are summarized in table \ref{tab:a9}. LSTM trained on source task,
     MFCC + Fine-tune LSTM  &  \textbf{0.74}\\ \hline
     \hline
     \end{tabular}
-    \caption{Summary of LSTM analyses}
+    \caption{Summary of LSTM analyses}\label{tab:a9}
 \end{table}
+\FloatBarrier
 
 \subsubsection{Analyses of CNN}
 CNN analyses are summarized in table \ref{tab:a10}. CNN and LSTM were trained in a single pipeline on the source dataset. Performance of black-box CNN with Bag of frames approximation is again better than black-box LSTM. But performance of black-box CNN with fine-tuned LSTM is lesser than it's MFCC counter-part and this shows that CNN features are not as rich as MFCC to serve as general purpose feature extractor. Fine-tuning CNN improves the performance, but it is still slightly lesser than MFCC. This shows that fine-tuning CNN on smaller dataset still cannot outperform MFCC for our target task.
   
-\begin{table}[H]
-\label{tab:a10}
+\begin{table}[!htb]
 \centering
    \begin{tabular}{ | p{0.7\textwidth} | p{0.2\textwidth} |}
     \hline
@@ -458,9 +452,9 @@ CNN analyses are summarized in table \ref{tab:a10}. CNN and LSTM were trained in
     Fine-tune CNN + Fine-tune LSTM &  0.71 \\ \hline
     \hline
     \end{tabular}
-    \caption{Summary of CNN + LSTM analyses}
+    \caption{Summary of CNN + LSTM analyses}\label{tab:a10}
 \end{table}
-
+\FloatBarrier
 
 
 

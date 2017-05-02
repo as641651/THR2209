@@ -181,8 +181,9 @@ It was shown that supervised learning can be pushed deep into the feature extrac
  
 \noindent \textbf{Automatic tagging using deep convolutional neural networks. 2016\cite{choi_cnn}:}\\
 \\
-\noindent The proposed model in this research achieves close to state of art performance on MTT dataset (\textbf{0.894 AUC}). The audio samples were down-sampled to 12 KHz and supervision was pushed until mel spectrogram extraction (with 96 bins). They also compared the features - MFCCs, CNN over STFT and CNN over Mel-log power spectrogram and report that the latter performs significantly better. 
-
+\noindent With several choices for filter sizes, number of filters and number of layers, there are myriads of CNN  architecture choices. The proposed architecture in this research achieves close to state of art performance on MTT dataset (\textbf{0.894 AUC}). The audio samples were down-sampled to 12 KHz and supervision was pushed until mel spectrogram extraction (with 96 bins). They also compared the features - MFCCs, CNN over STFT and CNN over Mel-log power spectrogram and report that the latter performs significantly better. 
+\begin{table}[H]
+\centering
     \begin{tabular}{ | p{5cm} | l |}
     \hline
     \textbf{Features} & \textbf{AUC} \\ \hline
@@ -191,6 +192,8 @@ It was shown that supervised learning can be pushed deep into the feature extrac
     STFT $\rightarrow$ MEL $\rightarrow$ MFCC &  0.862 \\ \hline
     \hline
     \end{tabular}
+\caption{Comparision of features}
+\end{table}
     
 \noindent To exploit the advantage of PCA Whitening proven in \cite{MultiScale}\cite{featurelearn1}, Batch Normalization of frequency components is done. That is, data is centred to the batch mean and divided by batch variance. In Batch normalization the data is \textit{learned} to be scaled and shifted.
 \begin{algorithm}

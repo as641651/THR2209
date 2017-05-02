@@ -151,7 +151,7 @@ Thus, it can be inferred that \textbf{square} of the Fourier coefficients is pro
 \label{mel}
 
 The \textit{mel-scale} was developed to express measured frequency in terms of psychological metrics (i.e perceived pitch). The mel-scale was developed
-by experimenting with the human ears interpretation of a pitch. The experiment showed that the pitch is linearly perceived in the frequency range 0-1000 Hz. Above
+by experimenting with the human ears interpretation of a pitch. The pitch is linearly perceived in the frequency range 0-1000 Hz. Above
 1000 Hz, the scale becomes logarithmic. There are several formulae to convert Hertz to mel. The following formula is used in this thesis\cite{speech}
 \begin{equation}
 \omega_{m} = 2595log_{10}\bigg(1+\frac{ \omega }{700}\bigg)
@@ -228,7 +228,7 @@ The objective of dimensionality reduction is to retain only the information that
 \bigskip
 
 \subsection{Domain engineering Vs Unsupervised learning Vs Supervised learning}
-\textit{Reduction by Domain engineering :} When the operators performing reduction \textit{do not} use any information from the data, but are rather derived from knowing the domain specific properties of the data, then the resulting reduction is said to be \textit{engineered}. Coming up with such operators is usually time-consuming and requires expert knowledge.\\
+\textit{Reduction by Domain engineering :} When the operators performing reduction are computed using the domain specific properties of the data, then the resulting reduction is said to be \textit{engineered}. Coming up with such operators is usually time-consuming and requires expert knowledge.\\
 \\
 \textit{Reduction by Unsupervised learning :} When the operators performing reduction are computed by exploiting the representation \textit{structure} of the data, then the resulting reductions are said to be \textit{learned} from the data. When this learning problem \textit{does not} require any labelled data, then the reduction is said to be \textit{unsupervised}.\\
 \\
