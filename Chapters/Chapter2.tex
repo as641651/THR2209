@@ -392,7 +392,7 @@ In music information retrieval, several task-specific features have been enginee
 
 \section{Temporal Approximation}
 \label{temporal}
-The size of resulting features computed through reduction operations discussed in the previous section depends on length of the audio. But classifiers like \textit{support vector machines} and \textit{multi layer perceptron} requires features of fixed size to compute the parameters while training. Therefore, frame-wise features over time are approximated to a fixed size feature representation. Temporal approximation $T$ of the reduced representation $\textbf{Y}$ is  
+The dimension of features computed through reduction operations discussed in the previous section depends on length of the audio. But classifiers like \textit{support vector machines} and \textit{multi layer perceptron} requires features of fixed size. Therefore, frame-wise features over time are approximated to a fixed size feature representation. Temporal approximation $T$ of the reduced representation $\textbf{Y}$ is  
 \[
 \textbf{f} = T(\textbf{Y}) \qquad \textbf{f} \in \mathbb{R}^{Z}, \textbf{Y} \in \mathbb{R}^{T \times W}
 \]
@@ -408,7 +408,7 @@ $W$ depends on length of the audio. $\textbf{f}$ is usually the final fixed size
  
 \subsection{Bag Of Frames}
 \label{clustering}
-In Bag of Frames(BoF) model\cite{BoF}, the \textit{frequency} of each reduced frame is used as a feature for training a classifier. To reduce to a fixed size representation (of size $Z$), $Z$ cluster centres are computed from the data. Each frame-wise feature is assigned to it's nearest cluster. The number of assignments to each cluster now becomes the feature $\textbf{f}$. 
+In Bag of Frames(BoF) model\cite{BoF}, each reduced frame is assigned to nearest of the $Z$ cluster centers. The number of assignments made to each cluster now becomes the feature $\textbf{f}$. Number of clusters $Z$ is size of the resulting feature.
 \begin{algorithm}
   \caption{$\textbf{f}$ = BagOfFrames($\textbf{Y}$) }\label{bof}
   \begin{algorithmic}[1]
@@ -430,7 +430,7 @@ In Bag of Frames(BoF) model\cite{BoF}, the \textit{frequency} of each reduced fr
     \Statex \textbf{Output :} $\bm{\mu}_{j} \in \mathbb{R}^{T}, j \in \{0,1,..,Z-1\}$
     \State Randomly initialize $\bm{\mu}_{j}$
     \While{$\bm{\mu}_{j}$ have not converged}
-    \For{$n \in \{0,1,..,N-1$}
+    \For{$n \in \{0,1,..,N-1\}$}
       \For{$ i \in \{0,1,..,W-1\}$}
          \State $j = \argmin\limits_{j} \norm{\textbf{Y}_{n}[:,i] - \bm{\mu}_{j}}^{2}$
           \State Assign $\textbf{Y}_{n}[:,i]$ to cluster $j$
@@ -451,7 +451,7 @@ The idea behind RNN is to learn a feature representation by sequentially combini
 \[
 \textbf{h}_{W} = \bm{\Theta}(\textbf{Y}[:,W], \textbf{h}_{W-1}) \qquad \textbf{Y} \in \mathbb{R}^{T \times W}
 \]
-$\textbf{h}_{W}$ is the internal state after combining $W$ columns of $\textbf{Y}$. $\bm{\Theta}$ is the internal state function which sequentially combines the input. The operator $\textbf{W}$ and other operators resulting from the function $\bm{\Theta}$ are solved for optimality using a labelled dataset. These operators can be computed by training an RNN (see Section \ref{training}). The function $\bm{\Theta}$ should sufficiently hold the information from beginning to end of the sequence. RNNs face challenge in remembering the information in the earlier part of the sequence. Because of this, different flavours of RNN have been developed to hold the sequence information longer and to battle the vanishing gradient problem while training neural network (see Section \ref{training}). Depending on how $\bm{\Theta}$ is defined, at least two RNN architectures are popular in the literature: Long-Short Term Memory (LSTM) RNN and Gated Recurrent Unit(GRU) RNN. In this thesis, only LSTMs\cite{LSTM} are considered.   
+$\textbf{h}_{W}$ is the internal state after combining $W$ columns of $\textbf{Y}$. $\bm{\Theta}$ is the internal state function which sequentially combines the input. The operator $\textbf{W}$ and other operators resulting from the function $\bm{\Theta}$ are solved for optimality using a labelled dataset. These operators can be computed by training an RNN (see Section \ref{training}). The function $\bm{\Theta}$ should sufficiently hold the information from beginning to end of the sequence. RNNs face challenge in remembering the information in the earlier part of the sequence. Because of this, different flavours of RNN have been developed to hold the sequence information longer and to battle the vanishing gradient problem while training neural network. Depending on how $\bm{\Theta}$ is defined, at least two RNN architectures are popular in the literature: Long-Short Term Memory (LSTM) RNN and Gated Recurrent Unit(GRU) RNN. In this thesis, only LSTMs\cite{LSTM} are considered.   
 
 \subsubsection{Long-Short Term Memory RNN}
 The LSTM internal state is contained by three gates that control the information flow. This is done by multiplying the output of each sequence $\textbf{o}_{w}$ with the corresponding cell state function $\textbf{c}_{w}$.
@@ -492,7 +492,7 @@ The operators $\textbf{W}_{o}, \textbf{U}_{o}, \textbf{W}_{i}, \textbf{U}_{i}, \
 \end{algorithm}
 \FloatBarrier
 
-\noindent Often times, multiple layers of RNN are used. An illustration of  two layer LSTM with a \textit{sequence to sequence} LSTM in between is shown in algorithm \ref{alg:2lstm}. The input sequence transformed in to a hidden sequence, which is then projected to a single output by the second layer. The functions in between ($\Phi_{1}, \Phi_{2}$) represents the transition operation between the layers. Several non-linear activations and transition operations have been developed to address the problems while training deep neural network (see Sec. \ref{training}). 
+\noindent Often times, multiple layers of RNN are used. An illustration of  two layer LSTM with a \textit{sequence to sequence} LSTM in between is shown in algorithm \ref{alg:2lstm}. The input sequence is transformed in to a hidden sequence, which is then projected to a single output by the second layer. The functions in between ($\Phi_{1}, \Phi_{2}$) represents the transition operation between the layers. Several non-linear activations and transition operations have been developed to address the problems while training deep neural network (see Sec. \ref{training}). 
   
 \begin{minipage}[t]{7.5cm}
   \vspace{0pt}  
@@ -570,7 +570,7 @@ Thus $0 \leq \zeta_{i} \leq 1$ and threshold $\epsilon$ can be set in-between 0 
 
 \section{Training}
 \label{training}
-The iterative steps involving the computation of the operators that is optimal for transformations for our context-based classification task is called \textit{training}. When we train only the operators of classifying function $C$ (that is, $\textbf{W}$ and $\textbf{W}_{L1}$), the classification performance will only be as good as the information encoded in the feature $\textbf{f}$. Let us assume that the features $\textbf{f}$ obtained as a result of transformations $R$, $D$, and $T$ is optimal for the task at hand. Hence, only the classifier $C$ is trained. The abstract prediction model is shown in algorithm \ref{abstraction}.
+The iterative steps involving the computation of the operators that is optimal for our context of classification task is called \textit{training}. When we train only the operators of classifying function $C$ (that is, $\textbf{W}$ and $\textbf{W}_{L1}$), the classification performance will only be as good as the information encoded in the feature $\textbf{f}$. Let us assume that the features $\textbf{f}$ obtained as a result of transformations $R$, $D$, and $T$ is optimal for the task at hand. Hence, only the classifier $C$ is trained. The abstract prediction model is shown in algorithm \ref{abstraction}.
 \begin{algorithm}
   \caption{$\textbf{pred}$ = $Model$($\textbf{a}$) }\label{abstraction}
   \begin{algorithmic}[1]

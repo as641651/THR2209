@@ -10,7 +10,7 @@ Using content-based music information for solving several music information retr
 
 \section{Literature Review}
 \label{literature}
-Dedicated analysis for music features emerged due to the fact that music signals possess specific acoustic and structural characteristics that distinguish them from spoken language or other non musical signals. In the previous chapter, computing the optimal features for a context-based classification task using deep learning was formalised. However, it is not always true that such \textit{learned} features will perform better than \textit{hand-crafted} features. The underlying issue is ultimately one of \textit{organization} and \textit{variance} of the features. 
+Dedicated analysis for music features emerged due to the fact that music signals possess specific acoustic and structural characteristics that distinguish them from spoken language or other non musical signals. In the previous chapter, computing the optimal features for a content-based classification task using deep learning was formalised. However, it is not always true that such \textit{learned} features will perform better than \textit{hand-crafted} features. The underlying issue is ultimately one of \textit{organization} and \textit{variance} of the features. 
 \bigskip 
 
 \noindent \textit{\textbf{Feature organization :}} The better organized a feature is to answer some question, the simpler it is to assign or infer semantic meaning. Thus a feature representation should explicitly reflect a desired semantic organization. 
@@ -22,15 +22,15 @@ Dedicated analysis for music features emerged due to the fact that music signals
 
 \subsection{From hand-crafting to feature learning}
 \label{featurelearning}
-A number of features have been engineered in the past that are relevant for different MIR tasks. MFCC features (ref. \ref{mfcc}), originally developed for speech recognition task often proved efficient for genre classification and tagging. At the same time, some machine learning algorithms were also used to adopt feature learning on spectrogram frames. Results from some proceedings that compare MFCCs (feature engineering) with feature learning for \textit{multi-label classification task} have been discussed.
+A number of features have been engineered in the past, that are relevant for different MIR tasks. MFCC features (see Sec. \ref{mfcc}), originally developed for speech recognition task often proved efficient for genre classification and tagging. At the same time, some machine learning algorithms were also used to adopt feature learning on spectrogram frames. Results from some proceedings that compare MFCCs (feature engineering) with feature learning for \textit{multi-label classification task} have been discussed.
 \bigskip
 
 \noindent \textbf{Temporal pooling and multiscale learning for automatic annotation and ranking of music audio. 2011 \cite{featurelearn1}:}\\
 \\
-\noindent The pipe line of their algorithm is shown below. The formalism of the notations used are consistent with explanations in chapter 2. The PCA whitened mel-power spectrogram (ref. \ref{pca}) (unsupervised learning for frame features) is compared with MFCC features (engineered features) on Magna tag a tune dataset. It was shown that the former achieve a performance of \textbf{AUC 0.87} out performing MFCCs which was 0.77. From this research, we can infer that unsupervised learning can extract features more relevant than MFCCs for music tagging.  
+\noindent The pipe line of their algorithm is shown below. The formalism of the notations used are consistent with explanations in chapter 2. The PCA whitened mel-power spectrogram (see Sec. \ref{pca}) (unsupervised learning for frame features) is compared with MFCC features (engineered features) on Magna tag a tune dataset. It was shown that the former achieve a performance of \textbf{AUC 0.87}, out performing MFCCs which was 0.77. From this research, we can infer that unsupervised learning can extract features more relevant than MFCCs for music tagging.  
 \bigskip
 
-\noindent \textbf{\textit{Parameter settings :}} Signal ($\textbf{a}$) is sampled at 22.1 KHz. Then STFT with window length 1024 and stride 512 is computed with FFT algorithm (ref. \ref{stft}). This is followed by conversion to mel power-spectrogram with 128 bins, followed by PCA Whitening which selects the top 120 variant frequencies. The resulting reduction is transformed by the operator $\textbf{W}_{L1}$ that learns (supervised) optimal features for some pooling function $T_{(POOL)}$. The temporal pooling is done by summarizing every 2.3s frame with suitable functions (see \cite{featurelearn1} for details). The resulting feature is then classified by two layer perceptron with 1000 hidden units with sigmoid ($\sigma$) activations. This algorithm is also an illustration for how supervised feature learning is pushed beyond the classifier and into the temporal pooler, but not into the frame-wise reduction stage (see chapter 2 \ref{training}).
+\noindent \textbf{\textit{Parameter settings :}} Signal ($\textbf{a}$) is sampled at 22.1 KHz. Then STFT with window length 1024 and stride 512 is computed with FFT algorithm (see Sec. \ref{stft}). This is followed by conversion to mel power-spectrogram with 128 bins, followed by PCA Whitening which selects the top 120 variant frequencies. The resulting reduction is transformed by the operator $\textbf{W}_{L1}$ that learns (supervised) optimal features for some pooling function $T_{(POOL)}$. The temporal pooling is done by summarizing every 2.3s frame with suitable functions (see \cite{featurelearn1} for details). The resulting feature is then classified by two layer perceptron with 1000 hidden units with sigmoid ($\sigma$) activations. This algorithm is also an illustration for how supervised feature learning is pushed beyond the classifier and into the temporal pooler, but not into the frame-wise reduction stage (see chapter 2, sec. \ref{training}).
 
 \begin{algorithm}
   \caption{$\textbf{pred}$ = MODEL($\textbf{a}$) }\label{Temporal Pooling}
@@ -103,7 +103,7 @@ Next,  the trained models are used to extract features from other datasets, whic
 
 \subsection{Convolutional Neural Networks}
 \label{convolution}
-It was shown that supervised learning can be pushed deep into the feature extraction pipeline by stacking multiple layers of learnable convolution filters (ref. \ref{stacked}). The idea was to replace the application specific dimension reductions with Convolution Neural Networks(CNN). In this section, some works that throw insights into CNN architecture settings are discussed. 
+It was shown that supervised learning can be pushed deep into the feature extraction pipeline by stacking multiple layers of learnable convolution filters (see Sec. \ref{stacked}). The idea was to replace the application specific dimension reductions with Convolution Neural Networks(CNN). In this section, some works that throw insights into CNN architecture settings are discussed. 
 \bigskip
 
 \noindent \textbf{End-to-end learning for music audio. 2014\cite{EndToEnd}:}\\
@@ -269,7 +269,7 @@ The representation operators are fixed and the operators for dimensionality redu
 \\  
 \textbf{Reduction :} The log mel power spectrogram is convolved with learnable filters. In \cite{MusicMotive}, 2D convolutions were shown to be more motivating than 1D. In \cite{choi_cnn}, a 5 layers of 2D convolutions were used for reduction, which achieves close to state of art performance on MTT dataset. Therefore, we choose their CNN model (algorithm \ref{alg:choicnn}) for dimensionality reduction.\\
 \\  
-\textbf{Temporal approximation :} Supervision can be introduced at this stage with a \textit{sequence to one} Recurrent Neural Network (see chapter 2 \ref{rnn}). Long Short-term memory(LSTM) and Gated recurrent units(GRU) are the choices at our disposal. In this thesis, we investigate only LSTMs. 
+\textbf{Temporal approximation :} Supervision can be introduced at this stage with a \textit{sequence to one} Recurrent Neural Network (see chapter 2, sec. \ref{rnn}). Long Short-term memory(LSTM) and Gated recurrent units(GRU) are the choices at our disposal. In this thesis, we investigate only LSTMs. 
         
 \subsection{Supervised learning of Temporal approximation and Classification operators}
 \label{fe2}
